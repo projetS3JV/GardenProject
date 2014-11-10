@@ -5,5 +5,9 @@ public class main {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void remy(){
+		
+	}
 
 }
