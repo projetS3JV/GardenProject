@@ -5,7 +5,7 @@ public class main {
 
 	}
 	
-	public void remy(){
+	public void remyBenjamin(){
 		
 	}
 
