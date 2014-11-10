@@ -1,3 +1,4 @@
+package jardin;
 
 public class main {
 	
