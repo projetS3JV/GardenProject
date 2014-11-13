@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 
 public class MainFrame extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
 	private JardinPanel jardinPanel;
 	private OutilPanel outilPanel;
 	private Plantotheque plantotheque;
