@@ -1,5 +1,7 @@
 package jardin.ui;
 
-public class JardinPanel {
+import javax.swing.JPanel;
+
+public class JardinPanel extends JPanel{
 
 }

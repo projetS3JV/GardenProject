@@ -3,6 +3,7 @@ package jardin.ui;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MainFrame extends JFrame{
@@ -18,23 +19,13 @@ public class MainFrame extends JFrame{
 		this.setSize(900, 600);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-		/*
-		this.add(northButton, BorderLayout.NORTH);
-
-	   
-	    this.add(southButton, BorderLayout.SOUTH);
-
-	    
-	    this.add(eastButton, BorderLayout.EAST);
-
-	    
-	    this.add(westButton, BorderLayout.WEST);
-
-	    
-	    this.add(centerButton, BorderLayout.CENTER);*/
-
+		this.setLayout(new BorderLayout());		
+		this.add( BorderLayout.NORTH, this.menuPanel);	   
+	    this.add(BorderLayout.SOUTH, this.calendarPanel);	    
+	    this.add(BorderLayout.EAST, this.outilPanel);	    
+	    this.add(BorderLayout.CENTER, this.jardinPanel);
 	}
+
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
 			MainFrame m = new MainFrame();
