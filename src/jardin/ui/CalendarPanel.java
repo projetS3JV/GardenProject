@@ -3,8 +3,10 @@ package jardin.ui;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.SwingUtilities;
 
 public class CalendarPanel extends JPanel{
 	private JScrollBar scrollbar;
@@ -22,6 +24,7 @@ public class CalendarPanel extends JPanel{
 			@Override
 			public void adjustmentValueChanged(AdjustmentEvent e) {
 				CalendarPanel.this.jour = CalendarPanel.this.scrollbar.getValue();
+				CalendarPanel.this.updateDate();
 				//méthode à ajouter pour que la changement de date entraine un changement sur les fleurs
 			}
 		});
@@ -32,7 +35,7 @@ public class CalendarPanel extends JPanel{
  * Permet de mettre à jour le mois sous forme de texte et le jourDuMois. 
  * Appelée à chaque fois que la valeur de la scrollbar est modifiée.
  */
-	private void update(){
+	private void updateDate(){
 		//Janvier
 		if(this.jour<=31){
 			this.jourDuMois = this.jour;
@@ -116,4 +119,11 @@ public class CalendarPanel extends JPanel{
 		}
 		return -1;
 	}
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(() -> {
+			JFrame m = new JFrame();
+			m.add(new CalendarPanel());
+			m.setVisible(true);
+		});
+}
 }
