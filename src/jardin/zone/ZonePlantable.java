@@ -9,35 +9,49 @@ import java.util.LinkedList;
 
 public class ZonePlantable extends Zone {
 
+
+	private static final long serialVersionUID = 0L;
 	private LinkedList<Plante> plantes = new LinkedList<Plante>();
 	private TypeSol typeSol;
 	
 	public ZonePlantable() {
-		super();
-		
+		super();		
 	}
 	
 	/**
-	 * Ajoute une plante dans la zone si elle peut etre planter, lance une exception sinon
-	 * @param p la plante à ajouter
+	 * Ajoute une plante dans la zone si elle peut etre planter
+	 * @param p la plante Ã  ajouter
 	 */
-	public void addPlante(Plante p) {
-		// verification si la plante peut etre planté
+	public void addPlante(Plante plante) {
+		
+		// verification si la plante peut etre plantÃ©
 		
 		// ajout de la plante
-		this.plantes.add(p);
+		this.plantes.add(plante);
 	}
 	
 	/**
 	 * Retire une plante de la zone
-	 * @param p la plante à retirer
+	 * @param p la plante Ã  retirer
 	 */
 	public void deletePlante(Plante p) {
 		this.plantes.remove(p);
 	}
 	
+	/**
+	 * Accesseurs au plantes
+	 * @return une linkedList de plantes
+	 */
 	public LinkedList<Plante> getPlantes() {
 		return this.plantes;
+	}
+	
+	/**
+	 * Accesseur au Type de sol de la zone
+	 * @return le TypeSol de la zone
+	 */
+	public TypeSol getTypeSol() {
+		return this.typeSol;
 	}
 	
 }
