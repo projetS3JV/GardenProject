@@ -2,7 +2,11 @@ package jardin.plante;
 
 import java.util.GregorianCalendar;
 
+import javax.swing.ImageIcon;
+
 public class Plante {
+	
+	// Attributs d'instance ---------------------------------------------------------------------------
 	
 	/*
 	 * La taille finale de la plante
@@ -53,12 +57,12 @@ public class Plante {
 	/*
 	 * L'image de la plante fleurie
 	 */
-	private String ImgFleurie;
+	private ImageIcon ImgFleurie;
 	
 	/*
 	 * L'image de la fleur non fleurie
 	 */
-	private String ImgNonFleurie;
+	private ImageIcon ImgNonFleurie;
 	
 	
 	/*
@@ -66,5 +70,117 @@ public class Plante {
 	 */
 	private int DureeDev;
 	
+	/*
+	 * Type de plante (Enumeration)
+	 */
+	private TypePlante type;
+	
+	// Constructeurs ---------------------------------------------------------------------------------
+	
+	/*
+	 * Constructeur par defaut
+	 */
+	public Plante(){
+		this.dateFloraison = null;
+		this.datePlantation = null;
+		this.dateTaille = null;
+		this.tailleFin = 0;
+		this.couleur = null;
+		this.vivace = false;
+		this.nom = "";
+		this.nomL = "";
+		this.persistant = false;
+		this.ImgFleurie = null;
+		this.ImgNonFleurie = null;
+		this.DureeDev = 0;
+		this.type = null;
+	}
+	
+	
+	
+
+
+
+	// Getter et Setter ---------------------------------------------------------------------------------
+	
+	
+	public TypePlante getType() {
+		return type;
+	}
+	public void setType(TypePlante type) {
+		this.type = type;
+	}
+	public int getTailleFin() {
+		return tailleFin;
+	}
+	public void setTailleFin(int tailleFin) {
+		this.tailleFin = tailleFin;
+	}
+	public GregorianCalendar getDateFloraison() {
+		return dateFloraison;
+	}
+	public void setDateFloraison(GregorianCalendar dateFloraison) {
+		this.dateFloraison = dateFloraison;
+	}
+	public GregorianCalendar getDatePlantation() {
+		return datePlantation;
+	}
+	public void setDatePlantation(GregorianCalendar datePlantation) {
+		this.datePlantation = datePlantation;
+	}
+	public String getCouleur() {
+		return couleur;
+	}
+	public void setCouleur(String couleur) {
+		this.couleur = couleur;
+	}
+	public GregorianCalendar getDateTaille() {
+		return dateTaille;
+	}
+	public void setDateTaille(GregorianCalendar dateTaille) {
+		this.dateTaille = dateTaille;
+	}
+	public boolean isVivace() {
+		return vivace;
+	}
+	public void setVivace(boolean vivace) {
+		this.vivace = vivace;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public String getNomL() {
+		return nomL;
+	}
+	public void setNomL(String nomL) {
+		this.nomL = nomL;
+	}
+	public boolean isPersistant() {
+		return persistant;
+	}
+	public void setPersistant(boolean persistant) {
+		this.persistant = persistant;
+	}
+	public ImageIcon getImgFleurie() {
+		return ImgFleurie;
+	}
+	public void setImgFleurie(ImageIcon imgFleurie) {
+		ImgFleurie = imgFleurie;
+	}
+	public ImageIcon getImgNonFleurie() {
+		return ImgNonFleurie;
+	}
+	public void setImgNonFleurie(ImageIcon imgNonFleurie) {
+		ImgNonFleurie = imgNonFleurie;
+	}
+	public int getDureeDev() {
+		return DureeDev;
+	}
+	public void setDureeDev(int dureeDev) {
+		DureeDev = dureeDev;
+	}
 	
 }
