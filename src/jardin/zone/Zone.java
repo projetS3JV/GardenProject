@@ -1,15 +1,11 @@
 package jardin.zone;
 
-import jardin.Ensoleillement;
-
-import java.awt.Polygon;
 import java.util.LinkedList;
 
-public class Zone extends Polygon{
+public class Zone extends AbstractZone{
 	
 	private static final long serialVersionUID = 0L;
-	private LinkedList<Zone> zones = new LinkedList<Zone>();
-	protected Ensoleillement ensoleillement;
+	private LinkedList<AbstractZone> zones = new LinkedList<AbstractZone>();
 	
 	/**
 	 * Crée une zone vide
@@ -24,14 +20,14 @@ public class Zone extends Polygon{
 	 * @param y la coordonnée en y
 	 */
 	public Zone(int x, int y) {
-		this.addPoint(x, y);
+		super(x,y);
 	}
 	
 	/**
 	 * Accesseur au zones contenus dans celle ci
 	 * @return une LinkedList de zones
 	 */
-	public LinkedList<Zone> getZones() {
+	public LinkedList<AbstractZone> getZones() {
 		return this.zones;
 	}
 	
@@ -40,7 +36,7 @@ public class Zone extends Polygon{
 	 * @param z la zone à ajouter
 	 * @throws IllegalArgumentException Si un des points est en dehors de la zone courante
 	 */
-	public void addZone(Zone zone) throws IllegalArgumentException {
+	public void addZone(AbstractZone zone) throws IllegalArgumentException {
 		
 		//verification si  la zone peut etre ajouter
 		
@@ -65,16 +61,7 @@ public class Zone extends Polygon{
 	 * Supprime une zone
 	 * @param z la zone à supprimer
 	 */
-	public void deleteZone(Zone zone) {
+	public void deleteZone(AbstractZone zone) {
 		this.zones.remove(zone);
-	}
-	
-	/**
-	 * Ajoute un point ayant les coordonnées passé à la zone
-	 * @param xCoord la coordonée en x
-	 * @param yCoord la coordonnée en y
-	 */
-	public void addPoint(int xCoord, int yCoord) {
-		super.addPoint(xCoord, yCoord);
 	}
 }

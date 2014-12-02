@@ -5,9 +5,7 @@ import jardin.plante.Plante;
 
 import java.util.LinkedList;
 
-
-
-public class ZonePlantable extends Zone {
+public class ZonePlantable extends AbstractZone {
 
 
 	private static final long serialVersionUID = 0L;
