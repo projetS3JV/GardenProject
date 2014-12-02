@@ -14,8 +14,20 @@ public class ZonePlantable extends Zone {
 	private LinkedList<Plante> plantes = new LinkedList<Plante>();
 	private TypeSol typeSol;
 	
+	/**
+	 * Crée une zone plantable vide
+	 */
 	public ZonePlantable() {
 		super();		
+	}
+	
+	/**
+	 * Crée une zone plantable avec un point
+	 * @param x la coordonnée en x du point
+	 * @param y la coordonnée en y du point
+	 */
+	public ZonePlantable(int x, int y) {
+		super(x, y);
 	}
 	
 	/**

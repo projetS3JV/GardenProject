@@ -19,6 +19,15 @@ public class Zone extends Polygon{
 	}
 	
 	/**
+	 * Crée une zone avec un Point
+	 * @param x la coordonnée en x
+	 * @param y la coordonnée en y
+	 */
+	public Zone(int x, int y) {
+		this.addPoint(x, y);
+	}
+	
+	/**
 	 * Accesseur au zones contenus dans celle ci
 	 * @return une LinkedList de zones
 	 */
@@ -66,7 +75,6 @@ public class Zone extends Polygon{
 	 * @param yCoord la coordonnée en y
 	 */
 	public void addPoint(int xCoord, int yCoord) {
-		this.addPoint(xCoord, yCoord);
-		this.invalidate();
+		super.addPoint(xCoord, yCoord);
 	}
 }
