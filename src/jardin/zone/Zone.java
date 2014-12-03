@@ -11,7 +11,7 @@ public class Zone extends AbstractZone{
 	 * Crée une zone vide
 	 */
 	public Zone() {
-		
+		super();
 	}
 	
 	/**
@@ -21,6 +21,14 @@ public class Zone extends AbstractZone{
 	 */
 	public Zone(int x, int y) {
 		super(x,y);
+	}
+	
+	/**
+	 * Constructeur par copie qui permet d'obtenir une zone a partir d'une AbstractZone
+	 * @param zone la zone a copier
+	 */
+	public Zone(AbstractZone zone) {
+		super(zone);
 	}
 	
 	/**

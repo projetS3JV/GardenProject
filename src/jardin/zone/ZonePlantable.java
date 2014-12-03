@@ -15,8 +15,9 @@ public class ZonePlantable extends AbstractZone {
 	/**
 	 * Crée une zone plantable vide
 	 */
-	public ZonePlantable() {
-		super();		
+	public ZonePlantable(TypeSol sol) {
+		super();
+		this.typeSol = sol;
 	}
 	
 	/**
@@ -24,8 +25,19 @@ public class ZonePlantable extends AbstractZone {
 	 * @param x la coordonnée en x du point
 	 * @param y la coordonnée en y du point
 	 */
-	public ZonePlantable(int x, int y) {
+	public ZonePlantable(int x, int y, TypeSol sol) {
 		super(x, y);
+		this.typeSol = sol;
+	}
+	
+	/**
+	 * Constructeur par copie qui permet d'obtenir une ZonePlantable a partir d'une AbstractZone
+	 * @param zone la zone a changer
+	 * @param sol le type de sol de la zone
+	 */
+	public ZonePlantable(AbstractZone zone, TypeSol sol) {
+		super(zone);
+		this.typeSol = sol;
 	}
 	
 	/**
