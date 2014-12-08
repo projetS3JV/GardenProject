@@ -33,14 +33,21 @@ public class AbstractZone extends Polygon {
 	
 	/**
 	 * Ajoute un point ayant les coordonnées passé à la zone
+	 * Si le point est proche du premier, la zone se ferme
 	 * @param xCoord la coordonée en x
 	 * @param yCoord la coordonnée en y
 	 */
-	public void addPoint(int xCoord, int yCoord) {
+	public void addPoint(int xCoord, int yCoord) throws IllegalArgumentException{
+		if (this.isClosed())
+			throw new IllegalArgumentException("impossible d'ajouter un point, la zone est fermé");
 		if (Math.abs(this.xpoints[0] - xCoord) <= 10 && Math.abs(this.ypoints[0] - yCoord) <= 10)
 			super.addPoint(this.xpoints[0], this.ypoints[0]);
-		else	
+		else 	
 			super.addPoint(xCoord, yCoord);
+	}
+	
+	public boolean isClosed() {
+		return this.xpoints[0] == this.xpoints[this.npoints-1] && this.ypoints[0] == this.ypoints[this.npoints -1];
 	}
 	
 	
