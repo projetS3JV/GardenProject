@@ -5,6 +5,7 @@ import jardin.plante.TypePlante;
 import jardin.zone.Zone;
 import jardin.zone.ZonePlantable;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -78,7 +79,7 @@ public final class AccesBD {
 	}
 	
 	private String escape (String s){
-		return " \"" + s +" \"";
+		return " \"" + s +"\"";
 	}
 	
 	public static long datee (int year, int month, int day){
@@ -93,9 +94,9 @@ public final class AccesBD {
 				+ p.getType() + ","
 				+ p.getTailleFin() + ","
 				+ p.getEnsoleillement() + ","
-				+ p.getImgFleurie() + ","
-				+ p.getImgNonFleurie() + ","
-				+ escape(p.getCouleur()) + ","
+				+ escape("p.getImgFleurie()") + "," // a modifier plus tard
+				+ escape("p.getImgNonFleurie()") + ","
+				+ p.getCouleur().getRGB() + ","
 				+ p.getTypeSol() + ","
 				+ p.getDatePlantation() + ","
 				+ p.getDateFloraison() + ","
@@ -136,13 +137,13 @@ public final class AccesBD {
 	public static void main(String[] args) {
 		AccesBD bd = AccesBD.getInstance();
 		Plante p = new Plante(10, new Date(datee(2010,03,15)), new Date(datee(2010,07,15)), 
-								"bleu", true, "popol","popolus patatus", new ImageIcon("/bla/img1.png"), 
+								Color.blue, true, "popol","popolus patatus", new ImageIcon("/bla/img1.png"), 
 								new ImageIcon("/bla/img2.png") , TypePlante.FLEUR, Ensoleillement.SOLEIL, 
 								TypeSol.LIMONEUX, "c'est une zolie fleur");
 		bd.insertPlante(p);
 		bd.close();
 	}
 	
-	
+	// transformer le type sol en integer
 	
 }

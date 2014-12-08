@@ -3,6 +3,7 @@ package jardin.plante;
 import jardin.Ensoleillement;
 import jardin.TypeSol;
 
+import java.awt.Color;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -30,7 +31,7 @@ public class Plante {
 	/*
 	 * La couleur de la plante
 	 */
-	private String couleur;
+	private Color couleur;
 	
 	
 	/* 
@@ -95,7 +96,7 @@ public class Plante {
 	
 
 	public Plante(int tailleFin, Date dateFloraison,
-			Date datePlantation, String couleur, boolean vivace,
+			Date datePlantation, Color couleur, boolean vivace,
 			String nom, String nomL, ImageIcon imgFleurie,
 			ImageIcon imgNonFleurie, TypePlante type,
 			Ensoleillement ensoleillement, TypeSol typeSol, String description) {
@@ -172,10 +173,10 @@ public class Plante {
 	public void setDatePlantation(Date datePlantation) {
 		this.datePlantation = datePlantation;
 	}
-	public String getCouleur() {
+	public Color getCouleur() {
 		return couleur;
 	}
-	public void setCouleur(String couleur) {
+	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
 	}
 
