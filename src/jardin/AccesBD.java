@@ -72,7 +72,31 @@ public final class AccesBD {
 		} catch (SQLException e) {e.printStackTrace();}
 	}
 	
-	public void insertPlante(Plante p) {}
+	/*
+	 * Insertion d'une plante dans la base de donnée
+	 */
+	public void insertPlante(Plante p) {
+		String sql = "INSERT INTO Plante values(null, " + p.getNom() + ","
+				+ p.getNomL() + ","
+				+ p.getType() + ","
+				+ p.getTailleFin() + ","
+				+ p.getEnsoleillement() + ","
+				+ p.getImgFleurie() + ","
+				+ p.getImgNonFleurie() + ","
+				+ p.getCouleur() + ","
+				+ p.getTypeSol() + ","
+				+ p.getDatePlantation() + ","
+				+ p.getDateFloraison() + ","
+				+ p.getVivace() + ")";
+		try {
+			this.statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	private void insertZone(Zone z) {}
 	private void insertZonePlantable(ZonePlantable z) {}
 	public void insertJardin(Jardin j) {}

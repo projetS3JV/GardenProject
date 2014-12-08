@@ -1,9 +1,7 @@
-package jardin.zone;
+package src.jardin.zone;
 
-import jardin.TypeSol;
-import jardin.plante.Plante;
-
-import java.util.LinkedList;
+import src.jardin.TypeSol;
+import src.jardin.plante.Plante;
 
 public class ZonePlantable extends AbstractZone {
 
