@@ -1,5 +1,6 @@
 package jardin;
 
+import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
 
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ public class Jardin {
 	 * Le nom du jardin
 	 */
 	private String name;
-	private LinkedList<Zone> zones = new LinkedList<Zone>();
+	private LinkedList<AbstractZone> zones = new LinkedList<AbstractZone>();
 	
 	public Jardin(String name) {
 		this.name = name;
@@ -44,7 +45,7 @@ public class Jardin {
 	 * Accesseur au zones du jardin
 	 * @return les zones
 	 */
-	public LinkedList<Zone> getZones() {
+	public LinkedList<AbstractZone> getZones() {
 		return this.zones;
 	}
 	

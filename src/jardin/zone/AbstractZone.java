@@ -46,6 +46,11 @@ public class AbstractZone extends Polygon {
 			super.addPoint(xCoord, yCoord);
 	}
 	
+	/**
+	 * Retourne si la zone est fermé donc si la zone.
+	 * Une zone est fermé si sont premier point = sont dernier point
+	 * @return true si la zone est fermé false sinon
+	 */
 	public boolean isClosed() {
 		return this.xpoints[0] == this.xpoints[this.npoints-1] && this.ypoints[0] == this.ypoints[this.npoints -1];
 	}
