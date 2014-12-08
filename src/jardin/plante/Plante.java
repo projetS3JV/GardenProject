@@ -1,6 +1,7 @@
 package jardin.plante;
 
 import jardin.Ensoleillement;
+import jardin.TypeSol;
 
 import java.util.GregorianCalendar;
 
@@ -79,6 +80,8 @@ public class Plante {
 	
 	private Ensoleillement ensoleillement ;
 	
+	private TypeSol typeSol;
+	
 	// Constructeurs ---------------------------------------------------------------------------------
 	
 	/*
@@ -99,6 +102,7 @@ public class Plante {
 		this.DureeDev = 0;
 		this.type = null;
 		this.ensoleillement = null;
+		this.typeSol = null;
 	}
 	
 	
@@ -109,6 +113,14 @@ public class Plante {
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
+	public TypeSol getTypeSol() {
+		return typeSol;
+	}
+
+	public void setTypeSol(TypeSol typeSol) {
+		this.typeSol = typeSol;
+	}
+
 	public Ensoleillement getEnsoleillement() {
 		return ensoleillement;
 	}
