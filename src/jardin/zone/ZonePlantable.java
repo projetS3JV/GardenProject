@@ -1,7 +1,6 @@
 package jardin.zone;
 
-import java.util.LinkedList;
-
+import jardin.Ensoleillement;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 
@@ -9,14 +8,14 @@ public class ZonePlantable extends AbstractZone {
 
 
 	private static final long serialVersionUID = 0L;
-	private LinkedList<Plante> plantes = new LinkedList<Plante>();
+	private Plante plante;
 	private TypeSol typeSol;
 	
 	/**
 	 * Crée une zone plantable vide
 	 */
-	public ZonePlantable(TypeSol sol) {
-		super();
+	public ZonePlantable(Ensoleillement ensoleillement, TypeSol sol) {
+		super(ensoleillement);
 		this.typeSol = sol;
 	}
 	
@@ -25,8 +24,8 @@ public class ZonePlantable extends AbstractZone {
 	 * @param x la coordonnée en x du point
 	 * @param y la coordonnée en y du point
 	 */
-	public ZonePlantable(int x, int y, TypeSol sol) {
-		super(x, y);
+	public ZonePlantable(Ensoleillement ensoleillement, int x, int y, TypeSol sol) {
+		super(ensoleillement, x, y);
 		this.typeSol = sol;
 	}
 	
@@ -41,31 +40,39 @@ public class ZonePlantable extends AbstractZone {
 	}
 	
 	/**
+	 * Constructeur par copie qui permet d'obtenir une ZonePlantable a partir d'une AbstractZone
+	 * Si la plante ne peut etre mise une exception est lancé
+	 * @param zone la zone a changer
+	 * @param sol le type de sol de la zone
+	 * @throws IllegalArgumentException si la plante ne peut etre mise
+	 */
+	public ZonePlantable(AbstractZone zone, TypeSol sol, Plante plante) throws IllegalArgumentException{
+		super(zone);
+		this.typeSol = sol;
+		this.setPlante(plante);
+	}
+	
+	/**
 	 * Ajoute une plante dans la zone si elle peut etre planter
 	 * @param p la plante à ajouter
 	 */
-	public void addPlante(Plante plante) {
+	public void setPlante(Plante plante) throws IllegalArgumentException{
 		
-		// verification si la plante peut etre planté
-		
+		// verification si la plante peut être planté
+		if(plante.getTypeSol() != this.typeSol)
+			throw new IllegalArgumentException("impossible de mettre une plante, le type de sol ne correspond pas");
+		if (plante.getEnsoleillement() != this.ensoleillement)
+			throw new IllegalArgumentException("impossible de mettre une plante, l'ensoleillement ne correspond pas");
 		// ajout de la plante
-		this.plantes.add(plante);
+		this.plante = plante;
 	}
 	
 	/**
-	 * Retire une plante de la zone
-	 * @param p la plante à retirer
+	 * Accesseurs à la plante de la zone
+	 * @return une plante
 	 */
-	public void deletePlante(Plante p) {
-		this.plantes.remove(p);
-	}
-	
-	/**
-	 * Accesseurs au plantes
-	 * @return une linkedList de plantes
-	 */
-	public LinkedList<Plante> getPlantes() {
-		return this.plantes;
+	public Plante getPlante() {
+		return this.plante;
 	}
 	
 	/**
