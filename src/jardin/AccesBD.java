@@ -87,7 +87,7 @@ public final class AccesBD {
 				+ p.getTypeSol() + ","
 				+ p.getDatePlantation() + ","
 				+ p.getDateFloraison() + ","
-				+ p.getVivace() + ")";
+				+ p.isVivace() + ")";
 		try {
 			this.statement.executeUpdate(sql);
 		} catch (SQLException e) {
