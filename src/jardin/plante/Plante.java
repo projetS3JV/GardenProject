@@ -1,5 +1,7 @@
 package jardin.plante;
 
+import jardin.Ensoleillement;
+
 import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
@@ -75,6 +77,8 @@ public class Plante {
 	 */
 	private TypePlante type;
 	
+	private Ensoleillement ensoleillement ;
+	
 	// Constructeurs ---------------------------------------------------------------------------------
 	
 	/*
@@ -94,6 +98,7 @@ public class Plante {
 		this.ImgNonFleurie = null;
 		this.DureeDev = 0;
 		this.type = null;
+		this.ensoleillement = null;
 	}
 	
 	
@@ -104,6 +109,14 @@ public class Plante {
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
+	public Ensoleillement getEnsoleillement() {
+		return ensoleillement;
+	}
+
+	public void setEnsoleillement(Ensoleillement ensoleillement) {
+		this.ensoleillement = ensoleillement;
+	}
+
 	public TypePlante getType() {
 		return type;
 	}
