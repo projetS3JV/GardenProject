@@ -42,19 +42,14 @@ public class Zone extends AbstractZone{
 	}
 	
 	/**
-	 * Ajoute une zone dans la liste de zones si cela est possible, lance une exception sinon
+	 * Ajoute une zone dans la liste de zones si cela est possible, lance une exception sinon.
+	 * Quelque soit l'ensoleillement, la zone obtient l'ensoleillement de la zone parent
 	 * @param z la zone à ajouter
 	 * @throws IllegalArgumentException Si un des points est en dehors de la zone courante
 	 */
 	public void addZone(AbstractZone zone) throws IllegalArgumentException {
 		
-		//verification si  la zone peut etre ajouter
-		
-		//Verification de l'ensoleillement
-		if (this.ensoleillement != zone.ensoleillement)
-			throw new IllegalArgumentException("l'ensoleillement n'est pas possible");
-		
-		
+		//verification si  la zone peut etre ajouter		
 		//Si les points sonts dans la zone
 		for(int i = 0; i < this.xpoints.length; i++) {
 			
@@ -63,8 +58,9 @@ public class Zone extends AbstractZone{
 				throw new IllegalArgumentException("La zone à ajouter ne doit pas dépasser la zone courante");
 		}
 		
-		//ajout de la zone
+		//ajout de la zone et mise a jour de l'ensoleillement
 		this.zones.add(zone);
+		zone.ensoleillement = this.ensoleillement;
 	}
 	
 	/**

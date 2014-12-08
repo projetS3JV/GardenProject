@@ -10,11 +10,21 @@ public class AbstractZone extends Polygon {
 	protected Ensoleillement ensoleillement;
 	public int interval = 10;
 	
+	/**
+	 * Constructeur d'une AbstractZone vide
+	 * @param ensoleillement
+	 */
 	public AbstractZone(Ensoleillement ensoleillement) {
 		super();
 		this.ensoleillement = ensoleillement;
 	}
 	
+	/**
+	 * Constructeur d'une AbstractZone avec un point
+	 * @param ensoleillement l'ensoleillement de la zone
+	 * @param x la coordonnée en x du premier point
+	 * @param y la coordonnée en y du premier poin
+	 */
 	public AbstractZone(Ensoleillement ensoleillement, int x, int y) {
 		this(ensoleillement);
 		this.addPoint(x, y);
