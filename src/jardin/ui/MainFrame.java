@@ -20,10 +20,10 @@ public class MainFrame extends JFrame{
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());		
-		this.add( BorderLayout.NORTH, this.menuPanel);	   
-	    this.add(BorderLayout.SOUTH, this.calendarPanel);	    
-	    this.add(BorderLayout.EAST, this.outilPanel);	    
-	    this.add(BorderLayout.CENTER, this.jardinPanel);
+		//this.add( BorderLayout.NORTH, this.menuPanel);	   
+	    this.add(BorderLayout.SOUTH, this.calendarPanel = new CalendarPanel());	    
+	 //   this.add(BorderLayout.EAST, this.outilPanel);	    
+	 //   this.add(BorderLayout.CENTER, this.jardinPanel);
 	}
 
 	public static void main(String[] args) {
