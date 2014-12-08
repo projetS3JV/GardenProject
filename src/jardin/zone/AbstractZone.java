@@ -37,7 +37,10 @@ public class AbstractZone extends Polygon {
 	 * @param yCoord la coordonnée en y
 	 */
 	public void addPoint(int xCoord, int yCoord) {
-		super.addPoint(xCoord, yCoord);
+		if (Math.abs(this.xpoints[0] - xCoord) <= 10 && Math.abs(this.ypoints[0] - yCoord) <= 10)
+			super.addPoint(this.xpoints[0], this.ypoints[0]);
+		else	
+			super.addPoint(xCoord, yCoord);
 	}
 	
 	
