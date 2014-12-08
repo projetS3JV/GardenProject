@@ -3,6 +3,7 @@ package jardin.plante;
 import jardin.Ensoleillement;
 import jardin.TypeSol;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
@@ -19,12 +20,12 @@ public class Plante {
 	/*
 	 * La date de la floraison
 	 */
-	private GregorianCalendar dateFloraison;
+	private Date dateFloraison;
 	
 	/*
 	 * La date de plantation
 	 */
-	private GregorianCalendar datePlantation;
+	private Date datePlantation;
 	
 	/*
 	 * La couleur de la plante
@@ -69,6 +70,8 @@ public class Plante {
 	
 	private TypeSol typeSol;
 	
+	private String description;
+	
 	// Constructeurs ---------------------------------------------------------------------------------
 	
 	/*
@@ -87,16 +90,48 @@ public class Plante {
 		this.type = null;
 		this.ensoleillement = null;
 		this.typeSol = null;
+		this.description = null;
 	}
 	
-	
-	
+
+	public Plante(int tailleFin, Date dateFloraison,
+			Date datePlantation, String couleur, boolean vivace,
+			String nom, String nomL, ImageIcon imgFleurie,
+			ImageIcon imgNonFleurie, TypePlante type,
+			Ensoleillement ensoleillement, TypeSol typeSol, String description) {
+		this.tailleFin = tailleFin;
+		this.dateFloraison = dateFloraison;
+		this.datePlantation = datePlantation;
+		this.couleur = couleur;
+		this.vivace = vivace;
+		this.nom = nom;
+		this.nomL = nomL;
+		this.ImgFleurie = imgFleurie;
+		this.ImgNonFleurie = imgNonFleurie;
+		this.type = type;
+		this.ensoleillement = ensoleillement;
+		this.typeSol = typeSol;
+		this.description = description;
+	}
+
+
+
 
 
 
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	public TypeSol getTypeSol() {
 		return typeSol;
 	}
@@ -125,16 +160,16 @@ public class Plante {
 	public void setTailleFin(int tailleFin) {
 		this.tailleFin = tailleFin;
 	}
-	public GregorianCalendar getDateFloraison() {
+	public Date getDateFloraison() {
 		return dateFloraison;
 	}
-	public void setDateFloraison(GregorianCalendar dateFloraison) {
+	public void setDateFloraison(Date dateFloraison) {
 		this.dateFloraison = dateFloraison;
 	}
-	public GregorianCalendar getDatePlantation() {
+	public Date getDatePlantation() {
 		return datePlantation;
 	}
-	public void setDatePlantation(GregorianCalendar datePlantation) {
+	public void setDatePlantation(Date datePlantation) {
 		this.datePlantation = datePlantation;
 	}
 	public String getCouleur() {
