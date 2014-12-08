@@ -31,10 +31,6 @@ public class Plante {
 	 */
 	private String couleur;
 	
-	/*
-	 * La date de la derniére taille
-	 */
-	private GregorianCalendar dateTaille;
 	
 	/* 
 	 * True si la plante est vivace
@@ -52,10 +48,6 @@ public class Plante {
 	 */
 	private String nomL;
 	
-	/*
-	 * True si la plante est persistante
-	 */
-	private boolean persistant;
 	
 	/*
 	 * L'image de la plante fleurie
@@ -67,11 +59,6 @@ public class Plante {
 	 */
 	private ImageIcon ImgNonFleurie;
 	
-	
-	/*
-	 * Durée du développement en jour
-	 */
-	private int DureeDev;
 	
 	/*
 	 * Type de plante (Enumeration)
@@ -90,16 +77,13 @@ public class Plante {
 	public Plante(){
 		this.dateFloraison = null;
 		this.datePlantation = null;
-		this.dateTaille = null;
 		this.tailleFin = 0;
 		this.couleur = null;
 		this.vivace = false;
 		this.nom = "";
 		this.nomL = "";
-		this.persistant = false;
 		this.ImgFleurie = null;
 		this.ImgNonFleurie = null;
-		this.DureeDev = 0;
 		this.type = null;
 		this.ensoleillement = null;
 		this.typeSol = null;
@@ -159,12 +143,7 @@ public class Plante {
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
 	}
-	public GregorianCalendar getDateTaille() {
-		return dateTaille;
-	}
-	public void setDateTaille(GregorianCalendar dateTaille) {
-		this.dateTaille = dateTaille;
-	}
+
 	public boolean isVivace() {
 		return vivace;
 	}
@@ -183,12 +162,6 @@ public class Plante {
 	public void setNomL(String nomL) {
 		this.nomL = nomL;
 	}
-	public boolean isPersistant() {
-		return persistant;
-	}
-	public void setPersistant(boolean persistant) {
-		this.persistant = persistant;
-	}
 	public ImageIcon getImgFleurie() {
 		return ImgFleurie;
 	}
@@ -201,11 +174,4 @@ public class Plante {
 	public void setImgNonFleurie(ImageIcon imgNonFleurie) {
 		ImgNonFleurie = imgNonFleurie;
 	}
-	public int getDureeDev() {
-		return DureeDev;
-	}
-	public void setDureeDev(int dureeDev) {
-		DureeDev = dureeDev;
-	}
-	
 }
