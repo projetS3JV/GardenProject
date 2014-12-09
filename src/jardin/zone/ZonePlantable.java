@@ -1,7 +1,5 @@
 package jardin.zone;
 
-import jardin.Ensoleillement;
-import jardin.TypeSol;
 import jardin.plante.Plante;
 
 public class ZonePlantable extends AbstractZone {
@@ -9,12 +7,12 @@ public class ZonePlantable extends AbstractZone {
 
 	private static final long serialVersionUID = 0L;
 	private Plante plante;
-	private TypeSol typeSol;
+	private int typeSol;
 	
 	/**
 	 * Crée une zone plantable vide
 	 */
-	public ZonePlantable(Ensoleillement ensoleillement, TypeSol sol) {
+	public ZonePlantable(int ensoleillement, int sol) {
 		super(ensoleillement);
 		this.typeSol = sol;
 	}
@@ -24,7 +22,7 @@ public class ZonePlantable extends AbstractZone {
 	 * @param x la coordonnée en x du point
 	 * @param y la coordonnée en y du point
 	 */
-	public ZonePlantable(Ensoleillement ensoleillement, int x, int y, TypeSol sol) {
+	public ZonePlantable(int ensoleillement, int x, int y, int sol) {
 		super(ensoleillement, x, y);
 		this.typeSol = sol;
 	}
@@ -34,7 +32,7 @@ public class ZonePlantable extends AbstractZone {
 	 * @param zone la zone a changer
 	 * @param sol le type de sol de la zone
 	 */
-	public ZonePlantable(AbstractZone zone, TypeSol sol) {
+	public ZonePlantable(AbstractZone zone, int sol) {
 		super(zone);
 		this.typeSol = sol;
 	}
@@ -46,7 +44,7 @@ public class ZonePlantable extends AbstractZone {
 	 * @param sol le type de sol de la zone
 	 * @throws IllegalArgumentException si la plante ne peut etre mise
 	 */
-	public ZonePlantable(AbstractZone zone, TypeSol sol, Plante plante) throws IllegalArgumentException{
+	public ZonePlantable(AbstractZone zone, int sol, Plante plante) throws IllegalArgumentException{
 		super(zone);
 		this.typeSol = sol;
 		this.setPlante(plante);
@@ -79,7 +77,7 @@ public class ZonePlantable extends AbstractZone {
 	 * Accesseur au Type de sol de la zone
 	 * @return le TypeSol de la zone
 	 */
-	public TypeSol getTypeSol() {
+	public int getTypeSol() {
 		return this.typeSol;
 	}
 	

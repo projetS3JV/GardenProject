@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import javax.swing.ImageIcon;
 
 public final class AccesBD {
 	
-	public static String LOCATION = "./res";
+	public static String LOCATION = "res/";
 
 	private static AccesBD instance = null;
 	private Connection connection;
@@ -45,7 +46,7 @@ public final class AccesBD {
 	
 	private String getSQL() {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(LOCATION + "/db.sql"));
+			BufferedReader in = new BufferedReader(new FileReader(System.getProperty("user.home") + "/db.sql"));
 			String s;
 			String sql = "";
 			while ((s = in.readLine()) != null)
@@ -87,10 +88,7 @@ public final class AccesBD {
 	}
 	/*
 	 * Insertion d'une plante dans la base de donnée
-	 */
-	/*public void insertPlante(Plante p) {
-		String sql = "INSERT INTO plante values(null, " + escape(p.getNom()) + ","
-				+ escape(p.getNomL()) + ","
+	 * + escape(p.getNomL()) + ","
 				+ p.getType() + ","
 				+ p.getTailleFin() + ","
 				+ p.getEnsoleillement() + ","
@@ -102,18 +100,37 @@ public final class AccesBD {
 				+ p.getDateFloraison() + ","
 				+ p.isVivace() + ","
 				+ escape(p.getDescription()) + ")"; 
-		try {
-			System.out.println(sql);
-			this.statement.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-	
+	 */
 	public void insertPlante(Plante p) {
-		
+		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement stat = this.connection.prepareStatement(sql);
+			stat.setString(1,escape(p.getNom()));
+			stat.setString(2,escape(p.getNomL()));
+			stat.setInt(3, p.getType());
+			stat.setInt(4, p.getTailleFin());
+			stat.setInt(5, p.getEnsoleillement());
+			stat.setString(6, escape("p.getImgFleurie()"));
+			stat.setString(7, escape("p.getImgNonFleurie()"));
+			stat.setInt(8, p.getCouleur().getRGB());
+			stat.setInt(9,p.getTypeSol());
+			stat.setDate(10, (Date) p.getDatePlantation()); 
+			stat.setDate(11,(Date) p.getDateFloraison());
+			stat.setBoolean(12, p.isVivace());
+			stat.setString(13, escape(p.getDescription()));
+			try {
+				System.out.println(sql);
+				stat.executeUpdate(sql);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
+	
 	
 	private void insertZone(Zone z) {}
 	private void insertZonePlantable(ZonePlantable z) {}
