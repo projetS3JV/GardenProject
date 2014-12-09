@@ -10,11 +10,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
@@ -88,7 +88,7 @@ public final class AccesBD {
 	/*
 	 * Insertion d'une plante dans la base de donnée
 	 */
-	public void insertPlante(Plante p) {
+	/*public void insertPlante(Plante p) {
 		String sql = "INSERT INTO plante values(null, " + escape(p.getNom()) + ","
 				+ escape(p.getNomL()) + ","
 				+ p.getType() + ","
@@ -109,6 +109,10 @@ public final class AccesBD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}*/
+	
+	public void insertPlante(Plante p) {
+		
 	}
 	
 	private void insertZone(Zone z) {}
@@ -130,8 +134,8 @@ public final class AccesBD {
 	
 	private ArrayList<Zone> getZones() {return null;}
 	private ArrayList<Zone> getZonePlantables() {return null;}
-	public ArrayList<Plante> getPlantes(int id) {return null;}
-	public ArrayList<Jardin> getJardins(int id) {return null;}
+	public ArrayList<Plante> getPlantes() {return null;}
+	public ArrayList<Jardin> getJardins() {return null;}
 	
 
 	public static void main(String[] args) {
@@ -144,6 +148,6 @@ public final class AccesBD {
 		bd.close();
 	}
 	
-	// transformer le type sol en integer
+	
 	
 }
