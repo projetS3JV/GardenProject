@@ -88,18 +88,6 @@ public final class AccesBD {
 	}
 	/*
 	 * Insertion d'une plante dans la base de donnée
-	 * + escape(p.getNomL()) + ","
-				+ p.getType() + ","
-				+ p.getTailleFin() + ","
-				+ p.getEnsoleillement() + ","
-				+ escape("p.getImgFleurie()") + "," // a modifier plus tard
-				+ escape("p.getImgNonFleurie()") + ","
-				+ p.getCouleur().getRGB() + ","
-				+ p.getTypeSol() + ","
-				+ p.getDatePlantation() + ","
-				+ p.getDateFloraison() + ","
-				+ p.isVivace() + ","
-				+ escape(p.getDescription()) + ")"; 
 	 */
 	public void insertPlante(Plante p) {
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
