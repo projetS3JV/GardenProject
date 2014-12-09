@@ -26,8 +26,7 @@ public class CalendarPanel extends JPanel{
 	
 	public CalendarPanel(){
 		super();
-		this.scrollbar.setPreferredSize(new Dimension(500,20));
-		this.setLocation(new Point(10,10));
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.scrollbar.setEnabled(true);
 		this.scrollbar.addAdjustmentListener(new AdjustmentListener() {
 			@Override
@@ -37,9 +36,16 @@ public class CalendarPanel extends JPanel{
 				//méthode à ajouter pour que la changement de date entraine un changement sur les fleurs
 			}
 		});
+		//sets des tailles du label pour qu'elle soit fixe.
+		this.labelDate.setMaximumSize(new Dimension(100,50));
+		this.labelDate.setMinimumSize(new Dimension(100,50));
+		this.labelDate.setPreferredSize(new Dimension(100,50));
+		
+		//ajout des composants graphiques au pannel
 		this.add(this.scrollbar);
 		this.add(labelDate);
 		
+
 	}
 	
 /**

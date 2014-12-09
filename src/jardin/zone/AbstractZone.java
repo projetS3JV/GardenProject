@@ -1,20 +1,18 @@
 package jardin.zone;
 
-import jardin.Ensoleillement;
-
 import java.awt.Polygon;
 
 public class AbstractZone extends Polygon {
 
 	private static final long serialVersionUID = 0L;
-	protected Ensoleillement ensoleillement;
+	protected int ensoleillement;
 	public int interval = 10;
 	
 	/**
 	 * Constructeur d'une AbstractZone vide
 	 * @param ensoleillement
 	 */
-	public AbstractZone(Ensoleillement ensoleillement) {
+	public AbstractZone(int ensoleillement) {
 		super();
 		this.ensoleillement = ensoleillement;
 	}
@@ -25,7 +23,7 @@ public class AbstractZone extends Polygon {
 	 * @param x la coordonnée en x du premier point
 	 * @param y la coordonnée en y du premier poin
 	 */
-	public AbstractZone(Ensoleillement ensoleillement, int x, int y) {
+	public AbstractZone(int ensoleillement, int x, int y) {
 		this(ensoleillement);
 		this.addPoint(x, y);
 	}

@@ -5,7 +5,6 @@ import jardin.TypeSol;
 
 import java.awt.Color;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
 
@@ -65,11 +64,11 @@ public class Plante {
 	/*
 	 * Type de plante (Enumeration)
 	 */
-	private TypePlante type;
+	private int type;
 	
-	private Ensoleillement ensoleillement ;
+	private int ensoleillement ;
 	
-	private TypeSol typeSol;
+	private int typeSol;
 	
 	private String description;
 	
@@ -88,9 +87,9 @@ public class Plante {
 		this.nomL = "";
 		this.ImgFleurie = null;
 		this.ImgNonFleurie = null;
-		this.type = null;
-		this.ensoleillement = null;
-		this.typeSol = null;
+		this.type = 0;
+		this.ensoleillement = 0;
+		this.typeSol = 0;
 		this.description = null;
 	}
 	
@@ -109,9 +108,9 @@ public class Plante {
 		this.nomL = nomL;
 		this.ImgFleurie = imgFleurie;
 		this.ImgNonFleurie = imgNonFleurie;
-		this.type = type;
-		this.ensoleillement = ensoleillement;
-		this.typeSol = typeSol;
+		this.type = type.getValue();
+		this.ensoleillement = ensoleillement.getValue();
+		this.typeSol = typeSol.getValue();
 		this.description = description;
 	}
 
@@ -133,26 +132,26 @@ public class Plante {
 	}
 
 
-	public TypeSol getTypeSol() {
+	public int getTypeSol() {
 		return typeSol;
 	}
 
-	public void setTypeSol(TypeSol typeSol) {
+	public void setTypeSol(int typeSol) {
 		this.typeSol = typeSol;
 	}
 
-	public Ensoleillement getEnsoleillement() {
+	public int getEnsoleillement() {
 		return ensoleillement;
 	}
 
-	public void setEnsoleillement(Ensoleillement ensoleillement) {
+	public void setEnsoleillement(int ensoleillement) {
 		this.ensoleillement = ensoleillement;
 	}
 
-	public TypePlante getType() {
+	public int getType() {
 		return type;
 	}
-	public void setType(TypePlante type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public int getTailleFin() {

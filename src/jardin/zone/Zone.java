@@ -1,7 +1,5 @@
 package jardin.zone;
 
-import jardin.Ensoleillement;
-
 import java.util.LinkedList;
 
 public class Zone extends AbstractZone{
@@ -12,7 +10,7 @@ public class Zone extends AbstractZone{
 	/**
 	 * Crée une zone vide
 	 */
-	public Zone(Ensoleillement ensoleillement) {
+	public Zone(int ensoleillement) {
 		super(ensoleillement);
 	}
 	
@@ -21,7 +19,7 @@ public class Zone extends AbstractZone{
 	 * @param x la coordonnée en x
 	 * @param y la coordonnée en y
 	 */
-	public Zone(Ensoleillement ensoleillement, int x, int y) {
+	public Zone(int ensoleillement, int x, int y) {
 		super(ensoleillement, x,y);
 	}
 	
