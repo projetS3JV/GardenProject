@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-public class PlantePanel extends JPanel {
+public class PlantePanel extends JLabel {
 	private JPanel plantePanel;
 	private AccesBD instance = AccesBD.getInstance();
 	
