@@ -117,7 +117,6 @@ public final class AccesBD {
 			stat.setString(13, escape(p.getDescription()));
 			stat.executeUpdate();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -133,7 +132,6 @@ public final class AccesBD {
 			// stat.setInt(5, z.);
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -150,7 +148,6 @@ public final class AccesBD {
 			// stat.setInt(6, z.);
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -162,14 +159,13 @@ public final class AccesBD {
 			stat.setString(1, escape(j.getName()));
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public void updatePlante(Plante p) throws IllegalArgumentException {
-		if (p.getId() != -1) {
-			String sql = "UPDATE PLANTE SET (null, ?,?,?,?,?,?,?,?,?,?,?,?,?) WHERE id="
+		//if (p.getId() != -1) {
+			String sql = "UPDATE PLANTE SET nom_Usuel =?, nom_Latin = ?, type_Plante = ?, hauteur = ?, luminosite = ?, url_Image_En_Fleur = ?, url_Image_Sans_Fleur = ?, couleur_RGB = ?, type_Sol = ?,	date_Debut = ?,	date_Fin = ?, vivace = ?, description = ? WHERE id="
 					+ p.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -188,19 +184,18 @@ public final class AccesBD {
 				stat.setString(13, escape(p.getDescription()));
 				stat.executeUpdate();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+			}/*
 		} else {
 			throw new IllegalArgumentException(
-					"Plante n'etant pas dans la base de données");
-		}
+					"Plante pas dans la base de données");
+		}*/
 
 	}
 
 	private void updateZone(Zone z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
-			String sql = "UPDATE INTO ZONE SET (null,?,?,?,?,?)";
+			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
 				// stat.setInt(1, z.); id jardin
@@ -210,19 +205,18 @@ public final class AccesBD {
 				// stat.setInt(5, z.);
 				stat.executeUpdate();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			throw new IllegalArgumentException(
-					"Plante n'etant pas dans la base de données");
+					"Zone pas dans la base de données");
 		}
 	}
 
 	private void updateZonePlantable(ZonePlantable z)
 			throws IllegalArgumentException {
 		if (z.getId() != -1) {
-			String sql = "UPDATE ZONEPLANTABLE SET(null,?,?,?,?,?,?)";
+			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
 				// stat.setInt(1, 0); id plante
@@ -233,46 +227,73 @@ public final class AccesBD {
 				// stat.setInt(6, z.);
 				stat.executeUpdate();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			throw new IllegalArgumentException(
-					"Plante n'etant pas dans la base de données");
+					"Zone pas dans la base de données");
 		}
 	}
 
 	public void updateJardin(Jardin j) throws IllegalArgumentException {
 		if (j.getId() != -1) {
-			String sql = "UPDATE JARDIN SET(null,?)";
+			String sql = "UPDATE JARDIN SET name=? WHERE id ="+j.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
 				stat.setString(1, escape(j.getName()));
 				stat.executeUpdate();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			throw new IllegalArgumentException(
-					"Plante n'etant pas dans la base de données");
+					"Jardin pas dans la base de données");
 		}
 	}
 
 	public void deletePlante(int id) {
+		String sql = "DELETE FROM PLANTE WHERE id =" + id;
+		try {
+			PreparedStatement stat = this.connection.prepareStatement(sql);
+			stat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void deleteZone(int id) {
+		String sql = "DELETE FROM ZONE WHERE id =" + id;
+		try {
+			PreparedStatement stat = this.connection.prepareStatement(sql);
+			stat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void deleteZonePlantable(int id) {
+		String sql = "DELETE FROM ZONEPLANTABLE PLANTE WHERE id =" + id;
+		try {
+			PreparedStatement stat = this.connection.prepareStatement(sql);
+			stat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteJardin(int id) {
+		String sql = "DELETE FROM JARDIN WHERE id =" + id;
+		try {
+			PreparedStatement stat = this.connection.prepareStatement(sql);
+			stat.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Plante getPlante(int id) {
-		return null;
+		return null; //http://www.hsqldb.org/doc/1.8/guide/apb.html
 	}
 
 	public Jardin getJardin(int id) {
@@ -303,9 +324,14 @@ public final class AccesBD {
 				new ImageIcon("/bla/img2.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur");
-		bd.insertPlante(p);
-		bd.updatePlante(p);
+		//bd.insertPlante(p);
+		//bd.updatePlante(p);
+		
+		bd.deletePlante(7);
 		bd.close();
 	}
 
+	
+	// Pense bête --------------->
+	// Reprendre les id lors des updates
 }
