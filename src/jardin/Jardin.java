@@ -12,6 +12,7 @@ public class Jardin {
 	 */
 	private String name;
 	private LinkedList<AbstractZone> zones = new LinkedList<AbstractZone>();
+	private int id = -1;
 	
 	public Jardin(String name) {
 		this.name = name;
@@ -65,5 +66,7 @@ public class Jardin {
 		this.zones.remove(zone);
 	}
 	
-	
+	public int getId(){
+		return this.id;
+	}
 }

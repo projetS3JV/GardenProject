@@ -12,6 +12,8 @@ public class Plante {
 	
 	// Attributs d'instance ---------------------------------------------------------------------------
 	
+	private int id = -1;
+	
 	/*
 	 * La taille finale de la plante
 	 */
@@ -122,6 +124,16 @@ public class Plante {
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public String getDescription() {
 		return description;
 	}
