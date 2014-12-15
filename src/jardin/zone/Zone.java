@@ -6,6 +6,7 @@ public class Zone extends AbstractZone{
 	
 	private static final long serialVersionUID = 0L;
 	private LinkedList<AbstractZone> zones = new LinkedList<AbstractZone>();
+
 	
 	/**
 	 * Crée une zone vide
@@ -69,3 +70,5 @@ public class Zone extends AbstractZone{
 		this.zones.remove(zone);
 	}
 }
+
+	

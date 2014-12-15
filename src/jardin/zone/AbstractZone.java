@@ -7,6 +7,7 @@ public class AbstractZone extends Polygon {
 	private static final long serialVersionUID = 0L;
 	protected int ensoleillement;
 	public int interval = 10;
+	private int id = -1;
 	
 	/**
 	 * Constructeur d'une AbstractZone vide
@@ -63,6 +64,10 @@ public class AbstractZone extends Polygon {
 	 */
 	public boolean isClosed() {
 		return this.xpoints[0] == this.xpoints[this.npoints-1] && this.ypoints[0] == this.ypoints[this.npoints -1];
+	}
+	
+	public int getId(){
+		return this.id;
 	}
 	
 	
