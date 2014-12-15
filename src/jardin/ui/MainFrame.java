@@ -13,14 +13,14 @@ public class MainFrame extends JFrame{
 	private OutilPanel outilPanel;
 	private Plantotheque plantotheque;
 	private CalendarPanel calendarPanel;
-	private MenuPanel menuPanel;
+	private MenuBar menuPanel;
 	
 	private MainFrame(){
-		this.setSize(900, 600);
+		this.setSize(1270, 850);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());		
-		//this.add( BorderLayout.NORTH, this.menuPanel);	   
+		this.setJMenuBar(new MenuBar());	   
 	    this.add(BorderLayout.SOUTH, this.calendarPanel = new CalendarPanel());	    
 	 //   this.add(BorderLayout.EAST, this.outilPanel);	    
 	 //   this.add(BorderLayout.CENTER, this.jardinPanel);
