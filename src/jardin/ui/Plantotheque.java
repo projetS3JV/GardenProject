@@ -21,7 +21,7 @@ public class Plantotheque extends JFrame {
 		//Création de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		int nbPlante = instance.getPlantes().size();
 		
-		listePlante = new JList<PlantePanel>(instance.getPlanteListeModel());
+		listePlante = new JList<PlantePanel>(/*instance.getPlanteListeModel()*/);
 		listePlante.setCellRenderer(new PlantePanel());
 		for(int i = 0; i < nbPlante; i++) {
 			PlantePanel tmp = new PlantePanel();
@@ -38,7 +38,7 @@ public class Plantotheque extends JFrame {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
 				//Récupérer la zone sélectionné
-				ZonePlantable.setPlante(select);
+				//ZonePlantable.setPlante(select);
 			}
 		});
 		
@@ -54,7 +54,12 @@ public class Plantotheque extends JFrame {
 	 * Méthode mettant en mémoire la plante sélectionnée.
 	 */
 	public void setSelected(PlantePanel plantePanel, int id) {
-		select = (Plante) this.listePlante.getSelectedValue();3
+		select = (Plante) this.listePlante.getSelectedValue();
+	}
+	
+	public static void main(String arg[]) {
+		Plantotheque p = new Plantotheque();
+		p.setVisible(true);
 	}
 	
 }

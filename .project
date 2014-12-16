@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>res/Img/test.png</name>
+			<type>1</type>
+			<location>X:/Documents/Jardin virtuel/test.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
