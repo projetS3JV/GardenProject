@@ -1,22 +1,14 @@
 package jardin.ui;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import jardin.Jardin;
 import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
 import jardin.zone.ZonePlantable;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
 
-import org.hsqldb.jdbc.JDBCArrayBasic;
-import org.hsqldb.types.Type;
-import org.omg.PortableInterceptor.INACTIVE;
+import javax.swing.JPanel;
 
 /**
  * 
@@ -69,5 +61,9 @@ public class JardinPanel extends JPanel{
 	public Jardin getJardin() {
 		return jardin;
 	}	
+	
+	public void setJardin(Jardin j) {
+		this.jardin = j;
+	}
 
 }
