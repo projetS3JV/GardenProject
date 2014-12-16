@@ -31,7 +31,7 @@ public final class AccesBD {
 	private SortedListModel planteList;
 
 	private AccesBD() {
-		this.planteList = new SortedListModel();
+		this.planteList = new SortedListModel(); // a construire !
 		try {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 			this.connect("ifexists=true");
@@ -103,6 +103,7 @@ public final class AccesBD {
 	 */
 	public void insertPlante(Plante p) {
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		this.planteList.add(p);
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.setString(1, escape(p.getNom()));
@@ -125,14 +126,13 @@ public final class AccesBD {
 	}
 
 	private void insertZone(Zone z) {
-		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?,?)";
+		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
-			// stat.setInt(1, z.); id jardin
+			stat.setInt(1, z.getId());
 			// stat.set(2, z.xpoints);
 			// stat.set(3, z.ypoints);
-			// stat.setInt(4, z.);
-			// stat.setInt(5, z.);
+			stat.setInt(4, z.getEnsoleillement());
 			stat.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,12 +143,12 @@ public final class AccesBD {
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
-			// stat.setInt(1, 0); id plante
-			// stat.setInt(2,0); id zone
+			stat.setInt(1,z.getPlante().getId());
+			stat.setInt(2,z.getId()); 
 			// stat.setArray(3,z.xpoints);
 			// stat.setInt(4, z.ypoints);
 			stat.setInt(5, z.getTypeSol());
-			// stat.setInt(6, z.);
+			stat.setInt(6, z.getEnsoleillement());
 			stat.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -198,14 +198,13 @@ public final class AccesBD {
 
 	private void updateZone(Zone z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
-			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, type_Sol =?, luminosite =? WHERE id = "+ z.getId();
+			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
-				// stat.setInt(1, z.); id jardin
+				stat.setInt(1, z.getId());
 				// stat.set(2, z.xpoints);
 				// stat.set(3, z.ypoints);
-				// stat.setInt(4, z.);
-				// stat.setInt(5, z.);
+				stat.setInt(4, z.getEnsoleillement());
 				stat.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -221,12 +220,12 @@ public final class AccesBD {
 			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
-				// stat.setInt(1, 0); id plante
-				// stat.setInt(2,0); id zone
+				stat.setInt(1,z.getPlante().getId());
+				stat.setInt(2,z.getId());
 				// stat.setArray(3,z.xpoints);
 				// stat.setInt(4, z.ypoints);
 				stat.setInt(5, z.getTypeSol());
-				// stat.setInt(6, z.);
+				stat.setInt(6, z.getEnsoleillement());
 				stat.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -254,6 +253,7 @@ public final class AccesBD {
 
 	public void deletePlante(int id) {
 		String sql = "DELETE FROM PLANTE WHERE id =" + id;
+		this.planteList.remove(id);
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.executeUpdate();
@@ -275,11 +275,8 @@ public final class AccesBD {
 	private void deleteZonePlantable(int id) {
 		String sql = "DELETE FROM ZONEPLANTABLE PLANTE WHERE id =" + id;
 		try {
-			PreparedStatement stat = this.connection.prepareStatement(sql);
-			stat.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			this.statement.executeUpdate(sql);
+		} catch (SQLException e) {e.printStackTrace();}
 	}
 
 	public void deleteJardin(int id) {

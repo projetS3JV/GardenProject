@@ -40,8 +40,8 @@ public class SortedListModel extends AbstractListModel<Plante> {
      * supprime l'élément element de la liste
      * @param element élément à supprimer
      */
-    public void remove(Plante element) {
-        int pos = this.sortedList.indexOf(element.getId());
+    public void remove(int id) {
+        int pos = this.sortedList.indexOf(id);
         this.sortedList.remove(pos);
         this.fireIntervalRemoved(this, pos, pos);
     }
