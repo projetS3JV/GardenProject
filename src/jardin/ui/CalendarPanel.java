@@ -1,19 +1,13 @@
 package jardin.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
-import javax.swing.SwingUtilities;
 
 public class CalendarPanel extends JPanel{
 	private int jour = 1; //récupère la valeur de la scrollbar, le nième jour de l'année
