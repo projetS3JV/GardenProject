@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 
 public class CreateNewPlante extends JDialog{
 	
+	
+	private static final long serialVersionUID = 1L;
 	private JPanel panel1;
 	private JPanel panel2;
 	private JPanel panel3;

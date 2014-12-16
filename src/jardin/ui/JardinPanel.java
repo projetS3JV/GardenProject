@@ -17,6 +17,8 @@ import javax.swing.JPanel;
  */
 public class JardinPanel extends JPanel{
 	
+	
+	private static final long serialVersionUID = 1L;
 	private Jardin jardin;
 	
 	public JardinPanel(Jardin jardin) {
@@ -46,7 +48,7 @@ public class JardinPanel extends JPanel{
 			ZonePlantable zone = (ZonePlantable) z;
 			g.setColor(Color.black);			
 			g.drawPolygon(zone);
-			g.setColor(zone.getPlante().getCouleur());			
+			g.setColor(zone.getPlante().getCouleur_en_fleur());			
 			g.fillPolygon(zone);
 		} 
 		else {

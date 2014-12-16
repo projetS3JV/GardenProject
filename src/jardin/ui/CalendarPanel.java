@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 
 public class CalendarPanel extends JPanel{
+	
+	private static final long serialVersionUID = 1L;
 	private int jour = 1; //récupère la valeur de la scrollbar, le nième jour de l'année
 	private  String mois = "Janvier";
 	private String texteDate = this.jourDuMois + " " +this.mois; //La date sous la forme "DD Month" pour l'affichage

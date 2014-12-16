@@ -14,7 +14,8 @@ import javax.swing.AbstractListModel;
  * @param <T> type d'élément de la liste (doit implémenter Comparable<T>)
  */
 public class SortedListModel extends AbstractListModel<Plante> {
-    private ArrayList<Plante> sortedList;
+    private static final long serialVersionUID = 1L;
+	private ArrayList<Plante> sortedList;
     
     /**
      * Constructeur	

@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class PlantothequeFrame extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 	private AccesBD instance = AccesBD.getInstance();
 	private Plante select = null;
 	private JList listePlante;
@@ -27,12 +29,12 @@ public class PlantothequeFrame extends JFrame {
 	public PlantothequeFrame() {
 		this.setResizable(false);
 		this.setSize(800, 600);
-		this.setTitle("Plantothèque");
+		this.setTitle("Plantothï¿½que");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
 		
-		//Création de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
+		//Crï¿½ation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		int nbPlante = instance.getPlantes().getSize();
 		
 		Plante p = new Plante(10, null,null,null, Color.blue, Color.black, true,
@@ -46,7 +48,7 @@ public class PlantothequeFrame extends JFrame {
 		this.add(new JScrollPane(this.listePlante));
 
 		
-		//Création de la barre de défilement et des boutons Ajouter et Annuler.
+		//Crï¿½ation de la barre de dï¿½filement et des boutons Ajouter et Annuler.
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		JButton ajouter = new JButton("Ajouter");
@@ -59,7 +61,7 @@ public class PlantothequeFrame extends JFrame {
 		ajouter.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-				//Récupérer la zone sélectionné
+				//Rï¿½cupï¿½rer la zone sï¿½lectionnï¿½
 				//ZonePlantable.setPlante(select);
 			}
 		});
@@ -75,7 +77,7 @@ public class PlantothequeFrame extends JFrame {
 	}
 	
 	/**
-	 * Méthode mettant en mémoire la plante sélectionnée.
+	 * Mï¿½thode mettant en mï¿½moire la plante sï¿½lectionnï¿½e.
 	 */
 	public void setSelected(PlantePanel plantePanel, int id) {
 		select = (Plante) this.listePlante.getSelectedValue();

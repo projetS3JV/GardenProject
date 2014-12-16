@@ -6,19 +6,21 @@ import jardin.SortedListModel;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class PlantothequePanel extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
 	private AccesBD instance = AccesBD.getInstance();
 	private Plante select = null;
 	private JList listePlante;
@@ -29,7 +31,7 @@ public class PlantothequePanel extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 		
-		//Création de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
+		//Crï¿½ation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		int nbPlante = instance.getPlantes().getSize();
 		
 		Plante p = new Plante(10, null,null,null, Color.blue, Color.black, true,
@@ -43,7 +45,7 @@ public class PlantothequePanel extends JPanel {
 		this.add(new JScrollPane(this.listePlante));
 
 		
-		//Création des boutons Ajouter et Annuler.
+		//Crï¿½ation des boutons Ajouter et Annuler.
 		JButton ajouter = new JButton("Ajouter");
 		this.add(ajouter, BorderLayout.SOUTH);
 		
@@ -51,14 +53,14 @@ public class PlantothequePanel extends JPanel {
 		ajouter.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-				//Récupérer la zone sélectionné
+				//Rï¿½cupï¿½rer la zone sï¿½lectionnï¿½
 				//ZonePlantable.setPlante(select);
 			}
 		});
 	}
 	
 	/**
-	 * Méthode mettant en mémoire la plante sélectionnée.
+	 * Mï¿½thode mettant en mï¿½moire la plante sï¿½lectionnï¿½e.
 	 */
 	public void setSelected(PlantePanel plantePanel, int id) {
 		select = (Plante) this.listePlante.getSelectedValue();
