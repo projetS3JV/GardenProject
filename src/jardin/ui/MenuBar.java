@@ -42,8 +42,11 @@ public class MenuBar extends JMenuBar {
 		nouveau.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
+				String [] values  = InputNewJardin.showInputNewJardin(MainFrame.getInstance());
 				//lancer méthode création de nouveau jardin
+				if (values != null) {
+					MainFrame.getInstance().getJardinPanel().setJardin(new Jardin(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2])));
+				}
 			}
 		});
 		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
