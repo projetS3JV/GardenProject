@@ -144,8 +144,8 @@ public class CalendarPanel extends JPanel{
   */
 	public Date getDate(){
 		
-		for(int i=0; i<this.moisTab.length; i++){
-			if(this.moisTab[i].equals(this.mois)){
+		for(int i=0; i < CalendarPanel.moisTab.length; i++){
+			if(CalendarPanel.moisTab[i].equals(this.mois)){
 				long timeStamp = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), i, this.jourDuMois).getTimeInMillis();
 				return new Date(timeStamp);
 			}
