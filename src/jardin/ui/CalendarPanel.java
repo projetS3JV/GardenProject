@@ -1,28 +1,24 @@
 package jardin.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
-import javax.swing.SwingUtilities;
 
 public class CalendarPanel extends JPanel{
 	private int jour = 1; //récupère la valeur de la scrollbar, le nième jour de l'année
 	private  String mois = "Janvier";
 	private String texteDate = this.jour + " " +this.mois; //La date sous la forme "DD Month" pour l'affichage
 	private static String[] moisTab = new String[]{"Janvier", "Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"};
-	//attributs graphiques
+	
+	//éléments graphiques
 	private JScrollBar scrollbar = new JScrollBar(java.awt.Adjustable.HORIZONTAL, 1, 10, 1, 365);;
 	private JLabel labelDate = new JLabel(this.texteDate);
+	
 	
 	public CalendarPanel(){
 		super();

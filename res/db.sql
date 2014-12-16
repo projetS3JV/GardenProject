@@ -25,7 +25,6 @@ CREATE TABLE zone (
 	id_Jardin		INTEGER UNIQUE FOREIGN KEY REFERENCES jardin(id),
 	x			INTEGER ARRAY,
 	y			INTEGER ARRAY,
-	type_Sol		INTEGER,
 	luminosite		INTEGER
 )
 

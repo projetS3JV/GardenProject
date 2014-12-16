@@ -70,5 +70,8 @@ public class AbstractZone extends Polygon {
 		return this.id;
 	}
 	
+	public int getEnsoleillement() {
+		return this.ensoleillement;
+	}	
 	
 }
