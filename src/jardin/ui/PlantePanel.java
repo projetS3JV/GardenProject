@@ -1,11 +1,8 @@
 package jardin.ui;
 
-import java.awt.Component;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import jardin.AccesBD;
 import jardin.plante.Plante;
+
+import java.awt.Component;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
