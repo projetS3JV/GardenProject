@@ -92,6 +92,8 @@ public class MenuBar extends JMenuBar {
 				}
 			}
 		});
+		
+		fichier.add(nouveau);
 		fichier.add(enregistrer);
 		fichier.add(new JSeparator());
 		fichier.add(ouvrirJardin);

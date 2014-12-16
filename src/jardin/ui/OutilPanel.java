@@ -14,7 +14,7 @@ public class OutilPanel extends JPanel{
 		this.setLayout(new GridLayout( 2,1));
 		
 		//Création du pannel qui va recevoir les boutons déclenchant les outils
-		JButton tracer = new JButton()
+		JButton tracer = new JButton("Tracer zone"
 		this.outilsPanel
 		
 		
