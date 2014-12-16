@@ -7,7 +7,7 @@ public enum TypePlante {
 	
 	private final int value;
 
-    private TypePlante(int value) {
+    TypePlante(int value) {
         this.value = value;
     }
     

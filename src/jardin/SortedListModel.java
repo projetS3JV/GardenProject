@@ -42,6 +42,7 @@ public class SortedListModel extends AbstractListModel<Plante> {
      */
     public void remove(int id) {
         int pos = this.sortedList.indexOf(id);
+        if (pos < 0) throw new IllegalArgumentException("ID non existant");
         this.sortedList.remove(pos);
         this.fireIntervalRemoved(this, pos, pos);
     }

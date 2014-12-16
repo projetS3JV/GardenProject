@@ -37,6 +37,21 @@ public class MenuBar extends JMenuBar {
 		super();
 		//Sous-menu fichier
 		JMenu fichier = new JMenu("Fichier");
+		
+		JMenuItem nouveau = new JMenuItem("Nouveau");
+		nouveau.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String [] values  = InputNewJardin.showInputNewJardin(MainFrame.getInstance());
+				//lancer méthode création de nouveau jardin
+				if (values != null) {
+					MainFrame.getInstance().getJardinPanel().setJardin(new Jardin(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2])));
+				}
+			}
+		});
+		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+
+		
 		JMenuItem enregistrer = new JMenuItem("Enregistrer");
 		enregistrer.addActionListener(new ActionListener() {
 			@Override
@@ -80,6 +95,8 @@ public class MenuBar extends JMenuBar {
 				}
 			}
 		});
+		
+		fichier.add(nouveau);
 		fichier.add(enregistrer);
 		fichier.add(new JSeparator());
 		fichier.add(ouvrirJardin);

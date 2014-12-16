@@ -1,11 +1,8 @@
 package jardin.ui;
 
-import java.awt.Component;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import jardin.AccesBD;
 import jardin.plante.Plante;
+
+import java.awt.Component;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,13 +18,16 @@ public class PlantePanel extends JLabel implements ListCellRenderer{
 	private JLabel name, desc;
 	
 	public PlantePanel() {
+		super();
 		plantePanel = new JPanel();
+		plantePanel.setSize(100, 50);
 		
 		JSplitPane split = new JSplitPane();
 	    split.setLeftComponent(image);
 	    split.setRightComponent(name);
 	    split.setRightComponent(desc);
 	    plantePanel.add(split);
+	    this.add(plantePanel);
 	}
 
 	//@Override
@@ -48,13 +48,6 @@ public class PlantePanel extends JLabel implements ListCellRenderer{
 		//Label contenant l'image de la plante.
 		image.setIcon(img);
 		return this;
-	}
-	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Fenêtre");
-		PlantePanel panel1 = new PlantePanel();
-		frame.add(panel1);
-		frame.setVisible(true);
 	}
 	
 }

@@ -6,11 +6,12 @@ public enum Ensoleillement {
 	
 	private final int value;
 
-    private Ensoleillement(int value) {
+    Ensoleillement(int value) {
         this.value = value;
     }
     
     public int getValue() {
         return value;
     }
+    
 }
