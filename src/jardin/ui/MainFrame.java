@@ -11,11 +11,10 @@ public class MainFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	//Les différents composants graphiques
-	private JardinPanel jardinPanel;
+	private JardinPanel jardinPanel = new JardinPanel();
 	private OutilPanel outilPanel;
-	private Plantotheque plantotheque;
-	private CalendarPanel calendarPanel;
-	private MenuBar menuPanel;
+	private CalendarPanel calendarPanel  = new CalendarPanel();
+	private MenuBar menuBar = new MenuBar();
 	private static MainFrame instance = null;
 	
 	private MainFrame(){
@@ -23,10 +22,10 @@ public class MainFrame extends JFrame{
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());		
-		this.setJMenuBar(new MenuBar());	   
-	    this.add(BorderLayout.SOUTH, this.calendarPanel = new CalendarPanel());	    
+		this.setJMenuBar(menuBar);	   
+	    this.add(BorderLayout.SOUTH, this.calendarPanel);	    
 	 //   this.add(BorderLayout.EAST, this.outilPanel);	    
-	 //   this.add(BorderLayout.CENTER, this.jardinPanel);
+	    this.add(BorderLayout.CENTER, this.jardinPanel);
 	}
 
 	public JardinPanel getJardinPanel() {
@@ -37,16 +36,14 @@ public class MainFrame extends JFrame{
 		return this.outilPanel;
 	}
 
-	public Plantotheque getPlantotheque() {
-		return this.plantotheque;
-	}
+
 
 	public CalendarPanel getCalendarPanel() {
 		return this.calendarPanel;
 	}
 
 	public MenuBar getMenuPanel() {
-		return this.menuPanel;
+		return this.menuBar;
 	}
 
 	public static MainFrame getInstance(){
