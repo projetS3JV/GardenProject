@@ -13,9 +13,14 @@ public class Jardin {
 	private String name;
 	private LinkedList<AbstractZone> zones = new LinkedList<AbstractZone>();
 	private int id = -1;
+	private int width;
+	private int height;
 	
-	public Jardin(String name) {
+	
+	public Jardin(String name, int width, int height) {
 		this.name = name;
+		this.width = width;
+		this.height = height;
 	}
 	
 	/**
@@ -68,6 +73,14 @@ public class Jardin {
 	
 	public int getId(){
 		return this.id;
+	}
+	
+	public int getHeight() {
+		return this.height;
+	}
+	
+	public int getWidth() {
+		return this.width;
 	}
 	
 	/**
