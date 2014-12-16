@@ -4,7 +4,7 @@ import jardin.Ensoleillement;
 import jardin.TypeSol;
 
 import java.awt.Color;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.swing.ImageIcon;
 
@@ -18,6 +18,8 @@ public class Plante implements Comparable<Integer> {
 	 * La taille finale de la plante
 	 */
 	private int tailleFin;
+
+	private Date dateFinFloraison;
 	
 	/*
 	 * La date de la floraison
@@ -78,6 +80,7 @@ public class Plante implements Comparable<Integer> {
 	 */
 	public Plante(){
 		this.dateFloraison = null;
+		this.dateFinFloraison = null;
 		this.datePlantation = null;
 		this.tailleFin = 0;
 		this.couleur_en_fleur = null;
@@ -93,12 +96,13 @@ public class Plante implements Comparable<Integer> {
 	}
 	
 
-	public Plante(int tailleFin, Date dateFloraison,
+	public Plante(int tailleFin, Date dateFloraison, Date dateFinFloraison,
 			Date datePlantation, Color fleuris, Color nonFleuris, boolean vivace,
 			String nom, String nomL, ImageIcon imgFleurie, TypePlante type,
 			Ensoleillement ensoleillement, TypeSol typeSol, String description) {
 		this.tailleFin = tailleFin;
 		this.dateFloraison = dateFloraison;
+		this.dateFinFloraison = dateFinFloraison;
 		this.datePlantation = datePlantation;
 		this.couleur_en_fleur = fleuris;
 		this.couleur_non_fleuris = nonFleuris;
@@ -120,6 +124,16 @@ public class Plante implements Comparable<Integer> {
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
+	public Date getDateFinFloraison() {
+		return dateFinFloraison;
+	}
+
+
+	public void setDateFinFloraison(Date dateFinFloraison) {
+		this.dateFinFloraison = dateFinFloraison;
+	}
+
+
 	public int getId() {
 		return id;
 	}
