@@ -64,16 +64,8 @@ public class JardinPanel extends JPanel{
 		return jardin;
 	}
 	
-	/*public static void main(String[] args) throws SQLException {
-		int[] x = {1,2,3,4};
-		JDBCArrayBasic T = intArrayToJDBXArray(x);
-		x = JDBCArrayTointArray(T);
-		for (int i = 0 ; i < x.length ; i++) {
-			System.out.print(x[i]);
-		}
-	}
 	
-	public static int[] JDBCArrayTointArray(java.sql.Array T) {
+	/*public static int[] JDBCArrayTointArray(java.sql.Array T) {
 		ResultSet rs;
 		ArrayList<Integer> x = new ArrayList<Integer>();
 		try {
@@ -86,7 +78,7 @@ public class JardinPanel extends JPanel{
 			ret[i] = x.get(i);
 		}
 		return ret;
-	}*/
+	}
 	
 	
 	public static JDBCArrayBasic intArrayToJDBXArray(int[] T) {
@@ -95,7 +87,7 @@ public class JardinPanel extends JPanel{
 		for (int i = 0 ; i< T.length ; i++) 
 			o[i] = new Integer(T[i]);
 		return new JDBCArrayBasic(o, type);
-	}
+	}*/
 	
 
 }
