@@ -69,4 +69,31 @@ public class Jardin {
 	public int getId(){
 		return this.id;
 	}
+	
+	/**
+	 * Methode qui retourne la plus petite zone trouvé.
+	 * @param x la coordonnée en x du point
+	 * @param y la coordonnée en y du point
+	 * @return la plus petite zone où le point est dedans null sinon.
+	 */
+	public AbstractZone getZone(int x, int y) {
+		AbstractZone z = null;
+		
+		for (int i = 0; i < this.zones.size() && z == null; i++) {
+			if (this.zones.get(i).contains(x, y))
+				z = this.zones.get(i);		
+		}
+		
+		if (z != null && z instanceof Zone) {
+			Zone k = (Zone) z;
+			AbstractZone temp = k;
+			while (temp instanceof Zone && (temp = k.getZone(x, y)) != null) {
+				if(temp instanceof Zone) {
+					k = (Zone) temp;
+				}
+				z = temp;
+			}
+		}
+		return z;
+	}
 }
