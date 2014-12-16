@@ -4,6 +4,7 @@ package jardin.ui;
 import jardin.AccesBD;
 import jardin.Jardin;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -41,10 +42,15 @@ public class MenuBar extends JMenuBar {
 		enregistrer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 				//lancer méthode enregistrement
 				 Jardin jardin = MainFrame.getInstance().getJardinPanel().getJardin();
-				 AccesBD.getInstance().updateJardin(jardin);
+				 try {
+					 //Si le jardin existe on le mets a jour
+					 AccesBD.getInstance().updateJardin(jardin);
+				 } catch (IllegalArgumentException exception) {
+					 //Sinon on l'ajoute
+					 AccesBD.getInstance().insertJardin(jardin);
+				 }
 			}
 		});
 		enregistrer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
@@ -66,7 +72,7 @@ public class MenuBar extends JMenuBar {
 				int reponse = fileChooser.showOpenDialog(MenuBar.this);
 				if (reponse == JFileChooser.APPROVE_OPTION) {
 					JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
-					//lancer méthode pour changer la fond du jardin par l'image fileChooser.getSelectedFile();
+					//lancer méthode pour changer le fond du jardin par l'image fileChooser.getSelectedFile();
 				}
 			}
 		});
