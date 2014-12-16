@@ -107,7 +107,6 @@ public final class AccesBD {
 	 */
 	public void insertPlante(Plante p) {
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		this.planteList.add(p);
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.setString(1, escape(p.getNom()));
@@ -128,6 +127,35 @@ public final class AccesBD {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	private Plante selectLast() {
+		String sql = "SELECT * FROM Plante";
+		Plante p = null;
+		try {
+			ResultSet rs = this.statement.executeQuery(sql);
+			rs.last();
+			/*p = new Plante(
+					rs.getInt(5),
+					rs.getDate(12),
+					rs.getDate(13),
+					rs.getDate(11), 
+					new Color(rs.getInt(8)), 
+					new Color(rs.getInt(9)), 
+					rs.getBoolean(14),
+					rs.getString(2),
+					rs.getString(3),
+					new ImageIcon(rs.getString(7)), 
+					null, //rs.getInt(4), 
+					null, //rs.getInt(6),
+					rs.getInt(10),
+					rs.getString(15)
+					);*/
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
 	}
 
 	private void insertZone(Zone z) {
@@ -332,7 +360,7 @@ public final class AccesBD {
 				"c'est une zolie fleur");
 		bd.insertPlante(p);
 		bd.updatePlante(p);
-		//bd.deletePlante(0);
+		bd.deletePlante(0);
 		
 		//Zone z = new Zone(5, 10, 10);
 		//bd.insertZone(z);
