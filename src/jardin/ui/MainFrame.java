@@ -3,12 +3,13 @@ package jardin.ui;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MainFrame extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
+	
+	//Les différents composants graphiques
 	private JardinPanel jardinPanel;
 	private OutilPanel outilPanel;
 	private Plantotheque plantotheque;
@@ -26,6 +27,26 @@ public class MainFrame extends JFrame{
 	 //   this.add(BorderLayout.CENTER, this.jardinPanel);
 	}
 
+	public JardinPanel getJardinPanel() {
+		return jardinPanel;
+	}
+
+	public OutilPanel getOutilPanel() {
+		return outilPanel;
+	}
+
+	public Plantotheque getPlantotheque() {
+		return plantotheque;
+	}
+
+	public CalendarPanel getCalendarPanel() {
+		return calendarPanel;
+	}
+
+	public MenuBar getMenuPanel() {
+		return menuPanel;
+	}
+
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
 			MainFrame m = new MainFrame();
@@ -33,5 +54,7 @@ public class MainFrame extends JFrame{
 		});
 		
 	}
+	
+	
 
 }
