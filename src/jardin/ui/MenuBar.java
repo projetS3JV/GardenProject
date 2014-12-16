@@ -16,6 +16,11 @@ import javax.swing.KeyStroke;
 public class MenuBar extends JMenuBar {
 
 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+/**
  * Dans ce contructeur le code se présente de la façon suivante pour chaque menu de la barre
  * 1-création d'un JMenu
  * 2-création d'un JMenuItem
@@ -35,6 +40,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 				//lancer méthode enregistrement
+				
 			}
 		});
 		enregistrer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
