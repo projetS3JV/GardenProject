@@ -8,7 +8,7 @@ import java.util.Date;
 
 import javax.swing.ImageIcon;
 
-public class Plante implements Comparable<Plante> {
+public class Plante implements Comparable<Integer> {
 	
 	// Attributs d'instance ---------------------------------------------------------------------------
 	
@@ -223,7 +223,7 @@ public class Plante implements Comparable<Plante> {
 	}
 
 	@Override
-	public int compareTo(Plante o) {
-		return this.id - o.id;
+	public int compareTo(Integer id) {
+		return this.id - id;
 	}
 }

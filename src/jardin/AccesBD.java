@@ -28,8 +28,10 @@ public final class AccesBD {
 	private static AccesBD instance = null;
 	private Connection connection;
 	private Statement statement;
+	private SortedListModel planteList;
 
 	private AccesBD() {
+		this.planteList = new SortedListModel();
 		try {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 			this.connect("ifexists=true");
@@ -86,6 +88,7 @@ public final class AccesBD {
 			e.printStackTrace();
 		}
 	}
+	
 
 	private String escape(String s) {
 		return " \"" + s + "\"";
@@ -213,8 +216,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void updateZonePlantable(ZonePlantable z)
-			throws IllegalArgumentException {
+	private void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
 			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
@@ -230,8 +232,7 @@ public final class AccesBD {
 				e.printStackTrace();
 			}
 		} else {
-			throw new IllegalArgumentException(
-					"Zone pas dans la base de données");
+			throw new IllegalArgumentException("Zone pas dans la base de données");
 		}
 	}
 
@@ -287,13 +288,12 @@ public final class AccesBD {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public Plante getPlante(int id) {
-		return null; //http://www.hsqldb.org/doc/1.8/guide/apb.html
+	public Plante getPlante(int id) throws IllegalArgumentException{
+		return this.planteList.getElementById(id);
 	}
 
 	public Jardin getJardin(int id) {
@@ -308,8 +308,8 @@ public final class AccesBD {
 		return null;
 	}
 
-	public ArrayList<Plante> getPlantes() {
-		return null;
+	public SortedListModel getPlantes() {
+		return this.planteList;
 	}
 
 	public ArrayList<Jardin> getJardins() {
