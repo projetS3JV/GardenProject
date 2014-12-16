@@ -42,24 +42,13 @@ public class MenuBar extends JMenuBar {
 		nouveau.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//lancer méthode enregistrement
-				 Jardin jardin = MainFrame.getInstance().getJardinPanel().getJardin();
-				 if (jardin == null) {
-					 JOptionPane.showMessageDialog(MenuBar.this,"Aucun jardin à enregistrer","Jardin inexistant", JOptionPane.WARNING_MESSAGE);
-				 } else {
-					 try {
-						 //Si le jardin existe on le mets a jour
-						 AccesBD.getInstance().updateJardin(jardin);
-					 } catch (IllegalArgumentException exception) {
-						 //Sinon on l'ajoute
-						 AccesBD.getInstance().insertJardin(jardin);
-					 }
-				 }
+				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
+				//lancer méthode création de nouveau jardin
 			}
 		});
-		enregistrer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 
-		JMenu fichier = new JMenu("Fichier");
+		
 		JMenuItem enregistrer = new JMenuItem("Enregistrer");
 		enregistrer.addActionListener(new ActionListener() {
 			@Override

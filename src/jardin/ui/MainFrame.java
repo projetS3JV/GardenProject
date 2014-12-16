@@ -36,8 +36,6 @@ public class MainFrame extends JFrame{
 		return this.outilPanel;
 	}
 
-
-
 	public CalendarPanel getCalendarPanel() {
 		return this.calendarPanel;
 	}
