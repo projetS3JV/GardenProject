@@ -69,6 +69,22 @@ public class Zone extends AbstractZone{
 	public void deleteZone(AbstractZone zone) {
 		this.zones.remove(zone);
 	}
+	
+	/**
+	 * Methode qui prend les coordonnées d'un point en parametre
+	 * et retourne la premiere zone trouvé dans où le point est dedan
+	 * @param x coordonnée en x du point
+	 * @param y coordonnée en y du point
+	 * @return la zone trouvé, null si aucune ne correspond;
+	 */
+	public AbstractZone getZone(int x, int y) {
+		AbstractZone z = null;
+		for (int i = 0; i < this.zones.size() && z == null; i++) {
+			if (this.zones.get(i).contains(x, y))
+				z = this.zones.get(i);
+		}
+		return z;
+	}
 }
 
 	
