@@ -43,12 +43,16 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode enregistrement
 				 Jardin jardin = MainFrame.getInstance().getJardinPanel().getJardin();
-				 try {
-					 //Si le jardin existe on le mets a jour
-					 AccesBD.getInstance().updateJardin(jardin);
-				 } catch (IllegalArgumentException exception) {
-					 //Sinon on l'ajoute
-					 AccesBD.getInstance().insertJardin(jardin);
+				 if (jardin == null) {
+					 JOptionPane.showMessageDialog(MenuBar.this,"Aucun jardin à enregistrer","Jardin inexistant", JOptionPane.WARNING_MESSAGE);
+				 } else {
+					 try {
+						 //Si le jardin existe on le mets a jour
+						 AccesBD.getInstance().updateJardin(jardin);
+					 } catch (IllegalArgumentException exception) {
+						 //Sinon on l'ajoute
+						 AccesBD.getInstance().insertJardin(jardin);
+					 }
 				 }
 			}
 		});
