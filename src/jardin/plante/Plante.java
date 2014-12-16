@@ -32,7 +32,9 @@ public class Plante implements Comparable<Integer> {
 	/*
 	 * La couleur de la plante
 	 */
-	private Color couleur;
+	private Color couleur_en_fleur;
+	
+	private Color couleur_non_fleuris;
 	
 	
 	/* 
@@ -57,12 +59,7 @@ public class Plante implements Comparable<Integer> {
 	 */
 	private ImageIcon ImgFleurie;
 	
-	/*
-	 * L'image de la fleur non fleurie
-	 */
-	private ImageIcon ImgNonFleurie;
-	
-	
+
 	/*
 	 * Type de plante (Enumeration)
 	 */
@@ -83,12 +80,12 @@ public class Plante implements Comparable<Integer> {
 		this.dateFloraison = null;
 		this.datePlantation = null;
 		this.tailleFin = 0;
-		this.couleur = null;
+		this.couleur_en_fleur = null;
+		this.couleur_non_fleuris = null;
 		this.vivace = false;
 		this.nom = "";
 		this.nomL = "";
 		this.ImgFleurie = null;
-		this.ImgNonFleurie = null;
 		this.type = 0;
 		this.ensoleillement = 0;
 		this.typeSol = 0;
@@ -97,19 +94,18 @@ public class Plante implements Comparable<Integer> {
 	
 
 	public Plante(int tailleFin, Date dateFloraison,
-			Date datePlantation, Color couleur, boolean vivace,
-			String nom, String nomL, ImageIcon imgFleurie,
-			ImageIcon imgNonFleurie, TypePlante type,
+			Date datePlantation, Color fleuris, Color nonFleuris, boolean vivace,
+			String nom, String nomL, ImageIcon imgFleurie, TypePlante type,
 			Ensoleillement ensoleillement, TypeSol typeSol, String description) {
 		this.tailleFin = tailleFin;
 		this.dateFloraison = dateFloraison;
 		this.datePlantation = datePlantation;
-		this.couleur = couleur;
+		this.couleur_en_fleur = fleuris;
+		this.couleur_non_fleuris = nonFleuris;
 		this.vivace = vivace;
 		this.nom = nom;
 		this.nomL = nomL;
 		this.ImgFleurie = imgFleurie;
-		this.ImgNonFleurie = imgNonFleurie;
 		this.type = type.getValue();
 		this.ensoleillement = ensoleillement.getValue();
 		this.typeSol = typeSol.getValue();
@@ -184,13 +180,6 @@ public class Plante implements Comparable<Integer> {
 	public void setDatePlantation(Date datePlantation) {
 		this.datePlantation = datePlantation;
 	}
-	public Color getCouleur() {
-		return couleur;
-	}
-	public void setCouleur(Color couleur) {
-		this.couleur = couleur;
-	}
-
 	public boolean isVivace() {
 		return vivace;
 	}
@@ -206,6 +195,26 @@ public class Plante implements Comparable<Integer> {
 	public String getNomL() {
 		return nomL;
 	}
+	public Color getCouleur_en_fleur() {
+		return couleur_en_fleur;
+	}
+
+
+	public void setCouleur_en_fleur(Color couleur_en_fleur) {
+		this.couleur_en_fleur = couleur_en_fleur;
+	}
+
+
+	public Color getCouleur_non_fleuris() {
+		return couleur_non_fleuris;
+	}
+
+
+	public void setCouleur_non_fleuris(Color couleur_non_fleuris) {
+		this.couleur_non_fleuris = couleur_non_fleuris;
+	}
+
+
 	public void setNomL(String nomL) {
 		this.nomL = nomL;
 	}
@@ -215,13 +224,6 @@ public class Plante implements Comparable<Integer> {
 	public void setImgFleurie(ImageIcon imgFleurie) {
 		ImgFleurie = imgFleurie;
 	}
-	public ImageIcon getImgNonFleurie() {
-		return ImgNonFleurie;
-	}
-	public void setImgNonFleurie(ImageIcon imgNonFleurie) {
-		ImgNonFleurie = imgNonFleurie;
-	}
-
 	@Override
 	public int compareTo(Integer id) {
 		return this.id - id;
