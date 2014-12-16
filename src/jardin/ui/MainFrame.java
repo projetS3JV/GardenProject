@@ -6,15 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class MainFrame extends JFrame{
-	
-	private static final long serialVersionUID = 1L;
-	
+		
 	//Les différents composants graphiques
 	private JardinPanel jardinPanel;
 	private OutilPanel outilPanel;
 	private Plantotheque plantotheque;
 	private CalendarPanel calendarPanel;
 	private MenuBar menuPanel;
+	private static MainFrame instance = null;
 	
 	private MainFrame(){
 		this.setSize(1270, 850);
@@ -27,29 +26,35 @@ public class MainFrame extends JFrame{
 	 //   this.add(BorderLayout.CENTER, this.jardinPanel);
 	}
 
-	public JardinPanel getJardinPanel() {
-		return jardinPanel;
+	public static JardinPanel getJardinPanel() {
+		return MainFrame.instance.jardinPanel;
 	}
 
-	public OutilPanel getOutilPanel() {
-		return outilPanel;
+	public static OutilPanel getOutilPanel() {
+		return MainFrame.instance.outilPanel;
 	}
 
-	public Plantotheque getPlantotheque() {
-		return plantotheque;
+	public static Plantotheque getPlantotheque() {
+		return MainFrame.instance.plantotheque;
 	}
 
-	public CalendarPanel getCalendarPanel() {
-		return calendarPanel;
+	public static CalendarPanel getCalendarPanel() {
+		return MainFrame.instance.calendarPanel;
 	}
 
-	public MenuBar getMenuPanel() {
-		return menuPanel;
+	public static MenuBar getMenuPanel() {
+		return MainFrame.instance.menuPanel;
 	}
 
+	public static MainFrame getInstance(){
+		if(MainFrame.instance==null) MainFrame.instance = new MainFrame();
+		return MainFrame.instance;
+		
+	}
+	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-			MainFrame m = new MainFrame();
+			MainFrame m = MainFrame.getInstance();
 			m.setVisible(true);
 		});
 		

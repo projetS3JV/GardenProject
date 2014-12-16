@@ -14,9 +14,11 @@ public class CalendarPanel extends JPanel{
 	private  String mois = "Janvier";
 	private String texteDate = this.jour + " " +this.mois; //La date sous la forme "DD Month" pour l'affichage
 	private static String[] moisTab = new String[]{"Janvier", "Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"};
-	//attributs graphiques
+	
+	//éléments graphiques
 	private JScrollBar scrollbar = new JScrollBar(java.awt.Adjustable.HORIZONTAL, 1, 10, 1, 365);;
 	private JLabel labelDate = new JLabel(this.texteDate);
+	
 	
 	public CalendarPanel(){
 		super();
