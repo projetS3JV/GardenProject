@@ -7,6 +7,9 @@ import javax.swing.SwingUtilities;
 
 public class MainFrame extends JFrame{
 		
+	
+	private static final long serialVersionUID = 1L;
+	
 	//Les différents composants graphiques
 	private JardinPanel jardinPanel;
 	private OutilPanel outilPanel;
@@ -26,24 +29,24 @@ public class MainFrame extends JFrame{
 	 //   this.add(BorderLayout.CENTER, this.jardinPanel);
 	}
 
-	public static JardinPanel getJardinPanel() {
-		return MainFrame.instance.jardinPanel;
+	public JardinPanel getJardinPanel() {
+		return this.jardinPanel;
 	}
 
-	public static OutilPanel getOutilPanel() {
-		return MainFrame.instance.outilPanel;
+	public OutilPanel getOutilPanel() {
+		return this.outilPanel;
 	}
 
-	public static Plantotheque getPlantotheque() {
-		return MainFrame.instance.plantotheque;
+	public Plantotheque getPlantotheque() {
+		return this.plantotheque;
 	}
 
-	public static CalendarPanel getCalendarPanel() {
-		return MainFrame.instance.calendarPanel;
+	public CalendarPanel getCalendarPanel() {
+		return this.calendarPanel;
 	}
 
-	public static MenuBar getMenuPanel() {
-		return MainFrame.instance.menuPanel;
+	public MenuBar getMenuPanel() {
+		return this.menuPanel;
 	}
 
 	public static MainFrame getInstance(){
@@ -59,7 +62,5 @@ public class MainFrame extends JFrame{
 		});
 		
 	}
-	
-	
 
 }

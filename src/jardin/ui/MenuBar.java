@@ -1,6 +1,9 @@
 package jardin.ui;
 
 
+import jardin.AccesBD;
+import jardin.Jardin;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -40,7 +43,8 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 				//lancer méthode enregistrement
-				
+				 Jardin jardin = MainFrame.getInstance().getJardinPanel().getJardin();
+				 AccesBD.getInstance().updateJardin(jardin);
 			}
 		});
 		enregistrer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
