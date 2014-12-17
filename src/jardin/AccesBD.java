@@ -102,8 +102,9 @@ public final class AccesBD {
 		return new GregorianCalendar(year, month, day).getTimeInMillis();
 	}
 
-	/*
+	/**
 	 * Insertion d'une plante dans la base de donnée
+	 * @param p la plante a ajouter
 	 */
 	public void insertPlante(Plante p) {
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -188,6 +189,10 @@ public final class AccesBD {
 		}
 	}
 
+	/**
+	 * Ajoute un jardin a la base de données
+	 * @param j le jardin a inserer
+	 */
 	public void insertJardin(Jardin j) {
 		String sql = "INSERT INTO JARDIN VALUES(null,?,?,?)";
 		try {
@@ -201,6 +206,11 @@ public final class AccesBD {
 		}
 	}
 
+	/**
+	 * Mets a jour les données d'une plante
+	 * @param p la plante a mettre a jour
+	 * @throws IllegalArgumentException si la mise a jour a echoué
+	 */
 	public void updatePlante(Plante p) throws IllegalArgumentException {
 		//if (p.getId() != -1) {
 			String sql = "UPDATE PLANTE SET nom_Usuel =?, nom_Latin = ?, type_Plante = ?, hauteur = ?, luminosite = ?,url_Image_En_Fleur=?, couleur_en_fleur = ?, couleur_non_fleuris = ?, type_Sol = ?,	date_Plantation = ?,	date_DebutFloraison = ?, date_FinFloraison= ?, vivace = ?, description = ? WHERE id="
@@ -271,6 +281,11 @@ public final class AccesBD {
 		}
 	}
 
+	/**
+	 * Mets a jour le jardin dans la base de données
+	 * @param j le jardin a mettre a jour
+	 * @throws IllegalArgumentException si la mise a jour est impossible
+	 */
 	public void updateJardin(Jardin j) throws IllegalArgumentException {
 		if (j.getId() != -1) {
 			String sql = "UPDATE JARDIN SET name=?,width = ?,height= ? WHERE id ="+j.getId();
@@ -289,6 +304,10 @@ public final class AccesBD {
 		}
 	}
 
+	/**
+	 * Supprime une plante dans la base de données
+	 * @param id l'identifiant de la plante a suppimer
+	 */
 	public void deletePlante(int id) {
 		String sql = "DELETE FROM PLANTE WHERE id =" + id;
 		this.planteList.remove(id);
@@ -317,6 +336,10 @@ public final class AccesBD {
 		} catch (SQLException e) {e.printStackTrace();}
 	}
 
+	/**
+	 * Supprime un jardin de la base de données
+	 * @param id l'identifiant du jardin a supprimer
+	 */
 	public void deleteJardin(int id) {
 		String sql = "DELETE FROM JARDIN WHERE id =" + id;
 		try {
