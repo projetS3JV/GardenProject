@@ -1,6 +1,10 @@
 package jardin.ui;
 
+import jardin.AccesBD;
+
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -18,9 +22,21 @@ public class MainFrame extends JFrame{
 	private static MainFrame instance = null;
 	
 	private MainFrame(){
+		// acces a la BD pour la creation si besoin
+		AccesBD.getInstance();
 		this.setSize(1270, 850);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		// Fermeture propre de la fenetre pour pouvoir fermer la base de données
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+						
+			@Override
+			public void windowClosed(WindowEvent e) {
+				AccesBD.getInstance().close();
+				System.exit(0);
+			}
+		});
+		
 		this.setLayout(new BorderLayout());		
 		this.setJMenuBar(menuBar);	   
 	    this.add(BorderLayout.SOUTH, this.calendarPanel);	    
