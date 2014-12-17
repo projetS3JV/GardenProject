@@ -88,6 +88,10 @@ public class Jardin {
 		return this.width;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	/**
 	 * Methode qui retourne la plus petite zone trouvé.
 	 * @param x la coordonnée en x du point

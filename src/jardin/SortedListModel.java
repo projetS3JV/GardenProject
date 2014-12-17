@@ -42,7 +42,7 @@ public class SortedListModel extends AbstractListModel<Plante> {
      * @param element élément à supprimer
      */
     public void remove(int id) {
-        int pos = this.sortedList.indexOf(id);
+        int pos = this.indexOf(id);
         if (pos < 0) throw new IllegalArgumentException("ID non existant");
         this.sortedList.remove(pos);
         this.fireIntervalRemoved(this, pos, pos);
@@ -72,5 +72,18 @@ public class SortedListModel extends AbstractListModel<Plante> {
 		if (pos < 0) throw new IllegalArgumentException("ID non existant");
 		return 	getElementAt(pos);
 	}
+	
+	public int indexOf(Object o) {
+        if (o == null) {
+            for (int i = 0; i < this.sortedList.size(); i++)
+                if (this.sortedList.get(i)==null)
+                    return i;
+        } else {
+            for (int i = 0; i < this.sortedList.size(); i++)
+                if (this.sortedList.get(i).equals(o))
+                    return i;
+        }
+        return -1;
+    }
       
 }

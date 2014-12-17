@@ -242,4 +242,16 @@ public class Plante implements Comparable<Integer> {
 	public int compareTo(Integer id) {
 		return this.id - id;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) return true;
+		if (o instanceof Integer) return ((Integer) o) == this.id;
+		if (o instanceof Plante) {
+			Plante p = (Plante) o;
+			//Cette ligne est certainement a modifier, elle doit etre a completer
+			return p.id == this.id;
+		}
+		return false;
+	}
 }

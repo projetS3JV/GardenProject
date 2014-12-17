@@ -46,7 +46,7 @@ public final class AccesBD {
 			try {
 				this.connect("");
 				this.statement.executeQuery(this.getSQL());
-				System.out.print("DataBase created");
+				System.out.println("DataBase created");
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -108,8 +108,10 @@ public final class AccesBD {
 	 */
 	public void insertPlante(Plante p) {
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql2 = "SELECT id FROM plante";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
+			PreparedStatement stat2 = this.connection.prepareStatement(sql2);
 			stat.setString(1, escape(p.getNom()));
 			stat.setString(2, escape(p.getNomL()));
 			stat.setInt(3, p.getType());
@@ -125,6 +127,13 @@ public final class AccesBD {
 			stat.setBoolean(13, p.isVivace());
 			stat.setString(14, escape(p.getDescription()));
 			stat.executeUpdate();
+			
+			// On met un id a la plante et on l'ajoute a la liste
+			ResultSet r = stat2.executeQuery();
+			// on va sur le dernier indice
+			while (!r.isLast())	r.next();
+			p.setId(r.getInt(1));
+			this.planteList.add(p);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -153,7 +162,6 @@ public final class AccesBD {
 					rs.getString(15)
 					);*/
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return p;
@@ -195,12 +203,20 @@ public final class AccesBD {
 	 */
 	public void insertJardin(Jardin j) {
 		String sql = "INSERT INTO JARDIN VALUES(null,?,?,?)";
+		String sql2 = "SELECT id FROM jardin";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
+			PreparedStatement stat2 = this.connection.prepareStatement(sql2);
 			stat.setString(1, escape(j.getName()));
 			stat.setInt(2, j.getWidth());
 			stat.setInt(3, j.getHeight());
 			stat.executeUpdate();
+			
+			// On met un id au jardin
+			ResultSet r = stat2.executeQuery();
+			// on va sur le dernier indice
+			while (!r.isLast())	r.next();
+			j.setId(r.getInt(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -256,8 +272,7 @@ public final class AccesBD {
 				e.printStackTrace();
 			}
 		} else {
-			throw new IllegalArgumentException(
-					"Zone pas dans la base de données");
+			throw new IllegalArgumentException("Zone pas dans la base de données");
 		}
 	}
 
@@ -381,16 +396,28 @@ public final class AccesBD {
 				"popol", "popolus patatus", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur");
+		Plante p2 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
+				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.black, true,
+				"fleur", "fleur de test", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
+				Ensoleillement.OMBRE, TypeSol.SABLEUX,
+				"c'est une zolie fleur");
 		bd.insertPlante(p);
+		bd.insertPlante(p2);
 		bd.updatePlante(p);
-		bd.deletePlante(0);
+		bd.deletePlante(p2.getId());
+		bd.deletePlante(p.getId());
+		System.out.println("Plantes OK");
 		
 		//Zone z = new Zone(5, 10, 10);
 		//bd.insertZone(z);
 		
-		Jardin j =new Jardin("Ma maison",100,100);
+		Jardin j = new Jardin("Ma maison",100,100);
+		Jardin j2 = new Jardin("null", 20, 20);
 		bd.insertJardin(j);
-		bd.deleteJardin(0);
+		bd.insertJardin(j2);
+		bd.deleteJardin(j.getId());
+		bd.deleteJardin(j2.getId());
+		System.out.println("Jardins OK");
 		
 		bd.close();
 	}
