@@ -145,8 +145,8 @@ public class MenuBar extends JMenuBar {
 		tracer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 				//lancer méthode traçage de zone
+				MainFrame.getInstance().getJardinPanel().startDrawing();
 			}
 		});
 		tracer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
