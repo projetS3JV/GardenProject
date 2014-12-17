@@ -56,7 +56,7 @@ public class AbstractZone extends Polygon {
 		if (this.isClosed())
 			throw new IllegalArgumentException("impossible d'ajouter un point, la zone est fermé");
 
-		if (this.npoints != 0 && (Math.abs(this.xpoints[0] - xCoord) <= this.interval && Math.abs(this.ypoints[0] - yCoord) <= this.interval))
+		if (this.npoints > 1 && (Math.abs(this.xpoints[0] - xCoord) <= this.interval && Math.abs(this.ypoints[0] - yCoord) <= this.interval))
 			super.addPoint(this.xpoints[0], this.ypoints[0]);
 		else 	
 			super.addPoint(xCoord, yCoord);
