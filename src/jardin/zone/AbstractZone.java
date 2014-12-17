@@ -6,7 +6,7 @@ public class AbstractZone extends Polygon {
 
 	private static final long serialVersionUID = 0L;
 	protected int ensoleillement;
-	public int interval = 10;
+	public static final int interval = 10;
 	private int id = -1;
 	
 	public AbstractZone() {
@@ -56,7 +56,7 @@ public class AbstractZone extends Polygon {
 		if (this.isClosed())
 			throw new IllegalArgumentException("impossible d'ajouter un point, la zone est fermé");
 
-		if (this.npoints > 1 && (Math.abs(this.xpoints[0] - xCoord) <= this.interval && Math.abs(this.ypoints[0] - yCoord) <= this.interval))
+		if (this.npoints > 1 && (Math.abs(this.xpoints[0] - xCoord) <= AbstractZone.interval && Math.abs(this.ypoints[0] - yCoord) <= AbstractZone.interval))
 			super.addPoint(this.xpoints[0], this.ypoints[0]);
 		else 	
 			super.addPoint(xCoord, yCoord);
@@ -68,7 +68,7 @@ public class AbstractZone extends Polygon {
 	 * @return true si la zone est fermé false sinon
 	 */
 	public boolean isClosed() {
-		return npoints != 0 && this.xpoints[0] == this.xpoints[this.npoints-1] && this.ypoints[0] == this.ypoints[this.npoints -1];
+		return npoints > 1 && this.xpoints[0] == this.xpoints[this.npoints-1] && this.ypoints[0] == this.ypoints[this.npoints -1];
 	}
 	
 	public int getId(){
