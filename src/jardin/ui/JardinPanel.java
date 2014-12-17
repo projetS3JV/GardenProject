@@ -66,6 +66,8 @@ public class JardinPanel extends JPanel{
 	
 	public void setJardin(Jardin j) {
 		this.jardin = j;
+		this.setBackground(Color.WHITE);
+		this.repaint();
 	}
 
 }
