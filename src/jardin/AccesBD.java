@@ -56,7 +56,7 @@ public final class AccesBD {
 	private String getSQL() {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(LOCATION
-					+ "/db.sql"));
+					+ "db.sql"));
 			String s;
 			String sql = "";
 			while ((s = in.readLine()) != null)
@@ -73,7 +73,7 @@ public final class AccesBD {
 		if (option != "")
 			option = ";" + option;
 		this.connection = DriverManager.getConnection("jdbc:hsqldb:file:"
-				+ LOCATION + "/db/db;shutdown=true" + option, "SA", "");
+				+ LOCATION + "db/db;shutdown=true" + option, "SA", "");
 		this.statement = this.connection.createStatement();
 	}
 
