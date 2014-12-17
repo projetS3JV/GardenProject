@@ -68,7 +68,7 @@ public class AbstractZone extends Polygon {
 	 * @return true si la zone est fermé false sinon
 	 */
 	public boolean isClosed() {
-		return this.xpoints[0] == this.xpoints[this.npoints-1] && this.ypoints[0] == this.ypoints[this.npoints -1];
+		return npoints != 0 && this.xpoints[0] == this.xpoints[this.npoints-1] && this.ypoints[0] == this.ypoints[this.npoints -1];
 	}
 	
 	public int getId(){

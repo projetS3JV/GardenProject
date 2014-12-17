@@ -28,6 +28,8 @@ public class CreateNewPlante extends JDialog{
 	public CreateNewPlante() {
 		
 		super();
+		this.setSize(200, 200);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	
 		panel3 = new JPanel();
 		cl = new CardLayout();
@@ -97,8 +99,6 @@ public class CreateNewPlante extends JDialog{
 	
 	public static void main(String[] args) {
 		CreateNewPlante c = new CreateNewPlante();
-		c.setSize(200, 200);
-		c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		c.showPanel("panel2");
 		c.setVisible(true);
 	}

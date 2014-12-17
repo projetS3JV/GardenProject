@@ -44,9 +44,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				String [] values  = InputNewJardin.showInputNewJardin(MainFrame.getInstance());
 				//lancer méthode création de nouveau jardin
-				if (values != null) {
-					MainFrame.getInstance().getJardinPanel().setJardin(new Jardin(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2])));
-				}
+				MainFrame.getInstance().getJardinPanel().setJardin(new Jardin(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2])));				
 			}
 		});
 		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
@@ -192,8 +190,9 @@ public class MenuBar extends JMenuBar {
 		planthotheque.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 				//lancer méthode qui affiche la fenêtre de la planthothèque
+				PlantothequeFrame plantoframe = new PlantothequeFrame();
+				plantoframe.setVisible(true);
 			}
 		});
 		
@@ -201,8 +200,9 @@ public class MenuBar extends JMenuBar {
 		creerPlante.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 				//lancer méthode qui affiche la fenêtre des paramètres d'affichages
+				CreateNewPlante newPlante = new CreateNewPlante();
+				newPlante.setVisible(true);
 			}
 		});
 	
