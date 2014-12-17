@@ -6,6 +6,7 @@ import jardin.zone.Zone;
 import jardin.zone.ZonePlantable;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -40,8 +41,10 @@ public class JardinPanel extends JPanel{
 					py = e.getY();
 					zone.addPoint(px, py);
 					draw = !zone.isClosed();
+					if (!draw)
+						JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				}
-				//if (zone.npoints > 1)
+				if (zone.npoints > 1)
 					repaint();
 			}
 		});
@@ -123,10 +126,12 @@ public class JardinPanel extends JPanel{
 	}
 	
 	public void startDrawing() {
+		this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		this.draw = true;
 	}
 	
 	public AbstractZone getZone() {
+		if (draw) return null; 
 		return zone;
 	}
 	
