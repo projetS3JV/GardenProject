@@ -9,6 +9,10 @@ public class AbstractZone extends Polygon {
 	public int interval = 10;
 	private int id = -1;
 	
+	public AbstractZone() {
+		super();
+	}
+	
 	/**
 	 * Constructeur d'une AbstractZone vide
 	 * @param ensoleillement
@@ -73,6 +77,10 @@ public class AbstractZone extends Polygon {
 	
 	public int getEnsoleillement() {
 		return this.ensoleillement;
-	}	
+	}
+	
+	public void setEnsoleillement(int ensoleillement) {
+		this.ensoleillement = ensoleillement;
+	}
 	
 }
