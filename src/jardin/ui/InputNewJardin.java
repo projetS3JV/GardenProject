@@ -53,11 +53,17 @@ public class InputNewJardin extends JDialog {
 			});
 		
 		creer.addActionListener(e -> {
-			InputNewJardin.this.res = new String[3];
-			InputNewJardin.this.res[0] = nomText.getText();
-			InputNewJardin.this.res[1] = largeurText.getText();
-			InputNewJardin.this.res[2] = hauteurText.getText();
-			InputNewJardin.this.setVisible(false);
+			if (validate(nomText.getText(),largeurText.getText(),hauteurText.getText())) {
+				InputNewJardin.this.res = new String[3];
+				InputNewJardin.this.res[0] = nomText.getText();
+				InputNewJardin.this.res[1] = largeurText.getText();
+				InputNewJardin.this.res[2] = hauteurText.getText();
+				InputNewJardin.this.setVisible(false);
+			} else {
+				nomText.setText("");
+				largeurText.setText("");
+				hauteurText.setText("");
+			}
 			});
 		
 		resultPanel.add(annuler);
@@ -70,6 +76,28 @@ public class InputNewJardin extends JDialog {
 	
 	private String[] getValues() {
 		return this.res;
+	}
+	
+	/**
+	 * Methode qui verifie le bon format des valeurs entrées
+	 * @param nom le champ nom
+	 * @param largeur le champs hauteur
+	 * @param hauteur la champs largeur
+	 * @return si les champs sont au bon format
+	 */
+	private static boolean validate(String nom, String largeur, String hauteur) {
+		if (nom.equals("")) {
+			return false;
+		}
+		
+		try {
+			Integer.parseInt(largeur);
+			Integer.parseInt(hauteur);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**

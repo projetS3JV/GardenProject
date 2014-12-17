@@ -16,11 +16,16 @@ public class Jardin {
 	private int width;
 	private int height;
 	
-	
+	/**
+	 * Constructeur de jardin si les entiers sont negatifs, il seront transformés en positif
+	 * @param name le nom du jardin
+	 * @param width la largeur du jardin
+	 * @param height la hauteur du jardin
+	 */
 	public Jardin(String name, int width, int height) {
 		this.name = name;
-		this.width = width;
-		this.height = height;
+		this.width = Math.abs(width);
+		this.height = Math.abs(height);
 	}
 	
 	/**
