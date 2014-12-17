@@ -22,6 +22,12 @@ public class MenuBar extends JMenuBar {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JMenuItem enregistrer;
+	private JMenuItem annuler;
+	private JMenuItem refaire;
+	private JMenuItem selectionnerTout;
+	private JMenuItem tracer;
+	private JMenuItem supprimer;
 
 /**
  * Dans ce contructeur le code se présente de la façon suivante pour chaque menu de la barre
@@ -44,13 +50,16 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				String [] values  = InputNewJardin.showInputNewJardin(MainFrame.getInstance());
 				//lancer méthode création de nouveau jardin
-				MainFrame.getInstance().getJardinPanel().setJardin(new Jardin(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2])));				
+				if (values != null) {
+					MainFrame.getInstance().getJardinPanel().setJardin(new Jardin(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2])));
+					MenuBar.this.enableItems();
+				}
 			}
 		});
 		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 
 		
-		JMenuItem enregistrer = new JMenuItem("Enregistrer");
+		enregistrer = new JMenuItem("Enregistrer");
 		enregistrer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -103,7 +112,7 @@ public class MenuBar extends JMenuBar {
 
 		//Sous-menu edition
 		JMenu edition = new JMenu("Edition");
-		JMenuItem annuler = new JMenuItem("Annuler");
+		annuler = new JMenuItem("Annuler");
 		annuler.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -113,7 +122,7 @@ public class MenuBar extends JMenuBar {
 		});
 		annuler.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
 
-		JMenuItem refaire = new JMenuItem("Refaire");
+		refaire = new JMenuItem("Refaire");
 		refaire.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -123,7 +132,7 @@ public class MenuBar extends JMenuBar {
 		});
 		refaire.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
 
-		JMenuItem selectionnerTout = new JMenuItem("Selectionner tout");
+		selectionnerTout = new JMenuItem("Selectionner tout");
 		selectionnerTout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -141,7 +150,7 @@ public class MenuBar extends JMenuBar {
 
 		//Sous-menu outil
 		JMenu outils = new JMenu("Outils");
-		JMenuItem tracer = new JMenuItem("Tracer zone");
+		tracer = new JMenuItem("Tracer zone");
 		tracer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -152,7 +161,7 @@ public class MenuBar extends JMenuBar {
 		tracer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
 
 		
-		JMenuItem supprimer = new JMenuItem("Supprimer zone");
+		supprimer = new JMenuItem("Supprimer zone");
 		supprimer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -210,5 +219,25 @@ public class MenuBar extends JMenuBar {
 		plantes.add(planthotheque);
 		plantes.add(creerPlante);
 		this.add(plantes);
+		
+		//desactivation des item de menu a ne pas utiliser sans jardin existant
+		this.annuler.setEnabled(false);
+		this.enregistrer.setEnabled(false);
+		this.refaire.setEnabled(false);
+		this.selectionnerTout.setEnabled(false);
+		this.supprimer.setEnabled(false);
+		this.tracer.setEnabled(false);
+	}
+	
+	/**
+	 * Methode pour pouvoir utiliser les items de menus
+	 */
+	private void enableItems() {
+		this.annuler.setEnabled(true);
+		this.enregistrer.setEnabled(true);
+		this.refaire.setEnabled(true);
+		this.selectionnerTout.setEnabled(true);
+		this.supprimer.setEnabled(true);
+		this.tracer.setEnabled(true);
 	}
 }
