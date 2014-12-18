@@ -71,7 +71,7 @@ public class PlantothequeFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				PlantothequeFrame.this.setVisible(false);
 			}
-		});;
+		});
 		
 		//this.pack();
 	}

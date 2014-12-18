@@ -22,10 +22,12 @@ public class MainFrame extends JFrame{
 	private static MainFrame instance = null;
 	
 	private MainFrame(){
+		super();
 		// acces a la BD pour la creation si besoin
 		AccesBD.getInstance();
 		this.setSize(1270, 850);
 		this.setResizable(false);
+		this.setTitle("Jardin Virtuel");
 		// Fermeture propre de la fenetre pour pouvoir fermer la base de données
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {

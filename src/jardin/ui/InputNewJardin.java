@@ -16,6 +16,8 @@ public class InputNewJardin extends JDialog {
 
 	private InputNewJardin(JFrame f) {
 		super(f, "Nouveau jardin", true);
+		this.setSize(230, 200);
+		this.setResizable(false);
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		
 		JLabel largeur = new JLabel("largeur  :");
@@ -45,11 +47,12 @@ public class InputNewJardin extends JDialog {
 				
 		JPanel resultPanel = new JPanel();
 		JButton annuler = new JButton("Annuler");
-		JButton creer = new JButton("Créer");
+		JButton creer = new JButton(" Créer ");
 		
 		
 		annuler.addActionListener(e -> {
 			InputNewJardin.this.setVisible(false);
+			InputNewJardin.this.dispose();
 			});
 		
 		creer.addActionListener(e -> {
@@ -69,8 +72,7 @@ public class InputNewJardin extends JDialog {
 		resultPanel.add(annuler);
 		resultPanel.add(creer);
 		
-		this.add(resultPanel);		
-		this.pack();
+		this.add(resultPanel);
 		this.setVisible(true);
 	}
 	
