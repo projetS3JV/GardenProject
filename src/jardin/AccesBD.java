@@ -92,11 +92,6 @@ public final class AccesBD {
 			e.printStackTrace();
 		}
 	}
-	
-
-	private String escape(String s) {
-		return " \"" + s + "\"";
-	}
 
 	public static long datee(int year, int month, int day) {
 		return new GregorianCalendar(year, month, day).getTimeInMillis();
@@ -112,12 +107,12 @@ public final class AccesBD {
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			PreparedStatement stat2 = this.connection.prepareStatement(sql2);
-			stat.setString(1, escape(p.getNom()));
-			stat.setString(2, escape(p.getNomL()));
+			stat.setString(1, p.getNom());
+			stat.setString(2, p.getNomL());
 			stat.setInt(3, p.getType());
 			stat.setInt(4, p.getTailleFin());
 			stat.setInt(5, p.getEnsoleillement());
-			stat.setString(6, escape("p.getImgFleurie()"));
+			stat.setString(6, "p.getImgFleurie()");
 			stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 			stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
 			stat.setInt(9, p.getTypeSol());
@@ -125,7 +120,7 @@ public final class AccesBD {
 			stat.setDate(11, (Date) p.getDateFloraison());
 			stat.setDate(12, (Date) p.getDateFinFloraison());
 			stat.setBoolean(13, p.isVivace());
-			stat.setString(14, escape(p.getDescription()));
+			stat.setString(14, p.getDescription());
 			stat.executeUpdate();
 			
 			// On met un id a la plante et on l'ajoute a la liste
@@ -207,7 +202,7 @@ public final class AccesBD {
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			PreparedStatement stat2 = this.connection.prepareStatement(sql2);
-			stat.setString(1, escape(j.getName()));
+			stat.setString(1, j.getName());
 			stat.setInt(2, j.getWidth());
 			stat.setInt(3, j.getHeight());
 			stat.executeUpdate();
@@ -228,17 +223,17 @@ public final class AccesBD {
 	 * @throws IllegalArgumentException si la mise a jour a echoué
 	 */
 	public void updatePlante(Plante p) throws IllegalArgumentException {
-		//if (p.getId() != -1) {
+		if (p.getId() != -1) {
 			String sql = "UPDATE PLANTE SET nom_Usuel =?, nom_Latin = ?, type_Plante = ?, hauteur = ?, luminosite = ?,url_Image_En_Fleur=?, couleur_en_fleur = ?, couleur_non_fleuris = ?, type_Sol = ?,	date_Plantation = ?,	date_DebutFloraison = ?, date_FinFloraison= ?, vivace = ?, description = ? WHERE id="
 					+ p.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
-				stat.setString(1, escape(p.getNom()));
-				stat.setString(2, escape(p.getNomL()));
+				stat.setString(1, p.getNom());
+				stat.setString(2, p.getNomL());
 				stat.setInt(3, p.getType());
 				stat.setInt(4, p.getTailleFin());
 				stat.setInt(5, p.getEnsoleillement());
-				stat.setString(6, escape("p.getImgFleurie()"));
+				stat.setString(6, "p.getImgFleurie()");
 				stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 				stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
 				stat.setInt(9, p.getTypeSol());
@@ -246,15 +241,15 @@ public final class AccesBD {
 				stat.setDate(11, (Date) p.getDateFloraison());
 				stat.setDate(12, (Date) p.getDateFinFloraison());
 				stat.setBoolean(13, p.isVivace());
-				stat.setString(14, escape(p.getDescription()));
+				stat.setString(14, p.getDescription());
 				stat.executeUpdate();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
-			}/*
+			}
 		} else {
 			throw new IllegalArgumentException(
 					"Plante pas dans la base de données");
-		}*/
+		}
 
 	}
 
@@ -306,7 +301,7 @@ public final class AccesBD {
 			String sql = "UPDATE JARDIN SET name=?,width = ?,height= ? WHERE id ="+j.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
-				stat.setString(1, escape(j.getName()));
+				stat.setString(1, j.getName());
 				stat.setInt(2, j.getWidth());
 				stat.setInt(3, j.getHeight());
 				stat.executeUpdate();
