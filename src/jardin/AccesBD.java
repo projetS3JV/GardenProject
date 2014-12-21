@@ -36,10 +36,12 @@ public final class AccesBD {
 
 	private AccesBD() {
 		this.planteList = new SortedListModel(); // a construire !
-		try {
-			Class.forName("org.hsqldb.jdbc.JDBCDriver");
-			this.connect("ifexists=true");
-		} catch (ClassNotFoundException e) {
+		try {//												|
+			Class.forName("org.hsqldb.jdbc.JDBCDriver");//	|
+			this.connect("ifexists=true");			//		|
+									//						V
+			this.fillPlanteList();//					Construit ! 
+		} catch (ClassNotFoundException e) { //     
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.print("Creating database..... ");
@@ -103,10 +105,8 @@ public final class AccesBD {
 	 */
 	public void insertPlante(Plante p) {
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		String sql2 = "SELECT id FROM plante";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
-			PreparedStatement stat2 = this.connection.prepareStatement(sql2);
 			stat.setString(1, p.getNom());
 			stat.setString(2, p.getNomL());
 			stat.setInt(3, p.getType());
@@ -124,7 +124,7 @@ public final class AccesBD {
 			stat.executeUpdate();
 			
 			// On met un id a la plante et on l'ajoute a la liste
-			ResultSet r = stat2.executeQuery();
+			ResultSet r = this.statement.executeQuery("SELECT id FROM plante");
 			// on va sur le dernier indice
 			while (!r.isLast())	r.next();
 			p.setId(r.getInt(1));
@@ -134,6 +134,44 @@ public final class AccesBD {
 		}
 	}
 	
+	/**
+	 * Méthode appelé au démarrage de la BD pour remplir le tableau de plante
+	 * By felix ROBINET QUi met des commentaires ....
+	 */
+	private void fillPlanteList() {
+		String sql = "SELECT * FROM Plante";
+		try {
+			ResultSet rs = this.statement.executeQuery(sql);
+			while(rs.next()) {
+				Plante p = new Plante(
+						rs.getInt(5),
+						rs.getDate(12),
+						rs.getDate(13),
+						rs.getDate(11), 
+						new Color(rs.getInt(8)), 
+						new Color(rs.getInt(9)), 
+						rs.getBoolean(14),
+						rs.getString(2),
+						rs.getString(3),
+						new ImageIcon(rs.getString(7)), 
+						TypePlante.values()[rs.getInt(4)], 
+						Ensoleillement.values()[rs.getInt(6)],
+						TypeSol.values()[rs.getInt(10)],
+						rs.getString(15)
+						);
+				p.setId(rs.getInt(1));
+				this.planteList.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Methode a supprimer 
+	 * @ Deprecated
+	 * @return
+	 */
 	private Plante selectLast() {
 		String sql = "SELECT * FROM Plante";
 		Plante p = null;
@@ -386,7 +424,7 @@ public final class AccesBD {
 
 	public static void main(String[] args) {
 		AccesBD bd = AccesBD.getInstance();
-		Plante p = new Plante(10, new Date(datee(2010, Calendar.FEBRUARY, 15)),
+	/*	Plante p = new Plante(10, new Date(datee(2010, Calendar.FEBRUARY, 15)),
 				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.black, true,
 				"popol", "popolus patatus", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
@@ -401,18 +439,24 @@ public final class AccesBD {
 		bd.updatePlante(p);
 		bd.deletePlante(p2.getId());
 		bd.deletePlante(p.getId());
-		System.out.println("Plantes OK");
+		System.out.println("Plantes OK");*/
 		
 		//Zone z = new Zone(5, 10, 10);
 		//bd.insertZone(z);
 		
-		Jardin j = new Jardin("Ma maison",100,100);
+		/*Jardin j = new Jardin("Ma maison",100,100);
 		Jardin j2 = new Jardin("null", 20, 20);
 		bd.insertJardin(j);
 		bd.insertJardin(j2);
 		bd.deleteJardin(j.getId());
 		bd.deleteJardin(j2.getId());
-		System.out.println("Jardins OK");
+		System.out.println("Jardins OK");*/
+		
+		for(Plante p : bd.getPlantes()) {
+			System.out.println(p.getId() + "," + p.getNom());
+		}
+		Plante p = bd.getPlante(1);
+		System.out.println(p.getId() + "," + p.getNom());
 		
 		bd.close();
 	}

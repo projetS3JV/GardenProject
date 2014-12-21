@@ -4,6 +4,7 @@ import jardin.plante.Plante;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 import javax.swing.AbstractListModel;
 
@@ -13,7 +14,7 @@ import javax.swing.AbstractListModel;
  * la méthode compareTo de l'interface Comparable)
  * @param <T> type d'élément de la liste (doit implémenter Comparable<T>)
  */
-public class SortedListModel extends AbstractListModel<Plante> {
+public class SortedListModel extends AbstractListModel<Plante> implements Iterable<Plante> {
     private static final long serialVersionUID = 1L;
 	private ArrayList<Plante> sortedList;
     
@@ -85,5 +86,10 @@ public class SortedListModel extends AbstractListModel<Plante> {
         }
         return -1;
     }
+
+	@Override
+	public Iterator<Plante> iterator() {
+		return this.sortedList.iterator();
+	}
       
 }
