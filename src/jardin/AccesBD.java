@@ -135,7 +135,7 @@ public final class AccesBD {
 	}
 	
 	/**
-	 * Méthode appelé au démarrage de la BD pour remplir le tableau de plante
+	 * Mï¿½thode appelï¿½ au dï¿½marrage de la BD pour remplir le tableau de plante
 	 * By felix ROBINET QUi met des commentaires ....
 	 */
 	private void fillPlanteList() {
@@ -172,7 +172,7 @@ public final class AccesBD {
 	 * @ Deprecated
 	 * @return
 	 */
-	private Plante selectLast() {
+	private Plante selectLastPlante() {
 		String sql = "SELECT * FROM Plante";
 		Plante p = null;
 		try {
@@ -201,6 +201,7 @@ public final class AccesBD {
 	}
 
 	private void insertZone(Zone z) {
+		//Il faut rajouter un id a la zone
 		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -215,6 +216,7 @@ public final class AccesBD {
 	}
 
 	private void insertZonePlantable(ZonePlantable z) {
+		//Il faut rajouter un id a la zone
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -235,6 +237,7 @@ public final class AccesBD {
 	 * @param j le jardin a inserer
 	 */
 	public void insertJardin(Jardin j) {
+		//Il faut rajouter les zones du jardin
 		String sql = "INSERT INTO JARDIN VALUES(null,?,?,?)";
 		String sql2 = "SELECT id FROM jardin";
 		try {
@@ -292,6 +295,7 @@ public final class AccesBD {
 	}
 
 	private void updateZone(Zone z) throws IllegalArgumentException {
+		//Il faut mettre a jour/rajouter les zones contenu dans celle ci
 		if (z.getId() != -1) {
 			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
 			try {
@@ -335,6 +339,7 @@ public final class AccesBD {
 	 * @throws IllegalArgumentException si la mise a jour est impossible
 	 */
 	public void updateJardin(Jardin j) throws IllegalArgumentException {
+		//Il faut mettre a jour/rajouter les zones de celui ci
 		if (j.getId() != -1) {
 			String sql = "UPDATE JARDIN SET name=?,width = ?,height= ? WHERE id ="+j.getId();
 			try {
@@ -368,6 +373,7 @@ public final class AccesBD {
 	}
 
 	private void deleteZone(int id) {
+		//Il faut supprimer toutes les zones de celle ci
 		String sql = "DELETE FROM ZONE WHERE id =" + id;
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -389,6 +395,7 @@ public final class AccesBD {
 	 * @param id l'identifiant du jardin a supprimer
 	 */
 	public void deleteJardin(int id) {
+		//Il faut aussi supprimer toutes les zones de celui ci
 		String sql = "DELETE FROM JARDIN WHERE id =" + id;
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
