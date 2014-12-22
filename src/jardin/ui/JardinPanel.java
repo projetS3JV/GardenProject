@@ -8,6 +8,8 @@ import jardin.zone.ZonePlantable;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -33,10 +35,11 @@ public class JardinPanel extends JPanel{
 	public JardinPanel(Jardin jardin) {
 		this.jardin = jardin;
 		this.zone = new AbstractZone();
+		this.setFocusable(true);
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (draw) {
+				if (draw & e.getButton() == MouseEvent.BUTTON1) {
 					px = e.getX();
 					py = e.getY();
 					zone.addPoint(px, py);
@@ -46,6 +49,20 @@ public class JardinPanel extends JPanel{
 				}
 				if (zone.npoints > 1)
 					repaint();
+			}
+		});
+		
+		/**
+		 * Listener sur la touche Echap pour annuler une zone en pleine création
+		 */
+		this.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE && JardinPanel.this.draw){
+					JardinPanel.this.draw = false;
+					JardinPanel.this.zone = new AbstractZone();
+					JardinPanel.this.repaint();
+				}
 			}
 		});
 		

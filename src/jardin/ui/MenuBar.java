@@ -4,6 +4,7 @@ package jardin.ui;
 import jardin.AccesBD;
 import jardin.Jardin;
 
+import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -103,11 +104,18 @@ public class MenuBar extends JMenuBar {
 			}
 		});
 		
+		JMenuItem quitter = new JMenuItem("Quitter");
+		quitter.addActionListener(e -> {
+			MainFrame.getInstance().dispose();
+		});
+		
 		fichier.add(nouveau);
 		fichier.add(enregistrer);
 		fichier.add(new JSeparator());
 		fichier.add(ouvrirJardin);
 		fichier.add(importImage);
+		fichier.add(new JSeparator());
+		fichier.add(quitter);
 		this.add(fichier);
 
 		//Sous-menu edition
