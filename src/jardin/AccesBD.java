@@ -2,6 +2,7 @@ package jardin;
 
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
+import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
 import jardin.zone.ZonePlantable;
 
@@ -18,7 +19,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
@@ -104,6 +104,7 @@ public final class AccesBD {
 	 * @param p la plante a ajouter
 	 */
 	public void insertPlante(Plante p) {
+		//Il faut trouver une solution pour les images des plantes
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -201,7 +202,7 @@ public final class AccesBD {
 	}
 
 	private void insertZone(Zone z) {
-		//Il faut rajouter un id a la zone
+		//Il faut rajouter les zones de celle ci
 		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -210,13 +211,18 @@ public final class AccesBD {
 			stat.setArray(3, intArrayToJDBXArray(z.ypoints));
 			stat.setInt(4, z.getEnsoleillement());
 			stat.executeUpdate();
+			
+			// On met un id a la zone
+			ResultSet r = this.statement.executeQuery("SELECT id FROM Zone");
+			// On va sur le dernier indice
+			while (!r.isLast())	r.next();
+			z.setId(r.getInt(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void insertZonePlantable(ZonePlantable z) {
-		//Il faut rajouter un id a la zone
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -227,6 +233,12 @@ public final class AccesBD {
 			stat.setInt(5, z.getTypeSol());
 			stat.setInt(6, z.getEnsoleillement());
 			stat.executeUpdate();
+			
+			// On met un id a la zone
+			ResultSet r = this.statement.executeQuery("SELECT id FROM ZonePlantable");
+			// On va sur le dernier indice
+			while (!r.isLast())	r.next();
+			z.setId(r.getInt(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -425,8 +437,62 @@ public final class AccesBD {
 		return this.planteList;
 	}
 
+	/**
+	 * A tester
+	 * @return les jardins complets
+	 */
 	public ArrayList<Jardin> getJardins() {
-		return null;
+		ArrayList<Jardin> jardins = new ArrayList<Jardin>();
+		try {
+			ResultSet r = this.statement.executeQuery("SELECT * From Jardin");
+			// On parcours tout les jardins
+			while (!r.isLast())	{
+				r.next();
+				Jardin j = new Jardin(r.getString(2), r.getInt(3), r.getInt(4));
+				j.setId(r.getInt(1));
+				//On va chercher toute les zones du jardin
+				ResultSet r2 = this.statement.executeQuery("SELECT * From Zone where id_jardin = " + j.getId());
+				while (! r2.isLast()) {
+					r2.next();
+					//On cree la zone et on lui ajoute un id et les points de la zone
+					int[] xCoords = JDBCArrayTointArray(r2.getArray(3));
+					int[] yCoords = JDBCArrayTointArray(r2.getArray(4));
+					Zone z = new Zone(r2.getInt(5));
+					z.setId(r2.getInt(1));
+					for (int i = 0; i < xCoords.length; i++) {
+						z.addPoint(xCoords[i], yCoords[i]);
+					}
+					//On ajoute la zone créée dans la bonne zone
+					AbstractZone zoneParent = j.getZone(z.xpoints[0], z.ypoints[0]);
+					if (zoneParent != null && zoneParent instanceof Zone) ((Zone)zoneParent).addZone(z);
+					else j.addZone(z);
+				}
+				//on ferme la reequete
+				r2.close();
+				
+				//On va chercher toute les zonesPlantables du jardin
+				r2 = this.statement.executeQuery("SELECT * From ZonePlantable where id_jardin = " + j.getId());
+				while ( !r2.isLast()) {
+					r2.next();
+					//On cree la zone et on lui ajoute un id et les points de la zone
+					int[] xCoords = JDBCArrayTointArray(r2.getArray(4));
+					int[] yCoords = JDBCArrayTointArray(r2.getArray(5));
+					ZonePlantable z = new ZonePlantable(r2.getInt(7), r2.getInt(6));
+					z.setId(r2.getInt(1));
+					for (int i = 0; i < xCoords.length; i++) {
+						z.addPoint(xCoords[i], yCoords[i]);
+					}
+					//On ajoute la zone créée dans la bonne zone
+					AbstractZone zoneParent = j.getZone(z.xpoints[0], z.ypoints[0]);
+					((Zone) zoneParent).addZone(z);
+				}
+				
+				jardins.add(j);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return jardins;
 	}
 
 	public static void main(String[] args) {

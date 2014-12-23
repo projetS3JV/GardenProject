@@ -61,6 +61,7 @@ public class JardinPanel extends JPanel{
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE && JardinPanel.this.draw){
 					JardinPanel.this.draw = false;
 					JardinPanel.this.zone = new AbstractZone();
+					JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 					JardinPanel.this.repaint();
 				}
 			}
