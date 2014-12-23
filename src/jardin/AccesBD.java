@@ -201,12 +201,12 @@ public final class AccesBD {
 		return p;
 	}
 
-	private void insertZone(Zone z) {
+	private void insertZone(Zone z,int idJardin) {
 		//Il faut rajouter les zones de celle ci
 		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
-			stat.setInt(1, z.getId());
+			stat.setInt(1, idJardin);
 			stat.setArray(2,intArrayToJDBXArray(z.xpoints));
 			stat.setArray(3, intArrayToJDBXArray(z.ypoints));
 			stat.setInt(4, z.getEnsoleillement());
@@ -222,12 +222,12 @@ public final class AccesBD {
 		}
 	}
 
-	private void insertZonePlantable(ZonePlantable z) {
+	private void insertZonePlantable(ZonePlantable z, int idJardin) {
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.setInt(1,z.getPlante().getId());
-			stat.setInt(2,z.getId()); 
+			stat.setInt(2, idJardin); 
 			stat.setArray(3,intArrayToJDBXArray(z.xpoints));
 			stat.setArray(4,intArrayToJDBXArray(z.ypoints));
 			stat.setInt(5, z.getTypeSol());
