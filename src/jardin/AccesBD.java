@@ -425,8 +425,27 @@ public final class AccesBD {
 		return null;
 	}
 
-	private ArrayList<Zone> getZones() {
-		return null;
+	/**
+	 * 
+	 * @param idJardin
+	 * @return tableau zones
+	 */
+	private ArrayList<Zone> getZones(int idJardin) {
+		ArrayList<Zone> zones = new ArrayList<Zone>();
+		try {
+			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONE WHERE id_jardin = " + idJardin);
+			while (rs.next()) {
+				Zone z = new Zone(rs.getInt(5));
+				int[] x = JDBCArrayTointArray(rs.getArray(3));
+				int[] y = JDBCArrayTointArray(rs.getArray(4));
+				z.setId(rs.getInt(1));
+				// Si tu veux rajouter un constructeur avec tableau !!!!!!
+				for (int i = 0 ; i < x.length ; i++)
+					z.addPoint(x[i], y[i]);
+				zones.add(z);
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return zones;
 	}
 
 	private ArrayList<Zone> getZonePlantables() {
