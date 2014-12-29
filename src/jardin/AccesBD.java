@@ -442,6 +442,8 @@ public final class AccesBD {
 				// Si tu veux rajouter un constructeur avec tableau !!!!!!
 				for (int i = 0 ; i < x.length ; i++)
 					z.addPoint(x[i], y[i]);
+				for (ZonePlantable zp : this.getZonePlantables(z.getId()))
+					z.addZone(zp);
 				zones.add(z);
 			}
 		} catch (SQLException e) {e.printStackTrace();}
