@@ -463,7 +463,6 @@ public final class AccesBD {
 				// Si tu veux rajouter un constructeur avec tableau !!!!!!
 				for (int i = 0 ; i < x.length ; i++)
 					z.addPoint(x[i], y[i]);
-				
 				zones.add(z);
 			}
 		} catch (SQLException e) {e.printStackTrace();}
@@ -475,7 +474,8 @@ public final class AccesBD {
 	}
 
 	/**
-	 * A tester
+	 * Utilise les methode deja défini plus haut pour la recherche de methode
+	 * ce sera plus facile a debigger et a tester !
 	 * @return les jardins complets
 	 */
 	public ArrayList<Jardin> getJardins() {
