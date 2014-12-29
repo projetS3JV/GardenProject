@@ -448,8 +448,24 @@ public final class AccesBD {
 		return zones;
 	}
 
-	private ArrayList<Zone> getZonePlantables() {
-		return null;
+	private ArrayList<ZonePlantable> getZonePlantables(int idZone) {
+		ArrayList<ZonePlantable> zones = new ArrayList<ZonePlantable>();
+		try {
+			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONE WHERE id_Zone = " + idZone);
+			while (rs.next()) {
+				ZonePlantable z = new ZonePlantable(rs.getInt(7), rs.getInt(6));
+				int[] x = JDBCArrayTointArray(rs.getArray(4));
+				int[] y = JDBCArrayTointArray(rs.getArray(5));
+				z.setId(rs.getInt(1));
+				z.setPlante(this.getPlante(rs.getInt(2)));
+				// Si tu veux rajouter un constructeur avec tableau !!!!!!
+				for (int i = 0 ; i < x.length ; i++)
+					z.addPoint(x[i], y[i]);
+				
+				zones.add(z);
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return zones;
 	}
 
 	public SortedListModel getPlantes() {
