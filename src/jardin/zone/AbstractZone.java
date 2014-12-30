@@ -13,6 +13,11 @@ public class AbstractZone extends Polygon {
 		super();
 	}
 	
+	public AbstractZone(int[] xPoints, int[] yPoints, int ensoleillement) {
+		super(xPoints,yPoints, xPoints.length);
+		this.ensoleillement = ensoleillement;
+	}
+	
 	/**
 	 * Constructeur d'une AbstractZone vide
 	 * @param ensoleillement

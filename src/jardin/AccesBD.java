@@ -439,7 +439,7 @@ public final class AccesBD {
 				int[] x = JDBCArrayTointArray(rs.getArray(3));
 				int[] y = JDBCArrayTointArray(rs.getArray(4));
 				z.setId(rs.getInt(1));
-				// Si tu veux rajouter un constructeur avec tableau !!!!!!
+				// Si tu veux rajouter un constructeur avec tableau !!!!!! // Fait
 				for (int i = 0 ; i < x.length ; i++)
 					z.addPoint(x[i], y[i]);
 				for (ZonePlantable zp : this.getZonePlantables(z.getId()))
@@ -460,7 +460,7 @@ public final class AccesBD {
 				int[] y = JDBCArrayTointArray(rs.getArray(5));
 				z.setId(rs.getInt(1));
 				z.setPlante(this.getPlante(rs.getInt(2)));
-				// Si tu veux rajouter un constructeur avec tableau !!!!!!
+				// Si tu veux rajouter un constructeur avec tableau !!!!!! // Fait
 				for (int i = 0 ; i < x.length ; i++)
 					z.addPoint(x[i], y[i]);
 				zones.add(z);
@@ -474,7 +474,7 @@ public final class AccesBD {
 	}
 
 	/**
-	 * Utilise les methode deja défini plus haut pour la recherche de methode
+	 * Utilise les methode deja dï¿½fini plus haut pour la recherche de methode
 	 * ce sera plus facile a debigger et a tester !
 	 * @return les jardins complets
 	 */

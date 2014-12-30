@@ -37,6 +37,11 @@ public class ZonePlantable extends AbstractZone {
 		this.typeSol = sol;
 	}
 	
+	public ZonePlantable(int[] xPoints, int[] yPoints, int ensoleillement, int sol) {
+		super(xPoints,yPoints, ensoleillement);
+		this.typeSol = sol;
+	}
+	
 	/**
 	 * Constructeur par copie qui permet d'obtenir une ZonePlantable a partir d'une AbstractZone
 	 * Si la plante ne peut etre mise une exception est lancé

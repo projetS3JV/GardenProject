@@ -23,6 +23,10 @@ public class Zone extends AbstractZone{
 		super(ensoleillement, x,y);
 	}
 	
+	public Zone(int[] xPoints,int [] yPoints, int ensoleillement) {
+		super(xPoints, yPoints, ensoleillement);
+	}
+	
 	/**
 	 * Constructeur par copie qui permet d'obtenir une zone a partir d'une AbstractZone
 	 * @param zone la zone a copier
