@@ -423,7 +423,17 @@ public final class AccesBD {
 	}
 
 	public Jardin getJardin(int id) {
-		return null;
+		Jardin j = null;
+		try {
+			ResultSet rs = this.statement.executeQuery("SELECT * FROM JARDIN WHERE id = " + id);
+			rs.next();
+			j = new Jardin(rs.getString(2), rs.getInt(3), rs.getInt(4));
+			for (Zone z : this.getZones(id))
+				j.addZone(z);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return j;
 	}
 
 	/**
