@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 
@@ -478,8 +479,21 @@ public final class AccesBD {
 	 * ce sera plus facile a debigger et a tester !
 	 * @return les jardins complets
 	 */
-	public ArrayList<Jardin> getJardins() {
-		ArrayList<Jardin> jardins = new ArrayList<Jardin>();
+	public HashMap<Integer, String> getJardins() {
+		/*
+		 * Il me semble plus interessant de ne recuperer que le nom et l'id
+		 * et quand l'user voudra ouvrir tel jardin on utilisera la methode
+		 * getJardin(int id)
+		 */
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		ResultSet rs;
+		try {
+			rs = this.statement.executeQuery("SELECT id, nom FROM JARDIN");
+			while (rs.next()) 
+				map.put(rs.getInt(1), rs.getString(2));	
+		} catch (SQLException e) {e.printStackTrace();}
+
+		/*ArrayList<Jardin> jardins = new ArrayList<Jardin>();
 		try {
 			ResultSet r = this.statement.executeQuery("SELECT * From Jardin");
 			// On parcours tout les jardins
@@ -529,7 +543,8 @@ public final class AccesBD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return jardins;
+		return jardins;*/	
+		return map;
 	}
 
 	public static void main(String[] args) {
