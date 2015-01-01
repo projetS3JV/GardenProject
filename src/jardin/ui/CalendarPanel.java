@@ -22,7 +22,7 @@ public class CalendarPanel extends JPanel{
 	private int jourDuMois = 1; //numero du jour dans le mois, utilisé pour le getDate et texteDate
 	
 	//éléments graphiques
-	private JScrollBar scrollbar = new JScrollBar(java.awt.Adjustable.HORIZONTAL, 1, 10, 1, 365);;
+	private JScrollBar scrollbar = new JScrollBar(java.awt.Adjustable.HORIZONTAL, 1, 10, 1, 365);
 	private JLabel labelDate = new JLabel(this.texteDate);
 	
 	

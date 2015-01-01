@@ -12,7 +12,7 @@ public class InputNewJardin extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
-	String[] res = null;
+	private String[] res = null;
 
 	private InputNewJardin(JFrame f) {
 		super(f, "Nouveau jardin", true);
@@ -62,6 +62,7 @@ public class InputNewJardin extends JDialog {
 				InputNewJardin.this.res[1] = largeurText.getText();
 				InputNewJardin.this.res[2] = hauteurText.getText();
 				InputNewJardin.this.setVisible(false);
+				InputNewJardin.this.dispose();
 			} else {
 				nomText.setText("");
 				largeurText.setText("");

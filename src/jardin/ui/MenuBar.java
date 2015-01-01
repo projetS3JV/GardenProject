@@ -84,9 +84,12 @@ public class MenuBar extends JMenuBar {
 		ouvrirJardin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 				//lancer méthode ouverture de jardin
-				
+				String jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance());
+				if (jardin != null) {
+					// TODO a corriger (remplacer le 0 par la bonne valeur)					
+					MainFrame.getInstance().getJardinPanel().setJardin(AccesBD.getInstance().getJardin(0));
+				}
 			}
 		});
 		ouvrirJardin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
