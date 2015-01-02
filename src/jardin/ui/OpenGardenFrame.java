@@ -10,7 +10,7 @@ public class OpenGardenFrame extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String selected = null;
+	private int selected = -1;
 	
 	private OpenGardenFrame(JFrame frame) {
 		super(frame, "Ouvrir jardin", true);
@@ -31,7 +31,7 @@ public class OpenGardenFrame extends JDialog{
 			});
 		
 		ouvrir.addActionListener(e -> {
-			// a completer
+			// TODO a completer
 			});
 		
 		resultPanel.add(annuler);
@@ -41,11 +41,12 @@ public class OpenGardenFrame extends JDialog{
 		this.setVisible(true);
 	}
 	
-	public String getSelected() {
-		return this.selected;
-	}
-	
-	public static String showOpenGardenFrame(JFrame owner) {
+	/**
+	 * Retourne l'indice du jardin a charger. -1 si il a choisi d'annuler
+	 * @param owner
+	 * @return
+	 */
+	public static int showOpenGardenFrame(JFrame owner) {
 		OpenGardenFrame openGarden = new OpenGardenFrame(owner);
 		return openGarden.selected;
 	}

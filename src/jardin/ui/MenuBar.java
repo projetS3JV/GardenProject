@@ -85,10 +85,9 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode ouverture de jardin
-				String jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance());
-				if (jardin != null) {
-					// TODO a corriger (remplacer le 0 par la bonne valeur)					
-					MainFrame.getInstance().getJardinPanel().setJardin(AccesBD.getInstance().getJardin(0));
+				int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance());
+				if (jardin != -1) {				
+					MainFrame.getInstance().getJardinPanel().setJardin(AccesBD.getInstance().getJardin(jardin));
 				}
 			}
 		});
