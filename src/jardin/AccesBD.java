@@ -169,7 +169,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void insertZone(Zone z, int idJardin) {
+	public void insertZone(Zone z, int idJardin) {
 		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -196,7 +196,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void insertZonePlantable(ZonePlantable z, int idZone) {
+	public void insertZonePlantable(ZonePlantable z, int idZone) {
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -506,7 +506,7 @@ public final class AccesBD {
 				"builson", "builsonus", new ImageIcon("/bla/img1.png"), TypePlante.BUISSON,
 				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
 				"buisson");
-		bd.insertPlante(p);
+		/*bd.insertPlante(p);
 		bd.insertPlante(p2);
 		bd.insertPlante(p3);
 		Plante p4 =  new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
