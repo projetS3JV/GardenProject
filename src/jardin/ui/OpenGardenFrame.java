@@ -1,15 +1,24 @@
 package jardin.ui;
 
+import jardin.AccesBD;
+
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class OpenGardenFrame extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	
+	/** L'indice du jardin selectionné */
 	private int selected = -1;
 	
 	private OpenGardenFrame(JFrame frame) {
@@ -17,8 +26,17 @@ public class OpenGardenFrame extends JDialog{
 		this.setSize(230, 200);
 		this.setResizable(false);
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+				
+		/* Les jardins*/
+		HashMap<Integer, String> jardins = AccesBD.getInstance().getJardins();		
+		Set<Entry<Integer, String>> jardinSet = jardins.entrySet();
 		
-		// TODO ajouter le panel contenant le nom des Jardins
+		JPanel jardinsPanel = new JPanel();
+		JList<Object> jardinsList = new JList<Object>(jardinSet.toArray());
+		jardinsList.setFixedCellWidth(200);
+		jardinsList.setCellRenderer(new OpenGardenCellRenderer());
+		jardinsPanel.add(new JScrollPane(jardinsList));
+		
 		
 		JPanel resultPanel = new JPanel();
 		JButton annuler = new JButton("Annuler");
@@ -31,12 +49,15 @@ public class OpenGardenFrame extends JDialog{
 			});
 		
 		ouvrir.addActionListener(e -> {
-			// TODO a completer
+			OpenGardenFrame.this.selected = ((Entry<Integer, String>)jardinsList.getSelectedValue()).getKey();
+			OpenGardenFrame.this.setVisible(false);
+			OpenGardenFrame.this.dispose();
 			});
 		
 		resultPanel.add(annuler);
 		resultPanel.add(ouvrir);
 		
+		this.add(jardinsPanel);
 		this.add(resultPanel);
 		this.setVisible(true);
 	}

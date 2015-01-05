@@ -3,6 +3,7 @@ package jardin.ui;
 
 import jardin.AccesBD;
 import jardin.Jardin;
+import jardin.plante.Plante;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -219,8 +220,10 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode qui affiche la fenêtre des paramètres d'affichages
-				CreateNewPlante newPlante = new CreateNewPlante();
-				newPlante.setVisible(true);
+				Plante p = CreateNewPlante.showCreateNewPlante();
+				if (p != null) {
+					AccesBD.getInstance().insertPlante(p);
+				}
 			}
 		});
 	

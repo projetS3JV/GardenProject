@@ -2,6 +2,7 @@ package jardin.ui;
 
 import jardin.Ensoleillement;
 import jardin.TypeSol;
+import jardin.plante.Plante;
 import jardin.plante.TypePlante;
 
 import java.awt.CardLayout;
@@ -24,11 +25,12 @@ public class CreateNewPlante extends JDialog{
 	private JPanel panel2;
 	private JPanel panel3;
 	private CardLayout cl;
+	private Plante p = null;
 	
-	public CreateNewPlante() {
+	private CreateNewPlante() {
 		
 		super();
-		this.setSize(200, 200);
+		this.setSize(300, 300);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	
 		panel3 = new JPanel();
@@ -44,8 +46,8 @@ public class CreateNewPlante extends JDialog{
 		JTextField latinNameField = new JTextField();
 		JLabel desc = new JLabel("Description");
 		JTextArea descArea = new JTextArea();
-		JButton annul = new JButton("Annuler");
-		JButton next = new JButton("Suivant");
+		JButton annul1 = new JButton("Annuler");
+		JButton next1 = new JButton("Suivant");
 		
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 		
@@ -55,8 +57,14 @@ public class CreateNewPlante extends JDialog{
 		panel1.add(latinNameField);
 		panel1.add(desc);
 		panel1.add(descArea);
-		panel1.add(annul);
-		panel1.add(next);
+		panel1.add(annul1);
+		panel1.add(next1);
+		
+		next1.addActionListener(e -> CreateNewPlante.this.showPanel("panel2"));
+		annul1.addActionListener(e -> {
+			CreateNewPlante.this.setVisible(false);
+			CreateNewPlante.this.dispose();
+		});
 		
 		//Ajout du premier panel au JDialog
 		this.add(panel1, "panel1");
@@ -73,6 +81,9 @@ public class CreateNewPlante extends JDialog{
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
 		JComboBox<Ensoleillement> ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
 		JCheckBox vivaceCheck = new JCheckBox("Vivace ?");
+		JButton annul2 = new JButton("Annuler");
+		JButton previous2 = new JButton("Retour");
+		JButton next2 = new JButton("Suivant");
 		
 		panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 		
@@ -83,6 +94,16 @@ public class CreateNewPlante extends JDialog{
 		panel2.add(ensoleillement);
 		panel2.add(ensoleillementComboBox);
 		panel2.add(vivaceCheck);
+		panel2.add(next2);
+		panel2.add(previous2);
+		panel2.add(annul2);
+		
+		next2.addActionListener(e -> CreateNewPlante.this.showPanel("panel3"));
+		previous2.addActionListener(e -> CreateNewPlante.this.showPanel("panel1"));
+		annul2.addActionListener(e -> {
+			CreateNewPlante.this.setVisible(false);
+			CreateNewPlante.this.dispose();
+		});
 		
 		//Ajout du deuxième panel au JDialog
 		this.add(panel2, "panel2");
@@ -91,15 +112,26 @@ public class CreateNewPlante extends JDialog{
 		panel3 = new JPanel();
 		JLabel dateFloraison = new JLabel("Date de floraison");
 		
+		this.add(panel3, "panel3");
+		
 	}
 	
-	public void showPanel(String panel) {
+	private void showPanel(String panel) {
 		this.cl.show(this.getContentPane(), panel);
+	}
+	
+	/**
+	 * Crée une plante et la retourne. Elle est nulle si on a annuler
+	 * @return la plante ou null
+	 */
+	public static Plante showCreateNewPlante() {
+		CreateNewPlante np = new CreateNewPlante();
+		return np.p;
 	}
 	
 	public static void main(String[] args) {
 		CreateNewPlante c = new CreateNewPlante();
-		c.showPanel("panel2");
+		c.showPanel("panel1");
 		c.setVisible(true);
 	}
 }
