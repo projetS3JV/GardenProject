@@ -114,7 +114,7 @@ public final class AccesBD {
 			stat.setInt(3, p.getType());
 			stat.setInt(4, p.getTailleFin());
 			stat.setInt(5, p.getEnsoleillement());
-			stat.setString(6, "p.getImgFleurie()");
+			stat.setString(6, p.getNom());
 			stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 			stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
 			stat.setInt(9, p.getTypeSol());
@@ -155,7 +155,7 @@ public final class AccesBD {
 						rs.getBoolean(14),
 						rs.getString(2),
 						rs.getString(3),
-						new ImageIcon(rs.getString(7)), 
+						new ImageIcon("/res/img/" + rs.getString(7) + ".png"), 
 						TypePlante.values()[rs.getInt(4)], 
 						Ensoleillement.values()[rs.getInt(6)],
 						TypeSol.values()[rs.getInt(10)],
@@ -263,7 +263,7 @@ public final class AccesBD {
 				stat.setInt(3, p.getType());
 				stat.setInt(4, p.getTailleFin());
 				stat.setInt(5, p.getEnsoleillement());
-				stat.setString(6, "p.getImgFleurie()");
+				stat.setString(6, p.getNom());
 				stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 				stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
 				stat.setInt(9, p.getTypeSol());
@@ -491,25 +491,25 @@ public final class AccesBD {
 		AccesBD bd = AccesBD.getInstance();
 		Plante p = new Plante(10, new Date(datee(2010, Calendar.FEBRUARY, 17)),
 				new Date(datee(2012, Calendar.AUGUST, 18)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.green, true,
-				"popol", "popolus patatus", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
+				"popol", "popolus patatus", new ImageIcon("/res/img/popol.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur");
 		Plante p2 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
 				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.green, true,
-				"ftb", "ftbus", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
+				"ftb", "ftbus", new ImageIcon("/res/img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.OMBRE, TypeSol.SABLEUX,
 				"c'est une fleur");
 		Plante p3 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
 				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.green, Color.green, false,
-				"builson", "builsonus", new ImageIcon("/bla/img1.png"), TypePlante.BUISSON,
+				"builson", "builsonus", new ImageIcon("/res/img/test.png"), TypePlante.BUISSON,
 				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
 				"buisson");
-		/*bd.insertPlante(p);
+		bd.insertPlante(p);
 		bd.insertPlante(p2);
 		bd.insertPlante(p3);
 		Plante p4 =  new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
 				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.green, Color.green, false,
-				"builson", "builsonus", new ImageIcon("/bla/img1.png"), TypePlante.BUISSON,
+				"builson", "builsonus", new ImageIcon("/res/img/test.png"), TypePlante.BUISSON,
 				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
 				"buisson");
 		bd.insertPlante(p4);
@@ -519,7 +519,7 @@ public final class AccesBD {
 		bd.deletePlante(p2.getId());
 		System.out.println("Plantes OK");
 		
-		
+		/*
 		Jardin j = new Jardin("Ma maison",100,100);
 		Jardin j2 = new Jardin("null", 20, 20);
 		Jardin j3 = new Jardin("blabla", 20, 20);
@@ -574,7 +574,7 @@ public final class AccesBD {
 		try {
 			rs = T.getResultSet();
 			while (rs.next()) 
-				x.add(rs.getInt(1));	
+				x.add(rs.getInt(2));	
 		} catch (SQLException e) {e.printStackTrace();}
 		int[] ret = new int[x.size()];
 		for (int i = 0 ; i < x.size() ; i++) {
