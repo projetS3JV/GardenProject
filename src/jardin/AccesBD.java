@@ -454,7 +454,7 @@ public final class AccesBD {
 	private ArrayList<ZonePlantable> getZonePlantables(int idZone) {
 		ArrayList<ZonePlantable> zones = new ArrayList<ZonePlantable>();
 		try {
-			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONE WHERE id_Zone = " + idZone);
+			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONEPLANTABLE WHERE id_Zone = " + idZone);
 			while (rs.next()) {
 				ZonePlantable z = new ZonePlantable(rs.getInt(7), rs.getInt(6));
 				int[] x = JDBCArrayTointArray(rs.getArray(4));
