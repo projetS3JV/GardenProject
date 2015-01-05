@@ -75,7 +75,8 @@ public class MenuBar extends JMenuBar {
 					 } catch (IllegalArgumentException exception) {
 						 //Sinon on l'ajoute
 						 AccesBD.getInstance().insertJardin(jardin);
-					 }					 
+					 }
+					 JOptionPane.showMessageDialog(MainFrame.getInstance(), "enregistré","Jardin enregistré", JOptionPane.INFORMATION_MESSAGE);
 				 }
 			}
 		});
@@ -101,6 +102,7 @@ public class MenuBar extends JMenuBar {
 				JFileChooser fileChooser = new JFileChooser();
 				int reponse = fileChooser.showOpenDialog(MenuBar.this);
 				if (reponse == JFileChooser.APPROVE_OPTION) {
+					// TODO
 					JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 					//lancer méthode pour changer le fond du jardin par l'image fileChooser.getSelectedFile();
 				}
