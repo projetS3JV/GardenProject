@@ -53,7 +53,7 @@ public class OpenGardenFrame extends JDialog{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2 /*&& jardinsList.(e.getPoint())*/) {
+				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
 					ouvrir.doClick();
 				}
 			}
