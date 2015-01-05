@@ -19,7 +19,7 @@ public class OutilPanel extends JPanel{
 		JButton tracer = new JButton("Tracer zone", new ImageIcon());
 	
 		//this.outilsPanel
-		
+		//test ceci est un changement
 		
 	}
 }
