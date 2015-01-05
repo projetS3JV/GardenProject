@@ -88,9 +88,12 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode ouverture de jardin
 				int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance());
-				if (jardin != -1) {				
-					MainFrame.getInstance().getJardinPanel().setJardin(AccesBD.getInstance().getJardin(jardin));
+				if (jardin != -1) {
+					Jardin j = AccesBD.getInstance().getJardin(jardin);
+					MainFrame instance = MainFrame.getInstance();
+					instance.getJardinPanel().setJardin(j);
 					MenuBar.this.enableItems();
+					instance.setTitle(instance.getTitle() + " : " + j.getName());
 				}
 			}
 		});

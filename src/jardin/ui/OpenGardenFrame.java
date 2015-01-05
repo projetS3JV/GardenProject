@@ -2,6 +2,8 @@ package jardin.ui;
 
 import jardin.AccesBD;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -47,7 +49,15 @@ public class OpenGardenFrame extends JDialog{
 			OpenGardenFrame.this.setVisible(false);
 			OpenGardenFrame.this.dispose();
 			});
-		
+		jardinsList.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2 /*&& jardinsList.(e.getPoint())*/) {
+					ouvrir.doClick();
+				}
+			}
+		});
 		ouvrir.addActionListener(e -> {
 			OpenGardenFrame.this.selected = ((Entry<Integer, String>)jardinsList.getSelectedValue()).getKey();
 			OpenGardenFrame.this.setVisible(false);
