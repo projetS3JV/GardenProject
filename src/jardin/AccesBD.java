@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -36,13 +37,12 @@ public final class AccesBD {
 	private SortedListModel planteList;
 
 	private AccesBD() {
-		this.planteList = new SortedListModel(); // a construire !
-		try {//												|
-			Class.forName("org.hsqldb.jdbc.JDBCDriver");//	|
-			this.connect("ifexists=true");			//		|
-									//						V
-			this.fillPlanteList();//					Construit ! 
-		} catch (ClassNotFoundException e) { //     
+		this.planteList = new SortedListModel();
+		try {
+			Class.forName("org.hsqldb.jdbc.JDBCDriver");
+			this.connect("ifexists=true");			
+			this.fillPlanteList();
+		} catch (ClassNotFoundException e) {    
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.print("Creating database..... ");
@@ -169,41 +169,13 @@ public final class AccesBD {
 		}
 	}
 
-	/**
-	 * Methode a supprimer 
-	 * @ Deprecated
-	 * @return
-	 */
-	private Plante selectLastPlante() {
-		String sql = "SELECT * FROM Plante";
-		Plante p = null;
-		try {
-			ResultSet rs = this.statement.executeQuery(sql);
-			rs.last();
-			/*p = new Plante(
-					rs.getInt(5),
-					rs.getDate(12),
-					rs.getDate(13),
-					rs.getDate(11), 
-					new Color(rs.getInt(8)), 
-					new Color(rs.getInt(9)), 
-					rs.getBoolean(14),
-					rs.getString(2),
-					rs.getString(3),
-					new ImageIcon(rs.getString(7)), 
-					null, //rs.getInt(4), 
-					null, //rs.getInt(6),
-					rs.getInt(10),
-					rs.getString(15)
-					);*/
-		} catch (SQLException e) {
-			e.printStackTrace();
+	private void insertZone(Zone z, int idJardin) {
+		for (AbstractZone zone : z.getZones()) {
+			if (zone instanceof Zone)
+				insertZone((Zone) zone, idJardin);
+			else
+				insertZonePlantable((ZonePlantable) zone, zone.getId());
 		}
-		return p;
-	}
-
-	private void insertZone(Zone z,int idJardin) {
-		//Il faut rajouter les zones de celle ci
 		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -223,12 +195,12 @@ public final class AccesBD {
 		}
 	}
 
-	private void insertZonePlantable(ZonePlantable z, int idJardin) {
+	private void insertZonePlantable(ZonePlantable z, int idZone) {
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.setInt(1,z.getPlante().getId());
-			stat.setInt(2, idJardin); 
+			stat.setInt(2, idZone); 
 			stat.setArray(3,intArrayToJDBXArray(z.xpoints));
 			stat.setArray(4,intArrayToJDBXArray(z.ypoints));
 			stat.setInt(5, z.getTypeSol());
@@ -250,7 +222,9 @@ public final class AccesBD {
 	 * @param j le jardin a inserer
 	 */
 	public void insertJardin(Jardin j) {
-		//Il faut rajouter les zones du jardin
+		for(Zone zone : j.getZones()){
+			insertZone(zone,j.getId());
+		}
 		String sql = "INSERT INTO JARDIN VALUES(null,?,?,?)";
 		String sql2 = "SELECT id FROM jardin";
 		try {
@@ -308,7 +282,12 @@ public final class AccesBD {
 	}
 
 	private void updateZone(Zone z) throws IllegalArgumentException {
-		//Il faut mettre a jour/rajouter les zones contenu dans celle ci
+		for (AbstractZone zone : z.getZones()) {
+			if (zone instanceof Zone)
+				updateZone((Zone) zone);
+			else
+				updateZonePlantable((ZonePlantable) zone);
+		}
 		if (z.getId() != -1) {
 			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
 			try {
@@ -352,7 +331,9 @@ public final class AccesBD {
 	 * @throws IllegalArgumentException si la mise a jour est impossible
 	 */
 	public void updateJardin(Jardin j) throws IllegalArgumentException {
-		//Il faut mettre a jour/rajouter les zones de celui ci
+		for(Zone zone : j.getZones()){
+			insertZone(zone,j.getId());
+		}
 		if (j.getId() != -1) {
 			String sql = "UPDATE JARDIN SET name=?,width = ?,height= ? WHERE id ="+j.getId();
 			try {
@@ -385,9 +366,14 @@ public final class AccesBD {
 		}
 	}
 
-	private void deleteZone(int id) {
-		//Il faut supprimer toutes les zones de celle ci
-		String sql = "DELETE FROM ZONE WHERE id =" + id;
+	private void deleteZone(Zone z) {
+		for (AbstractZone zone : z.getZones()) {
+			if (zone instanceof Zone)
+				deleteZone((Zone) zone);
+			else
+				deleteZonePlantable( (ZonePlantable) zone);
+		}
+		String sql = "DELETE FROM ZONE WHERE id =" + z.getId();
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.executeUpdate();
@@ -396,8 +382,8 @@ public final class AccesBD {
 		}
 	}
 
-	private void deleteZonePlantable(int id) {
-		String sql = "DELETE FROM ZONEPLANTABLE PLANTE WHERE id =" + id;
+	private void deleteZonePlantable(ZonePlantable z) {
+		String sql = "DELETE FROM ZONEPLANTABLE PLANTE WHERE id =" + z.getId();
 		try {
 			this.statement.executeUpdate(sql);
 		} catch (SQLException e) {e.printStackTrace();}
@@ -407,9 +393,11 @@ public final class AccesBD {
 	 * Supprime un jardin de la base de données
 	 * @param id l'identifiant du jardin a supprimer
 	 */
-	public void deleteJardin(int id) {
-		//Il faut aussi supprimer toutes les zones de celui ci
-		String sql = "DELETE FROM JARDIN WHERE id =" + id;
+	public void deleteJardin(Jardin j) {
+		for(Zone zone : j.getZones()){
+			deleteZone(zone);
+		}
+		String sql = "DELETE FROM JARDIN WHERE id =" + j.getId();
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.executeUpdate();
@@ -471,7 +459,6 @@ public final class AccesBD {
 				int[] y = JDBCArrayTointArray(rs.getArray(5));
 				z.setId(rs.getInt(1));
 				z.setPlante(this.getPlante(rs.getInt(2)));
-				// Si tu veux rajouter un constructeur avec tableau !!!!!! // Fait
 				for (int i = 0 ; i < x.length ; i++)
 					z.addPoint(x[i], y[i]);
 				zones.add(z);
@@ -490,108 +477,86 @@ public final class AccesBD {
 	 * @return les jardins complets
 	 */
 	public HashMap<Integer, String> getJardins() {
-		/*
-		 * Il me semble plus interessant de ne recuperer que le nom et l'id
-		 * et quand l'user voudra ouvrir tel jardin on utilisera la methode
-		 * getJardin(int id)
-		 */
 		HashMap<Integer, String> map = new HashMap<Integer, String>();
 		ResultSet rs;
 		try {
 			rs = this.statement.executeQuery("SELECT id, nom FROM JARDIN");
 			while (rs.next()) 
 				map.put(rs.getInt(1), rs.getString(2));	
-		} catch (SQLException e) {e.printStackTrace();}
-
-		/*ArrayList<Jardin> jardins = new ArrayList<Jardin>();
-		try {
-			ResultSet r = this.statement.executeQuery("SELECT * From Jardin");
-			// On parcours tout les jardins
-			while (!r.isLast())	{
-				r.next();
-				Jardin j = new Jardin(r.getString(2), r.getInt(3), r.getInt(4));
-				j.setId(r.getInt(1));
-				//On va chercher toute les zones du jardin
-				ResultSet r2 = this.statement.executeQuery("SELECT * From Zone where id_jardin = " + j.getId());
-				while (! r2.isLast()) {
-					r2.next();
-					//On cree la zone et on lui ajoute un id et les points de la zone
-					int[] xCoords = JDBCArrayTointArray(r2.getArray(3));
-					int[] yCoords = JDBCArrayTointArray(r2.getArray(4));
-					Zone z = new Zone(r2.getInt(5));
-					z.setId(r2.getInt(1));
-					for (int i = 0; i < xCoords.length; i++) {
-						z.addPoint(xCoords[i], yCoords[i]);
-					}
-					//On ajoute la zone créée dans la bonne zone
-					AbstractZone zoneParent = j.getZone(z.xpoints[0], z.ypoints[0]);
-					if (zoneParent != null && zoneParent instanceof Zone) ((Zone)zoneParent).addZone(z);
-					else j.addZone(z);
-				}
-				//on ferme la reequete
-				r2.close();
-				
-				//On va chercher toute les zonesPlantables du jardin
-				r2 = this.statement.executeQuery("SELECT * From ZonePlantable where id_jardin = " + j.getId());
-				while ( !r2.isLast()) {
-					r2.next();
-					//On cree la zone et on lui ajoute un id et les points de la zone
-					int[] xCoords = JDBCArrayTointArray(r2.getArray(4));
-					int[] yCoords = JDBCArrayTointArray(r2.getArray(5));
-					ZonePlantable z = new ZonePlantable(r2.getInt(7), r2.getInt(6));
-					z.setId(r2.getInt(1));
-					for (int i = 0; i < xCoords.length; i++) {
-						z.addPoint(xCoords[i], yCoords[i]);
-					}
-					//On ajoute la zone créée dans la bonne zone
-					AbstractZone zoneParent = j.getZone(z.xpoints[0], z.ypoints[0]);
-					((Zone) zoneParent).addZone(z);
-				}
-				
-				jardins.add(j);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return jardins;*/	
+		} catch (SQLException e) {e.printStackTrace();}	
 		return map;
 	}
 
 	public static void main(String[] args) {
 		AccesBD bd = AccesBD.getInstance();
-	/*	Plante p = new Plante(10, new Date(datee(2010, Calendar.FEBRUARY, 15)),
-				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.black, true,
+		Plante p = new Plante(10, new Date(datee(2010, Calendar.FEBRUARY, 17)),
+				new Date(datee(2012, Calendar.AUGUST, 18)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.green, true,
 				"popol", "popolus patatus", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur");
 		Plante p2 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
-				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.black, true,
-				"fleur", "fleur de test", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
+				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.green, true,
+				"ftb", "ftbus", new ImageIcon("/bla/img1.png"), TypePlante.FLEUR,
 				Ensoleillement.OMBRE, TypeSol.SABLEUX,
-				"c'est une zolie fleur");
+				"c'est une fleur");
+		Plante p3 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
+				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.green, Color.green, false,
+				"builson", "builsonus", new ImageIcon("/bla/img1.png"), TypePlante.BUISSON,
+				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
+				"buisson");
 		bd.insertPlante(p);
 		bd.insertPlante(p2);
-		bd.updatePlante(p);
+		bd.insertPlante(p3);
+		Plante p4 =  new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
+				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.green, Color.green, false,
+				"builson", "builsonus", new ImageIcon("/bla/img1.png"), TypePlante.BUISSON,
+				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
+				"buisson");
+		bd.insertPlante(p4);
+		p4.setDescription("autre buisson");
+		bd.updatePlante(p4);
+	 
 		bd.deletePlante(p2.getId());
-		bd.deletePlante(p.getId());
-		System.out.println("Plantes OK");*/
+		System.out.println("Plantes OK");
 		
-		//Zone z = new Zone(5, 10, 10);
-		//bd.insertZone(z);
 		
-		/*Jardin j = new Jardin("Ma maison",100,100);
+		Jardin j = new Jardin("Ma maison",100,100);
 		Jardin j2 = new Jardin("null", 20, 20);
+		Jardin j3 = new Jardin("blabla", 20, 20);
+		Jardin j4 = new Jardin("blabla", 20, 20);
 		bd.insertJardin(j);
 		bd.insertJardin(j2);
-		bd.deleteJardin(j.getId());
-		bd.deleteJardin(j2.getId());
-		System.out.println("Jardins OK");*/
+		bd.insertJardin(j3);
+		bd.insertJardin(j4);
+		j4.setName("bla");
+		bd.updateJardin(j4);
 		
-		for(Plante p : bd.getPlantes()) {
+		bd.deleteJardin(j2);
+		System.out.println("Jardins OK");
+		
+		
+		Zone z = new Zone(5, 100, 100);
+		Zone z2 = new Zone(5, 10, 10);
+		ZonePlantable z3 = new ZonePlantable(5, 10, 10, 2);
+		ZonePlantable z4 = new ZonePlantable(5, 10, 10, 3);
+		ZonePlantable z5 = new ZonePlantable(5, 10, 10, 2);
+		bd.insertZone(z,j.getId());
+		bd.insertZone(z2,j.getId());
+		bd.insertZonePlantable(z3,z.getId());
+		bd.insertZonePlantable(z4,z.getId());
+		bd.insertZonePlantable(z5,z.getId());
+		
+		z5.setEnsoleillement(8);
+		bd.updateZonePlantable(z5);
+		
+		bd.deleteZone(z2);
+		System.out.println("Zone OK");
+		
+		/*for(Plante p : bd.getPlantes()) {
 			System.out.println(p.getId() + "," + p.getNom());
 		}
 		Plante p = bd.getPlante(1);
-		System.out.println(p.getId() + "," + p.getNom());
+		System.out.println(p.getId() + "," + p.getNom());*/
 		
 		bd.close();
 	}
@@ -621,9 +586,4 @@ public final class AccesBD {
 			o[i] = new Integer(T[i]);
 		return new JDBCArrayBasic(o, type);
 	}
-
-	
-	// Pense bête --------------->
-	// Reprendre les id lors des updates
-	// Gerer les le sortedlist
 }
