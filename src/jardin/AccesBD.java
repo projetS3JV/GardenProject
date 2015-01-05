@@ -169,7 +169,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void insertZone(Zone z, int idJardin) {
+	public void insertZone(Zone z, int idJardin) {
 		String sql = "INSERT INTO ZONE VALUES (null,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -196,7 +196,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void insertZonePlantable(ZonePlantable z, int idZone) {
+	public void insertZonePlantable(ZonePlantable z, int idZone) {
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -283,7 +283,7 @@ public final class AccesBD {
 
 	}
 
-	private void updateZone(Zone z) throws IllegalArgumentException {
+	public void updateZone(Zone z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
 			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
 			try {
@@ -307,7 +307,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {
+	public void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
 			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
@@ -368,7 +368,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void deleteZone(Zone z) {
+	public void deleteZone(Zone z) {
 		String sql = "DELETE FROM ZONE WHERE id =" + z.getId();
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -384,7 +384,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void deleteZonePlantable(ZonePlantable z) {
+	public void deleteZonePlantable(ZonePlantable z) {
 		String sql = "DELETE FROM ZONEPLANTABLE PLANTE WHERE id =" + z.getId();
 		try {
 			this.statement.executeUpdate(sql);
@@ -454,7 +454,7 @@ public final class AccesBD {
 	private ArrayList<ZonePlantable> getZonePlantables(int idZone) {
 		ArrayList<ZonePlantable> zones = new ArrayList<ZonePlantable>();
 		try {
-			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONE WHERE id_Zone = " + idZone);
+			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONEPLANTABLE WHERE id_Zone = " + idZone);
 			while (rs.next()) {
 				ZonePlantable z = new ZonePlantable(rs.getInt(7), rs.getInt(6));
 				int[] x = JDBCArrayTointArray(rs.getArray(4));
@@ -506,7 +506,7 @@ public final class AccesBD {
 				"builson", "builsonus", new ImageIcon("/bla/img1.png"), TypePlante.BUISSON,
 				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
 				"buisson");
-		bd.insertPlante(p);
+		/*bd.insertPlante(p);
 		bd.insertPlante(p2);
 		bd.insertPlante(p3);
 		Plante p4 =  new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
