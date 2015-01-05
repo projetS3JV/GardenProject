@@ -6,11 +6,14 @@ import jardin.SortedListModel;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,9 +32,9 @@ public class PlantothequeFrame extends JFrame {
 	public PlantothequeFrame() {
 		this.setResizable(false);
 		this.setSize(800, 600);
-		this.setTitle("Plantothèque");
+		this.setTitle("Plantotheque");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setLayout(new BorderLayout());
+		this.setLayout(new GridLayout(2,20)/*BorderLayout()*/);
 		
 		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
@@ -41,7 +44,12 @@ public class PlantothequeFrame extends JFrame {
 				"popol", "popolus patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur");
+		Plante p1 = new Plante(10, null,null,null, Color.blue, Color.black, true,
+				"Tartiflette", "Tartifletus Patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
+				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
+				"c'est une zolie fleur");
 		modelList.add(p);
+		modelList.add(p1);
 		
 		listePlante = new JList<Plante>(modelList);
 		listePlante.setCellRenderer(new PlantePanel());
