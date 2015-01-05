@@ -39,7 +39,12 @@ public class PlantothequeFrame extends JFrame {
 		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		int nbPlante = instance.getPlantes().getSize();
-		
+		System.out.print(nbPlante);
+		for(int i = 0; i < nbPlante; i++) {
+			Plante Ptmp = modelList.getElementAt(i);
+			//modelList.add(Ptmp);
+		}
+		/*
 		Plante p = new Plante(10, null,null,null, Color.blue, Color.black, true,
 				"Chaise", "popolus patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
@@ -48,8 +53,8 @@ public class PlantothequeFrame extends JFrame {
 				"Tartiflette", "Tartifletus Patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur bleuableuzbleuavleuzezkjfvjakzr");
-		modelList.add(p);
-		modelList.add(p1);
+		*/
+		
 		
 		listePlante = new JList<Plante>(modelList);
 		listePlante.setCellRenderer(new PlantePanel());
