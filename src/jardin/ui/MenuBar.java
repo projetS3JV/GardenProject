@@ -252,5 +252,6 @@ public class MenuBar extends JMenuBar {
 		this.selectionnerTout.setEnabled(true);
 		this.supprimer.setEnabled(true);
 		this.tracer.setEnabled(true);
+		MainFrame.getInstance().getOutilPanel().enableItems();
 	}
 }
