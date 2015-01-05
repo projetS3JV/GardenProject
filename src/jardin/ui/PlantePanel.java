@@ -36,11 +36,11 @@ public class PlantePanel extends JLabel implements ListCellRenderer{
 			int index, boolean isSelected, boolean cellHasFocus) {
 		
 		Plante p = (Plante) value;
-		//R�cup�ration de l'image de la plante.
+		//Recuperation de l'image de la plante.
 		//ImageIcon img = p.getImgFleurie();
 		ImageIcon img = new ImageIcon("res/Img/test.png");
 		
-		//Cr�ation des labels pour l'affichage du nom et la description des plantes.
+		//Creation des labels pour l'affichage du nom et la description des plantes.
 		//name = new JLabel("Nom : " + p.getNom());
 		//desc = new JLabel("Description : " + p.getDescription());
 		name = new JLabel("Nom : RaindowDash");

@@ -34,7 +34,7 @@ public class PlantothequeFrame extends JFrame {
 		this.setLayout(new BorderLayout());
 		
 		
-		//Cr�ation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
+		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		int nbPlante = instance.getPlantes().getSize();
 		
 		Plante p = new Plante(10, null,null,null, Color.blue, Color.black, true,
@@ -48,7 +48,7 @@ public class PlantothequeFrame extends JFrame {
 		this.add(new JScrollPane(this.listePlante));
 
 		
-		//Cr�ation de la barre de d�filement et des boutons Ajouter et Annuler.
+		//Creation de la barre de defilement et des boutons Ajouter et Annuler.
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		JButton ajouter = new JButton("Ajouter");
@@ -61,7 +61,7 @@ public class PlantothequeFrame extends JFrame {
 		ajouter.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-				//R�cup�rer la zone s�lectionn�
+				//Recuperer la zone selectionnee
 				//ZonePlantable.setPlante(select);
 			}
 		});
@@ -77,7 +77,7 @@ public class PlantothequeFrame extends JFrame {
 	}
 	
 	/**
-	 * M�thode mettant en m�moire la plante s�lectionn�e.
+	 * Methode ettant en memoire la plante si selectionne
 	 */
 	public void setSelected(PlantePanel plantePanel, int id) {
 		select = (Plante) this.listePlante.getSelectedValue();
