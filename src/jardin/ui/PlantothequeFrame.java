@@ -31,10 +31,10 @@ public class PlantothequeFrame extends JFrame {
 	
 	public PlantothequeFrame() {
 		this.setResizable(false);
-		this.setSize(800, 600);
+		this.setSize(400, 400);
 		this.setTitle("Plantotheque");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setLayout(new GridLayout(2,1)/*BorderLayout()*/);
+		this.setLayout(new BorderLayout());
 		
 		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
@@ -43,11 +43,11 @@ public class PlantothequeFrame extends JFrame {
 		Plante p = new Plante(10, null,null,null, Color.blue, Color.black, true,
 				"Chaise", "popolus patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
-				"c'est une zolie fleur");
+				"c'est une zolie fleur ololololololololololololololololol");
 		Plante p1 = new Plante(10, null,null,null, Color.blue, Color.black, true,
 				"Tartiflette", "Tartifletus Patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
-				"c'est une zolie fleur");
+				"c'est une zolie fleur bleuableuzbleuavleuzezkjfvjakzr");
 		modelList.add(p);
 		modelList.add(p1);
 		

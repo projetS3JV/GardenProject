@@ -2,6 +2,7 @@ package jardin.ui;
 
 import jardin.plante.Plante;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -13,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
 
 public class PlantePanel extends JPanel implements ListCellRenderer{
 	
@@ -23,7 +25,7 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 	
 	public PlantePanel() {
 		super();
-		name = new JLabel();
+		name = new JLabel("test", SwingConstants.CENTER);
 		desc = new JLabel();
 		image = new JLabel();
 	}
@@ -45,10 +47,10 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		
 		//Label contenant l'image de la plante.
 		image.setIcon(img);
-		this.setLayout(new GridLayout(2,2));
-		this.add(image);
-		this.add(name);
-		this.add(desc);
+		this.setLayout(new BorderLayout());
+		this.add(image, BorderLayout.WEST);
+		this.add(name, BorderLayout.NORTH);
+		this.add(desc, BorderLayout.EAST);
 		return this;
 	}
 	
