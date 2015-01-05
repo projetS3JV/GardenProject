@@ -16,7 +16,7 @@ public class MainFrame extends JFrame{
 	
 	//Les différents composants graphiques
 	private JardinPanel jardinPanel = new JardinPanel();
-	private OutilPanel outilPanel;
+	private OutilPanel outilPanel = new OutilPanel();
 	private CalendarPanel calendarPanel  = new CalendarPanel();
 	private MenuBar menuBar = new MenuBar();
 	private static MainFrame instance = null;
@@ -42,7 +42,7 @@ public class MainFrame extends JFrame{
 		this.setLayout(new BorderLayout());		
 		this.setJMenuBar(menuBar);	   
 	    this.add(BorderLayout.SOUTH, this.calendarPanel);	    
-	 //   this.add(BorderLayout.EAST, this.outilPanel);	    
+	    this.add(BorderLayout.EAST, this.outilPanel);	    
 	    this.add(BorderLayout.CENTER, this.jardinPanel);
 	}
 
