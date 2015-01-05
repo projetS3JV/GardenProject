@@ -437,13 +437,10 @@ public final class AccesBD {
 		try {
 			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONE WHERE id_jardin = " + idJardin);
 			while (rs.next()) {
-				Zone z = new Zone(rs.getInt(5));
 				int[] x = JDBCArrayTointArray(rs.getArray(3));
 				int[] y = JDBCArrayTointArray(rs.getArray(4));
+				Zone z = new Zone(x, y, rs.getInt(5));
 				z.setId(rs.getInt(1));
-				// Si tu veux rajouter un constructeur avec tableau !!!!!! // Fait
-				for (int i = 0 ; i < x.length ; i++)
-					z.addPoint(x[i], y[i]);
 				for (ZonePlantable zp : this.getZonePlantables(z.getId()))
 					z.addZone(zp);
 				zones.add(z);

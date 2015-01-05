@@ -45,9 +45,8 @@ public class AbstractZone extends Polygon {
 	public AbstractZone(AbstractZone z) {
 		super();
 		this.npoints = z.npoints;
-		for (int i = 0; i < this.npoints; i++) {
-			this.addPoint(z.xpoints[i], z.ypoints[i]);
-		}
+		this.xpoints = z.xpoints;
+		this.ypoints = z.ypoints;
 		this.ensoleillement = z.ensoleillement;
 	}
 	

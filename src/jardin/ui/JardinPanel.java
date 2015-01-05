@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -30,6 +31,7 @@ public class JardinPanel extends JPanel{
 	private AbstractZone zone;
 	private boolean draw = false;
 	private int px, py, tx, ty;
+	private AbstractZone selected = null;
 	
 	
 	public JardinPanel(Jardin jardin) {
@@ -39,13 +41,17 @@ public class JardinPanel extends JPanel{
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				if (!draw)
+					selected = jardin.getZone(e.getX(), e.getY());
 				if (draw & e.getButton() == MouseEvent.BUTTON1) {
 					px = e.getX();
 					py = e.getY();
 					zone.addPoint(px, py);
 					draw = !zone.isClosed();
-					if (!draw)
+					if (!draw) {
 						JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						saveZone(zone);
+					}
 				}
 				if (zone.npoints > 1)
 					repaint();
@@ -107,7 +113,6 @@ public class JardinPanel extends JPanel{
 				g.fillOval(x1 - 3, y1 - 3, 6, 6);
 			}
 		}
-		else g.drawPolygon(this.zone); // a enlever
 	}
 	
 	private void drawJardin(Graphics g) {
@@ -119,18 +124,26 @@ public class JardinPanel extends JPanel{
 	private void drawZone(Graphics g, AbstractZone z) {
 		if (z instanceof ZonePlantable) {
 			ZonePlantable zone = (ZonePlantable) z;
-			g.setColor(Color.black);			
+			if (selected != null && z.equals(this.selected))
+				g.setColor(Color.red);	
+			g.setColor(Color.black);	
 			g.drawPolygon(zone);
 			g.setColor(zone.getPlante().getCouleur_en_fleur());			
 			g.fillPolygon(zone);
 		} 
 		else {
 			Zone zone = (Zone) z;
-			g.setColor(Color.black);			
+			if (selected != null && z.equals(this.selected))
+				g.setColor(Color.red);	
+			g.setColor(Color.black);		
 			g.drawPolygon(zone);
 			for (AbstractZone i : zone.getZones())
 				drawZone(g, i);
 		}
+	}
+	
+	public AbstractZone getSelected() {
+		return selected;
 	}
 	
 	public Jardin getJardin() {
@@ -148,9 +161,16 @@ public class JardinPanel extends JPanel{
 		this.draw = true;
 	}
 	
+	@Deprecated
 	public AbstractZone getZone() {
 		if (draw) return null; 
 		return zone;
+	}
+	
+	private void saveZone(AbstractZone z) {
+		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
+		jardin.addZone(new Zone(z));
+		this.repaint();
 	}
 	
 	public static void main(String[] args) {
