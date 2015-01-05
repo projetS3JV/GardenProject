@@ -418,6 +418,7 @@ public final class AccesBD {
 			ResultSet rs = this.statement.executeQuery("SELECT * FROM JARDIN WHERE id = " + id);
 			rs.next();
 			j = new Jardin(rs.getString(2), rs.getInt(3), rs.getInt(4));
+			j.setId(id);
 			for (Zone z : this.getZones(id))
 				j.addZone(z);
 		} catch (SQLException e) {
