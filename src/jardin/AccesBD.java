@@ -574,7 +574,7 @@ public final class AccesBD {
 		try {
 			rs = T.getResultSet();
 			while (rs.next()) 
-				x.add(rs.getInt(1));	
+				x.add(rs.getInt(2));	
 		} catch (SQLException e) {e.printStackTrace();}
 		int[] ret = new int[x.size()];
 		for (int i = 0 ; i < x.size() ; i++) {
