@@ -76,6 +76,7 @@ public class MenuBar extends JMenuBar {
 						 //Sinon on l'ajoute
 						 AccesBD.getInstance().insertJardin(jardin);
 					 }
+					 MenuBar.this.enableItems();
 				 }
 			}
 		});
