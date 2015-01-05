@@ -11,7 +11,7 @@ public class Jardin {
 	 * Le nom du jardin
 	 */
 	private String name;
-	private LinkedList<AbstractZone> zones = new LinkedList<AbstractZone>();
+	private LinkedList<Zone> zones = new LinkedList<Zone>();
 	private int id = -1;
 	private int width;
 	private int height;
@@ -56,7 +56,7 @@ public class Jardin {
 	 * Accesseur au zones du jardin
 	 * @return les zones
 	 */
-	public LinkedList<AbstractZone> getZones() {
+	public LinkedList<Zone> getZones() {
 		return this.zones;
 	}
 	
