@@ -16,13 +16,13 @@ public class CalendarPanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	private int jour = 1; //récupère la valeur de la scrollbar, le nième jour de l'année
+	private int jourDuMois = 1; //numero du jour dans le mois, utilisé pour le getDate et texteDate
 	private  String mois = "Janvier";
 	private String texteDate = this.jourDuMois + " " +this.mois; //La date sous la forme "DD Month" pour l'affichage
 	private static String[] moisTab = new String[]{"Janvier", "Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"};
-	private int jourDuMois = 1; //numero du jour dans le mois, utilisé pour le getDate et texteDate
 	
 	//éléments graphiques
-	private JScrollBar scrollbar = new JScrollBar(java.awt.Adjustable.HORIZONTAL, 1, 10, 1, 365);
+	private JScrollBar scrollbar = new JScrollBar(java.awt.Adjustable.HORIZONTAL, 1, 1, 1, 366);
 	private JLabel labelDate = new JLabel(this.texteDate);
 	
 	
@@ -121,9 +121,9 @@ public class CalendarPanel extends JPanel{
 			this.mois = moisTab[10];
 		}
 		//Décembre
-		else if(this.jour>334 && this.jour<=365)
+		else
 		{
-			this.jourDuMois = this.jour -324;
+			this.jourDuMois = this.jour -334;
 			this.mois = moisTab[11];
 		}
 		this.texteDate = this.jourDuMois + " " + this. mois;
