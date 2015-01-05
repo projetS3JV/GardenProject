@@ -92,4 +92,13 @@ public class AbstractZone extends Polygon {
 		this.ensoleillement = ensoleillement;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this != obj) return false;
+		if (!(obj instanceof AbstractZone)) return false;
+		AbstractZone z = (AbstractZone) obj;
+		if (z.id != this.id) return false;
+		return true;
+	}
+	
 }
