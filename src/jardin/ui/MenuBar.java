@@ -75,8 +75,7 @@ public class MenuBar extends JMenuBar {
 					 } catch (IllegalArgumentException exception) {
 						 //Sinon on l'ajoute
 						 AccesBD.getInstance().insertJardin(jardin);
-					 }
-					 MenuBar.this.enableItems();
+					 }					 
 				 }
 			}
 		});
@@ -90,6 +89,7 @@ public class MenuBar extends JMenuBar {
 				int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance());
 				if (jardin != -1) {				
 					MainFrame.getInstance().getJardinPanel().setJardin(AccesBD.getInstance().getJardin(jardin));
+					MenuBar.this.enableItems();
 				}
 			}
 		});
