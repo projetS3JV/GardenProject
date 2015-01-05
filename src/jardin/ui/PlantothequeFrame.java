@@ -34,14 +34,14 @@ public class PlantothequeFrame extends JFrame {
 		this.setSize(800, 600);
 		this.setTitle("Plantotheque");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setLayout(new GridLayout(2,20)/*BorderLayout()*/);
+		this.setLayout(new GridLayout(2,1)/*BorderLayout()*/);
 		
 		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		int nbPlante = instance.getPlantes().getSize();
 		
 		Plante p = new Plante(10, null,null,null, Color.blue, Color.black, true,
-				"popol", "popolus patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
+				"Chaise", "popolus patatus", new ImageIcon("res/Img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur");
 		Plante p1 = new Plante(10, null,null,null, Color.blue, Color.black, true,
