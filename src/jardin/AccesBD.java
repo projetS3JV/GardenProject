@@ -283,7 +283,7 @@ public final class AccesBD {
 
 	}
 
-	private void updateZone(Zone z) throws IllegalArgumentException {
+	public void updateZone(Zone z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
 			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
 			try {
@@ -307,7 +307,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {
+	public void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
 			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
@@ -368,7 +368,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void deleteZone(Zone z) {
+	public void deleteZone(Zone z) {
 		String sql = "DELETE FROM ZONE WHERE id =" + z.getId();
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -384,7 +384,7 @@ public final class AccesBD {
 		}
 	}
 
-	private void deleteZonePlantable(ZonePlantable z) {
+	public void deleteZonePlantable(ZonePlantable z) {
 		String sql = "DELETE FROM ZONEPLANTABLE PLANTE WHERE id =" + z.getId();
 		try {
 			this.statement.executeUpdate(sql);
