@@ -8,15 +8,18 @@ import jardin.plante.TypePlante;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -59,6 +62,7 @@ public class CreateNewPlante extends JDialog{
 		panel1 = new JPanel();
 		JLabel name = new JLabel("Nom usuel");
 		JTextField nameField = new JTextField();
+		//JFormattedTextField nameField1 = new JFormattedTextField(format)
 		JLabel latinName = new JLabel("Nom latin");
 		JTextField latinNameField = new JTextField();
 		JLabel tailleFinale = new JLabel("Taille finale moyenne");
@@ -186,8 +190,8 @@ public class CreateNewPlante extends JDialog{
 		
 		//Définition des listeners des boutons
 		fetch.addActionListener(e -> fileChooser.showOpenDialog(panel3));
-		couleurPasFleurieButton.addActionListener(e -> JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante non-fleurie", Color.WHITE));
-		couleurFleurieButton.addActionListener(e -> JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante fleurie", Color.WHITE));
+		couleurPasFleurieButton.addActionListener(e -> this.couleurNonFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante non-fleurie", Color.WHITE));
+		couleurFleurieButton.addActionListener(e -> this.couleurFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante fleurie", Color.WHITE));
 		previous3.addActionListener(e -> CreateNewPlante.this.showPanel("panel2"));
 		annul3.addActionListener(e -> {
 			CreateNewPlante.this.setVisible(false);
@@ -197,12 +201,19 @@ public class CreateNewPlante extends JDialog{
 			CreateNewPlante.this.setVisible(false);
 			CreateNewPlante.this.dispose();
 			this.finished = true;
-			//this.debutFloraison = GregorianCalendar.getInstance().
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
+			try {
+				this.debutFloraison = (Date) sdf.parse(dateFloraisonField1.getText());
+				this.finFloraison = (Date) sdf.parse(dateFloraisonField2.getText());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			this.imageFleurie = imageFleurieField.getText();
 		});
 		
 		//Ajout du troisième panel au JDialog		
-		this.add(panel3, "panel3");
-		
+		this.add(panel3, "panel3");		
 	}
 	
 	private void showPanel(String panel) {
@@ -217,8 +228,16 @@ public class CreateNewPlante extends JDialog{
 		CreateNewPlante cnp = new CreateNewPlante();
 		cnp.showPanel("panel1");
 		cnp.setVisible(true);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
+		Date datePlantation = new Date((long) 0);
+		try {
+			datePlantation = (Date) sdf.parse("02/10");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if(cnp.finished) {
-		//	cnp.p.set;
+			cnp.p = new Plante(cnp.tailleFinale, cnp.debutFloraison, cnp.finFloraison, datePlantation, cnp.couleurFleurie, cnp.couleurNonFleurie, cnp.vivace, cnp.nom, cnp.nomLatin, new ImageIcon(cnp.imageFleurie), cnp.typePlante, cnp.ensoleillement, cnp.typeSol, cnp.description);
 		}
 		return cnp.p;
 	}
