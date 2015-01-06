@@ -59,9 +59,11 @@ public class OpenGardenFrame extends JDialog{
 			}
 		});
 		ouvrir.addActionListener(e -> {
-			OpenGardenFrame.this.selected = ((Entry<Integer, String>)jardinsList.getSelectedValue()).getKey();
-			OpenGardenFrame.this.setVisible(false);
-			OpenGardenFrame.this.dispose();
+			if (jardinsList.getSelectedIndex() >= 0) {
+				OpenGardenFrame.this.selected = ((Entry<Integer, String>)jardinsList.getSelectedValue()).getKey();
+				OpenGardenFrame.this.setVisible(false);
+				OpenGardenFrame.this.dispose();
+			}
 			});
 		
 		resultPanel.add(annuler);
