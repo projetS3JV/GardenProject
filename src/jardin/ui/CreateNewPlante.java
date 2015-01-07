@@ -9,7 +9,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -19,13 +18,10 @@ import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import sun.tools.jar.resources.jar_pt_BR;
 
 public class CreateNewPlante extends JDialog{
 	
@@ -206,14 +202,17 @@ public class CreateNewPlante extends JDialog{
 				this.debutFloraison = (Date) sdf.parse(dateFloraisonField1.getText());
 				this.finFloraison = (Date) sdf.parse(dateFloraisonField2.getText());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			this.imageFleurie = imageFleurieField.getText();
 		});
 		
 		//Ajout du troisième panel au JDialog		
-		this.add(panel3, "panel3");		
+		this.add(panel3, "panel3");
+		
+		//Affichage de la fenetre
+		this.showPanel("panel1");
+		this.setVisible(true);
 	}
 	
 	private void showPanel(String panel) {
@@ -226,14 +225,11 @@ public class CreateNewPlante extends JDialog{
 	 */
 	public static Plante showCreateNewPlante() {
 		CreateNewPlante cnp = new CreateNewPlante();
-		cnp.showPanel("panel1");
-		cnp.setVisible(true);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
 		Date datePlantation = new Date((long) 0);
 		try {
 			datePlantation = (Date) sdf.parse("02/10");
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		if(cnp.finished) {
@@ -243,8 +239,6 @@ public class CreateNewPlante extends JDialog{
 	}
 	
 	public static void main(String[] args) {
-		CreateNewPlante c = new CreateNewPlante();
-		c.showPanel("panel1");
-		c.setVisible(true);
+		new CreateNewPlante();
 	}
 }
