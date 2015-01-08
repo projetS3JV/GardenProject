@@ -58,6 +58,7 @@ public class JardinPanel extends JPanel{
 					if (!draw) {
 						JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 						saveZone(zone);
+						zone = new AbstractZone();
 					}
 				}
 				if (zone.npoints > 1)
@@ -181,22 +182,6 @@ public class JardinPanel extends JPanel{
 		if (jardin.getId() != -1)
 			bd.insertZone(zone, jardin.getId());
 		this.repaint();
-	}
-	
-	
-	
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			JFrame frame = new JFrame();
-			JardinPanel test = new JardinPanel();
-			test.startDrawing();
-			frame.add(test);
-			frame.setSize(500, 500);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);			
-			
-		});
 	}
 	
 
