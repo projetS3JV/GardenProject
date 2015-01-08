@@ -97,7 +97,7 @@ public class ZonePlantable extends AbstractZone {
 			throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
 		}
 		
-		this.typeSol = nouveau;
+		this.typeSol = nouveau.getValue();
 	}
 	
 }
