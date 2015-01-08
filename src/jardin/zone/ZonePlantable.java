@@ -1,5 +1,6 @@
 package jardin.zone;
 
+import jardin.TypeSol;
 import jardin.plante.Plante;
 
 public class ZonePlantable extends AbstractZone {
@@ -84,6 +85,19 @@ public class ZonePlantable extends AbstractZone {
 	 */
 	public int getTypeSol() {
 		return this.typeSol;
+	}
+	
+	/**
+	 * Change le type de sol si possible, lance une exception sinon
+	 * @param nouveau le nouveau type de sol
+	 * @throws IllegalArgumentException si c'est impossible
+	 */
+	public void setTypeSol(TypeSol nouveau) throws IllegalArgumentException {
+		if (this.plante != null && !nouveau.equals(this.plante.getTypeSol())) {
+			throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
+		}
+		
+		this.typeSol = nouveau;
 	}
 	
 }
