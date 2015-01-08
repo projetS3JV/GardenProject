@@ -61,11 +61,17 @@ public class Jardin {
 	}
 	
 	/**
-	 * Ajoute une zone dans la liste de zones
+	 * Ajoute une zone dans la liste de zones (n'autorise pas 2 zones plantable qui se croisent)
 	 * @param zone la zone à ajouter
+	 * @throws IllegalArgumentException c'est impossible de l'ajouter
 	 */
-	public void addZone(Zone zone) {
-		this.zones.add(zone);
+	public void addZone(Zone zone) throws IllegalArgumentException{
+		AbstractZone z = this.getZone(zone.xpoints[0], zone.ypoints[0]);
+		if (z != null && z instanceof Zone)  {
+			((Zone)z).addZone(zone);
+		} else if (z == null) {
+			this.zones.add(zone);
+		} else throw new IllegalArgumentException();
 	}
 	
 	/**
