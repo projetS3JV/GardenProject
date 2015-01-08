@@ -1,20 +1,16 @@
 package jardin.ui;
 
 import jardin.AccesBD;
-import jardin.Ensoleillement;
 import jardin.SortedListModel;
-import jardin.TypeSol;
 import jardin.plante.Plante;
-import jardin.plante.TypePlante;
+import jardin.zone.AbstractZone;
+import jardin.zone.ZonePlantable;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -38,9 +34,6 @@ public class PlantothequeFrame extends JFrame {
 		
 		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
-		int nbPlante = instance.getPlantes().getSize();
-		System.out.print(nbPlante);
-		
 		listePlante = new JList<Plante>(modelList);
 		listePlante.setCellRenderer(new PlantePanel());
 		this.add(new JScrollPane(this.listePlante));
@@ -59,8 +52,8 @@ public class PlantothequeFrame extends JFrame {
 		ajouter.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-				//Recuperer la zone selectionnee
-				//ZonePlantable.setPlante(select);
+				AbstractZone zone = MainFrame.getInstance().getJardinPanel().getSelected();
+				((ZonePlantable) zone).setPlante(select);
 			}
 		});
 		
