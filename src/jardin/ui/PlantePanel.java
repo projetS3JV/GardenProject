@@ -2,17 +2,13 @@ package jardin.ui;
 
 import jardin.plante.Plante;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 
@@ -34,21 +30,17 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
 		
-		Plante p = (Plante) value;
-		//Recuperation de l'image de la plante.res/Img/test.png
+		Plante p = (Plante) value; //res/Img/test.png
 		ImageIcon img = p.getImgFleurie();
-		
-		//Creation des labels pour l'affichage du nom et la description des plantes.
-		name = new JLabel(p.getNom());
-		desc = new JLabel("Description : " + p.getDescription());
+		this.name.setText(p.getNom() + " / " + p.getNomL());
+		this.desc.setText("Description : " + p.getDescription());
 		
 		//Label contenant l'image de la plante.
 		image.setIcon(img);
-		this.setLayout(new BorderLayout());
-		this.add(image, BorderLayout.WEST);
-		this.add(name, BorderLayout.NORTH);
-		this.add(desc, BorderLayout.CENTER);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(name);
+		this.add(image);
+		this.add(desc);
 		return this;
-	}
-	
+	}	
 }
