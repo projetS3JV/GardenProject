@@ -21,7 +21,7 @@ public class MainFrame extends JFrame{
 	private MenuBar menuBar = new MenuBar();
 	private static MainFrame instance = null;
 	
-	private MainFrame(){
+	public MainFrame(){
 		super();
 		// acces a la BD pour la creation si besoin
 		AccesBD.getInstance();
@@ -65,14 +65,6 @@ public class MainFrame extends JFrame{
 	public static MainFrame getInstance(){
 		if(MainFrame.instance==null) MainFrame.instance = new MainFrame();
 		return MainFrame.instance;
-		
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			MainFrame m = MainFrame.getInstance();
-			m.setVisible(true);
-		});
 		
 	}
 
