@@ -32,17 +32,19 @@ public class JardinPanel extends JPanel{
 	private boolean draw = false;
 	private int px, py, tx, ty;
 	private AbstractZone selected = null;
-	
-	
-	public JardinPanel(Jardin jardin) {
-		this.jardin = jardin;
+
+
+	public JardinPanel(Jardin j) {
+		this.jardin = j;
 		this.zone = new AbstractZone();
 		this.setFocusable(true);
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (!draw)
+				if (jardin != null && !draw) {
 					selected = jardin.getZone(e.getX(), e.getY());
+					repaint();
+				}
 				if (draw & e.getButton() == MouseEvent.BUTTON1) {
 					px = e.getX();
 					py = e.getY();
@@ -72,7 +74,7 @@ public class JardinPanel extends JPanel{
 				}
 			}
 		});
-		
+
 		this.addMouseMotionListener(new MouseAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -92,11 +94,11 @@ public class JardinPanel extends JPanel{
 	public JardinPanel() {
 		this(null);
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		if (this.jardin != null) {			
+		if (this.jardin != null) {
 			drawJardin(g);
 		}
 		if(draw) {
@@ -114,19 +116,19 @@ public class JardinPanel extends JPanel{
 			}
 		}
 	}
-	
+
 	private void drawJardin(Graphics g) {
 		for (AbstractZone zone : jardin.getZones()) {
 			drawZone(g, zone);
 		}
 	}
-	
+
 	private void drawZone(Graphics g, AbstractZone z) {
 		if (z instanceof ZonePlantable) {
 			ZonePlantable zone = (ZonePlantable) z;
-			if (selected != null && z.equals(this.selected))
-				g.setColor(Color.red);	
-			g.setColor(Color.black);	
+			if (selected != null && z.equals(this.selected)) 
+				g.setColor(Color.red);
+			else g.setColor(Color.black);	
 			g.drawPolygon(zone);
 			g.setColor(zone.getPlante().getCouleur_en_fleur());			
 			g.fillPolygon(zone);
@@ -135,13 +137,13 @@ public class JardinPanel extends JPanel{
 			Zone zone = (Zone) z;
 			if (selected != null && z.equals(this.selected))
 				g.setColor(Color.red);	
-			g.setColor(Color.black);		
+			else g.setColor(Color.black);		
 			g.drawPolygon(zone);
 			for (AbstractZone i : zone.getZones())
 				drawZone(g, i);
 		}
 	}
-	
+
 	public AbstractZone getSelected() {
 		return selected;
 	}
@@ -172,6 +174,9 @@ public class JardinPanel extends JPanel{
 		jardin.addZone(new Zone(z));
 		this.repaint();
 	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
