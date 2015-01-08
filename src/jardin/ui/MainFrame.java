@@ -7,7 +7,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class MainFrame extends JFrame{
 		
@@ -21,7 +20,7 @@ public class MainFrame extends JFrame{
 	private MenuBar menuBar = new MenuBar();
 	private static MainFrame instance = null;
 	
-	public MainFrame(){
+	private MainFrame(){
 		super();
 		// acces a la BD pour la creation si besoin
 		AccesBD.getInstance();
