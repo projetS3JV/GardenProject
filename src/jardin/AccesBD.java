@@ -341,9 +341,9 @@ public final class AccesBD {
 				stat.setInt(2, j.getWidth());
 				stat.setInt(3, j.getHeight());
 				stat.executeUpdate();
-				for(Zone zone : j.getZones()){
+				/*for(Zone zone : j.getZones()){
 					insertZone(zone,j.getId());
-				}
+				}*/
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

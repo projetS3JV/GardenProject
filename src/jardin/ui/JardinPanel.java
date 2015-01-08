@@ -1,5 +1,6 @@
 package jardin.ui;
 
+import jardin.AccesBD;
 import jardin.Jardin;
 import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
@@ -13,10 +14,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.accessibility.AccessibleBundle;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import sun.tools.jar.resources.jar;
 
 /**
  * 
@@ -32,6 +36,7 @@ public class JardinPanel extends JPanel{
 	private boolean draw = false;
 	private int px, py, tx, ty;
 	private AbstractZone selected = null;
+	private AccesBD bd = AccesBD.getInstance();
 
 
 	public JardinPanel(Jardin j) {
@@ -171,7 +176,10 @@ public class JardinPanel extends JPanel{
 	
 	private void saveZone(AbstractZone z) {
 		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
-		jardin.addZone(new Zone(z));
+		Zone zone = new Zone(z);
+		jardin.addZone(zone);
+		if (jardin.getId() != -1)
+			bd.insertZone(zone, jardin.getId());
 		this.repaint();
 	}
 	
