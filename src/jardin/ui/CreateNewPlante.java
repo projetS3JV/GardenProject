@@ -7,6 +7,8 @@ import jardin.plante.TypePlante;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -19,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -47,6 +50,7 @@ public class CreateNewPlante extends JDialog{
 		
 		super();
 		this.setSize(300, 300);
+		this.setTitle("Nouvelle plante");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	
 		panel3 = new JPanel();
@@ -84,11 +88,20 @@ public class CreateNewPlante extends JDialog{
 		panel1.add(buttonsPanel1);
 		
 		//Définition des listeners des boutons
-		next1.addActionListener(e -> {CreateNewPlante.this.showPanel("panel2");
-									  this.nom = nameField.getText();
-									  this.nomLatin = latinNameField.getText();
-									  this.description = descArea.getText();
-									  this.tailleFinale = new Integer(tailleFinaleField.getText());
+		next1.addActionListener(e -> {if(nameField.getText().isEmpty()||latinNameField.getText().isEmpty()||(!tailleFinaleField.getClass().isPrimitive())) {
+									  	JOptionPane.showMessageDialog(
+									  	panel1,
+									  	"Un des champs est mal rempli",
+									  	"Erreur",
+									  	JOptionPane.ERROR_MESSAGE);
+									  } else {
+										  this.nom = nameField.getText();
+										  this.nomLatin = latinNameField.getText();
+										  this.description = descArea.getText();
+										  this.tailleFinale = new Integer(tailleFinaleField.getText());
+										  CreateNewPlante.this.showPanel("panel2");
+									  }
+									  
 		});
 		annul1.addActionListener(e -> {
 			CreateNewPlante.this.setVisible(false);
@@ -131,9 +144,13 @@ public class CreateNewPlante extends JDialog{
 		
 		//Définition des listeners des boutons
 		next2.addActionListener(e -> {CreateNewPlante.this.showPanel("panel3");
-									  this.typePlante = (TypePlante) typePlanteComboBox.getSelectedItem();
-									  this.typeSol = (TypeSol) typeSolComboBox.getSelectedItem();
-									  this.ensoleillement = (Ensoleillement) ensoleillementComboBox.getSelectedItem();
+									  try {
+										  this.typePlante = (TypePlante) typePlanteComboBox.getSelectedItem();
+										  this.typeSol = (TypeSol) typeSolComboBox.getSelectedItem();
+										  this.ensoleillement = (Ensoleillement) ensoleillementComboBox.getSelectedItem();
+									  }catch(Exception e3){
+										  e3.printStackTrace();
+									  }
 									  this.vivace = vivaceCheck.isSelected();
 		});
 		previous2.addActionListener(e -> CreateNewPlante.this.showPanel("panel1"));
@@ -150,7 +167,9 @@ public class CreateNewPlante extends JDialog{
 		JLabel dateFloraison = new JLabel("Date de floraison");
 		JPanel sousPanel1 = new JPanel();
 		JTextField dateFloraisonField1 = new JTextField("jj/mm");
+		dateFloraisonField1.setColumns(4);
 		JTextField dateFloraisonField2 = new JTextField("jj/mm");
+		dateFloraisonField2.setColumns(4);
 		JButton ajouterDatesFloraisons = new JButton("Ajouter");
 		sousPanel1.add(dateFloraisonField1);
 		sousPanel1.add(dateFloraisonField2);
@@ -185,7 +204,25 @@ public class CreateNewPlante extends JDialog{
 		panel3.add(buttonsPanel3);
 		
 		//Définition des listeners des boutons
-		fetch.addActionListener(e -> fileChooser.showOpenDialog(panel3));
+		dateFloraisonField1.addMouseListener(new  MouseAdapter(){			 
+			 public void mouseClicked(MouseEvent e) {
+			    dateFloraisonField1.setText("");  
+			 }
+		});
+		dateFloraisonField2.addMouseListener(new  MouseAdapter(){			 
+			 public void mouseClicked(MouseEvent e) {
+			    dateFloraisonField2.setText("");  
+			 }
+		});
+		ajouterDatesFloraisons.addActionListener(e -> {SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
+													   try {
+													   this.debutFloraison = new Date(sdf.parse(dateFloraisonField1.getText()).getTime());
+													   this.finFloraison = new Date(sdf.parse(dateFloraisonField2.getText()).getTime());
+													   } catch (Exception e1) {
+														   e1.printStackTrace();
+													   }
+		});
+		fetch.addActionListener(e -> fileChooser.showOpenDialog(panel3)); 
 		couleurPasFleurieButton.addActionListener(e -> this.couleurNonFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante non-fleurie", Color.WHITE));
 		couleurFleurieButton.addActionListener(e -> this.couleurFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante fleurie", Color.WHITE));
 		previous3.addActionListener(e -> CreateNewPlante.this.showPanel("panel2"));
@@ -197,13 +234,6 @@ public class CreateNewPlante extends JDialog{
 			CreateNewPlante.this.setVisible(false);
 			CreateNewPlante.this.dispose();
 			this.finished = true;
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
-			try {
-				this.debutFloraison = (Date) sdf.parse(dateFloraisonField1.getText());
-				this.finFloraison = (Date) sdf.parse(dateFloraisonField2.getText());
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
 			this.imageFleurie = imageFleurieField.getText();
 		});
 		
@@ -228,7 +258,7 @@ public class CreateNewPlante extends JDialog{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
 		Date datePlantation = new Date((long) 0);
 		try {
-			datePlantation = (Date) sdf.parse("02/10");
+			datePlantation = new Date(sdf.parse("02/10").getTime());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
