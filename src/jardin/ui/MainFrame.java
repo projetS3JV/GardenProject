@@ -7,7 +7,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class MainFrame extends JFrame{
 		
@@ -65,14 +64,6 @@ public class MainFrame extends JFrame{
 	public static MainFrame getInstance(){
 		if(MainFrame.instance==null) MainFrame.instance = new MainFrame();
 		return MainFrame.instance;
-		
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			MainFrame m = MainFrame.getInstance();
-			m.setVisible(true);
-		});
 		
 	}
 
