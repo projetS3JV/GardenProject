@@ -28,6 +28,7 @@ public class MenuBar extends JMenuBar {
 	private JMenuItem refaire;
 	private JMenuItem selectionnerTout;
 	private JMenuItem tracer;
+	private JMenuItem tracerP;
 	private JMenuItem supprimer;
 
 /**
@@ -186,11 +187,20 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode traçage de zone
-				MainFrame.getInstance().getJardinPanel().startDrawing(true);
+				MainFrame.getInstance().getJardinPanel().startDrawing(false);
 			}
 		});
 		tracer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
 
+		tracerP = new JMenuItem("Tracer zone plantable");
+		tracerP.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//lancer méthode traçage de zone plantable
+				MainFrame.getInstance().getJardinPanel().startDrawing(true);
+			}
+		});
+		tracerP.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 		
 		supprimer = new JMenuItem("Supprimer zone");
 		supprimer.addActionListener(new ActionListener() {
@@ -204,6 +214,7 @@ public class MenuBar extends JMenuBar {
 
 
 		outils.add(tracer);
+		outils.add(tracerP);
 		outils.add(supprimer);
 		this.add(outils);
 		//Sous-menu préférences
@@ -260,6 +271,7 @@ public class MenuBar extends JMenuBar {
 		this.selectionnerTout.setEnabled(false);
 		this.supprimer.setEnabled(false);
 		this.tracer.setEnabled(false);
+		this.tracerP.setEnabled(false);
 	}
 	
 	/**
@@ -272,6 +284,7 @@ public class MenuBar extends JMenuBar {
 		this.selectionnerTout.setEnabled(b);
 		this.supprimer.setEnabled(b);
 		this.tracer.setEnabled(b);
+		this.tracerP.setEnabled(b);
 		MainFrame.getInstance().getOutilPanel().enableItems(b);
 	}
 }

@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 public class OutilPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	//private PlantothequePanel plantothequePanel= new PlantothequePanel();
 	
 	private JButton tracer = new JButton(new ImageIcon("res/img/tracer.gif"));
 	private JButton tracerP = new JButton(new ImageIcon("res/img/tracerP.gif"));
