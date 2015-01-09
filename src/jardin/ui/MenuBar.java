@@ -58,7 +58,7 @@ public class MenuBar extends JMenuBar {
 				}
 			}
 		});
-		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 
 		
 		enregistrer = new JMenuItem("Enregistrer");

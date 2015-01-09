@@ -25,7 +25,7 @@ public class OpenGardenFrame extends JDialog{
 	
 	private OpenGardenFrame(JFrame frame, String titre) {
 		super(frame, titre, true);
-		this.setSize(230, 200);
+		this.setSize(250, 230);
 		this.setResizable(false);
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 				
