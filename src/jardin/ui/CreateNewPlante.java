@@ -1,5 +1,6 @@
 package jardin.ui;
 
+import jardin.AccesBD;
 import jardin.Ensoleillement;
 import jardin.TypeSol;
 import jardin.plante.Plante;
@@ -7,11 +8,17 @@ import jardin.plante.TypePlante;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,7 +41,9 @@ public class CreateNewPlante extends JDialog{
 	private JPanel panel2;
 	private JPanel panel3;
 	private CardLayout cl;
+
 	private Plante p = null;
+	
 	private String nom, nomLatin, description, imageFleurie;
 	private int tailleFinale;
 	private TypePlante typePlante;
@@ -49,7 +58,7 @@ public class CreateNewPlante extends JDialog{
 	private CreateNewPlante() {
 		
 		super();
-		this.setSize(300, 300);
+		this.setSize(500, 300);
 		this.setTitle("Nouvelle plante");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	
@@ -88,21 +97,17 @@ public class CreateNewPlante extends JDialog{
 		panel1.add(buttonsPanel1);
 		
 		//Définition des listeners des boutons
-		next1.addActionListener(e -> {if(nameField.getText().isEmpty()||latinNameField.getText().isEmpty()||(!tailleFinaleField.getClass().isPrimitive())) {
-									  	JOptionPane.showMessageDialog(
-									  	panel1,
-									  	"Un des champs est mal rempli",
-									  	"Erreur",
-									  	JOptionPane.ERROR_MESSAGE);
-									  } else {
-										  this.nom = nameField.getText();
+		next1.addActionListener(e -> {    this.nom = nameField.getText();
 										  this.nomLatin = latinNameField.getText();
 										  this.description = descArea.getText();
-										  this.tailleFinale = new Integer(tailleFinaleField.getText());
+										  if(tailleFinaleField.getText().isEmpty()){
+											  this.tailleFinale = 0;
+										  }else{
+											  this.tailleFinale = Integer.parseInt(tailleFinaleField.getText());
+										  }
 										  CreateNewPlante.this.showPanel("panel2");
-									  }
-									  
-		});
+									  }									  
+		);
 		annul1.addActionListener(e -> {
 			CreateNewPlante.this.setVisible(false);
 			CreateNewPlante.this.dispose();
@@ -164,20 +169,26 @@ public class CreateNewPlante extends JDialog{
 		
 		//Création du troisième panel
 		panel3 = new JPanel();
-		JLabel dateFloraison = new JLabel("Date de floraison");
+		JLabel datesFloraison = new JLabel("Date de floraison");
 		JPanel sousPanel1 = new JPanel();
+		JLabel dateDebutFloraison = new JLabel("Date de début de la floraison"); 
 		JTextField dateFloraisonField1 = new JTextField("jj/mm");
 		dateFloraisonField1.setColumns(4);
+		JPanel sousPanel4 = new JPanel();
+		JLabel dateFinFloraison = new JLabel("Date de fin de la floraison"); 
 		JTextField dateFloraisonField2 = new JTextField("jj/mm");
 		dateFloraisonField2.setColumns(4);
-		JButton ajouterDatesFloraisons = new JButton("Ajouter");
+		//Bouton pour ajouter une date à la liste
+		//JButton ajouterDatesFloraisons = new JButton("Ajouter");
+		sousPanel1.add(dateDebutFloraison);
 		sousPanel1.add(dateFloraisonField1);
-		sousPanel1.add(dateFloraisonField2);
-		sousPanel1.add(ajouterDatesFloraisons);
+		sousPanel4.add(dateFinFloraison);
+		sousPanel4.add(dateFloraisonField2);
+		//Ajout du bouton pour ajouter une date à la liste au sous panel
+		//sousPanel1.add(ajouterDatesFloraisons);
 		JLabel imageFleurie = new JLabel("Image de la plante lorsqu'elle est en fleur");
 		JPanel sousPanel2 = new JPanel();
 		JTextField imageFleurieField = new JTextField(10);
-		JFileChooser fileChooser = new JFileChooser();
 		JButton fetch = new JButton("Parcourir");
 		sousPanel2.add(imageFleurieField);
 		sousPanel2.add(fetch);
@@ -196,8 +207,9 @@ public class CreateNewPlante extends JDialog{
 		
 		panel3.setLayout(new BoxLayout(panel3, BoxLayout.Y_AXIS));
 		
-		panel3.add(dateFloraison);
+		panel3.add(datesFloraison);
 		panel3.add(sousPanel1);
+		panel3.add(sousPanel4);
 		panel3.add(imageFleurie);
 		panel3.add(sousPanel2);
 		panel3.add(sousPanel3);
@@ -214,17 +226,14 @@ public class CreateNewPlante extends JDialog{
 			    dateFloraisonField2.setText("");  
 			 }
 		});
-		ajouterDatesFloraisons.addActionListener(e -> {SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
-													   try {
-													   this.debutFloraison = new Date(sdf.parse(dateFloraisonField1.getText()).getTime());
-													   this.finFloraison = new Date(sdf.parse(dateFloraisonField2.getText()).getTime());
-													   } catch (Exception e1) {
-														   e1.printStackTrace();
-													   }
-		});
-		fetch.addActionListener(e -> fileChooser.showOpenDialog(panel3)); 
-		couleurPasFleurieButton.addActionListener(e -> this.couleurNonFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante non-fleurie", Color.WHITE));
-		couleurFleurieButton.addActionListener(e -> this.couleurFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante fleurie", Color.WHITE));
+		//Listener du bouton pour ajouter une date à la liste
+		//ajouterDatesFloraisons.addActionListener(e -> {});
+		JFileChooser fileChooser = new JFileChooser();
+		fetch.addActionListener(e -> {fileChooser.showOpenDialog(panel3);
+									  imageFleurieField.setText(fileChooser.getName(fileChooser.getSelectedFile()));
+		}); 
+		couleurPasFleurieButton.addActionListener(e -> this.couleurNonFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante non-fleurie", this.couleurNonFleurie));
+		couleurFleurieButton.addActionListener(e -> this.couleurFleurie = JColorChooser.showDialog(panel3, "Choisissez la couleur pour la plante fleurie", this.couleurFleurie));
 		previous3.addActionListener(e -> CreateNewPlante.this.showPanel("panel2"));
 		annul3.addActionListener(e -> {
 			CreateNewPlante.this.setVisible(false);
@@ -233,8 +242,35 @@ public class CreateNewPlante extends JDialog{
 		finish.addActionListener(e -> {
 			CreateNewPlante.this.setVisible(false);
 			CreateNewPlante.this.dispose();
-			this.finished = true;
-			this.imageFleurie = imageFleurieField.getText();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
+			try {
+				this.debutFloraison = new Date(sdf.parse(dateFloraisonField1.getText()).getTime());
+				this.finFloraison = new Date(sdf.parse(dateFloraisonField2.getText()).getTime());
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}	
+			this.imageFleurie = imageFleurieField.getText();			
+			Date datePlantation = new Date((long) 0);
+			try {
+				datePlantation = new Date(sdf.parse("02/10").getTime());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			this.p = new Plante(this.tailleFinale, this.debutFloraison, this.finFloraison, datePlantation, this.couleurFleurie, this.couleurNonFleurie, this.vivace, this.nom, this.nomLatin, new ImageIcon(this.imageFleurie), this.typePlante, this.ensoleillement, this.typeSol, this.description);
+			System.out.print("Nom de la plante : " + this.p.getNom());
+			AccesBD.getInstance().insertPlante(this.p);
+			
+			/*Image img = this.p.getImgFleurie().getImage();
+			BufferedImage bi = new BufferedImage(img.getWidth(null),img.getHeight(null),BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g2 = bi.createGraphics();
+			g2.drawImage(img, 0, 0, null);
+			g2.dispose();
+			try {
+				ImageIO.write(bi, "png", new File("./res/img" + this.p.getNom() + ".png"));
+			} catch (IOException eI) {
+				eI.printStackTrace();
+			}*/
+			
 		});
 		
 		//Ajout du troisième panel au JDialog		
@@ -255,20 +291,11 @@ public class CreateNewPlante extends JDialog{
 	 */
 	public static Plante showCreateNewPlante() {
 		CreateNewPlante cnp = new CreateNewPlante();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm");
-		Date datePlantation = new Date((long) 0);
-		try {
-			datePlantation = new Date(sdf.parse("02/10").getTime());
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		if(cnp.finished) {
-			cnp.p = new Plante(cnp.tailleFinale, cnp.debutFloraison, cnp.finFloraison, datePlantation, cnp.couleurFleurie, cnp.couleurNonFleurie, cnp.vivace, cnp.nom, cnp.nomLatin, new ImageIcon(cnp.imageFleurie), cnp.typePlante, cnp.ensoleillement, cnp.typeSol, cnp.description);
-		}
+		System.out.print(cnp.p.getNom());
 		return cnp.p;
 	}
 	
 	public static void main(String[] args) {
-		new CreateNewPlante();
+		CreateNewPlante cnp = new CreateNewPlante();	
 	}
 }
