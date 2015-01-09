@@ -116,7 +116,7 @@ public class MenuBar extends JMenuBar {
 			int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance(), "Supprimer Jardin");
 			if (jardin != -1) {				
 				MainFrame instance = MainFrame.getInstance();
-				if(jardin == instance.getJardinPanel().getJardin().getId()){
+				if(instance.getJardinPanel().getJardin() != null && jardin ==instance.getJardinPanel().getJardin().getId()){
 					instance.getJardinPanel().setJardin(null);
 					MenuBar.this.enableItems(false);
 					instance.setTitle(MainFrame.defaultTitle);
