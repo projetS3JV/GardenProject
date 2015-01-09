@@ -33,7 +33,7 @@ public class OutilPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode traçage de zone
-				MainFrame.getInstance().getJardinPanel().startDrawing();
+				MainFrame.getInstance().getJardinPanel().startDrawing(false);
 			}
 		});
 		

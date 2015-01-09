@@ -37,6 +37,7 @@ public class JardinPanel extends JPanel{
 	private int px, py, tx, ty;
 	private AbstractZone selected = null;
 	private AccesBD bd = AccesBD.getInstance();
+	private boolean plantable = false;
 
 
 	public JardinPanel(Jardin j) {
@@ -164,26 +165,37 @@ public class JardinPanel extends JPanel{
 		this.repaint();
 	}
 	
-	public void startDrawing() {
+	public void startDrawing(boolean plantable) {
 		this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		this.draw = true;
+		this.plantable = plantable;
 	}
+	
 	
 	@Deprecated
 	public AbstractZone getZone() {
 		if (draw) return null; 
 		return zone;
 	}
-	
+
 	private void saveZone(AbstractZone z) {
 		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
 		Zone zone = new Zone(z);
-		jardin.addZone(zone);
+		jardin.addZone(zone);	
 		if (jardin.getId() != -1)
 			bd.insertZone(zone, jardin.getId());
 		this.repaint();
 	}
 	
+	private void saveZonePlantable(AbstractZone z) {
+		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
+		Zone zone = new Zone(z);
+		jardin.addZone(zone);	
+		if (jardin.getId() != -1)
+			bd.insertZone(zone, jardin.getId());
+		this.repaint();
+	}
+
 	public void deleteSelected() {
 		this.jardin.deleteZone((Zone)this.selected);
 		this.bd.deleteZone((Zone)this.selected);
