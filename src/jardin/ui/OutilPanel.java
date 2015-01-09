@@ -1,5 +1,7 @@
 package jardin.ui;
 
+import jardin.plante.Plante;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,7 @@ public class OutilPanel extends JPanel{
 	//private PlantothequePanel plantothequePanel= new PlantothequePanel();
 	
 	private JButton tracer = new JButton(new ImageIcon("res/img/tracer.gif"));
+	private JButton tracerP = new JButton(new ImageIcon("res/img/tracerP.gif"));
 	private JButton effacer = new JButton(new ImageIcon("res/img/effacer.gif"));
 	public OutilPanel(){
 		super();
@@ -37,6 +40,14 @@ public class OutilPanel extends JPanel{
 			}
 		});
 		
+		this.tracerP.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//lancer méthode traçage de zone
+				MainFrame.getInstance().getJardinPanel().startDrawing(true);
+			}
+		});
+		
 		this.effacer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -44,6 +55,7 @@ public class OutilPanel extends JPanel{
 			}
 		});
 		outils.add(this.tracer);
+		outils.add(this.tracerP);
 		outils.add(this.effacer);
 
 		outilsMiseEnPage.add(outils);
@@ -52,9 +64,6 @@ public class OutilPanel extends JPanel{
 		this.tracer.setEnabled(false);
 		this.effacer.setEnabled(false);
 		//this.outilsPanel
-
-		
-		
 	}
 	
 	public void enableItems() {
