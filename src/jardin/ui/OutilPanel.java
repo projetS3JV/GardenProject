@@ -40,7 +40,7 @@ public class OutilPanel extends JPanel{
 		this.effacer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//lancer méthode pour effacer une zone
+				MainFrame.getInstance().getJardinPanel().deleteSelected();
 			}
 		});
 		outils.add(this.tracer);

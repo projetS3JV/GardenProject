@@ -184,5 +184,11 @@ public class JardinPanel extends JPanel{
 		this.repaint();
 	}
 	
+	public void deleteSelected() {
+		this.jardin.deleteZone((Zone)this.selected);
+		this.bd.deleteZone((Zone)this.selected);
+		repaint();
+	}
+	
 
 }
