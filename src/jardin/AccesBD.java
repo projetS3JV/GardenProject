@@ -416,6 +416,7 @@ public final class AccesBD {
 	 */
 	public void deleteJardin(int idJardin) {
 		String sql = "DELETE FROM JARDIN WHERE id =" + idJardin;
+		Jardin j = getJardin(idJardin);
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.executeUpdate();
