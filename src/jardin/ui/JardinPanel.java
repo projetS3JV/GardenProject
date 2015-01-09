@@ -161,7 +161,10 @@ public class JardinPanel extends JPanel{
 	
 	public void setJardin(Jardin j) {
 		this.jardin = j;
-		this.setBackground(Color.WHITE);
+		if (this.jardin == null)
+			this.setBackground(Color.GRAY);
+		else
+			this.setBackground(Color.WHITE);
 		this.repaint();
 	}
 	
@@ -189,10 +192,12 @@ public class JardinPanel extends JPanel{
 	
 	private void saveZonePlantable(AbstractZone z) {
 		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
-		Zone zone = new Zone(z);
-		jardin.addZone(zone);	
+		int sol = new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?"));
+		ZonePlantable zone = new ZonePlantable(z,sol);
+		Zone supZone = (Zone) jardin.getZone(z.xpoints[0], z.ypoints[0]);
+		supZone.addZone(zone);
 		if (jardin.getId() != -1)
-			bd.insertZone(zone, jardin.getId());
+			bd.insertZonePlantable(zone, supZone.getId());
 		this.repaint();
 	}
 
