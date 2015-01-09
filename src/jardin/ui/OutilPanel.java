@@ -1,7 +1,5 @@
 package jardin.ui;
 
-import jardin.plante.Plante;
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -61,13 +59,13 @@ public class OutilPanel extends JPanel{
 		outilsMiseEnPage.add(outils);
 		this.add(outilsMiseEnPage);
 		
-		this.tracer.setEnabled(false);
-		this.effacer.setEnabled(false);
+		this.enableItems(false);
 		//this.outilsPanel
 	}
 	
-	public void enableItems() {
-		this.tracer.setEnabled(true);
-		this.effacer.setEnabled(true);
+	public void enableItems(boolean b) {
+		this.tracer.setEnabled(b);
+		this.tracerP.setEnabled(b);
+		this.effacer.setEnabled(b);
 	}
 }

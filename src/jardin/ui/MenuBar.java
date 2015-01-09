@@ -53,7 +53,7 @@ public class MenuBar extends JMenuBar {
 				//lancer méthode création de nouveau jardin
 				if (values != null) {
 					MainFrame.getInstance().getJardinPanel().setJardin(new Jardin(values[0], Integer.parseInt(values[1]), Integer.parseInt(values[2])));
-					MenuBar.this.enableItems();
+					MenuBar.this.enableItems(true);
 				}
 			}
 		});
@@ -87,12 +87,12 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode ouverture de jardin
-				int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance());
+				int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance(), "Ouvrir jardin");
 				if (jardin != -1) {
 					Jardin j = AccesBD.getInstance().getJardin(jardin);
 					MainFrame instance = MainFrame.getInstance();
 					instance.getJardinPanel().setJardin(j);
-					MenuBar.this.enableItems();
+					MenuBar.this.enableItems(true);
 					instance.setTitle(instance.getTitle() + " : " + j.getName());
 				}
 			}
@@ -105,10 +105,23 @@ public class MenuBar extends JMenuBar {
 				JFileChooser fileChooser = new JFileChooser();
 				int reponse = fileChooser.showOpenDialog(MenuBar.this);
 				if (reponse == JFileChooser.APPROVE_OPTION) {
-					// TODO
 					JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
 					//lancer méthode pour changer le fond du jardin par l'image fileChooser.getSelectedFile();
 				}
+			}
+		});
+		
+		JMenuItem supprimerJardin = new JMenuItem("Supprimer jardin");
+		supprimerJardin.addActionListener(e -> {
+			int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance(), "Supprimer Jardin");
+			if (jardin != -1) {				
+				MainFrame instance = MainFrame.getInstance();
+				if(jardin == instance.getJardinPanel().getJardin().getId()){
+					instance.getJardinPanel().setJardin(null);
+					MenuBar.this.enableItems(false);
+					instance.setTitle(MainFrame.defaultTitle);
+				}
+				AccesBD.getInstance().deleteJardin(jardin);
 			}
 		});
 		
@@ -122,6 +135,8 @@ public class MenuBar extends JMenuBar {
 		fichier.add(new JSeparator());
 		fichier.add(ouvrirJardin);
 		fichier.add(importImage);
+		fichier.add(new JSeparator());
+		fichier.add(supprimerJardin);
 		fichier.add(new JSeparator());
 		fichier.add(quitter);
 		this.add(fichier);
@@ -171,7 +186,7 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode traçage de zone
-				MainFrame.getInstance().getJardinPanel().startDrawing();
+				MainFrame.getInstance().getJardinPanel().startDrawing(true);
 			}
 		});
 		tracer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
@@ -250,13 +265,13 @@ public class MenuBar extends JMenuBar {
 	/**
 	 * Methode pour pouvoir utiliser les items de menus
 	 */
-	private void enableItems() {
-		this.annuler.setEnabled(true);
-		this.enregistrer.setEnabled(true);
-		this.refaire.setEnabled(true);
-		this.selectionnerTout.setEnabled(true);
-		this.supprimer.setEnabled(true);
-		this.tracer.setEnabled(true);
-		MainFrame.getInstance().getOutilPanel().enableItems();
+	private void enableItems(boolean b) {
+		this.annuler.setEnabled(b);
+		this.enregistrer.setEnabled(b);
+		this.refaire.setEnabled(b);
+		this.selectionnerTout.setEnabled(b);
+		this.supprimer.setEnabled(b);
+		this.tracer.setEnabled(b);
+		MainFrame.getInstance().getOutilPanel().enableItems(b);
 	}
 }

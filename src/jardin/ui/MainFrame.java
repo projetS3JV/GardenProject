@@ -19,6 +19,7 @@ public class MainFrame extends JFrame{
 	private CalendarPanel calendarPanel  = new CalendarPanel();
 	private MenuBar menuBar = new MenuBar();
 	private static MainFrame instance = null;
+	public static final String defaultTitle = "Jardin Virtuel";
 	
 	private MainFrame(){
 		super();
@@ -26,7 +27,7 @@ public class MainFrame extends JFrame{
 		AccesBD.getInstance();
 		this.setSize(1270, 850);
 		this.setResizable(false);
-		this.setTitle("Jardin Virtuel");
+		this.setTitle(defaultTitle);
 		// Fermeture propre de la fenetre pour pouvoir fermer la base de données
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
