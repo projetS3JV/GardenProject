@@ -35,6 +35,8 @@ public final class AccesBD {
 	private Connection connection;
 	private Statement statement;
 	private SortedListModel planteList;
+	private String path = "/res/img";
+	private String ext = ".png";
 
 	private AccesBD() {
 		this.planteList = new SortedListModel();
@@ -155,7 +157,7 @@ public final class AccesBD {
 						rs.getBoolean(14),
 						rs.getString(2),
 						rs.getString(3),
-						new ImageIcon("/res/img/" + rs.getString(7) + ".png"), 
+						new ImageIcon(path + rs.getString(7) + ext), 
 						TypePlante.values()[rs.getInt(4)], 
 						Ensoleillement.values()[rs.getInt(6)],
 						TypeSol.values()[rs.getInt(10)],
