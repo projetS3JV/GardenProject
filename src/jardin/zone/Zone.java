@@ -56,8 +56,9 @@ public class Zone extends AbstractZone{
 		for(int i = 0; i < this.xpoints.length; i++) {
 			
 			// Si un point est en dehors de la zone, on lance une exception
-			if (!this.contains(zone.xpoints[i], zone.ypoints[i]))
+			if (!this.contains(zone.xpoints[i], zone.ypoints[i])) {
 				throw new IllegalArgumentException("La zone à ajouter ne doit pas dépasser la zone courante");
+			}
 		}
 		
 		//ajout de la zone et mise a jour de l'ensoleillement
