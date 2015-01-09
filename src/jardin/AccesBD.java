@@ -409,6 +409,23 @@ public final class AccesBD {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Supprime un jardin de la base de données
+	 * @param id l'identifiant du jardin a supprimer
+	 */
+	public void deleteJardin(int idJardin) {
+		String sql = "DELETE FROM JARDIN WHERE id =" + idJardin;
+		try {
+			PreparedStatement stat = this.connection.prepareStatement(sql);
+			stat.executeUpdate();
+			for(Zone zone : j.getZones()){
+				deleteZone(zone);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public Plante getPlante(int id) throws IllegalArgumentException{
 		return this.planteList.getElementById(id);
