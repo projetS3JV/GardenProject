@@ -75,7 +75,7 @@ public class PlantothequePanel extends JPanel {
 		JFrame frame = new JFrame();
 		PlantothequePanel p = new PlantothequePanel();
 		frame.add(p);
-		p.setVisible(true);
+		frame.setVisible(true);
 	}
 	
 }
