@@ -2,6 +2,7 @@ package jardin.ui;
 
 import jardin.AccesBD;
 import jardin.Jardin;
+import jardin.plante.Plante;
 import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
 import jardin.zone.ZonePlantable;
@@ -14,13 +15,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.accessibility.AccessibleBundle;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import sun.tools.jar.resources.jar;
 
 /**
  * 
@@ -205,6 +201,12 @@ public class JardinPanel extends JPanel{
 		this.jardin.deleteZone((Zone)this.selected);
 		this.bd.deleteZone((Zone)this.selected);
 		repaint();
+	}
+	
+	public void setPlante(Plante p) {
+		if (this.selected instanceof ZonePlantable) {
+			((ZonePlantable) this.selected).setPlante(p);
+		}
 	}
 	
 
