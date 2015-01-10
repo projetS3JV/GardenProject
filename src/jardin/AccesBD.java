@@ -204,7 +204,10 @@ public final class AccesBD {
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
-			stat.setInt(1,z.getPlante().getId());
+			if (z.getPlante().getId() == -1)
+				stat.setNull(1,Types.NULL);
+			else
+				stat.setInt(1,z.getPlante().getId());
 			stat.setInt(2, idZone); 
 			stat.setArray(3,intArrayToJDBXArray(z.xpoints,z.npoints));
 			stat.setArray(4,intArrayToJDBXArray(z.ypoints,z.npoints));
