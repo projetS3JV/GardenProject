@@ -14,4 +14,13 @@ public enum Ensoleillement {
         return value;
     }
     
+    public static String getEnsoleillement(int type) {
+    	if (type == 0) {
+    		return "SOLEIL";
+    	} else if (type == 1) {
+    		return "MIOMBRE";
+    	}
+    	return "OMBRE";
+    }
+    
 }

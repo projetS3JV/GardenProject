@@ -1,5 +1,6 @@
 package jardin.ui;
 
+import jardin.Ensoleillement;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.zone.AbstractZone;
@@ -130,6 +131,8 @@ public class OutilPanel extends JPanel{
 					this.plante.setText("Plante : none");
 				}
 			}
+			this.ensoleillement.setText("Ensoleillement : " + Ensoleillement.getEnsoleillement(z.getEnsoleillement()));
+			
 		} else { // sinon la zone est nulle
 			this.zonePanel.setVisible(false);
 		}
