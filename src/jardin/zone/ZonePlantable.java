@@ -1,6 +1,5 @@
 package jardin.zone;
 
-import jardin.TypeSol;
 import jardin.plante.Plante;
 
 public class ZonePlantable extends AbstractZone {
