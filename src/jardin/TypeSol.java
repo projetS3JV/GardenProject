@@ -17,14 +17,13 @@ public enum TypeSol {
     public static String getTypeSol(int type) {
     	if (type == 0) {
     		return "ARGILEUX";
-    	} else if (type == 0) {
+    	} else if (type == 1) {
     		return "CALCAIRE";
-    	} else if (type == 0) {
+    	} else if (type == 2) {
     		return "HULIFERE";
-    	} else if (type == 0) {
+    	} else if (type == 3) {
     		return "LIMONEUX";
     	}
-    	
     	return "SABLEUX";
     }
 }
