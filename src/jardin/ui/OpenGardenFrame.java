@@ -23,7 +23,7 @@ public class OpenGardenFrame extends JDialog{
 	/** L'indice du jardin selectionné */
 	private int selected = -1;
 	
-	private OpenGardenFrame(JFrame frame, String titre) {
+	private OpenGardenFrame(JFrame frame, String titre, String action) {
 		super(frame, titre, true);
 		this.setSize(250, 230);
 		this.setResizable(false);
@@ -42,7 +42,7 @@ public class OpenGardenFrame extends JDialog{
 		
 		JPanel resultPanel = new JPanel();
 		JButton annuler = new JButton("Annuler");
-		JButton ouvrir = new JButton("Ouvrir");
+		JButton ouvrir = new JButton(action);
 		
 		
 		annuler.addActionListener(e -> {
@@ -79,8 +79,8 @@ public class OpenGardenFrame extends JDialog{
 	 * @param owner
 	 * @return
 	 */
-	public static int showOpenGardenFrame(JFrame owner, String titre) {
-		OpenGardenFrame openGarden = new OpenGardenFrame(owner, titre);
+	public static int showOpenGardenFrame(JFrame owner, String titre, String action) {
+		OpenGardenFrame openGarden = new OpenGardenFrame(owner, titre, action);
 		return openGarden.selected;
 	}
 

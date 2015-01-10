@@ -29,11 +29,13 @@ public class OutilPanel extends JPanel{
 	private JButton effacer = new JButton(new ImageIcon("res/img/effacer.gif"));
 	
 	private JPanel zonePanel = new JPanel();
-	JLabel typeZone = new JLabel("coucou");
-	JLabel ensoleillement = new JLabel();	
-	JLabel typeSol = new JLabel();
-	JLabel plante = new JLabel();
-	JButton change = new JButton("modifier");
+	private JLabel typeZone = new JLabel();
+	private JLabel ensoleillement = new JLabel();	
+	private JLabel typeSol = new JLabel();
+	private JLabel plante = new JLabel();
+	private JButton change = new JButton("modifier");
+	
+	private AbstractZone selected;
 	
 	public OutilPanel(){
 		super();
@@ -86,6 +88,7 @@ public class OutilPanel extends JPanel{
 		
 		change.addActionListener(e->{
 			EditZoneFrame.showEditZoneFrame(MainFrame.getInstance());
+			OutilPanel.this.updateZonePanel(selected);
 		});
 
 		outilsMiseEnPage.add(outils);
@@ -108,7 +111,7 @@ public class OutilPanel extends JPanel{
 	 * @param z la zonesélectionné. Peut etre a null, dans ce cas le panel ne sera pas rendu.
 	 */
 	public void updateZonePanel(AbstractZone z) {
-		
+		selected = z;
 		boolean b = z == null;
 		this.zonePanel.setVisible(b);
 		
@@ -136,6 +139,5 @@ public class OutilPanel extends JPanel{
 		} else { // sinon la zone est nulle
 			this.zonePanel.setVisible(false);
 		}
-		
 	}
 }
