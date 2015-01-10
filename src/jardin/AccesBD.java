@@ -518,17 +518,17 @@ public final class AccesBD {
 		AccesBD bd = AccesBD.getInstance();
 		Plante p = new Plante(10, new Date(datee(2010, Calendar.FEBRUARY, 17)),
 				new Date(datee(2012, Calendar.AUGUST, 18)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.green, true,
-				"popol", "popolus patatus", new ImageIcon("/res/img/popol.png"), TypePlante.FLEUR,
+				"popolBleu", "popolus patatus", new ImageIcon("/res/img/popol.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
 				"c'est une zolie fleur");
 		Plante p2 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
-				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.green, true,
-				"ftb", "ftbus", new ImageIcon("/res/img/test.png"), TypePlante.FLEUR,
+				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.red, Color.green, true,
+				"ftbRouge", "ftbus", new ImageIcon("/res/img/test.png"), TypePlante.FLEUR,
 				Ensoleillement.OMBRE, TypeSol.SABLEUX,
 				"c'est une fleur");
 		Plante p3 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
 				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.green, Color.green, false,
-				"builson", "builsonus", new ImageIcon("/res/img/test.png"), TypePlante.BUISSON,
+				"builsonVert", "builsonus", new ImageIcon("/res/img/test.png"), TypePlante.BUISSON,
 				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
 				"buisson");
 		bd.insertPlante(p);
