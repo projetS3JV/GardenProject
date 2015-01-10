@@ -57,7 +57,7 @@ public class Zone extends AbstractZone{
 			
 			// Si un point est en dehors de la zone, on lance une exception
 			if (!this.contains(zone.xpoints[i], zone.ypoints[i])) {
-				throw new IllegalArgumentException("La zone à ajouter ne doit pas dépasser la zone courante");
+				//throw new IllegalArgumentException("La zone à ajouter ne doit pas dépasser la zone courante");
 			}
 		}
 		

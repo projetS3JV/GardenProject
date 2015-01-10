@@ -22,6 +22,8 @@ public class OutilPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
+	private AbstractZone currentZone;
+	
 	private JButton tracer = new JButton(new ImageIcon("res/img/tracer.gif"));
 	private JButton tracerP = new JButton(new ImageIcon("res/img/tracerP.gif"));
 	private JButton effacer = new JButton(new ImageIcon("res/img/effacer.gif"));
@@ -83,7 +85,7 @@ public class OutilPanel extends JPanel{
 		zonePanel.setVisible(false);
 		
 		change.addActionListener(e->{
-			//TODO action a implementer
+			EditZoneFrame.showEditZoneFrame(MainFrame.getInstance(), currentZone);
 		});
 
 		outilsMiseEnPage.add(outils);
@@ -106,6 +108,7 @@ public class OutilPanel extends JPanel{
 	 * @param z la zonesélectionné. Peut etre a null, dans ce cas le panel ne sera pas rendu.
 	 */
 	public void updateZonePanel(AbstractZone z) {
+		
 		boolean b = z == null;
 		this.zonePanel.setVisible(b);
 		
