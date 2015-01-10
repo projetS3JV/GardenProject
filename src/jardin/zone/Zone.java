@@ -53,7 +53,7 @@ public class Zone extends AbstractZone{
 		
 		//verification si  la zone peut etre ajouter		
 		//Si les points sonts dans la zone
-		for(int i = 0; i < this.xpoints.length; i++) {
+		for(int i = 0; i < zone.xpoints.length; i++) {
 			
 			// Si un point est en dehors de la zone, on lance une exception
 			if (!this.contains(zone.xpoints[i], zone.ypoints[i])) {
