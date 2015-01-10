@@ -378,16 +378,17 @@ public final class AccesBD {
 	}
 
 	public void deleteZone(Zone z) {
+		for (AbstractZone zone : z.getZones()) {
+			if (zone instanceof Zone)
+				deleteZone((Zone) zone);
+			else
+				deleteZonePlantable( (ZonePlantable) zone);
+		}
 		String sql = "DELETE FROM ZONE WHERE id =" + z.getId();
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.executeUpdate();
-			for (AbstractZone zone : z.getZones()) {
-				if (zone instanceof Zone)
-					deleteZone((Zone) zone);
-				else
-					deleteZonePlantable( (ZonePlantable) zone);
-			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -422,14 +423,16 @@ public final class AccesBD {
 	 * @param id l'identifiant du jardin a supprimer
 	 */
 	public void deleteJardin(int idJardin) {
-		String sql = "DELETE FROM JARDIN WHERE id =" + idJardin;
 		Jardin j = getJardin(idJardin);
+		for(Zone zone : j.getZones()){
+			deleteZone(zone);
+		}
+
+		String sql = "DELETE FROM JARDIN WHERE id =" + idJardin;
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.executeUpdate();
-			for(Zone zone : j.getZones()){
-				deleteZone(zone);
-			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
