@@ -34,7 +34,7 @@ public class PlantothequePanel extends JPanel {
 		listePlante = new JList<Plante>(modelList);
 		listePlante.setCellRenderer(new PlantePanel());
 		this.add(new JScrollPane(this.listePlante));
-		
+
 		JLabel research = new JLabel("Rechercher :");
 		
 		JLabel nom = new JLabel("Nom :");
@@ -80,7 +80,7 @@ public class PlantothequePanel extends JPanel {
 	}
 	
 	public Plante getSelected() {
-		return this.select;
+		return (Plante) this.listePlante.getSelectedValue();
 	}
 	
 	public static void main(String arg[]) {

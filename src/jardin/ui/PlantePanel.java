@@ -32,12 +32,13 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
+		Plante p = (Plante) value; //res/img/test.png
+		
 		if (isSelected)
 			this.setBackground(list.getSelectionBackground());
 		else 
 			this.setBackground(Color.WHITE);
 		
-		Plante p = (Plante) value; //res/img/test.png
 		ImageIcon img = p.getImgFleurie();
 		this.name.setText(p.getNom() + " / " + p.getNomL());
 		this.desc.setText("Description : " + p.getDescription());
