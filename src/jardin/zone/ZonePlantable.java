@@ -7,7 +7,7 @@ public class ZonePlantable extends AbstractZone {
 
 
 	private static final long serialVersionUID = 0L;
-	private Plante plante;
+	private Plante plante = null;
 	private int typeSol;
 	
 	/**

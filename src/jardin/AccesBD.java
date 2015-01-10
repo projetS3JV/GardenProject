@@ -486,7 +486,8 @@ public final class AccesBD {
 				int[] x = JDBCArrayTointArray(rs.getArray(4));
 				int[] y = JDBCArrayTointArray(rs.getArray(5));
 				z.setId(rs.getInt(1));
-				z.setPlante(this.getPlante(rs.getInt(2)));
+				if (rs.getInt(2) != Types.NULL)
+					z.setPlante(this.getPlante(rs.getInt(2)));
 				for (int i = 0 ; i < x.length ; i++)
 					z.addPoint(x[i], y[i]);
 				zones.add(z);
