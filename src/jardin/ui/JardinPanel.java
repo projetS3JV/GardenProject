@@ -171,12 +171,13 @@ public class JardinPanel extends JPanel{
 			g.drawPolygon(zone);
 			if (zone.getPlante() != null) {
 				cal = MainFrame.getInstance().getCalendarPanel();
-				if (zone.getPlante().getDateFloraison().compareTo(cal.getDate()) < 0 && zone.getPlante().getDateFinFloraison().compareTo(cal.getDate()) > 0) {
+				//System.out.print(zone.getPlante().getDateFloraison().compareTo(cal.getDate()) < 0);
+				//if (zone.getPlante().getDateFloraison().compareTo(cal.getDate()) < 0 && zone.getPlante().getDateFinFloraison().compareTo(cal.getDate()) > 0) {
 					g.setColor(zone.getPlante().getCouleur_en_fleur());			
 					g.fillPolygon(zone);
-				}
+				//}
 			}
-		} 
+		}
 		else {
 			Zone zone = (Zone) z;
 			if (selected != null && z.equals(this.selected))

@@ -136,6 +136,7 @@ public class CalendarPanel extends JPanel{
 		private void update(){
 			this.updateDate();
 			this.labelDate.setText(this.texteDate);	
+			MainFrame.getInstance().getJardinPanel().repaint();
 		}
 
 /**
