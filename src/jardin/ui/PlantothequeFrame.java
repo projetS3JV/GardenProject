@@ -33,7 +33,7 @@ public class PlantothequeFrame extends JFrame {
 	
 	public PlantothequeFrame() {
 		this.setResizable(true);
-		this.setSize(400, 400);
+		this.setSize(400, 500);
 		this.setTitle("Plantotheque");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
