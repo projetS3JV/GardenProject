@@ -165,8 +165,6 @@ public final class AccesBD {
 						TypeSol.values()[rs.getInt(10)],
 						rs.getString(15)
 						);
-
-				System.out.println(path + rs.getString(7) + ext);
 				p.setId(rs.getInt(1));
 				this.planteList.add(p);
 			}
