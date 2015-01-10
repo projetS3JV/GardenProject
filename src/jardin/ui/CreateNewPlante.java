@@ -77,7 +77,7 @@ public class CreateNewPlante extends JDialog{
 		//JFormattedTextField nameField1 = new JFormattedTextField(format)
 		JLabel latinName = new JLabel("Nom latin");
 		JTextField latinNameField = new JTextField();
-		JLabel tailleFinale = new JLabel("Taille finale moyenne");
+		JLabel tailleFinale = new JLabel("Taille finale moyenne arrondie (en cm)");
 		JTextField tailleFinaleField = new JTextField();
 		JLabel desc = new JLabel("Description");
 		JTextArea descArea = new JTextArea();
@@ -331,10 +331,9 @@ public class CreateNewPlante extends JDialog{
 
 			if(moisDate1<1 || moisDate2<1 || moisDate1>12 || moisDate2>12){
 				isDatesCorect = false;
-			} else if(moisDate1<moisDate2) {
+			} else if(moisDate1>moisDate2) {
 				isDatesCorect = false;
 			} else {			
-
 				switch (moisDate1) {
 				case 1: case 3: case 5:
 				case 7: case 8: case 10:
@@ -374,11 +373,16 @@ public class CreateNewPlante extends JDialog{
 						isDatesCorect=false;
 					};
 				}
+
 				if(isDatesCorect) {
-					moisDate1--;
-					moisDate2--;
-					this.debutFloraison = new Date(sdf.parse(joursDate1 + "/" + moisDate1).getTime());
-					this.finFloraison = new Date(sdf.parse(joursDate2 + "/" + moisDate2).getTime());
+					if( (moisDate1==moisDate2) && (joursDate1>joursDate2)) {
+						isDatesCorect = false;
+					} else {
+						moisDate1--;
+						moisDate2--;
+						this.debutFloraison = new Date(sdf.parse(joursDate1 + "/" + moisDate1).getTime());
+						this.finFloraison = new Date(sdf.parse(joursDate2 + "/" + moisDate2).getTime());
+					}
 				}
 			}
 		} catch (Exception e2) {
