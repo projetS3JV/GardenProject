@@ -4,8 +4,8 @@ import jardin.plante.Plante;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -37,16 +37,16 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		else 
 			this.setBackground(Color.WHITE);
 		
-		Plante p = (Plante) value; //res/Img/test.png
+		Plante p = (Plante) value; //res/img/test.png
 		ImageIcon img = p.getImgFleurie();
 		this.name.setText(p.getNom() + " / " + p.getNomL());
 		this.desc.setText("Description : " + p.getDescription());
 		
 		//Label contenant l'image de la plante.
 		image.setIcon(img);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(name);
+		this.setLayout(new GridLayout(3,2));
 		this.add(image);
+		this.add(name);
 		this.add(desc);
 		return this;
 	}	

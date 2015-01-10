@@ -35,7 +35,7 @@ public final class AccesBD {
 	private Connection connection;
 	private Statement statement;
 	private SortedListModel planteList;
-	private String path = "/res/img";
+	private String path = "res/img/";
 	private String ext = ".png";
 
 	private AccesBD() {
@@ -163,6 +163,8 @@ public final class AccesBD {
 						TypeSol.values()[rs.getInt(10)],
 						rs.getString(15)
 						);
+
+				System.out.println(path + rs.getString(7) + ext);
 				p.setId(rs.getInt(1));
 				this.planteList.add(p);
 			}
