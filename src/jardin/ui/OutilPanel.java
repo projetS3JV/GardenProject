@@ -72,7 +72,7 @@ public class OutilPanel extends JPanel{
 		outils.add(this.effacer);
 		
 		
-		zonePanel.setLayout(new GridLayout(1, 4));
+		zonePanel.setLayout(new GridLayout(5, 1));
 		typeZone.setFont(getFont().deriveFont(Font.BOLD, 25));
 		
 		zonePanel.add(typeZone);
@@ -82,6 +82,9 @@ public class OutilPanel extends JPanel{
 		zonePanel.add(change);
 		zonePanel.setVisible(false);
 		
+		change.addActionListener(e->{
+			//TODO action a implementer
+		});
 
 		outilsMiseEnPage.add(outils);
 		this.add(outilsMiseEnPage);

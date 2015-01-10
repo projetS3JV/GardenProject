@@ -71,7 +71,7 @@ public class Jardin {
 			((Zone)z).addZone(zone);
 		} else if (z == null) {
 			this.zones.add(zone);
-		} else throw new IllegalArgumentException();
+		} else throw new IllegalArgumentException("impossible d'ajouter une zone plantable directement sans le jardin");
 	}
 	
 	/**
