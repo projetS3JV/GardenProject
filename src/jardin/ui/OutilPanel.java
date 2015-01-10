@@ -89,6 +89,7 @@ public class OutilPanel extends JPanel{
 		change.addActionListener(e->{
 			EditZoneFrame.showEditZoneFrame(MainFrame.getInstance());
 			OutilPanel.this.updateZonePanel(selected);
+			MainFrame.getInstance().getJardinPanel().repaint();
 		});
 
 		outilsMiseEnPage.add(outils);
@@ -131,7 +132,7 @@ public class OutilPanel extends JPanel{
 				if (pl != null) {
 					this.plante.setText("Plante : " + pl.getNom() + " " + pl.getNomL());
 				} else {
-					this.plante.setText("Plante : none");
+					this.plante.setText("Plante : aucune");
 				}
 			}
 			this.ensoleillement.setText("Ensoleillement : " + Ensoleillement.getEnsoleillement(z.getEnsoleillement()));
