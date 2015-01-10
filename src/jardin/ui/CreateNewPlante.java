@@ -36,7 +36,9 @@ import javax.swing.JTextField;
 
 public class CreateNewPlante extends JDialog{
 
-
+	//Le nom du compte est : ProjetS3JV
+	//et le mot de passe est : jvinfs3
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel panel1;
 	private JPanel panel2;
