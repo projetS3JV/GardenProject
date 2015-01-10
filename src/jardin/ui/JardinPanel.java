@@ -35,6 +35,7 @@ public class JardinPanel extends JPanel{
 	private AccesBD bd = AccesBD.getInstance();
 	private boolean plantable = false;
 	private boolean remove = false;
+	private CalendarPanel cal;
 
 
 	public JardinPanel(Jardin j) {
@@ -161,9 +162,13 @@ public class JardinPanel extends JPanel{
 				g.setColor(Color.red);
 			else g.setColor(Color.black);	
 			g.drawPolygon(zone);
-			//if (zone.getPlante().getDateFloraison())
-			g.setColor(zone.getPlante().getCouleur_en_fleur());			
-			g.fillPolygon(zone);
+			if (zone.getPlante() != null) {
+				cal = MainFrame.getInstance().getCalendarPanel();
+				if (zone.getPlante().getDateFloraison().compareTo(cal.getDate()) < 0 && zone.getPlante().getDateFinFloraison().compareTo(cal.getDate()) > 0) {
+					g.setColor(zone.getPlante().getCouleur_en_fleur());			
+					g.fillPolygon(zone);
+				}
+			}
 		} 
 		else {
 			Zone zone = (Zone) z;
