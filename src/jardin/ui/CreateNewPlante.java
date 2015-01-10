@@ -40,6 +40,8 @@ public class CreateNewPlante extends JDialog{
 	//et le mot de passe est : jvinfs3
 	
 	private static final long serialVersionUID = 1L;
+	
+	//Les trois fenêtres pour créer la plante affichées les unes après les autres
 	private JPanel panel1;
 	private JPanel panel2;
 	private JPanel panel3;
@@ -47,6 +49,7 @@ public class CreateNewPlante extends JDialog{
 
 	private Plante p = null;
 
+	//Attributs de la plante
 	private String nom, nomLatin, description, imageFleurie;
 	private int tailleFinale;
 	private TypePlante typePlante;
@@ -55,10 +58,10 @@ public class CreateNewPlante extends JDialog{
 	private boolean vivace;
 	private Date debutFloraison, finFloraison;
 	private Color couleurFleurie, couleurNonFleurie;
+	
+	
 	private boolean couleurFleurieIsNull = true;
 	private boolean couleurNonFleurieIsNull = true;
-
-	private boolean finished = false;
 
 	private CreateNewPlante() {
 
