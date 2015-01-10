@@ -9,6 +9,7 @@ public class ZonePlantable extends AbstractZone {
 	private static final long serialVersionUID = 0L;
 	private Plante plante = null;
 	private int typeSol;
+	private Zone zoneConteneur = null;
 	
 	/**
 	 * Crée une zone plantable vide
@@ -98,6 +99,14 @@ public class ZonePlantable extends AbstractZone {
 		}
 		
 		this.typeSol = nouveau.getValue();
+	}
+	
+	public void setZoneConteneur(Zone zoneConteneur) {
+		this.zoneConteneur = zoneConteneur;
+	}
+	
+	public Zone getZoneConteneur() {
+		return zoneConteneur;
 	}
 	
 }

@@ -62,6 +62,8 @@ public class Zone extends AbstractZone{
 		}
 		
 		//ajout de la zone et mise a jour de l'ensoleillement
+		if (zone instanceof ZonePlantable)
+			((ZonePlantable) zone).setZoneConteneur(this);
 		this.zones.add(zone);
 		zone.ensoleillement = this.ensoleillement;
 	}
