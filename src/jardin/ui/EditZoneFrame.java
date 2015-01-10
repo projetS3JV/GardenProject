@@ -1,7 +1,14 @@
 package jardin.ui;
 
+import jardin.Ensoleillement;
+import jardin.TypeSol;
+import jardin.zone.AbstractZone;
+import jardin.zone.Zone;
+import jardin.zone.ZonePlantable;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,23 +16,43 @@ import javax.swing.JPanel;
 
 public class EditZoneFrame extends JDialog{
 private static final long serialVersionUID = 1L;
-	
-	private String[] res = null;
+
 
 	private EditZoneFrame(JFrame f) {
-		super(f, "ModifierZone", true);
-		this.setSize(230, 200);
+		super(f, "Modifier Zone", true);
+		this.setSize(500, 500);
 		this.setResizable(false);
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		
-		PlantePanel plantes = new PlantePanel();
+		JardinPanel panel = MainFrame.getInstance().getJardinPanel();
+		AbstractZone z = panel.getSelected();
+		
+		PlantothequePanel plantes = new PlantothequePanel();
 		
 		JLabel ensoleillement = new JLabel("Ensoleillement : ");
-		JLabel typeSol = new JLabel(" type de sol : ");
+		JLabel typeSol = new JLabel("Type de sol : ");
 		
+
+		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
+		JComboBox<TypeSol> typeSolComboBox = new JComboBox<>(typeSolBoxItems);
+		
+		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
+		JComboBox<Ensoleillement> ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
+		
+		if (z instanceof Zone) {
+			typeSol.setVisible(false);
+			typeSolComboBox.setVisible(false);
+			plantes.setVisible(false);
+		}
 		
 		JPanel soleilPanel = new JPanel();
 		JPanel solPanel = new JPanel();
+		
+		soleilPanel.add(ensoleillement);
+		soleilPanel.add(ensoleillementComboBox);
+		
+		soleilPanel.add(typeSol);
+		soleilPanel.add(typeSolComboBox);
 		
 		JPanel resultPanel = new JPanel();
 		JButton annuler = new JButton("Annuler");
@@ -38,18 +65,26 @@ private static final long serialVersionUID = 1L;
 			});
 		
 		valider.addActionListener(e -> {
-			if (true) {
+				
+				
+				z.setEnsoleillement(((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue());
+				
+				if (z instanceof ZonePlantable) {
+					ZonePlantable zone = (ZonePlantable) z;
+					zone.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());
+					panel.setPlante(plantes.getSelected());
+				}
 				
 				EditZoneFrame.this.setVisible(false);
 				EditZoneFrame.this.dispose();
-			} else {
-				
-			}
 			});
 		
 		resultPanel.add(annuler);
 		resultPanel.add(valider);
 		
+		this.add(plantes);
+		this.add(soleilPanel);
+		this.add(solPanel);
 		this.add(resultPanel);
 		this.setVisible(true);
 	}	

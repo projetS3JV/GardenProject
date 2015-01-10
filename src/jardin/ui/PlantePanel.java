@@ -57,7 +57,7 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		pRight.add(desc);
 		pRight.setSize(200, 50);
 		
-		this.setLayout(new BordureLayout);
+		//this.setLayout(new BordureLayout);
 		this.add(pLeft);
 		this.add(pRight);
 		return this;

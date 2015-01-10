@@ -93,12 +93,12 @@ public class ZonePlantable extends AbstractZone {
 	 * @param nouveau le nouveau type de sol
 	 * @throws IllegalArgumentException si c'est impossible
 	 */
-	public void setTypeSol(TypeSol nouveau) throws IllegalArgumentException {
-		if (this.plante != null && !nouveau.equals(this.plante.getTypeSol())) {
+	public void setTypeSol(int nouveau) throws IllegalArgumentException {
+		if (this.plante != null && nouveau != this.plante.getTypeSol()) {
 			throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
 		}
 		
-		this.typeSol = nouveau.getValue();
+		this.typeSol = nouveau;
 	}
 	
 	public void setZoneConteneur(Zone zoneConteneur) {
