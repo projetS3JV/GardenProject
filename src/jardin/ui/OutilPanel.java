@@ -21,8 +21,7 @@ import javax.swing.JPanel;
 public class OutilPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	
-	private AbstractZone currentZone;
+
 	
 	private JButton tracer = new JButton(new ImageIcon("res/img/tracer.gif"));
 	private JButton tracerP = new JButton(new ImageIcon("res/img/tracerP.gif"));
@@ -85,7 +84,7 @@ public class OutilPanel extends JPanel{
 		zonePanel.setVisible(false);
 		
 		change.addActionListener(e->{
-			EditZoneFrame.showEditZoneFrame(MainFrame.getInstance(), currentZone);
+			EditZoneFrame.showEditZoneFrame(MainFrame.getInstance());
 		});
 
 		outilsMiseEnPage.add(outils);
