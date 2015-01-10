@@ -6,20 +6,16 @@ import jardin.SortedListModel;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
-import jardin.zone.AbstractZone;
-import jardin.zone.ZonePlantable;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class PlantothequePanel extends JPanel {
@@ -34,9 +30,12 @@ public class PlantothequePanel extends JPanel {
 		this.setSize(400, 400);
 		this.setLayout(new BorderLayout());
 		
-		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
-JLabel research = new JLabel("Rechercher :");
+		listePlante = new JList<Plante>(modelList);
+		listePlante.setCellRenderer(new PlantePanel());
+		this.add(new JScrollPane(this.listePlante));
+		
+		JLabel research = new JLabel("Rechercher :");
 		
 		JLabel nom = new JLabel("Nom :");
 		JTextField nomF = new JTextField();
@@ -71,8 +70,6 @@ JLabel research = new JLabel("Rechercher :");
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
 		
 		this.add(form, BorderLayout.SOUTH);
-		
-		//this.pack();
 	}
 	
 	/**
@@ -88,6 +85,11 @@ JLabel research = new JLabel("Rechercher :");
 	
 	public static void main(String arg[]) {
 		JFrame frame = new JFrame();
+		frame.setResizable(false);
+		frame.setSize(400, 500);
+		frame.setTitle("Plantotheque");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
 		PlantothequePanel p = new PlantothequePanel();
 		frame.add(p);
 		frame.setVisible(true);
