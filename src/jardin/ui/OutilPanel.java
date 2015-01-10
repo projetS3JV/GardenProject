@@ -1,7 +1,10 @@
 package jardin.ui;
 
+import jardin.TypeSol;
+import jardin.plante.Plante;
 import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
+import jardin.zone.ZonePlantable;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,6 +27,11 @@ public class OutilPanel extends JPanel{
 	private JButton effacer = new JButton(new ImageIcon("res/img/effacer.gif"));
 	
 	private JPanel zonePanel = new JPanel();
+	JLabel typeZone = new JLabel("coucou");
+	JLabel ensoleillement = new JLabel();	
+	JLabel typeSol = new JLabel();
+	JLabel plante = new JLabel();
+	JButton change = new JButton("modifier");
 	
 	public OutilPanel(){
 		super();
@@ -65,15 +73,14 @@ public class OutilPanel extends JPanel{
 		
 		
 		zonePanel.setLayout(new GridLayout(1, 4));
-		JLabel typeZone = new JLabel("coucou");
 		typeZone.setFont(getFont().deriveFont(Font.BOLD, 25));
 		
-		JLabel typeSol = new JLabel();
-		
-		
-		
 		zonePanel.add(typeZone);
+		zonePanel.add(ensoleillement);
 		zonePanel.add(typeSol);
+		zonePanel.add(plante);
+		zonePanel.add(change);
+		zonePanel.setVisible(false);
 		
 
 		outilsMiseEnPage.add(outils);
@@ -101,12 +108,25 @@ public class OutilPanel extends JPanel{
 		
 		//Si z n'est pas null on met a jour le panel
 		if(!b) {
-			//TODO mise a jour du panel
+			this.zonePanel.setVisible(true);
 			if (z instanceof Zone) {
-				
+				this.typeZone.setText("Zone");
+				this.typeSol.setText("");
+				this.plante.setText("");
 			} else { // donc c'est une zone plantable
+				ZonePlantable p = (ZonePlantable) z;
+				this.typeZone.setText("Zone Plantable");
+				this.typeSol.setText("Type de sol : " + TypeSol.getTypeSol(p.getTypeSol()));
 				
+				Plante pl = p.getPlante();
+				if (pl != null) {
+					this.plante.setText("Plante : " + pl.getNom() + " " + pl.getNomL());
+				} else {
+					this.plante.setText("Plante : none");
+				}
 			}
+		} else { // sinon la zone est nulle
+			this.zonePanel.setVisible(false);
 		}
 		
 	}

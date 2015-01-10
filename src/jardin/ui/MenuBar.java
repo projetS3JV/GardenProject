@@ -206,8 +206,7 @@ public class MenuBar extends JMenuBar {
 		supprimer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MenuBar.this,"Action non implémentée pour l'instant","Erreur", JOptionPane.ERROR_MESSAGE); // ligne à supprimer après implémentation de la méthode
-				//lancer méthode suppression de zone
+				MainFrame.getInstance().getJardinPanel().deleteSelected();
 			}
 		});
 		supprimer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));

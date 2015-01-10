@@ -13,4 +13,18 @@ public enum TypeSol {
     public int getValue() {
         return value;
     }
+    
+    public static String getTypeSol(int type) {
+    	if (type == 0) {
+    		return "ARGILEUX";
+    	} else if (type == 0) {
+    		return "CALCAIRE";
+    	} else if (type == 0) {
+    		return "HULIFERE";
+    	} else if (type == 0) {
+    		return "LIMONEUX";
+    	}
+    	
+    	return "SABLEUX";
+    }
 }
