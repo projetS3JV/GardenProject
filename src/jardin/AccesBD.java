@@ -26,6 +26,8 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 
 import org.hsqldb.jdbc.JDBCArrayBasic;
+import org.hsqldb.types.Type;
+import org.hsqldb.types.Types;
 
 public final class AccesBD {
 
@@ -316,7 +318,10 @@ public final class AccesBD {
 			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
-				stat.setInt(1,z.getPlante().getId());
+				if (z.getPlante().getId() == -1)
+					stat.setNull(1,Types.NULL);
+				else
+					stat.setInt(1,z.getPlante().getId());
 				stat.setInt(2,z.getId());
 				stat.setArray(3,intArrayToJDBXArray(z.xpoints,z.npoints));
 				stat.setArray(4, intArrayToJDBXArray(z.ypoints,z.npoints));
