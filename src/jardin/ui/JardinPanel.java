@@ -34,6 +34,7 @@ public class JardinPanel extends JPanel{
 	private AbstractZone selected = null;
 	private AccesBD bd = AccesBD.getInstance();
 	private boolean plantable = false;
+	private boolean remove = false;
 
 
 	public JardinPanel(Jardin j) {
@@ -45,17 +46,39 @@ public class JardinPanel extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				if (jardin != null && !draw) {
 					selected = jardin.getZone(e.getX(), e.getY());
+					MainFrame.getInstance().getOutilPanel().updateZonePanel(selected);
 					repaint();
+				}
+				if (jardin != null && remove) {
+					if (selected != null)
+						remove = false;
+					if (!remove) {
+						JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						deleteSelected();
+					}
 				}
 				if (draw & e.getButton() == MouseEvent.BUTTON1) {
 					px = e.getX();
 					py = e.getY();
+	
 					zone.addPoint(px, py);
 					draw = !zone.isClosed();
 					if (!draw) {
 						JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-						saveZone(zone);
+						if (plantable)
+							saveZonePlantable(zone);
+						else 
+							saveZone(zone);
 						zone = new AbstractZone();
+					}
+					if (zone.npoints == 1 && plantable) {
+						AbstractZone supZone = jardin.getZone(px, py);
+						if (!(supZone instanceof Zone)) {
+							JOptionPane.showMessageDialog(JardinPanel.this, "Impossible de mettre une zone plantable hors d'une zone", "error",JOptionPane.ERROR_MESSAGE);
+							draw = false;
+							zone = new AbstractZone();
+							JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+						}
 					}
 				}
 				if (zone.npoints > 1)
@@ -69,11 +92,16 @@ public class JardinPanel extends JPanel{
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE && JardinPanel.this.draw){
 					JardinPanel.this.draw = false;
 					JardinPanel.this.zone = new AbstractZone();
 					JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 					JardinPanel.this.repaint();
+				}
+				else if (e.getKeyCode() == KeyEvent.VK_ESCAPE && remove) {
+					JardinPanel.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+					remove = false;
 				}
 			}
 		});
@@ -133,6 +161,7 @@ public class JardinPanel extends JPanel{
 				g.setColor(Color.red);
 			else g.setColor(Color.black);	
 			g.drawPolygon(zone);
+			//if (zone.getPlante().getDateFloraison())
 			g.setColor(zone.getPlante().getCouleur_en_fleur());			
 			g.fillPolygon(zone);
 		} 
@@ -168,6 +197,7 @@ public class JardinPanel extends JPanel{
 		this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		this.draw = true;
 		this.plantable = plantable;
+		this.requestFocus();
 	}
 	
 	
@@ -188,7 +218,7 @@ public class JardinPanel extends JPanel{
 	
 	private void saveZonePlantable(AbstractZone z) {
 		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
-		int sol = new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?"));
+		int sol = new Integer(JOptionPane.showInputDialog("Quel type de sol ?"));
 		ZonePlantable zone = new ZonePlantable(z,sol);
 		Zone supZone = (Zone) jardin.getZone(z.xpoints[0], z.ypoints[0]);
 		supZone.addZone(zone);
@@ -198,9 +228,16 @@ public class JardinPanel extends JPanel{
 	}
 
 	public void deleteSelected() {
-		this.jardin.deleteZone((Zone)this.selected);
-		this.bd.deleteZone((Zone)this.selected);
-		repaint();
+		if (this.selected != null) {
+			this.jardin.deleteZone((Zone)this.selected);
+			this.bd.deleteZone((Zone)this.selected);
+			repaint();
+		}
+		else {
+			this.requestFocus();
+			this.remove = true;
+			this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+		}
 	}
 	
 	public void setPlante(Plante p) {
