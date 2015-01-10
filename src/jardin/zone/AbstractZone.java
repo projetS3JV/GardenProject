@@ -6,7 +6,7 @@ public class AbstractZone extends Polygon {
 
 	private static final long serialVersionUID = 0L;
 	protected int ensoleillement;
-	public static final int interval = 10;
+	public static final int interval = 13;
 	private int id = -1;
 	
 	public AbstractZone() {
