@@ -88,7 +88,7 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lancer méthode ouverture de jardin
-				int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance(), "Ouvrir jardin");
+				int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance(), "Ouvrir jardin", "Ouvrir");
 				if (jardin != -1) {
 					Jardin j = AccesBD.getInstance().getJardin(jardin);
 					MainFrame instance = MainFrame.getInstance();
@@ -114,7 +114,7 @@ public class MenuBar extends JMenuBar {
 		
 		JMenuItem supprimerJardin = new JMenuItem("Supprimer jardin");
 		supprimerJardin.addActionListener(e -> {
-			int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance(), "Supprimer Jardin");
+			int jardin = OpenGardenFrame.showOpenGardenFrame(MainFrame.getInstance(), "Supprimer Jardin", "Supprimer");
 			if (jardin != -1) {				
 				MainFrame instance = MainFrame.getInstance();
 				if(instance.getJardinPanel().getJardin() != null && jardin ==instance.getJardinPanel().getJardin().getId()){
