@@ -1,21 +1,27 @@
 package jardin.ui;
 
 import jardin.AccesBD;
+import jardin.Ensoleillement;
 import jardin.SortedListModel;
+import jardin.TypeSol;
 import jardin.plante.Plante;
+import jardin.plante.TypePlante;
 import jardin.zone.AbstractZone;
 import jardin.zone.ZonePlantable;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class PlantothequeFrame extends JFrame {
 	
@@ -40,13 +46,46 @@ public class PlantothequeFrame extends JFrame {
 
 		
 		//Creation de la barre de defilement et des boutons Ajouter et Annuler.
-		JPanel buttons = new JPanel();
-		buttons.setLayout(new FlowLayout());
+		JLabel research = new JLabel("Rechercher :");
+		
+		JLabel nom = new JLabel("Nom :");
+		JTextField nomF = new JTextField();
+		
+		JLabel vide = new JLabel();
+		
+		JLabel famille = new JLabel("Famille :");
+		JTextField familleF = new JTextField();
+		
+		JLabel typePlante = new JLabel("Type de plante");
+		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE};
+		JComboBox<TypePlante> typePlanteComboBox = new JComboBox(typePlanteBoxItems);
+		
+		JLabel typeSol = new JLabel("Type de sol");
+		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
+		JComboBox<TypeSol> typeSolComboBox = new JComboBox<>(typeSolBoxItems);
+		
+		JLabel ensoleillement = new JLabel("Ensoleillement");
+		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
+		JComboBox<Ensoleillement> ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
+		
+		JPanel form = new JPanel();
+		form.setLayout(new GridLayout(9, 2, 5, 5));
+		form.add(research);
+		form.add(vide);
+		form.add(nom);
+		form.add(nomF);
+		form.add(famille);
+		form.add(familleF);
+		form.add(typePlante); form.add(typePlanteComboBox);
+		form.add(typeSol); form.add(typeSolComboBox);
+		form.add(ensoleillement); form.add(ensoleillementComboBox);
+		
 		JButton ajouter = new JButton("Ajouter");
 		JButton fermer = new JButton("Fermer");
-		buttons.add(ajouter);
-		buttons.add(fermer);
-		this.add(buttons, BorderLayout.SOUTH);
+		form.add(ajouter);
+		form.add(fermer);
+		
+		this.add(form, BorderLayout.SOUTH);
 		
 		//Ajout des actionListener sur les boutons.
 		ajouter.addActionListener(new ActionListener() {
