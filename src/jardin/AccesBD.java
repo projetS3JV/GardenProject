@@ -26,7 +26,6 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 
 import org.hsqldb.jdbc.JDBCArrayBasic;
-import org.hsqldb.types.Type;
 import org.hsqldb.types.Types;
 
 public final class AccesBD {
@@ -188,12 +187,12 @@ public final class AccesBD {
 			// On va sur le dernier indice
 			while (!r.isLast())	r.next();
 			z.setId(r.getInt(1));
-			
+
 			for (AbstractZone zone : z.getZones()) {
 				if (zone instanceof Zone)
 					insertZone((Zone) zone, idJardin);
 				else
-					insertZonePlantable((ZonePlantable) zone, zone.getId());
+					insertZonePlantable((ZonePlantable) zone, z.getId());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -611,6 +610,7 @@ public final class AccesBD {
 		}
 		return ret;
 	}
+
 	
 	
 	public static JDBCArrayBasic intArrayToJDBXArray(int[] T, int size) {

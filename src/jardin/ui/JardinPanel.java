@@ -1,7 +1,9 @@
 package jardin.ui;
 
 import jardin.AccesBD;
+import jardin.Ensoleillement;
 import jardin.Jardin;
+import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
@@ -15,6 +17,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -213,7 +220,7 @@ public class JardinPanel extends JPanel{
 	}
 
 	private void saveZone(AbstractZone z) {
-		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
+		z.setEnsoleillement(this.setEnsoleillement());
 		Zone zone = new Zone(z);
 		jardin.addZone(zone);	
 		if (jardin.getId() != -1)
@@ -222,8 +229,8 @@ public class JardinPanel extends JPanel{
 	}
 	
 	private void saveZonePlantable(AbstractZone z) {
-		z.setEnsoleillement(new Integer(JOptionPane.showInputDialog("Quel ensoleillement ?")));
-		int sol = new Integer(JOptionPane.showInputDialog("Quel type de sol ?"));
+		z.setEnsoleillement(this.setEnsoleillement());
+		int sol = this.setTypeSol();
 		ZonePlantable zone = new ZonePlantable(z,sol);
 		Zone supZone = (Zone) jardin.getZone(z.xpoints[0], z.ypoints[0]);
 		supZone.addZone(zone);
@@ -231,11 +238,58 @@ public class JardinPanel extends JPanel{
 			bd.insertZonePlantable(zone, supZone.getId());
 		this.repaint();
 	}
+	
+	private int setEnsoleillement() {
+		JDialog j = new JDialog(MainFrame.getInstance(), "Ensoleillement", true);
+		j.setSize(400, 200);
+		j.setLayout(new BoxLayout(j.getContentPane(), BoxLayout.Y_AXIS));
+		
+		JLabel ensoleillement = new JLabel("Ensoleillement");
+		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
+		JComboBox<Ensoleillement> ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
+		JButton validButton = new JButton("Valider");
+    	validButton.addActionListener(e -> {
+			j.dispose();	
+		});
+		j.add(ensoleillement);
+		j.add(ensoleillementComboBox);
+		j.add(validButton);
+		j.pack();
+		j.setVisible(true);
+		return ((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue();
+	}
+	
+	private int setTypeSol() {
+		JDialog j = new JDialog(MainFrame.getInstance(), "Ensoleillement", true);
+		j.setSize(400, 200);
+		j.setLayout(new BoxLayout(j.getContentPane(), BoxLayout.Y_AXIS));
+		
+		JLabel typeSol = new JLabel("Type de sol");
+		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
+		JComboBox<TypeSol> typeSolComboBox = new JComboBox<>(typeSolBoxItems);
+		JButton validButton = new JButton("Valider");
+    	validButton.addActionListener(e -> {
+			j.dispose();	
+		});
+		j.add(typeSol);
+		j.add(typeSolComboBox);
+		j.add(validButton);
+		j.pack();
+		j.setVisible(true);
+		return ((TypeSol)typeSolComboBox.getSelectedItem()).getValue();
+	}
 
 	public void deleteSelected() {
 		if (this.selected != null) {
-			this.jardin.deleteZone((Zone)this.selected);
-			this.bd.deleteZone((Zone)this.selected);
+			if (selected instanceof Zone) {
+				this.jardin.deleteZone((Zone)this.selected);
+				this.bd.deleteZone((Zone)this.selected);
+			}
+			else {
+				ZonePlantable zp = (ZonePlantable) selected;
+				zp.getZoneConteneur().deleteZone(selected);
+				this.bd.deleteZonePlantable(zp);
+			}
 			repaint();
 		}
 		else {
@@ -244,12 +298,12 @@ public class JardinPanel extends JPanel{
 			this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		}
 	}
-	
+
 	public void setPlante(Plante p) {
-		if (this.selected instanceof ZonePlantable) {
+		if (p != null && this.selected instanceof ZonePlantable) {
 			((ZonePlantable) this.selected).setPlante(p);
 		}
 	}
-	
+
 
 }
