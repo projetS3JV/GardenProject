@@ -204,7 +204,7 @@ public final class AccesBD {
 		String sql = "INSERT INTO ZONEPLANTABLE VALUES(null,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stat = this.connection.prepareStatement(sql);
-			if (z.getPlante().getId() == -1)
+			if (z.getPlante() == null || z.getPlante().getId() == -1)
 				stat.setNull(1,Types.NULL);
 			else
 				stat.setInt(1,z.getPlante().getId());
@@ -315,7 +315,7 @@ public final class AccesBD {
 	}
 
 	public void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {
-		if (z.getId() != -1) {
+		if (z.getPlante() == null || z.getId() != -1) {
 			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
