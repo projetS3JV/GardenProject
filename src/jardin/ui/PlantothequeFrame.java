@@ -32,7 +32,7 @@ public class PlantothequeFrame extends JFrame {
 	private SortedListModel modelList = instance.getPlantes();
 	
 	public PlantothequeFrame() {
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setSize(400, 500);
 		this.setTitle("Plantotheque");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

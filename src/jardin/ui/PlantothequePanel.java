@@ -103,6 +103,10 @@ JLabel research = new JLabel("Rechercher :");
 		select = (Plante) this.listePlante.getSelectedValue();
 	}
 	
+	public Plante getSelected() {
+		return this.select;
+	}
+	
 	public static void main(String arg[]) {
 		JFrame frame = new JFrame();
 		PlantothequePanel p = new PlantothequePanel();

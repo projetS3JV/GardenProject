@@ -4,9 +4,9 @@ import jardin.plante.Plante;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -33,7 +33,6 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
-		
 		if (isSelected)
 			this.setBackground(list.getSelectionBackground());
 		else 
@@ -48,15 +47,16 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		image.setIcon(img);
 		
 		JPanel pLeft = new JPanel();
-		pLeft.setLayout(new BoxLayout(MainFrame.getInstance().getContentPane(), BoxLayout.X_AXIS));
 		pLeft.add(image);
+		pLeft.setSize(50, 50);
 		
 		JPanel pRight = new JPanel();
-		pRight.setLayout(new BoxLayout(MainFrame.getInstance().getContentPane(), BoxLayout.X_AXIS));
+		pRight.setLayout(new GridLayout(2,1));
 		pRight.add(name);
 		pRight.add(desc);
+		pRight.setSize(200, 50);
 		
-		this.setLayout(new BoxLayout(MainFrame.getInstance().getContentPane(), BoxLayout.Y_AXIS));
+		this.setLayout(new FlowLayout(FlowLayout.TRAILING));
 		this.add(pLeft);
 		this.add(pRight);
 		return this;
