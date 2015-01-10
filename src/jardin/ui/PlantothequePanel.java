@@ -70,28 +70,7 @@ JLabel research = new JLabel("Rechercher :");
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
 		
-		JButton ajouter = new JButton("Ajouter");
-		JButton fermer = new JButton("Fermer");
-		form.add(ajouter);
-		form.add(fermer);
-		
 		this.add(form, BorderLayout.SOUTH);
-		
-		//Ajout des actionListener sur les boutons.
-		ajouter.addActionListener(new ActionListener() {
-			//@Override
-			public void actionPerformed(ActionEvent e) {
-				AbstractZone zone = MainFrame.getInstance().getJardinPanel().getSelected();
-				((ZonePlantable) zone).setPlante(select);
-			}
-		});
-		
-		fermer.addActionListener(new ActionListener() {
-			//@Override
-			public void actionPerformed(ActionEvent e) {
-				PlantothequePanel.this.setVisible(false);
-			}
-		});
 		
 		//this.pack();
 	}

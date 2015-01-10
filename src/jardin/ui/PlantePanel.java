@@ -7,6 +7,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -56,7 +57,7 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		pRight.add(desc);
 		pRight.setSize(200, 50);
 		
-		this.setLayout(new FlowLayout(FlowLayout.TRAILING));
+		this.setLayout(new BordureLayout);
 		this.add(pLeft);
 		this.add(pRight);
 		return this;
