@@ -2,6 +2,7 @@ package jardin.ui;
 
 import jardin.plante.Plante;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.BoxLayout;
@@ -24,11 +25,17 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		name = new JLabel("test", SwingConstants.CENTER);
 		desc = new JLabel();
 		image = new JLabel();
+		this.setOpaque(true);
 	}
 
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
+		
+		if (isSelected)
+			this.setBackground(list.getSelectionBackground());
+		else 
+			this.setBackground(Color.WHITE);
 		
 		Plante p = (Plante) value; //res/Img/test.png
 		ImageIcon img = p.getImgFleurie();
