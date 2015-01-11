@@ -16,6 +16,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -123,10 +126,8 @@ public class JardinPanel extends JPanel{
 						ty = e.getY();
 						repaint();
 					}
-					
 				}
 			}
-			
 		});
 	}
 	
@@ -170,12 +171,17 @@ public class JardinPanel extends JPanel{
 			else g.setColor(Color.black);	
 			g.drawPolygon(zone);
 			if (zone.getPlante() != null) {
-				cal = MainFrame.getInstance().getCalendarPanel();
-				//System.out.print(zone.getPlante().getDateFloraison().compareTo(cal.getDate()) < 0);
-				//if (zone.getPlante().getDateFloraison().compareTo(cal.getDate()) < 0 && zone.getPlante().getDateFinFloraison().compareTo(cal.getDate()) > 0) {
+				int d = MainFrame.getInstance().getCalendarPanel().getJour();
+				int d1 = sqlDateToCalendar(zone.getPlante().getDateFloraison()).get(Calendar.DAY_OF_YEAR);
+				int d2 = sqlDateToCalendar(zone.getPlante().getDateFinFloraison()).get(Calendar.DAY_OF_YEAR);
+				if (d >= d1 && d <= d2) {
 					g.setColor(zone.getPlante().getCouleur_en_fleur());			
 					g.fillPolygon(zone);
-				//}
+				}
+				else {
+					g.setColor(zone.getPlante().getCouleur_non_fleuris());			
+					g.fillPolygon(zone);
+				}
 			}
 		}
 		else {
@@ -299,7 +305,13 @@ public class JardinPanel extends JPanel{
 			this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		}
 	}
-
+	
+	public static GregorianCalendar sqlDateToCalendar(Date d) {
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTimeInMillis(d.getTime());
+		return cal;
+	}
+	
 	public void setPlante(Plante p) {
 		if (p != null && this.selected instanceof ZonePlantable) {
 			((ZonePlantable) this.selected).setPlante(p);

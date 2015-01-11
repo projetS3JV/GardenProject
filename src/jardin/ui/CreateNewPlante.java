@@ -388,8 +388,6 @@ public class CreateNewPlante extends JDialog{
 						moisDate2--;
 						this.debutFloraison = new Date(new GregorianCalendar(1970,moisDate1,joursDate1).getTimeInMillis());
 						this.finFloraison = new Date(new GregorianCalendar(1970,moisDate2,joursDate2).getTimeInMillis());
-						System.out.println(debutFloraison);
-						System.out.println(finFloraison);
 					}
 				}
 			}
