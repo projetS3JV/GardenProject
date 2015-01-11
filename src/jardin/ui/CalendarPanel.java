@@ -20,6 +20,7 @@ public class CalendarPanel extends JPanel{
 	private  String mois = "Janvier";
 	private String texteDate = this.jourDuMois + " " +this.mois; //La date sous la forme "DD Month" pour l'affichage
 	private static String[] moisTab = new String[]{"Janvier", "Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"};
+	private int month = 0;
 	
 	//éléments graphiques
 	private JScrollBar scrollbar = new JScrollBar(java.awt.Adjustable.HORIZONTAL, 1, 1, 1, 366);
@@ -59,72 +60,84 @@ public class CalendarPanel extends JPanel{
 		if(this.jour<=31){
 			this.jourDuMois = this.jour;
 			this.mois = moisTab[0];
+			this.month = 1;
 		}
 		//Février
 		else if(this.jour>31 && this.jour<=59)
 		{
 			this.jourDuMois = this.jour- 31;
 			this.mois = moisTab[1];
+			this.month = 2;
 		}
 		//Mars
 		else if(this.jour>59 && this.jour<=90)
 		{
 			this.jourDuMois = this.jour-59;
 			this.mois = moisTab[2];
+			this.month = 3;
 		}
 		//Avril
 		else if(this.jour>90 && this.jour<=120)
 		{
 			this.jourDuMois = this.jour-90;
 			this.mois = moisTab[3];
+			this.month = 4;
 		}
 		//Mai
 		else if(this.jour>120 && this.jour<=151)
 		{
 			this.jourDuMois = this.jour -120;
 			this.mois = moisTab[4];
+			this.month = 5;
 		}
 		//Juin
 		else if(this.jour>151 && this.jour<=181)
 		{
 			this.jourDuMois = this.jour -151;
 			this.mois = moisTab[5];
+			this.month = 6;
 		}
 		//Juillet
 		else if(this.jour>181 && this.jour<=212)
 		{
 			this.jourDuMois = this.jour-181;
 			this.mois = moisTab[6];
+			this.month = 7;
 		}
 		//Aout
 		else if(this.jour>212 && this.jour<=243)
 		{
 			this.jourDuMois = this.jour -212;
 			this.mois = moisTab[7];
+			this.month = 8;
 		}
 		//Septembre
 		else if(this.jour>243 && this.jour<=273)
 		{
 			this.jourDuMois = this.jour - 243;
 			this.mois = moisTab[8];
+			this.month = 9;
 		}
 		//Octobre
 		else if(this.jour>273 && this.jour<=304)
 		{
 			this.jourDuMois = this.jour -273;
 			this.mois = moisTab[9];
+			this.month = 10;
 		}
 		//Novembre
 		else if(this.jour>304 && this.jour<=334)
 		{
 			this.jourDuMois = this.jour -304;
 			this.mois = moisTab[10];
+			this.month = 11;
 		}
 		//Décembre
 		else
 		{
 			this.jourDuMois = this.jour -334;
 			this.mois = moisTab[11];
+			this.month = 12;
 		}
 		this.texteDate = this.jourDuMois + " " + this. mois;
 	}
@@ -153,6 +166,9 @@ public class CalendarPanel extends JPanel{
 		}
 		return null;
 	}
-
+	
+	public int getJour() {
+		return jour;
+	}
 
 }

@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -385,8 +386,10 @@ public class CreateNewPlante extends JDialog{
 					} else {
 						moisDate1--;
 						moisDate2--;
-						this.debutFloraison = new Date(sdf.parse(joursDate1 + "/" + moisDate1).getTime());
-						this.finFloraison = new Date(sdf.parse(joursDate2 + "/" + moisDate2).getTime());
+						this.debutFloraison = new Date(new GregorianCalendar(1970,moisDate1,joursDate1).getTimeInMillis());
+						this.finFloraison = new Date(new GregorianCalendar(1970,moisDate2,joursDate2).getTimeInMillis());
+						System.out.println(debutFloraison);
+						System.out.println(finFloraison);
 					}
 				}
 			}
