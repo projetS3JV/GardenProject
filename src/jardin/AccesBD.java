@@ -315,18 +315,18 @@ public final class AccesBD {
 
 	public void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {
 		if (z.getPlante() == null || z.getId() != -1) {
-			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
+			String sql = "UPDATE ZONEPLANTABLE SET id_Zone=?, x =?, y =?, type_Sol =?, luminosite =? , id_Plante =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
 				if (z.getPlante() == null || z.getPlante().getId() == -1)
-					stat.setNull(1,Types.NULL);
+					stat.setNull(6,Types.NULL);
 				else
-					stat.setInt(1,z.getPlante().getId());
-				stat.setInt(2,z.getId());
-				stat.setArray(3,intArrayToJDBXArray(z.xpoints,z.npoints));
-				stat.setArray(4, intArrayToJDBXArray(z.ypoints,z.npoints));
-				stat.setInt(5, z.getTypeSol());
-				stat.setInt(6, z.getEnsoleillement());
+					stat.setInt(6,z.getPlante().getId());
+				stat.setInt(1,z.getId());
+				stat.setArray(2,intArrayToJDBXArray(z.xpoints,z.npoints));
+				stat.setArray(3, intArrayToJDBXArray(z.ypoints,z.npoints));
+				stat.setInt(4, z.getTypeSol());
+				stat.setInt(5, z.getEnsoleillement());
 				stat.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();

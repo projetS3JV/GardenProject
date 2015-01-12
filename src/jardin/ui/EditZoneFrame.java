@@ -7,12 +7,14 @@ import jardin.zone.AbstractZone;
 import jardin.zone.Zone;
 import jardin.zone.ZonePlantable;
 
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -68,21 +70,28 @@ private static final long serialVersionUID = 1L;
 		
 		valider.addActionListener(e -> {
 				
-				
+				boolean valid = true;
 				z.setEnsoleillement(((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue());
 				
 				if (z instanceof ZonePlantable) {
 					ZonePlantable zone = (ZonePlantable) z;
-					zone.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());
+					try {
 					panel.setPlante(plantes.getSelected());
+					zone.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());					
 					//Mise a jour de la zone
 					AccesBD.getInstance().updateZonePlantable(zone);
+					} catch (IllegalArgumentException exception) {
+						JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
+						valid = false;
+					}
 				} else {
 					AccesBD.getInstance().updateZone((Zone)z);
 				}
 				
-				EditZoneFrame.this.setVisible(false);
-				EditZoneFrame.this.dispose();
+				if(valid) {
+					EditZoneFrame.this.setVisible(false);
+					EditZoneFrame.this.dispose();
+				}
 			});
 		
 		resultPanel.add(annuler);
