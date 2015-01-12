@@ -291,7 +291,7 @@ public final class AccesBD {
 
 	public void updateZone(Zone z) throws IllegalArgumentException {
 		if (z.getId() != -1) {
-			String sql = "UPDATE INTO ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
+			String sql = "UPDATE ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
 				stat.setInt(1, z.getId());
@@ -318,7 +318,7 @@ public final class AccesBD {
 			String sql = "UPDATE ZONEPLANTABLE SET id_Plante =?, id_Zone=?,	x =?, y =?,	type_Sol =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
-				if (z.getPlante().getId() == -1)
+				if (z.getPlante() == null || z.getPlante().getId() == -1)
 					stat.setNull(1,Types.NULL);
 				else
 					stat.setInt(1,z.getPlante().getId());
@@ -350,9 +350,13 @@ public final class AccesBD {
 				stat.setInt(2, j.getWidth());
 				stat.setInt(3, j.getHeight());
 				stat.executeUpdate();
-				/*for(Zone zone : j.getZones()){
-					insertZone(zone,j.getId());
-				}*/
+				for(Zone zone : j.getZones()){
+					if (zone.getId() != -1) {
+						updateZone(zone);
+					} else {
+						insertZone(zone,j.getId());
+					}
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -484,14 +488,12 @@ public final class AccesBD {
 		try {
 			ResultSet rs = this.statement.executeQuery("SELECT * FROM ZONEPLANTABLE WHERE id_Zone = " + idZone);
 			while (rs.next()) {
-				ZonePlantable z = new ZonePlantable(rs.getInt(7), rs.getInt(6));
 				int[] x = JDBCArrayTointArray(rs.getArray(4));
 				int[] y = JDBCArrayTointArray(rs.getArray(5));
+				ZonePlantable z = new ZonePlantable(x, y, rs.getInt(7), rs.getInt(6));				
 				z.setId(rs.getInt(1));
 				if (rs.getInt(2) != Types.NULL)
 					z.setPlante(this.getPlante(rs.getInt(2)));
-				for (int i = 0 ; i < x.length ; i++)
-					z.addPoint(x[i], y[i]);
 				zones.add(z);
 			}
 		} catch (SQLException e) {e.printStackTrace();}
