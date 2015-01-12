@@ -1,5 +1,6 @@
 package jardin.ui;
 
+import jardin.AccesBD;
 import jardin.Ensoleillement;
 import jardin.TypeSol;
 import jardin.zone.AbstractZone;
@@ -13,6 +14,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 public class EditZoneFrame extends JDialog{
 private static final long serialVersionUID = 1L;
@@ -73,6 +75,10 @@ private static final long serialVersionUID = 1L;
 					ZonePlantable zone = (ZonePlantable) z;
 					zone.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());
 					panel.setPlante(plantes.getSelected());
+					//Mise a jour de la zone
+					AccesBD.getInstance().updateZonePlantable(zone);
+				} else {
+					AccesBD.getInstance().updateZone((Zone)z);
 				}
 				
 				EditZoneFrame.this.setVisible(false);

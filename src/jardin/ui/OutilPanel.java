@@ -136,7 +136,6 @@ public class OutilPanel extends JPanel{
 				}
 			}
 			this.ensoleillement.setText("Ensoleillement : " + Ensoleillement.getEnsoleillement(z.getEnsoleillement()));
-			
 		} else { // sinon la zone est nulle
 			this.zonePanel.setVisible(false);
 		}

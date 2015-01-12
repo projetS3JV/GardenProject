@@ -250,7 +250,6 @@ public class Plante implements Comparable<Integer> {
 		if (o instanceof Integer) return ((Integer) o) == this.id;
 		if (o instanceof Plante) {
 			Plante p = (Plante) o;
-			//Cette ligne est certainement a modifier, elle doit etre a completer
 			return p.id == this.id;
 		}
 		return false;
