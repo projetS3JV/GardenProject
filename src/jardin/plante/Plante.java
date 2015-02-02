@@ -19,12 +19,12 @@ public class Plante implements Comparable<Integer> {
 	 */
 	private int tailleFin;
 
-	private Date dateFinFloraison;
+	private Date[] dateFinFloraison;
 	
 	/*
 	 * La date de la floraison
 	 */
-	private Date dateFloraison;
+	private Date[] dateFloraison;
 	
 	/*
 	 * La date de plantation
@@ -73,6 +73,8 @@ public class Plante implements Comparable<Integer> {
 	
 	private String description;
 	
+	private int nbDate;
+	
 	// Constructeurs ---------------------------------------------------------------------------------
 	
 	/*
@@ -93,10 +95,11 @@ public class Plante implements Comparable<Integer> {
 		this.ensoleillement = 0;
 		this.typeSol = 0;
 		this.description = null;
+		this.nbDate = 0;
 	}
 	
 
-	public Plante(int tailleFin, Date dateFloraison, Date dateFinFloraison,
+	public Plante(int tailleFin, Date[] dateFloraison, Date[] dateFinFloraison,
 			Date datePlantation, Color fleuris, Color nonFleuris, boolean vivace,
 			String nom, String nomL, ImageIcon imgFleurie, TypePlante type,
 			Ensoleillement ensoleillement, TypeSol typeSol, String description) {
@@ -114,6 +117,7 @@ public class Plante implements Comparable<Integer> {
 		this.ensoleillement = ensoleillement.getValue();
 		this.typeSol = typeSol.getValue();
 		this.description = description;
+		this.nbDate = this.dateFloraison.length;
 	}
 
 	
@@ -125,12 +129,12 @@ public class Plante implements Comparable<Integer> {
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
-	public Date getDateFinFloraison() {
+	public Date[] getDateFinFloraison() {
 		return dateFinFloraison;
 	}
 
 
-	public void setDateFinFloraison(Date dateFinFloraison) {
+	public void setDateFinFloraison(Date[] dateFinFloraison) {
 		this.dateFinFloraison = dateFinFloraison;
 	}
 
@@ -183,12 +187,23 @@ public class Plante implements Comparable<Integer> {
 	public void setTailleFin(int tailleFin) {
 		this.tailleFin = tailleFin;
 	}
-	public Date getDateFloraison() {
+	public Date[] getDateFloraison() {
 		return dateFloraison;
 	}
-	public void setDateFloraison(Date dateFloraison) {
+	public void setDateFloraison(Date[] dateFloraison) {
 		this.dateFloraison = dateFloraison;
+		this.nbDate= dateFloraison.length;
 	}
+	public int getNbDate() {
+		return nbDate;
+	}
+
+
+	public void setNbDate(int nbDate) {
+		this.nbDate = nbDate;
+	}
+
+
 	public Date getDatePlantation() {
 		return datePlantation;
 	}

@@ -10,8 +10,8 @@ CREATE TABLE plante (
 	couleur_non_fleuris	INTEGER,
 	type_Sol		INTEGER,
 	date_Plantation		DATE,
-	date_DebutFloraison	DATE,
-	date_FinFloraison	DATE,
+	date_DebutFloraison	DATE ARRAY,
+	date_FinFloraison	DATE ARRAY,
 	vivace			BOOLEAN,
 	description		VARCHAR(50)
 )
