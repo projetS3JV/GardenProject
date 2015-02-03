@@ -68,6 +68,8 @@ public class PlantothequeFrame extends JFrame {
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
 		JComboBox<Ensoleillement> ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
 		
+		
+		//Panel contenant les outils de recherche
 		JPanel form = new JPanel();
 		form.setLayout(new GridLayout(9, 2, 5, 5));
 		form.add(research);
