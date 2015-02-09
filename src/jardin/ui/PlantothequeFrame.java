@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -41,6 +42,7 @@ public class PlantothequeFrame extends JFrame {
 		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		listePlante = new JList<Plante>(modelList);
+		SortedListModel.sortedByName((List)listePlante);
 		listePlante.setCellRenderer(new PlantePanel());
 		this.add(new JScrollPane(this.listePlante));
 

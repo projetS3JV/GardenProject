@@ -5,6 +5,7 @@ import jardin.plante.Plante;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.AbstractListModel;
 
@@ -90,6 +91,10 @@ public class SortedListModel extends AbstractListModel<Plante> implements Iterab
 	@Override
 	public Iterator<Plante> iterator() {
 		return this.sortedList.iterator();
+	}
+	
+	public static void sortedByName(List listePlante) {
+		Collections.sort(listePlante);
 	}
       
 }
