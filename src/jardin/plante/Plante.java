@@ -69,7 +69,7 @@ public class Plante implements Comparable<Integer> {
 	
 	private int ensoleillement ;
 	
-	private int typeSol;
+	private int[] typeSol;
 	
 	private String description;
 	
@@ -93,7 +93,7 @@ public class Plante implements Comparable<Integer> {
 		this.ImgFleurie = null;
 		this.type = 0;
 		this.ensoleillement = 0;
-		this.typeSol = 0;
+		this.typeSol = null;
 		this.description = null;
 		this.nbDate = 0;
 	}
@@ -102,7 +102,7 @@ public class Plante implements Comparable<Integer> {
 	public Plante(int tailleFin, Date[] dateFloraison, Date[] dateFinFloraison,
 			Date datePlantation, Color fleuris, Color nonFleuris, boolean vivace,
 			String nom, String nomL, ImageIcon imgFleurie, TypePlante type,
-			Ensoleillement ensoleillement, TypeSol typeSol, String description) {
+			Ensoleillement ensoleillement, /*TypeSol[]*/ int[] typeSol, String description) {
 		this.tailleFin = tailleFin;
 		this.dateFloraison = dateFloraison;
 		this.dateFinFloraison = dateFinFloraison;
@@ -115,7 +115,10 @@ public class Plante implements Comparable<Integer> {
 		this.ImgFleurie = imgFleurie;
 		this.type = type.getValue();
 		this.ensoleillement = ensoleillement.getValue();
-		this.typeSol = typeSol.getValue();
+		/*for(int i =0; i< typeSol.length;i++){
+			this.typeSol[i]= typeSol[i].getValue();
+		}*/
+		this.typeSol = typeSol;
 		this.description = description;
 		this.nbDate = this.dateFloraison.length;
 	}
@@ -159,11 +162,11 @@ public class Plante implements Comparable<Integer> {
 	}
 
 
-	public int getTypeSol() {
+	public int[] getTypeSol() {
 		return typeSol;
 	}
 
-	public void setTypeSol(int typeSol) {
+	public void setTypeSol(int[] typeSol) {
 		this.typeSol = typeSol;
 	}
 

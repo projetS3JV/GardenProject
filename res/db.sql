@@ -8,7 +8,7 @@ CREATE TABLE plante (
 	url_Image_En_Fleur	VARCHAR(50),
 	couleur_en_fleur	INTEGER,
 	couleur_non_fleuris	INTEGER,
-	type_Sol		INTEGER,
+	type_Sol		INTEGER ARRAY,
 	date_Plantation		DATE,
 	date_DebutFloraison	DATE ARRAY,
 	date_FinFloraison	DATE ARRAY,

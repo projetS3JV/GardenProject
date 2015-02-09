@@ -34,8 +34,8 @@ import javax.swing.JPanel;
  *
  */
 public class JardinPanel extends JPanel{
-	
-	
+
+
 	private static final long serialVersionUID = 1L;
 	private Jardin jardin;
 	private AbstractZone zone;
@@ -71,7 +71,7 @@ public class JardinPanel extends JPanel{
 				if (draw & e.getButton() == MouseEvent.BUTTON1) {
 					px = e.getX();
 					py = e.getY();
-	
+
 					zone.addPoint(px, py);
 					draw = !zone.isClosed();
 					if (!draw) {
@@ -96,14 +96,14 @@ public class JardinPanel extends JPanel{
 					repaint();
 			}
 		});
-		
+
 		/**
 		 * Listener sur la touche Echap pour annuler une zone en pleine création
 		 */
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
+
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE && JardinPanel.this.draw){
 					JardinPanel.this.draw = false;
 					JardinPanel.this.zone = new AbstractZone();
@@ -130,7 +130,7 @@ public class JardinPanel extends JPanel{
 			}
 		});
 	}
-	
+
 	public JardinPanel() {
 		this(null);
 	}
@@ -172,15 +172,17 @@ public class JardinPanel extends JPanel{
 			g.drawPolygon(zone);
 			if (zone.getPlante() != null) {
 				int d = MainFrame.getInstance().getCalendarPanel().getJour();
-				int d1 = sqlDateToCalendar(zone.getPlante().getDateFloraison()).get(Calendar.DAY_OF_YEAR);
-				int d2 = sqlDateToCalendar(zone.getPlante().getDateFinFloraison()).get(Calendar.DAY_OF_YEAR);
-				if (d >= d1 && d <= d2) {
-					g.setColor(zone.getPlante().getCouleur_en_fleur());			
-					g.fillPolygon(zone);
-				}
-				else {
-					g.setColor(zone.getPlante().getCouleur_non_fleuris());			
-					g.fillPolygon(zone);
+				for(int i = 0; i < zone.getPlante().getDateFloraison().length; i++){
+					int d1 = sqlDateToCalendar(zone.getPlante().getDateFloraison()[i]).get(Calendar.DAY_OF_YEAR);
+					int d2 = sqlDateToCalendar(zone.getPlante().getDateFinFloraison()[i]).get(Calendar.DAY_OF_YEAR);
+					if (d >= d1 && d <= d2) {
+						g.setColor(zone.getPlante().getCouleur_en_fleur());			
+						g.fillPolygon(zone);
+					}
+					else {
+						g.setColor(zone.getPlante().getCouleur_non_fleuris());			
+						g.fillPolygon(zone);
+					}
 				}
 			}
 		}
@@ -198,11 +200,11 @@ public class JardinPanel extends JPanel{
 	public AbstractZone getSelected() {
 		return selected;
 	}
-	
+
 	public Jardin getJardin() {
 		return jardin;
 	}	
-	
+
 	public void setJardin(Jardin j) {
 		this.jardin = j;
 		if (this.jardin == null)
@@ -211,15 +213,15 @@ public class JardinPanel extends JPanel{
 			this.setBackground(Color.WHITE);
 		this.repaint();
 	}
-	
+
 	public void startDrawing(boolean plantable) {
 		this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		this.draw = true;
 		this.plantable = plantable;
 		this.requestFocus();
 	}
-	
-	
+
+
 	@Deprecated
 	public AbstractZone getZone() {
 		if (draw) return null; 
@@ -234,7 +236,7 @@ public class JardinPanel extends JPanel{
 			bd.insertZone(zone, jardin.getId());
 		this.repaint();
 	}
-	
+
 	private void saveZonePlantable(AbstractZone z) {
 		z.setEnsoleillement(this.setEnsoleillement());
 		int sol = this.setTypeSol();
@@ -245,17 +247,17 @@ public class JardinPanel extends JPanel{
 			bd.insertZonePlantable(zone, supZone.getId());
 		this.repaint();
 	}
-	
+
 	private int setEnsoleillement() {
 		JDialog j = new JDialog(MainFrame.getInstance(), "Ensoleillement", true);
 		j.setSize(400, 200);
 		j.setLayout(new BoxLayout(j.getContentPane(), BoxLayout.Y_AXIS));
-		
+
 		JLabel ensoleillement = new JLabel("Ensoleillement");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
 		JComboBox<Ensoleillement> ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
 		JButton validButton = new JButton("Valider");
-    	validButton.addActionListener(e -> {
+		validButton.addActionListener(e -> {
 			j.dispose();	
 		});
 		j.add(ensoleillement);
@@ -265,17 +267,17 @@ public class JardinPanel extends JPanel{
 		j.setVisible(true);
 		return ((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue();
 	}
-	
+
 	private int setTypeSol() {
 		JDialog j = new JDialog(MainFrame.getInstance(), "Ensoleillement", true);
 		j.setSize(400, 200);
 		j.setLayout(new BoxLayout(j.getContentPane(), BoxLayout.Y_AXIS));
-		
+
 		JLabel typeSol = new JLabel("Type de sol");
 		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
 		JComboBox<TypeSol> typeSolComboBox = new JComboBox<>(typeSolBoxItems);
 		JButton validButton = new JButton("Valider");
-    	validButton.addActionListener(e -> {
+		validButton.addActionListener(e -> {
 			j.dispose();	
 		});
 		j.add(typeSol);
@@ -305,13 +307,13 @@ public class JardinPanel extends JPanel{
 			this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		}
 	}
-	
+
 	public static GregorianCalendar sqlDateToCalendar(Date d) {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(d.getTime());
 		return cal;
 	}
-	
+
 	public void setPlante(Plante p) {
 		if (p != null && this.selected instanceof ZonePlantable) {
 			((ZonePlantable) this.selected).setPlante(p);

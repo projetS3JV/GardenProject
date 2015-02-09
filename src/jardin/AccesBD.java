@@ -122,7 +122,7 @@ public final class AccesBD {
 			stat.setString(6, p.getNom());
 			stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 			stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
-			stat.setInt(9, p.getTypeSol());
+			stat.setArray(9,intArrayToJDBXArray(p.getTypeSol(),p.getTypeSol().length));
 			stat.setDate(10, (Date) p.getDatePlantation());
 			stat.setArray(11, dateArrayToJDBXArray(p.getDateFloraison(), p.getNbDate()));
 			stat.setArray(12, dateArrayToJDBXArray(p.getDateFinFloraison(), p.getNbDate()));
@@ -163,7 +163,7 @@ public final class AccesBD {
 						new ImageIcon(path + rs.getString(7) + ext), 
 						TypePlante.values()[rs.getInt(4)], 
 						Ensoleillement.values()[rs.getInt(6)],
-						TypeSol.values()[rs.getInt(10)],
+						JDBCArrayTointArray(rs.getArray(10)),
 						rs.getString(15)
 						);
 				p.setId(rs.getInt(1));
@@ -274,7 +274,7 @@ public final class AccesBD {
 				stat.setString(6, p.getNom());
 				stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 				stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
-				stat.setInt(9, p.getTypeSol());
+				stat.setArray(9, intArrayToJDBXArray(p.getTypeSol(), p.getTypeSol().length));
 				stat.setDate(10, (Date) p.getDatePlantation());
 				stat.setArray(11, dateArrayToJDBXArray(p.getDateFloraison(), p.getNbDate()));
 				stat.setArray(12, dateArrayToJDBXArray(p.getDateFinFloraison(), p.getNbDate()));
@@ -525,42 +525,44 @@ public final class AccesBD {
 	public static void main(String[] args) {
 		AccesBD bd = AccesBD.getInstance();
 		Date[] debut = null;
-		debut[0] = new Date(datee(2010, Calendar.FEBRUARY, 17));
-		debut[1] = new Date(datee(2010, Calendar.SEPTEMBER, 19));
+		debut[0] = new Date(datee(2010, Calendar.MAY, 12));
+		debut[1] = new Date(datee(2010, Calendar.AUGUST, 19));
 		
 		Date[] fin = null;
-		fin[0] = new Date(datee(2010, Calendar.FEBRUARY, 20));
-		fin[1] = new Date(datee(2010, Calendar.OCTOBER, 20));
+		fin[0] = new Date(datee(2010, Calendar.JULY, 20));
+		fin[1] = new Date(datee(2010, Calendar.SEPTEMBER, 20));
 		
-		Plante p = new Plante(10, new Date(datee(2010, Calendar.FEBRUARY, 17)),
-				new Date(datee(2012, Calendar.AUGUST, 18)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.blue, Color.green, true,
-				"popolBleu", "popolus patatus", new ImageIcon("res/img/popol.png"), TypePlante.FLEUR,
-				Ensoleillement.SOLEIL, TypeSol.LIMONEUX,
-				"c'est une zolie fleur");
-		Plante p2 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
-				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.red, Color.green, true,
-				"ftbRouge", "ftbus", new ImageIcon("res/img/test.png"), TypePlante.FLEUR,
-				Ensoleillement.OMBRE, TypeSol.SABLEUX,
-				"c'est une fleur");
-		Plante p3 = new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
-				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.green, Color.green, false,
-				"builsonVert", "builsonus", new ImageIcon("res/img/test.png"), TypePlante.BUISSON,
-				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
-				"buisson");
-		bd.insertPlante(p);
+		int[] typeSol1 = null;
+		typeSol1[0] = TypeSol.ARGILEUX.getValue();
+		typeSol1[1] = TypeSol.SABLEUX.getValue();
+		
+		Plante p1 = new Plante(180, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.red, Color.green, true,
+				"Rose des peintres", "Rosa x centifolia", new ImageIcon("res/img/popol.png"), TypePlante.BUISSON,
+				Ensoleillement.MIOMBRE, typeSol1,
+				"Ce rosier centfeuilles forme un buisson souple et harmonieux, portant de grosses fleurs globuleuses rose vif, au port retombant, s'épanouissant en coupes bien pleines, au parfum puissant.");
+		
+		debut[0] = new Date(datee(2010, Calendar.MARCH, 5));
+		debut[1] = null;
+		
+		fin[0] = new Date(datee(2010, Calendar.AUGUST, 31));
+		fin[1] = null;
+		
+		Plante p2 = new Plante(10, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.blue, Color.green, true,
+				"Trèfle blanc", "(Trifolium repens", new ImageIcon("res/img/popol.png"), TypePlante.FLEUR,
+				Ensoleillement.SOLEIL, typeSol1,"Le trèfle blanc, aussi appelé trèfle rampant, est une plante fourragère très commune dans les prairies et les jardins.");
+		
+		debut[0] = new Date(datee(2010, Calendar.JUNE, 5));
+		debut[1] = null;
+		
+		fin[0] = new Date(datee(2010, Calendar.OCTOBER, 31));
+		fin[1] = null;
+		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(15,15,15), Color.green, true,
+						"Marguerite commune", "Leucanthemum vulgare", new ImageIcon("res/img/popol.png"), TypePlante.FLEUR,
+						Ensoleillement.SOLEIL, typeSol1,"");
+		bd.insertPlante(p1);
 		bd.insertPlante(p2);
 		bd.insertPlante(p3);
-		Plante p4 =  new Plante(20, new Date(datee(2010, Calendar.FEBRUARY, 15)),
-				new Date(datee(2010, Calendar.AUGUST, 15)),new Date(datee(2010, Calendar.FEBRUARY, 20)), Color.green, Color.green, false,
-				"builson", "builsonus", new ImageIcon("res/img/test.png"), TypePlante.BUISSON,
-				Ensoleillement.OMBRE, TypeSol.HUMIFERE,
-				"buisson");
-		bd.insertPlante(p4);
-		p4.setDescription("autre buisson");
-		bd.updatePlante(p4);
-	 
-		bd.deletePlante(p2.getId());
-		System.out.println("Plantes OK");
+	
 		
 		/*
 		Jardin j = new Jardin("Ma maison",100,100);
@@ -641,7 +643,7 @@ public final class AccesBD {
 		org.hsqldb.types.Type type = org.hsqldb.types.Type.SQL_DATE;
 		Object[] o = new Object[size];
 		for (int i = 0 ; i< size ; i++){
-			o[i] = new Date(d[i].getYear(), d[i].getMonth(), d[i].getDay());
+			o[i] = new Date(datee(d[i].getYear(), d[i].getMonth(), d[i].getDay()));
 		}
 		return new JDBCArrayBasic(o, type);
 	}
@@ -652,7 +654,7 @@ public final class AccesBD {
 		try {
 			rs = T.getResultSet();
 			while (rs.next()) 
-				x.add(rs.getDate(2));	
+				x.add((Date)rs.getDate(2));	
 		} catch (SQLException e) {e.printStackTrace();}
 		Date[] ret = new Date[x.size()];
 		for (int i = 0 ; i < x.size() ; i++) {
