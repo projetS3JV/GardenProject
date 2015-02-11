@@ -5,6 +5,7 @@ import jardin.TypeSol;
 
 import java.awt.Color;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -19,12 +20,12 @@ public class Plante implements Comparable<Integer> {
 	 */
 	private int tailleFin;
 
-	private Date[] dateFinFloraison;
+	private ArrayList<Date> dateFinFloraison;
 	
 	/*
 	 * La date de la floraison
 	 */
-	private Date[] dateFloraison;
+	private ArrayList<Date> dateFloraison;
 	
 	/*
 	 * La date de plantation
@@ -69,7 +70,7 @@ public class Plante implements Comparable<Integer> {
 	
 	private int ensoleillement ;
 	
-	private int[] typeSol;
+	private ArrayList<Integer> typeSol;
 	
 	private String description;
 	
@@ -99,10 +100,10 @@ public class Plante implements Comparable<Integer> {
 	}
 	
 
-	public Plante(int tailleFin, Date[] dateFloraison, Date[] dateFinFloraison,
+	public Plante(int tailleFin, ArrayList<Date> dateFloraison, ArrayList<Date> dateFinFloraison,
 			Date datePlantation, Color fleuris, Color nonFleuris, boolean vivace,
 			String nom, String nomL, ImageIcon imgFleurie, TypePlante type,
-			Ensoleillement ensoleillement, /*TypeSol[]*/ int[] typeSol, String description) {
+			Ensoleillement ensoleillement, ArrayList<Integer> typeSol, String description) {
 		this.tailleFin = tailleFin;
 		this.dateFloraison = dateFloraison;
 		this.dateFinFloraison = dateFinFloraison;
@@ -115,12 +116,9 @@ public class Plante implements Comparable<Integer> {
 		this.ImgFleurie = imgFleurie;
 		this.type = type.getValue();
 		this.ensoleillement = ensoleillement.getValue();
-		/*for(int i =0; i< typeSol.length;i++){
-			this.typeSol[i]= typeSol[i].getValue();
-		}*/
 		this.typeSol = typeSol;
 		this.description = description;
-		this.nbDate = this.dateFloraison.length;
+		this.nbDate = this.dateFloraison.size();
 	}
 
 	
@@ -132,12 +130,12 @@ public class Plante implements Comparable<Integer> {
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
-	public Date[] getDateFinFloraison() {
+	public ArrayList<Date> getDateFinFloraison() {
 		return dateFinFloraison;
 	}
 
 
-	public void setDateFinFloraison(Date[] dateFinFloraison) {
+	public void setDateFinFloraison(ArrayList<Date> dateFinFloraison) {
 		this.dateFinFloraison = dateFinFloraison;
 	}
 
@@ -162,11 +160,11 @@ public class Plante implements Comparable<Integer> {
 	}
 
 
-	public int[] getTypeSol() {
+	public ArrayList<Integer> getTypeSol() {
 		return typeSol;
 	}
 
-	public void setTypeSol(int[] typeSol) {
+	public void setTypeSol(ArrayList<Integer> typeSol) {
 		this.typeSol = typeSol;
 	}
 
@@ -190,12 +188,12 @@ public class Plante implements Comparable<Integer> {
 	public void setTailleFin(int tailleFin) {
 		this.tailleFin = tailleFin;
 	}
-	public Date[] getDateFloraison() {
+	public ArrayList<Date> getDateFloraison() {
 		return dateFloraison;
 	}
-	public void setDateFloraison(Date[] dateFloraison) {
+	public void setDateFloraison(ArrayList<Date> dateFloraison) {
 		this.dateFloraison = dateFloraison;
-		this.nbDate= dateFloraison.length;
+		this.nbDate= dateFloraison.size();
 	}
 	public int getNbDate() {
 		return nbDate;

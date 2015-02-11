@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -122,7 +123,7 @@ public final class AccesBD {
 			stat.setString(6, p.getNom());
 			stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 			stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
-			stat.setArray(9,intArrayToJDBXArray(p.getTypeSol(),p.getTypeSol().length));
+			stat.setArray(9, (Array) p.getTypeSol());
 			stat.setDate(10, (Date) p.getDatePlantation());
 			stat.setArray(11, dateArrayToJDBXArray(p.getDateFloraison(), p.getNbDate()));
 			stat.setArray(12, dateArrayToJDBXArray(p.getDateFinFloraison(), p.getNbDate()));
@@ -150,10 +151,11 @@ public final class AccesBD {
 		try {
 			ResultSet rs = this.statement.executeQuery(sql);
 			while(rs.next()) {
+				@SuppressWarnings("unchecked")
 				Plante p = new Plante(
 						rs.getInt(5),
-						JDBCArrayTodateArray(rs.getArray(12)),
-						JDBCArrayTodateArray(rs.getArray(13)),
+						JDBCArrayTodateArray1(rs.getArray(12)),
+						JDBCArrayTodateArray1(rs.getArray(13)),
 						rs.getDate(11), 
 						new Color(rs.getInt(8)), 
 						new Color(rs.getInt(9)), 
@@ -163,9 +165,9 @@ public final class AccesBD {
 						new ImageIcon(path + rs.getString(7) + ext), 
 						TypePlante.values()[rs.getInt(4)], 
 						Ensoleillement.values()[rs.getInt(6)],
-						JDBCArrayTointArray(rs.getArray(10)),
+						JDBCArrayTointArray1(rs.getArray(10)),
 						rs.getString(15)
-						);
+						);//rs.getArray(10) JDBCArrayTointArray1
 				p.setId(rs.getInt(1));
 				this.planteList.add(p);
 			}
@@ -274,7 +276,7 @@ public final class AccesBD {
 				stat.setString(6, p.getNom());
 				stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 				stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
-				stat.setArray(9, intArrayToJDBXArray(p.getTypeSol(), p.getTypeSol().length));
+				stat.setArray(9, (intArrayToJDBXArray(p.getTypeSol(),p.getTypeSol().size())));
 				stat.setDate(10, (Date) p.getDatePlantation());
 				stat.setArray(11, dateArrayToJDBXArray(p.getDateFloraison(), p.getNbDate()));
 				stat.setArray(12, dateArrayToJDBXArray(p.getDateFinFloraison(), p.getNbDate()));
@@ -524,38 +526,53 @@ public final class AccesBD {
 
 	public static void main(String[] args) {
 		AccesBD bd = AccesBD.getInstance();
-		Date[] debut = null;
+		
+		/*Date[] debut = new Date[2];
 		debut[0] = new Date(datee(2010, Calendar.MAY, 12));
 		debut[1] = new Date(datee(2010, Calendar.AUGUST, 19));
 		
-		Date[] fin = null;
+		Date[] fin = new Date[2];
 		fin[0] = new Date(datee(2010, Calendar.JULY, 20));
 		fin[1] = new Date(datee(2010, Calendar.SEPTEMBER, 20));
 		
-		int[] typeSol1 = null;
+		int[] typeSol1 = new int[2];
 		typeSol1[0] = TypeSol.ARGILEUX.getValue();
 		typeSol1[1] = TypeSol.SABLEUX.getValue();
+		*/
+		
+		ArrayList<Date> debut = new ArrayList<>();
+		debut.add(new Date(datee(2010, Calendar.MAY, 12)));
+		debut.add(new Date(datee(2010, Calendar.AUGUST, 19)));
+		
+		ArrayList<Date> fin = new ArrayList<>();
+		fin.add(new Date(datee(2010, Calendar.JULY, 20)));
+		fin.add(new Date(datee(2010, Calendar.SEPTEMBER, 20)));
+		
+		ArrayList<Integer> typeSol1 = new ArrayList<Integer>();
+		typeSol1.add(TypeSol.ARGILEUX.getValue());
+		typeSol1.add(TypeSol.SABLEUX.getValue());
 		
 		Plante p1 = new Plante(180, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.red, Color.green, true,
 				"Rose des peintres", "Rosa x centifolia", new ImageIcon("res/img/popol.png"), TypePlante.BUISSON,
 				Ensoleillement.MIOMBRE, typeSol1,
 				"Ce rosier centfeuilles forme un buisson souple et harmonieux, portant de grosses fleurs globuleuses rose vif, au port retombant, s'épanouissant en coupes bien pleines, au parfum puissant.");
 		
-		debut[0] = new Date(datee(2010, Calendar.MARCH, 5));
+		/*debut[0] = new Date(datee(2010, Calendar.MARCH, 5));
 		debut[1] = null;
 		
 		fin[0] = new Date(datee(2010, Calendar.AUGUST, 31));
-		fin[1] = null;
+		fin[1] = null;*/
 		
 		Plante p2 = new Plante(10, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.blue, Color.green, true,
 				"Trèfle blanc", "(Trifolium repens", new ImageIcon("res/img/popol.png"), TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, typeSol1,"Le trèfle blanc, aussi appelé trèfle rampant, est une plante fourragère très commune dans les prairies et les jardins.");
 		
-		debut[0] = new Date(datee(2010, Calendar.JUNE, 5));
+		/*debut[0] = new Date(datee(2010, Calendar.JUNE, 5));
 		debut[1] = null;
 		
 		fin[0] = new Date(datee(2010, Calendar.OCTOBER, 31));
-		fin[1] = null;
+		fin[1] = null;*/
+		
 		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(15,15,15), Color.green, true,
 						"Marguerite commune", "Leucanthemum vulgare", new ImageIcon("res/img/popol.png"), TypePlante.FLEUR,
 						Ensoleillement.SOLEIL, typeSol1,"");
@@ -627,6 +644,17 @@ public final class AccesBD {
 		}
 		return ret;
 	}
+	
+	public static ArrayList<Integer> JDBCArrayTointArray1(Array T) {
+		ResultSet rs;
+		ArrayList<Integer> x = new ArrayList<Integer>();
+		try {
+			rs = T.getResultSet();
+			while (rs.next()) 
+				x.add(rs.getInt(2));	
+		} catch (SQLException e) {e.printStackTrace();}
+		return x;
+	}
 
 	
 	
@@ -637,6 +665,15 @@ public final class AccesBD {
 			o[i] = new Integer(T[i]);
 		return new JDBCArrayBasic(o, type);
 	}
+	
+	public static JDBCArrayBasic intArrayToJDBXArray(ArrayList<Integer> T, int size) {
+		org.hsqldb.types.Type type = org.hsqldb.types.Type.SQL_INTEGER;
+		Object[] o = new Object[size];
+		for (int i = 0 ; i< size ; i++) 
+			o[i] = new Integer(T.get(i));
+		return new JDBCArrayBasic(o, type);
+	}
+	
 	
 	@SuppressWarnings("deprecation")
 	public static JDBCArrayBasic dateArrayToJDBXArray(Date[] d, int size){
@@ -661,6 +698,27 @@ public final class AccesBD {
 			ret[i] = x.get(i);
 		}
 		return ret;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static JDBCArrayBasic dateArrayToJDBXArray(ArrayList<Date> d, int size){
+		org.hsqldb.types.Type type = org.hsqldb.types.Type.SQL_DATE;
+		Object[] o = new Object[size];
+		for (int i = 0 ; i< size ; i++){
+			o[i] = new Date(datee(d.get(i).getYear(), d.get(i).getMonth(), d.get(i).getDay()));
+		}
+		return new JDBCArrayBasic(o, type);
+	}
+	
+	public static ArrayList<Date> JDBCArrayTodateArray1(Array T) {
+		ResultSet rs;
+		ArrayList<Date> x = new ArrayList<Date>();
+		try {
+			rs = T.getResultSet();
+			while (rs.next()) 
+				x.add((Date)rs.getDate(2));	
+		} catch (SQLException e) {e.printStackTrace();}
+		return x;
 	}
 	
 }
