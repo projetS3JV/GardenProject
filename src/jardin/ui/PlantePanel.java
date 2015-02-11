@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,7 +16,6 @@ import javax.swing.SwingConstants;
 public class PlantePanel extends JPanel implements ListCellRenderer{
 	
 	private static final long serialVersionUID = 1L;
-	private JPanel plantePanel;
 	private JLabel image;
 	private JLabel name, desc, vide;
 	
@@ -35,9 +33,11 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 			int index, boolean isSelected, boolean cellHasFocus) {
 		Plante p = (Plante) value; //res/img/test.png
 		
-		if (isSelected)
+		if (isSelected){
 			this.setBackground(list.getSelectionBackground());
-		else 
+			
+			InfoPlante iP = new InfoPlante(p);
+		}else 
 			this.setBackground(Color.WHITE);
 		
 		ImageIcon img = p.getImgFleurie();

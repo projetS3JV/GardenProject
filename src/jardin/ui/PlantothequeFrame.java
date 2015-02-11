@@ -34,7 +34,7 @@ public class PlantothequeFrame extends JFrame {
 	
 	public PlantothequeFrame() {
 		this.setResizable(false);
-		this.setSize(400, 500);
+		this.setSize(800, 500);
 		this.setTitle("Plantotheque");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
@@ -44,7 +44,7 @@ public class PlantothequeFrame extends JFrame {
 		listePlante = new JList<Plante>(modelList);
 		SortedListModel.sortedByName((List)listePlante);
 		listePlante.setCellRenderer(new PlantePanel());
-		this.add(new JScrollPane(this.listePlante));
+		this.add(new JScrollPane(this.listePlante), BorderLayout.CENTER);
 
 		
 		//Creation de la barre de defilement et des boutons Ajouter et Annuler.
@@ -84,21 +84,12 @@ public class PlantothequeFrame extends JFrame {
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
 		
-		JButton ajouter = new JButton("Ajouter");
 		JButton fermer = new JButton("Fermer");
-		form.add(ajouter);
 		form.add(fermer);
 		
 		this.add(form, BorderLayout.SOUTH);
 		
-		//Ajout des actionListener sur les boutons.
-		ajouter.addActionListener(new ActionListener() {
-			//@Override
-			public void actionPerformed(ActionEvent e) {
-				AbstractZone zone = MainFrame.getInstance().getJardinPanel().getSelected();
-				((ZonePlantable) zone).setPlante(select);
-			}
-		});
+		//Ajout des actionListener sur le bouton.
 		
 		fermer.addActionListener(new ActionListener() {
 			//@Override
