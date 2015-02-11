@@ -63,8 +63,8 @@ public class ZonePlantable extends AbstractZone {
 	public void setPlante(Plante plante) throws IllegalArgumentException{
 		
 		// verification si la plante peut être planté
-		for(int i =0; i< plante.getTypeSol().length ; i++)
-			if(plante.getTypeSol()[i] != this.typeSol)
+		for(int i =0; i< plante.getTypeSol().size() ; i++)
+			if(plante.getTypeSol().get(i) != this.typeSol)
 				throw new IllegalArgumentException("impossible de mettre une plante, le type de sol ne correspond pas");
 		if (plante.getEnsoleillement() != this.ensoleillement)
 			throw new IllegalArgumentException("impossible de mettre une plante, l'ensoleillement ne correspond pas");
@@ -94,8 +94,8 @@ public class ZonePlantable extends AbstractZone {
 	 * @throws IllegalArgumentException si c'est impossible
 	 */
 	public void setTypeSol(int nouveau) throws IllegalArgumentException {
-		for(int i =0; i< plante.getTypeSol().length ; i++)
-			if(this.plante != null && plante.getTypeSol()[i] != nouveau)
+		for(int i =0; i< plante.getTypeSol().size() ; i++)
+			if(this.plante != null && plante.getTypeSol().get(i) != nouveau)
 				throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
 		
 		this.typeSol = nouveau;
