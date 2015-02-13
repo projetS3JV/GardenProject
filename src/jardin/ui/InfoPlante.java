@@ -47,6 +47,10 @@ public class InfoPlante extends JFrame {
 		JLabel cf = new JLabel("Couleur en fleur : ");
 		JButton bf = new JButton("     ");
 		bf.setBackground(p.getCouleur_en_fleur());
+		JPanel tmp2 = new JPanel();
+		tmp2.setLayout(new FlowLayout());
+		tmp2.add(cf);
+		tmp2.add(bf);
 		
 		//Concernant les dates de floraison.
 		ArrayList<String> tabDates = new ArrayList<String>(p.getDateFloraison().size());
@@ -72,7 +76,10 @@ public class InfoPlante extends JFrame {
 		mainPanel.add(typeEns, BorderLayout.CENTER);
 		mainPanel.add(typeSol, BorderLayout.CENTER);
 		mainPanel.add(imageLabel, BorderLayout.EAST);
-		mainPanel.add(cf, BorderLayout.EAST);
+		mainPanel.add(tmp1, BorderLayout.EAST);
+		mainPanel.add(tmp2, BorderLayout.EAST);
+		mainPanel.add(dates);
+		mainPanel.add(vivace);
 		
 	}
 }

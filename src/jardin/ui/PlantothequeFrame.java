@@ -31,6 +31,11 @@ public class PlantothequeFrame extends JFrame {
 	private Plante select = null;
 	private JList listePlante;
 	private SortedListModel modelList = instance.getPlantes();
+	private JLabel  rechercher, nom, vide, famille, typePlante, typeSol, ensoleillement;
+	private JTextField nomF, familleF;
+	private JComboBox<TypePlante> typePlanteComboBox;
+	private JComboBox<TypeSol> typeSolComboBox;
+	private JComboBox<Ensoleillement> ensoleillementComboBox;
 	
 	public PlantothequeFrame() {
 		this.setResizable(false);
@@ -48,33 +53,29 @@ public class PlantothequeFrame extends JFrame {
 
 		
 		//Creation de la barre de defilement et des boutons Ajouter et Annuler.
-		JLabel research = new JLabel("Rechercher :");
+		rechercher.setText("Rechercher :");
 		
-		JLabel nom = new JLabel("Nom :");
-		JTextField nomF = new JTextField();
+		nom.setText("Nom :");
 		
-		JLabel vide = new JLabel();
+		famille.setText("Famille :");
 		
-		JLabel famille = new JLabel("Famille :");
-		JTextField familleF = new JTextField();
-		
-		JLabel typePlante = new JLabel("Type de plante");
+		typePlante.setText("Type de plante");
 		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE};
-		JComboBox<TypePlante> typePlanteComboBox = new JComboBox(typePlanteBoxItems);
+		typePlanteComboBox = new JComboBox(typePlanteBoxItems);
 		
-		JLabel typeSol = new JLabel("Type de sol");
+		typeSol.setText("Type de sol");
 		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
-		JComboBox<TypeSol> typeSolComboBox = new JComboBox<>(typeSolBoxItems);
+		typeSolComboBox = new JComboBox<>(typeSolBoxItems);
 		
-		JLabel ensoleillement = new JLabel("Ensoleillement");
+		ensoleillement.setText("Ensoleillement");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
-		JComboBox<Ensoleillement> ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
+		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
 		
 		
 		//Panel contenant les outils de recherche
 		JPanel form = new JPanel();
 		form.setLayout(new GridLayout(9, 2, 5, 5));
-		form.add(research);
+		form.add(rechercher);
 		form.add(vide);
 		form.add(nom);
 		form.add(nomF);
@@ -86,15 +87,26 @@ public class PlantothequeFrame extends JFrame {
 		
 		JButton fermer = new JButton("Fermer");
 		form.add(fermer);
+		JButton ajouterNewPlante = new JButton("Créer une plante");
+		form.add(ajouterNewPlante);
 		
 		this.add(form, BorderLayout.SOUTH);
 		
-		//Ajout des actionListener sur le bouton.
+		//Ajout des actionListener sur les boutons.
 		
 		fermer.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
 				PlantothequeFrame.this.setVisible(false);
+			}
+		});
+		
+		ajouterNewPlante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Plante p = CreateNewPlante.showCreateNewPlante();
+				if (p != null) {
+					AccesBD.getInstance().insertPlante(p);
+				}
 			}
 		});
 		
