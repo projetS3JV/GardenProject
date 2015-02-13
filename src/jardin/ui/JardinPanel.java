@@ -172,9 +172,9 @@ public class JardinPanel extends JPanel{
 			g.drawPolygon(zone);
 			if (zone.getPlante() != null) {
 				int d = MainFrame.getInstance().getCalendarPanel().getJour();
-				for(int i = 0; i < zone.getPlante().getDateFloraison().length; i++){
-					int d1 = sqlDateToCalendar(zone.getPlante().getDateFloraison()[i]).get(Calendar.DAY_OF_YEAR);
-					int d2 = sqlDateToCalendar(zone.getPlante().getDateFinFloraison()[i]).get(Calendar.DAY_OF_YEAR);
+				for(int i = 0; i < zone.getPlante().getDateFloraison().size(); i++){
+					int d1 = sqlDateToCalendar(zone.getPlante().getDateFloraison().get(i)).get(Calendar.DAY_OF_YEAR);
+					int d2 = sqlDateToCalendar(zone.getPlante().getDateFinFloraison().get(i)).get(Calendar.DAY_OF_YEAR);
 					if (d >= d1 && d <= d2) {
 						g.setColor(zone.getPlante().getCouleur_en_fleur());			
 						g.fillPolygon(zone);
