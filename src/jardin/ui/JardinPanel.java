@@ -41,7 +41,7 @@ public class JardinPanel extends JPanel{
 	private AbstractZone zone;
 	private boolean draw = false;
 	private int px, py, tx, ty;
-	private AbstractZone selected = null;
+	private static AbstractZone selected = null;
 	private AccesBD bd = AccesBD.getInstance();
 	private boolean plantable = false;
 	private boolean remove = false;
@@ -197,7 +197,7 @@ public class JardinPanel extends JPanel{
 		}
 	}
 
-	public AbstractZone getSelected() {
+	public static AbstractZone getSelected() {
 		return selected;
 	}
 

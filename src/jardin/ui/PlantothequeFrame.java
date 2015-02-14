@@ -66,11 +66,14 @@ public class PlantothequeFrame extends JFrame {
 		typeSol.setText("Type de sol");
 		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
 		typeSolComboBox = new JComboBox<>(typeSolBoxItems);
-		typeSolComboBox.setSelectedIndex((ZonePlantable)JardinPanel.getSelected().getTypeSol());
+		//Copie de la Zone Plantable sélectionnée pour avoir accès à ses attributs.
+		ZonePlantable tmp = (ZonePlantable)JardinPanel.getSelected();
+		typeSolComboBox.setSelectedIndex(tmp.getTypeSol());
 		
 		ensoleillement.setText("Ensoleillement");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
 		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
+		ensoleillementComboBox.setSelectedIndex(tmp.getEnsoleillement());
 		
 		
 		//Panel contenant les outils de recherche
@@ -120,11 +123,6 @@ public class PlantothequeFrame extends JFrame {
 	public void setSelected(PlantePanel plantePanel, int id) {
 		select = (Plante) this.listePlante.getSelectedValue();
 	}
-	
-	public static void main(String arg[]) {
-		PlantothequeFrame p = new PlantothequeFrame();
-		p.setVisible(true);
-	}
 
 	public JTextField getNomF() {
 		return nomF;
@@ -165,6 +163,11 @@ public class PlantothequeFrame extends JFrame {
 	public void setEnsoleillementComboBox(
 			JComboBox<Ensoleillement> ensoleillementComboBox) {
 		this.ensoleillementComboBox = ensoleillementComboBox;
+	}
+	
+	public static void main(String arg[]) {
+		PlantothequeFrame p = new PlantothequeFrame();
+		p.setVisible(true);
 	}
 	
 }
