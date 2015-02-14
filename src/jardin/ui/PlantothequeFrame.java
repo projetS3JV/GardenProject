@@ -6,14 +6,12 @@ import jardin.SortedListModel;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
-import jardin.zone.AbstractZone;
 import jardin.zone.ZonePlantable;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -47,33 +45,55 @@ public class PlantothequeFrame extends JFrame {
 		
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		listePlante = new JList<Plante>(modelList);
-		SortedListModel.sortedByName((List)listePlante);
+		//SortedListModel.sortedByName((List)listePlante);
 		listePlante.setCellRenderer(new PlantePanel());
 		this.add(new JScrollPane(this.listePlante), BorderLayout.CENTER);
 
 		
 		//Creation de la barre de defilement et des boutons Ajouter et Annuler.
-		rechercher.setText("Rechercher :");
+		rechercher = new JLabel("Rechercher : ");
 		
-		nom.setText("Nom :");
+		nom = new JLabel("Nom :");
 		
-		famille.setText("Famille :");
+		vide = new JLabel();
 		
-		typePlante.setText("Type de plante");
-		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE};
+		famille = new JLabel("Famille :");
+		
+		typePlante = new JLabel("Type de plante");
+		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE, null};
 		typePlanteComboBox = new JComboBox(typePlanteBoxItems);
+		typePlanteComboBox.setSelectedItem(null);;
 		
-		typeSol.setText("Type de sol");
-		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
-		typeSolComboBox = new JComboBox<>(typeSolBoxItems);
+		typeSol = new JLabel("Type de sol");
+		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX, null};
+		typeSolComboBox = new JComboBox(typeSolBoxItems);
 		//Copie de la Zone Plantable sélectionnée pour avoir accès à ses attributs.
 		ZonePlantable tmp = (ZonePlantable)JardinPanel.getSelected();
-		typeSolComboBox.setSelectedIndex(tmp.getTypeSol());
+		/*typeSolComboBox.setSelectedIndex(tmp.getTypeSol());
+		int typeS = tmp.getTypeSol();
+		String typeS2 = "";
+		     if(typeS == 0) typeS2 = "ARGILEUX";
+		else if(typeS == 1) typeS2 = "CALCAIRE";
+		else if(typeS == 2) typeS2 = "HUMIFERE";
+		else if(typeS == 3) typeS2 = "LIMONIEUX";
+		else                typeS2 = "SABLEUX";*/
+		typeSolComboBox.setSelectedItem(null);
 		
-		ensoleillement.setText("Ensoleillement");
-		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
+		
+		ensoleillement = new JLabel("Ensoleillement");
+		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL, null};
 		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
-		ensoleillementComboBox.setSelectedIndex(tmp.getEnsoleillement());
+				/*ensoleillementComboBox.setSelectedIndex(tmp.getEnsoleillement());
+				int typeE = tmp.getTypeSol();
+				String typeE2 = "";
+				     if(typeE == 0) typeE2 = "MIOMBRE";
+				else if(typeE == 1) typeE2 = "OMBRE";
+				else                typeE2 = "SOLEIL";
+				typeSolComboBox.setSelectedItem(null);*/
+		ensoleillementComboBox.setSelectedItem(null);;
+		
+		nomF = new JTextField();
+		familleF = new JTextField();
 		
 		
 		//Panel contenant les outils de recherche
