@@ -167,7 +167,7 @@ public final class AccesBD {
 						Ensoleillement.values()[rs.getInt(6)],
 						JDBCArrayTointArray1(rs.getArray(10)),
 						rs.getString(15)
-						);//rs.getArray(10) JDBCArrayTointArray1
+						);
 				p.setId(rs.getInt(1));
 				this.planteList.add(p);
 			}

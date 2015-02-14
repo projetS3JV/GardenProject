@@ -125,5 +125,46 @@ public class PlantothequeFrame extends JFrame {
 		PlantothequeFrame p = new PlantothequeFrame();
 		p.setVisible(true);
 	}
+
+	public JTextField getNomF() {
+		return nomF;
+	}
+
+	public void setNomF(JTextField nomF) {
+		this.nomF = nomF;
+	}
+
+	public JTextField getFamilleF() {
+		return familleF;
+	}
+
+	public void setFamilleF(JTextField familleF) {
+		this.familleF = familleF;
+	}
+
+	public JComboBox<TypePlante> getTypePlanteComboBox() {
+		return typePlanteComboBox;
+	}
+
+	public void setTypePlanteComboBox(JComboBox<TypePlante> typePlanteComboBox) {
+		this.typePlanteComboBox = typePlanteComboBox;
+	}
+
+	public JComboBox<TypeSol> getTypeSolComboBox() {
+		return typeSolComboBox;
+	}
+
+	public void setTypeSolComboBox(JComboBox<TypeSol> typeSolComboBox) {
+		this.typeSolComboBox = typeSolComboBox;
+	}
+
+	public JComboBox<Ensoleillement> getEnsoleillementComboBox() {
+		return ensoleillementComboBox;
+	}
+
+	public void setEnsoleillementComboBox(
+			JComboBox<Ensoleillement> ensoleillementComboBox) {
+		this.ensoleillementComboBox = ensoleillementComboBox;
+	}
 	
 }
