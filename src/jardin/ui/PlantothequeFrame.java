@@ -66,6 +66,7 @@ public class PlantothequeFrame extends JFrame {
 		typeSol.setText("Type de sol");
 		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
 		typeSolComboBox = new JComboBox<>(typeSolBoxItems);
+		typeSolComboBox.setSelectedIndex((ZonePlantable)JardinPanel.getSelected().getTypeSol());
 		
 		ensoleillement.setText("Ensoleillement");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
