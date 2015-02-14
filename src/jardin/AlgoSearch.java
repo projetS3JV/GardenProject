@@ -1,16 +1,10 @@
 package jardin;
 
-import java.util.ArrayList;
-
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
 import jardin.ui.PlantothequeFrame;
-import jardin.Ensoleillement;
 
-import javax.swing.JFrame;
-import javax.swing.JList;
-
-import sun.swing.UIAction;
+import java.util.ArrayList;
 
 public class AlgoSearch {
 	private AccesBD instance = AccesBD.getInstance();

@@ -59,11 +59,13 @@ public class PlantothequeFrame extends JFrame {
 		
 		famille = new JLabel("Famille :");
 		
+		//Concernant le type de la plante
 		typePlante = new JLabel("Type de plante");
 		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE, null};
 		typePlanteComboBox = new JComboBox(typePlanteBoxItems);
 		typePlanteComboBox.setSelectedItem(null);;
 		
+		//Concernant le type de sol
 		typeSol = new JLabel("Type de sol");
 		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX, null};
 		typeSolComboBox = new JComboBox(typeSolBoxItems);
@@ -79,7 +81,7 @@ public class PlantothequeFrame extends JFrame {
 		else                typeS2 = "SABLEUX";*/
 		typeSolComboBox.setSelectedItem(null);
 		
-		
+		//Concernant l'ensoleillement
 		ensoleillement = new JLabel("Ensoleillement");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL, null};
 		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
@@ -90,7 +92,7 @@ public class PlantothequeFrame extends JFrame {
 				else if(typeE == 1) typeE2 = "OMBRE";
 				else                typeE2 = "SOLEIL";
 				typeSolComboBox.setSelectedItem(null);*/
-		ensoleillementComboBox.setSelectedItem(null);;
+		ensoleillementComboBox.setSelectedItem(null);
 		
 		nomF = new JTextField();
 		familleF = new JTextField();
@@ -180,8 +182,7 @@ public class PlantothequeFrame extends JFrame {
 		return ensoleillementComboBox;
 	}
 
-	public void setEnsoleillementComboBox(
-			JComboBox<Ensoleillement> ensoleillementComboBox) {
+	public void setEnsoleillementComboBox(JComboBox<Ensoleillement> ensoleillementComboBox) {
 		this.ensoleillementComboBox = ensoleillementComboBox;
 	}
 	
