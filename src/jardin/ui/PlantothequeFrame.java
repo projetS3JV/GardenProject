@@ -1,6 +1,7 @@
 package jardin.ui;
 
 import jardin.AccesBD;
+import jardin.AlgoSearch;
 import jardin.Ensoleillement;
 import jardin.SortedListModel;
 import jardin.TypeSol;
@@ -12,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -95,6 +97,16 @@ public class PlantothequeFrame extends JFrame {
 		form.add(typePlante); form.add(typePlanteComboBox);
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
+		
+		JButton recherButton = new JButton("Rechercher");
+		recherButton.addActionListener(new AlgoSearch() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Plante> algo = new ArrayList<Plante>();
+				algo = algoSearch(PlantothequeFrame.this);
+			}
+		});
+		form.add(recherButton);
 		
 		JButton fermer = new JButton("Fermer");
 		form.add(fermer);

@@ -1,6 +1,7 @@
 package jardin.ui;
 
 import jardin.AccesBD;
+import jardin.AlgoSearch;
 import jardin.Ensoleillement;
 import jardin.SortedListModel;
 import jardin.TypeSol;
@@ -11,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -83,10 +85,11 @@ public class PlantothequePanel extends JPanel {
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
 		
 		JButton recherButton = new JButton("Rechercher");
-		recherButton.addActionListener(new ActionListener() {
+		recherButton.addActionListener(new AlgoSearch() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				ArrayList<Plante> algo = new ArrayList<Plante>();
+				algo = algoSearch(PlantothequePanel.this);
 			}
 		});
 		form.add(recherButton);
@@ -94,8 +97,64 @@ public class PlantothequePanel extends JPanel {
 		this.add(form, BorderLayout.SOUTH);
 	}
 
+	public JLabel getTypePlante() {
+		return typePlante;
+	}
+
+	public void setTypePlante(JLabel typePlante) {
+		this.typePlante = typePlante;
+	}
+
+	public JLabel getTypeSol() {
+		return typeSol;
+	}
+
+	public void setTypeSol(JLabel typeSol) {
+		this.typeSol = typeSol;
+	}
+
+	public JLabel getEnsoleillement() {
+		return ensoleillement;
+	}
+
+	public void setEnsoleillement(JLabel ensoleillement) {
+		this.ensoleillement = ensoleillement;
+	}
+
+	public JTextField getNomF() {
+		return nomF;
+	}
+
+	public void setNomF(JTextField nomF) {
+		this.nomF = nomF;
+	}
+
+	public JComboBox<TypePlante> getTypePlanteComboBox() {
+		return typePlanteComboBox;
+	}
+
+	public void setTypePlanteComboBox(JComboBox<TypePlante> typePlanteComboBox) {
+		this.typePlanteComboBox = typePlanteComboBox;
+	}
+
+	public JComboBox<TypeSol> getTypeSolComboBox() {
+		return typeSolComboBox;
+	}
+
+	public void setTypeSolComboBox(JComboBox<TypeSol> typeSolComboBox) {
+		this.typeSolComboBox = typeSolComboBox;
+	}
+
+	public JComboBox<Ensoleillement> getEnsoleillementComboBox() {
+		return ensoleillementComboBox;
+	}
+
+	public void setEnsoleillementComboBox(JComboBox<Ensoleillement> ensoleillementComboBox) {
+		this.ensoleillementComboBox = ensoleillementComboBox;
+	}
+
 	/**
-	 * Methode ettant en memoire la plante si selectionne
+	 * Methode mettant en memoire la plante si selectionne
 	 */
 	public void setSelected(PlantePanel plantePanel, int id) {
 		select = (Plante) this.listePlante.getSelectedValue();
