@@ -54,7 +54,7 @@ public class AlgoSearch {
 		return false;
 	}
 	
-	ArrayList AlgoSearch(PlantothequeFrame pf){
+	public ArrayList AlgoSearch(PlantothequeFrame pf){
 		Ensoleillement e = (Ensoleillement) pf.getEnsoleillementComboBox().getSelectedItem();
 		TypeSol ts = (TypeSol)pf.getTypeSolComboBox().getSelectedItem();
 		TypePlante tp = (TypePlante)pf.getTypePlanteComboBox().getSelectedItem();

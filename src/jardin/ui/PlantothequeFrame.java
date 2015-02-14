@@ -71,27 +71,12 @@ public class PlantothequeFrame extends JFrame {
 		typeSolComboBox = new JComboBox(typeSolBoxItems);
 		//Copie de la Zone Plantable sélectionnée pour avoir accès à ses attributs.
 		ZonePlantable tmp = (ZonePlantable)JardinPanel.getSelected();
-		/*typeSolComboBox.setSelectedIndex(tmp.getTypeSol());
-		int typeS = tmp.getTypeSol();
-		String typeS2 = "";
-		     if(typeS == 0) typeS2 = "ARGILEUX";
-		else if(typeS == 1) typeS2 = "CALCAIRE";
-		else if(typeS == 2) typeS2 = "HUMIFERE";
-		else if(typeS == 3) typeS2 = "LIMONIEUX";
-		else                typeS2 = "SABLEUX";*/
 		typeSolComboBox.setSelectedItem(null);
 		
 		//Concernant l'ensoleillement
 		ensoleillement = new JLabel("Ensoleillement");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL, null};
 		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
-				/*ensoleillementComboBox.setSelectedIndex(tmp.getEnsoleillement());
-				int typeE = tmp.getTypeSol();
-				String typeE2 = "";
-				     if(typeE == 0) typeE2 = "MIOMBRE";
-				else if(typeE == 1) typeE2 = "OMBRE";
-				else                typeE2 = "SOLEIL";
-				typeSolComboBox.setSelectedItem(null);*/
 		ensoleillementComboBox.setSelectedItem(null);
 		
 		nomF = new JTextField();

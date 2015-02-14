@@ -6,10 +6,11 @@ import jardin.SortedListModel;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
-import jardin.zone.ZonePlantable;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -42,7 +43,7 @@ public class PlantothequePanel extends JPanel {
 		listePlante.setCellRenderer(new PlantePanel());
 		this.add(new JScrollPane(this.listePlante));
 
-		JLabel research = new JLabel("Rechercher :");
+		JLabel rechercher = new JLabel("Rechercher :");
 
 		JLabel nom = new JLabel("Nom :");
 		JTextField nomF = new JTextField();
@@ -71,7 +72,7 @@ public class PlantothequePanel extends JPanel {
 
 		JPanel form = new JPanel();
 		form.setLayout(new GridLayout(9, 2, 5, 5));
-		form.add(research);
+		form.add(rechercher);
 		form.add(vide);
 		form.add(nom);
 		form.add(nomF);
@@ -80,7 +81,14 @@ public class PlantothequePanel extends JPanel {
 		form.add(typePlante); form.add(typePlanteComboBox);
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
+		
 		JButton recherButton = new JButton("Rechercher");
+		recherButton.addActionListener(new ActionListener() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		form.add(recherButton);
 
 		this.add(form, BorderLayout.SOUTH);
