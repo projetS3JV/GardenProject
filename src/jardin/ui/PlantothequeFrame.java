@@ -186,6 +186,14 @@ public class PlantothequeFrame extends JFrame {
 		this.ensoleillementComboBox = ensoleillementComboBox;
 	}
 	
+	public JList getListePlante() {
+		return listePlante;
+	}
+
+	public void setListePlante(JList listePlante) {
+		this.listePlante = listePlante;
+	}
+
 	public static void main(String arg[]) {
 		PlantothequeFrame p = new PlantothequeFrame();
 		p.setVisible(true);

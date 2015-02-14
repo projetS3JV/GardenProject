@@ -11,6 +11,7 @@ import jardin.zone.ZonePlantable;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -52,8 +53,9 @@ public class PlantothequePanel extends JPanel {
 		JTextField familleF = new JTextField();
 
 		JLabel typePlante = new JLabel("Type de plante");
-		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE};
+		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE, null};
 		JComboBox<TypePlante> typePlanteComboBox = new JComboBox(typePlanteBoxItems);
+		typePlanteComboBox.setSelectedItem(null);
 
 		//Concernant le type de sol
 		typeSol = new JLabel("Type de sol");
@@ -64,7 +66,8 @@ public class PlantothequePanel extends JPanel {
 		//Concernant l'ensoleillement
 		ensoleillement = new JLabel("Ensoleillement");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL, null};
-		ensoleillementComboBox = new JComboBox(ensoleillementBoxItems);;
+		ensoleillementComboBox = new JComboBox(ensoleillementBoxItems);
+		ensoleillementComboBox.setSelectedItem(null);
 
 		JPanel form = new JPanel();
 		form.setLayout(new GridLayout(9, 2, 5, 5));
@@ -77,6 +80,8 @@ public class PlantothequePanel extends JPanel {
 		form.add(typePlante); form.add(typePlanteComboBox);
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
+		JButton recherButton = new JButton("Rechercher");
+		form.add(recherButton);
 
 		this.add(form, BorderLayout.SOUTH);
 	}
