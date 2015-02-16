@@ -383,7 +383,7 @@ public class CreateNewPlante extends JDialog{
 				if(!this.imageFleurie.isEmpty()){
 					img = new ImageIcon(this.imageFleurie);
 				}
-				this.p = new Plante(this.tailleFinale, this.debutsFloraison, this.finsFloraison, datePlantation, this.couleurFleurie, this.couleurNonFleurie, this.vivace, this.nom, this.nomLatin, img, this.typePlante, this.ensoleillement, this.typesSol, this.description);
+				this.p = new Plante(this.tailleFinale, this.debutsFloraison, this.finsFloraison, datePlantation, this.couleurFleurie, this.couleurNonFleurie, this.vivace, this.nom, this.nomLatin, this.imageFleurie, this.typePlante, this.ensoleillement, this.typesSol, this.description);
 				AccesBD.getInstance().insertPlante(this.p);
 			}
 		});

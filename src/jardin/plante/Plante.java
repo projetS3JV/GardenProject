@@ -61,6 +61,7 @@ public class Plante implements Comparable<Integer> {
 	 * L'image de la plante fleurie
 	 */
 	private ImageIcon ImgFleurie;
+	private String pathImg;
 	
 
 	/*
@@ -102,7 +103,7 @@ public class Plante implements Comparable<Integer> {
 
 	public Plante(int tailleFin, ArrayList<Date> dateFloraison, ArrayList<Date> dateFinFloraison,
 			Date datePlantation, Color fleuris, Color nonFleuris, boolean vivace,
-			String nom, String nomL, ImageIcon imgFleurie, TypePlante type,
+			String nom, String nomL, String imgFleurie, TypePlante type,
 			Ensoleillement ensoleillement, ArrayList<Integer> typeSol, String description) {
 		this.tailleFin = tailleFin;
 		this.dateFloraison = dateFloraison;
@@ -113,7 +114,8 @@ public class Plante implements Comparable<Integer> {
 		this.vivace = vivace;
 		this.nom = nom;
 		this.nomL = nomL;
-		this.ImgFleurie = imgFleurie;
+		this.ImgFleurie = new ImageIcon(imgFleurie);
+		this.pathImg = imgFleurie;
 		this.type = type.getValue();
 		this.ensoleillement = ensoleillement.getValue();
 		this.typeSol = typeSol;
@@ -130,6 +132,16 @@ public class Plante implements Comparable<Integer> {
 	// Getter et Setter ---------------------------------------------------------------------------------
 	
 	
+	public String getPathImg() {
+		return pathImg;
+	}
+
+
+	public void setPathImg(String pathImg) {
+		this.pathImg = pathImg;
+	}
+
+
 	public ArrayList<Date> getDateFinFloraison() {
 		return dateFinFloraison;
 	}

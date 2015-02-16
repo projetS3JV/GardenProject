@@ -5,7 +5,7 @@ CREATE TABLE plante (
 	type_Plante		INTEGER,
 	hauteur			INTEGER,
 	luminosite		INTEGER,
-	url_Image_En_Fleur	VARCHAR(50),
+	url_Image_En_Fleur	VARCHAR(100),
 	couleur_en_fleur	INTEGER,
 	couleur_non_fleuris	INTEGER,
 	type_Sol		INTEGER ARRAY,
@@ -13,7 +13,7 @@ CREATE TABLE plante (
 	date_DebutFloraison	DATE ARRAY,
 	date_FinFloraison	DATE ARRAY,
 	vivace			BOOLEAN,
-	description		VARCHAR(50)
+	description		VARCHAR(1000)
 )
 
 CREATE TABLE jardin (

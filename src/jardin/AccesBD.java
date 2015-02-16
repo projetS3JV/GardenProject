@@ -114,16 +114,22 @@ public final class AccesBD {
 		//Il faut trouver une solution pour les images des plantes
 		String sql = "INSERT INTO PLANTE VALUES (null, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
+			
 			PreparedStatement stat = this.connection.prepareStatement(sql);
 			stat.setString(1, p.getNom());
 			stat.setString(2, p.getNomL());
 			stat.setInt(3, p.getType());
 			stat.setInt(4, p.getTailleFin());
 			stat.setInt(5, p.getEnsoleillement());
-			stat.setString(6, p.getNom());
+			stat.setString(6, p.getPathImg());
 			stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 			stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
-			stat.setArray(9, (Array) p.getTypeSol());
+			
+			Object[] o = new Object[p.getTypeSol().size()];
+			for(int i =0; i< p.getTypeSol().size(); i++)
+				o[i]=p.getTypeSol().get(i);
+			
+			stat.setArray(9, connection.createArrayOf("INTEGER",o));
 			stat.setDate(10, (Date) p.getDatePlantation());
 			stat.setArray(11, dateArrayToJDBXArray(p.getDateFloraison(), p.getNbDate()));
 			stat.setArray(12, dateArrayToJDBXArray(p.getDateFinFloraison(), p.getNbDate()));
@@ -151,7 +157,6 @@ public final class AccesBD {
 		try {
 			ResultSet rs = this.statement.executeQuery(sql);
 			while(rs.next()) {
-				@SuppressWarnings("unchecked")
 				Plante p = new Plante(
 						rs.getInt(5),
 						JDBCArrayTodateArray1(rs.getArray(12)),
@@ -162,7 +167,7 @@ public final class AccesBD {
 						rs.getBoolean(14),
 						rs.getString(2),
 						rs.getString(3),
-						new ImageIcon(path + rs.getString(7) + ext), 
+						"path + rs.getString(7) + ext", 
 						TypePlante.values()[rs.getInt(4)], 
 						Ensoleillement.values()[rs.getInt(6)],
 						JDBCArrayTointArray1(rs.getArray(10)),
@@ -273,7 +278,7 @@ public final class AccesBD {
 				stat.setInt(3, p.getType());
 				stat.setInt(4, p.getTailleFin());
 				stat.setInt(5, p.getEnsoleillement());
-				stat.setString(6, p.getNom());
+				stat.setString(6, p.getImgFleurie().toString());
 				stat.setInt(7, p.getCouleur_en_fleur().getRGB());
 				stat.setInt(8, p.getCouleur_non_fleuris().getRGB());
 				stat.setArray(9, (intArrayToJDBXArray(p.getTypeSol(),p.getTypeSol().size())));
@@ -552,8 +557,12 @@ public final class AccesBD {
 		typeSol1.add(TypeSol.ARGILEUX.getValue());
 		typeSol1.add(TypeSol.SABLEUX.getValue());
 		
+		ArrayList<Integer> typeSol2 = new ArrayList<Integer>();
+		typeSol2.add(TypeSol.ARGILEUX.getValue());
+		typeSol2.add(TypeSol.CALCAIRE.getValue());
+		
 		Plante p1 = new Plante(180, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.red, Color.green, true,
-				"Rose des peintres", "Rosa x centifolia", new ImageIcon("res/img/popol.png"), TypePlante.BUISSON,
+				"Rose des peintres", "Rosa x centifolia", "res/img/popol.png", TypePlante.BUISSON,
 				Ensoleillement.MIOMBRE, typeSol1,
 				"Ce rosier centfeuilles forme un buisson souple et harmonieux, portant de grosses fleurs globuleuses rose vif, au port retombant, s'épanouissant en coupes bien pleines, au parfum puissant.");
 		
@@ -564,7 +573,7 @@ public final class AccesBD {
 		fin[1] = null;*/
 		
 		Plante p2 = new Plante(10, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.blue, Color.green, true,
-				"Trèfle blanc", "(Trifolium repens", new ImageIcon("res/img/popol.png"), TypePlante.FLEUR,
+				"Trèfle blanc", "(Trifolium repens", "res/img/popol.png", TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, typeSol1,"Le trèfle blanc, aussi appelé trèfle rampant, est une plante fourragère très commune dans les prairies et les jardins.");
 		
 		/*debut[0] = new Date(datee(2010, Calendar.JUNE, 5));
@@ -574,8 +583,9 @@ public final class AccesBD {
 		fin[1] = null;*/
 		
 		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(15,15,15), Color.green, true,
-						"Marguerite commune", "Leucanthemum vulgare", new ImageIcon("res/img/popol.png"), TypePlante.FLEUR,
-						Ensoleillement.SOLEIL, typeSol1,"");
+						"Marguerite commune", "Leucanthemum vulgare", "res/img/popol.png", TypePlante.FLEUR,
+						Ensoleillement.SOLEIL, typeSol2,"");
+		
 		bd.insertPlante(p1);
 		bd.insertPlante(p2);
 		bd.insertPlante(p3);
