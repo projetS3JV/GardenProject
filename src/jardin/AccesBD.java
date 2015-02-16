@@ -167,7 +167,7 @@ public final class AccesBD {
 						rs.getBoolean(14),
 						rs.getString(2),
 						rs.getString(3),
-						"path + rs.getString(7) + ext", 
+						path + rs.getString(7) + ext, 
 						TypePlante.values()[rs.getInt(4)], 
 						Ensoleillement.values()[rs.getInt(6)],
 						JDBCArrayTointArray1(rs.getArray(10)),
@@ -562,7 +562,7 @@ public final class AccesBD {
 		typeSol2.add(TypeSol.CALCAIRE.getValue());
 		
 		Plante p1 = new Plante(180, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.red, Color.green, true,
-				"Rose des peintres", "Rosa x centifolia", "res/img/popol.png", TypePlante.BUISSON,
+				"Rose des peintres", "Rosa x centifolia", "res/img/popol", TypePlante.BUISSON,
 				Ensoleillement.MIOMBRE, typeSol1,
 				"Ce rosier centfeuilles forme un buisson souple et harmonieux, portant de grosses fleurs globuleuses rose vif, au port retombant, s'épanouissant en coupes bien pleines, au parfum puissant.");
 		
@@ -573,7 +573,7 @@ public final class AccesBD {
 		fin[1] = null;*/
 		
 		Plante p2 = new Plante(10, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.blue, Color.green, true,
-				"Trèfle blanc", "(Trifolium repens", "res/img/popol.png", TypePlante.FLEUR,
+				"Trèfle blanc", "(Trifolium repens", "res/img/popol", TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, typeSol1,"Le trèfle blanc, aussi appelé trèfle rampant, est une plante fourragère très commune dans les prairies et les jardins.");
 		
 		/*debut[0] = new Date(datee(2010, Calendar.JUNE, 5));
@@ -583,7 +583,7 @@ public final class AccesBD {
 		fin[1] = null;*/
 		
 		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(15,15,15), Color.green, true,
-						"Marguerite commune", "Leucanthemum vulgare", "res/img/popol.png", TypePlante.FLEUR,
+						"Marguerite commune", "Leucanthemum vulgare", "res/img/popol", TypePlante.FLEUR,
 						Ensoleillement.SOLEIL, typeSol2,"");
 		
 		bd.insertPlante(p1);
