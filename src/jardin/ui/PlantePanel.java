@@ -31,21 +31,21 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
-		Plante p = (Plante) value; //res/img/test.png
+		Plante p = (Plante) value;
 		
 		if (isSelected){
 			this.setBackground(list.getSelectionBackground());
-			
-			InfoPlante iP = new InfoPlante(p);
+			PlantePanel tmp = PlantePanel.this;
+			PlantothequeFrame.setSelected(tmp, p);
 		}else 
 			this.setBackground(Color.WHITE);
 		
-		ImageIcon img = p.getImgFleurie();
 		this.name.setText((p.getNom() + " / " + p.getNomL()).toUpperCase());
 		this.name.setHorizontalAlignment(JLabel.CENTER);
 		this.desc.setText("Description : " + p.getDescription() + "\n" + "Ensoleillement : ");
 		
 		//Label contenant l'image de la plante.
+		ImageIcon img = p.getImgFleurie();
 		image.setIcon(img);
 		
 		this.setLayout(new GridLayout(2,2));
@@ -53,7 +53,6 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		this.add(vide);
 		this.add(desc);
 		this.add(image);
-		
 		
 		return this;
 	}	

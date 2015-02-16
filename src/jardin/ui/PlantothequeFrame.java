@@ -24,11 +24,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class PlantothequeFrame extends JFrame {
+public final class PlantothequeFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private AccesBD instance = AccesBD.getInstance();
-	private Plante select = null;
+	private static Plante selectedPlante = null;
 	private JList listePlante;
 	private SortedListModel modelList = instance.getPlantes();
 	private JLabel  rechercher, nom, vide, famille, typePlante, typeSol, ensoleillement;
@@ -137,6 +137,14 @@ public class PlantothequeFrame extends JFrame {
 			}
 		});
 		
+		afficherFiche.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InfoPlante info = new InfoPlante(selectedPlante);
+			}
+		});
+		
 		//Ajout des boutons Rechercher et Fermer
 		form.add(recherButton);
 		form.add(fermer);
@@ -147,8 +155,9 @@ public class PlantothequeFrame extends JFrame {
 	/**
 	 * Methode ettant en memoire la plante si selectionne
 	 */
-	public void setSelected(PlantePanel plantePanel, int id) {
-		select = (Plante) this.listePlante.getSelectedValue();
+	public static void setSelected(PlantePanel pan, Plante p) {
+		//selectedPlante = (Plante) this.listePlante.getSelectedValue();
+		selectedPlante = p;
 	}
 
 	public JTextField getNomF() {
