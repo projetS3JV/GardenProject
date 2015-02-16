@@ -4,6 +4,8 @@ import jardin.plante.Plante;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -67,6 +69,16 @@ public class InfoPlante extends JFrame {
 		ImageIcon img = p.getImgFleurie();
 		imageLabel.setIcon(img);
 		
+		//Bouton fermer
+		JButton fermer = new JButton("Fermer");
+		fermer.addActionListener(new ActionListener() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				InfoPlante.this.setVisible(false);
+				InfoPlante.this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			}
+		});
+		
 		//Mise en page
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout(5, 5));
@@ -80,6 +92,9 @@ public class InfoPlante extends JFrame {
 		mainPanel.add(tmp2, BorderLayout.EAST);
 		mainPanel.add(dates);
 		mainPanel.add(vivace);
+		mainPanel.add(fermer);
+		
+		this.add(mainPanel);
 		
 	}
 }

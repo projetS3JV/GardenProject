@@ -120,7 +120,6 @@ public final class PlantothequeFrame extends JFrame {
 		this.add(form, BorderLayout.SOUTH);
 		
 		//Ajout des actionListener sur les boutons.
-		
 		fermer.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
@@ -142,6 +141,8 @@ public final class PlantothequeFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				InfoPlante info = new InfoPlante(selectedPlante);
+				info.setSize(500, 400);
+				info.setVisible(true);
 			}
 		});
 		

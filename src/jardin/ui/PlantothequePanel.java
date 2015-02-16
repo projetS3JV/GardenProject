@@ -26,7 +26,7 @@ public class PlantothequePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private AccesBD instance = AccesBD.getInstance();
-	private Plante select = null;
+	private Plante selectedPlante = null;
 	private JList listePlante;
 	private SortedListModel modelList = instance.getPlantes();
 	private JLabel  rechercher, nom, vide, famille, typePlante, typeSol, ensoleillement;
@@ -102,7 +102,7 @@ public class PlantothequePanel extends JPanel {
 
 		this.add(form, BorderLayout.SOUTH);
 	}
-
+	
 	public JLabel getTypePlante() {
 		return typePlante;
 	}
@@ -162,8 +162,9 @@ public class PlantothequePanel extends JPanel {
 	/**
 	 * Methode mettant en memoire la plante si selectionne
 	 */
-	public void setSelected(PlantePanel plantePanel, int id) {
-		select = (Plante) this.listePlante.getSelectedValue();
+	public void setSelected(PlantePanel plantePanel, Plante p) {
+		//selectedPlante = (Plante) this.listePlante.getSelectedValue();
+		selectedPlante = p;
 	}
 
 	public Plante getSelected() {
