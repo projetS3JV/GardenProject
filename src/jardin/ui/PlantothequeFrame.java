@@ -63,13 +63,13 @@ public class PlantothequeFrame extends JFrame {
 		
 		//Concernant le type de la plante
 		typePlante = new JLabel("Type de plante");
-		TypePlante[] typePlanteBoxItems = {TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE, null};
+		TypePlante[] typePlanteBoxItems = {null, TypePlante.BUISSON, TypePlante.FLEUR, TypePlante.HERBE};
 		typePlanteComboBox = new JComboBox(typePlanteBoxItems);
 		typePlanteComboBox.setSelectedItem(null);;
 		
 		//Concernant le type de sol
 		typeSol = new JLabel("Type de sol");
-		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX, null};
+		TypeSol[] typeSolBoxItems = {null, TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
 		typeSolComboBox = new JComboBox(typeSolBoxItems);
 		//Copie de la Zone Plantable sélectionnée pour avoir accès à ses attributs.
 		ZonePlantable tmp = (ZonePlantable)JardinPanel.getSelected();
@@ -77,7 +77,7 @@ public class PlantothequeFrame extends JFrame {
 		
 		//Concernant l'ensoleillement
 		ensoleillement = new JLabel("Ensoleillement");
-		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL, null};
+		Ensoleillement[] ensoleillementBoxItems = {null, Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
 		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
 		ensoleillementComboBox.setSelectedItem(null);
 		
