@@ -11,7 +11,6 @@ import jardin.plante.TypePlante;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -74,6 +73,13 @@ public class PlantothequePanel extends JPanel {
 
 		JPanel form = new JPanel();
 		form.setLayout(new GridLayout(9, 2, 5, 5));
+			//Bouton de création de plante
+		JButton creerNewPlante = new JButton("Créer une plante");
+		form.add(creerNewPlante);
+			//Bouton d'affichage de fiche
+		JButton afficherFiche = new JButton("Fiche de la plante");
+		form.add(afficherFiche);
+			//Champs de recherche
 		form.add(rechercher);
 		form.add(vide);
 		form.add(nom);
@@ -92,7 +98,7 @@ public class PlantothequePanel extends JPanel {
 				algo = algoSearch(PlantothequePanel.this);
 			}
 		});
-		form.add(recherButton);
+		this.add(recherButton);
 
 		this.add(form, BorderLayout.SOUTH);
 	}

@@ -39,7 +39,7 @@ public class PlantothequeFrame extends JFrame {
 	
 	public PlantothequeFrame() {
 		this.setResizable(false);
-		this.setSize(800, 500);
+		this.setSize(500, 500);
 		this.setTitle("Plantotheque");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
@@ -88,6 +88,13 @@ public class PlantothequeFrame extends JFrame {
 		//Panel contenant les outils de recherche
 		JPanel form = new JPanel();
 		form.setLayout(new GridLayout(9, 2, 5, 5));
+			//Bouton de création de plante
+		JButton creerNewPlante = new JButton("Créer une plante");
+		form.add(creerNewPlante);
+			//Bouton d'affichage de fiche
+		JButton afficherFiche = new JButton("Fiche de la plante");
+		form.add(afficherFiche);
+			//Champs de recherche
 		form.add(rechercher);
 		form.add(vide);
 		form.add(nom);
@@ -106,12 +113,9 @@ public class PlantothequeFrame extends JFrame {
 				algo = algoSearch(PlantothequeFrame.this);
 			}
 		});
-		form.add(recherButton);
+		
 		
 		JButton fermer = new JButton("Fermer");
-		form.add(fermer);
-		JButton ajouterNewPlante = new JButton("Créer une plante");
-		form.add(ajouterNewPlante);
 		
 		this.add(form, BorderLayout.SOUTH);
 		
@@ -124,7 +128,7 @@ public class PlantothequeFrame extends JFrame {
 			}
 		});
 		
-		ajouterNewPlante.addActionListener(new ActionListener() {
+		creerNewPlante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Plante p = CreateNewPlante.showCreateNewPlante();
 				if (p != null) {
@@ -132,6 +136,10 @@ public class PlantothequeFrame extends JFrame {
 				}
 			}
 		});
+		
+		//Ajout des boutons Rechercher et Fermer
+		form.add(recherButton);
+		form.add(fermer);
 		
 		//this.pack();
 	}
