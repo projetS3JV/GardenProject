@@ -140,9 +140,11 @@ public final class PlantothequeFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				InfoPlante info = new InfoPlante(selectedPlante);
-				info.setSize(500, 400);
-				info.setVisible(true);
+				if(selectedPlante != null) {
+					InfoPlante info = new InfoPlante(selectedPlante);
+					info.setSize(500, 400);
+					info.setVisible(true);
+				}
 			}
 		});
 		
