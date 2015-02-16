@@ -582,7 +582,7 @@ public final class AccesBD {
 		fin[0] = new Date(datee(2010, Calendar.OCTOBER, 31));
 		fin[1] = null;*/
 		
-		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(15,15,15), Color.green, true,
+		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(240, 240, 240), Color.green, true,
 						"Marguerite commune", "Leucanthemum vulgare", "res/img/popol", TypePlante.FLEUR,
 						Ensoleillement.SOLEIL, typeSol2,"");
 		
