@@ -94,7 +94,7 @@ public class PlantothequePanel extends JPanel {
 		recherButton.addActionListener(new AlgoSearch() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<Plante> algo = new ArrayList<Plante>();
+				JList<Plante> algo = new JList<Plante>();
 				algo = algoSearch(PlantothequePanel.this);
 			}
 		});

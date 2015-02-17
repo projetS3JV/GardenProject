@@ -1,9 +1,12 @@
 package jardin.ui;
 
+import jardin.Ensoleillement;
+import jardin.TypeSol;
 import jardin.plante.Plante;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -18,38 +21,65 @@ import javax.swing.JPanel;
 
 public class InfoPlante extends JFrame {
 	private static final long serialVersionUID = 1L;
+	JLabel name, desc, typeEns, typeSol, hauteur, vivace, cnf, cf, dates, imageLabel;
+	JButton bnf, bf, fermer;
+	JPanel tmp1, tmp2;
 	
 	public InfoPlante(Plante p) {
-		JLabel name = new JLabel(p.getNom() + " / " + p.getNomL());
-		JLabel desc = new JLabel("Description : " + p.getDescription());
-		JLabel typeEns = new JLabel("Ensoleillement : " + p.getEnsoleillement());
+		name = new JLabel(p.getNom() + " / " + p.getNomL());
+		desc = new JLabel("Description : " + p.getDescription());
+		
+		//Gestion de l'ensoleillement
+		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
+		String tmpEns = "Ensoleillement : ";
+		     if(p.getEnsoleillement()==0) tmpEns += "Mi-ombre";
+		else if(p.getEnsoleillement()==0) tmpEns += "Ombre";
+		else                              tmpEns += "Soleil";
+		typeEns = new JLabel(tmpEns);
 		
 		//Les différents types de sol
-		String tmp = "Type(s) de sol : ";
-		for (int i = 0; i < p.getTypeSol().size(); i++); {
-			tmp += p.getTypeSol() + ", ";
+		ArrayList<Integer> typeSolPlante = p.getTypeSol();
+		String tmpTS = "Type(s) de sol : ";
+		for(int i = 0; i < typeSolPlante.size(); i++)
+		{
+			if(typeSolPlante.get(i)==0)
+			{
+				tmpTS += "Argileux, ";
+			}
+			else if(typeSolPlante.get(i)==1)
+			{
+				tmpTS += "Humifère, ";
+			}
+			else if(typeSolPlante.get(i)==2)
+			{
+				tmpTS += "Limonieux, ";
+			}
+			else
+			{
+				tmpTS += "Sableux";
+			}
 		}
-		JLabel typeSol = new JLabel(tmp);
-		JLabel hauteur = new JLabel("Hauteur : " + p.getTailleFin());
+		typeSol = new JLabel(tmpTS);
+		hauteur = new JLabel("Hauteur : " + p.getTailleFin());
 		
 		//Condition sur la vivacité potentielle de la plante
-		JLabel vivace = new JLabel();
+		vivace = new JLabel();
 		if(p.isVivace()) vivace.setText("Vivace ? : Oui");
 		else vivace.setText("Vivace ? : Non");
 		
 		//Concernant les couleurs
-		JLabel cnf = new JLabel("Couleur non fleuri : ");
-		JButton bnf = new JButton("     ");
+		cnf = new JLabel("Couleur non fleuri : ");
+		bnf = new JButton("     ");
 		bnf.setBackground(p.getCouleur_non_fleuris());
-		JPanel tmp1 = new JPanel();
+		tmp1 = new JPanel();
 		tmp1.setLayout(new FlowLayout());
 		tmp1.add(cnf);
 		tmp1.add(bnf);
 		
-		JLabel cf = new JLabel("Couleur en fleur : ");
-		JButton bf = new JButton("     ");
+		cf = new JLabel("Couleur en fleur : ");
+		bf = new JButton("     ");
 		bf.setBackground(p.getCouleur_en_fleur());
-		JPanel tmp2 = new JPanel();
+		tmp2 = new JPanel();
 		tmp2.setLayout(new FlowLayout());
 		tmp2.add(cf);
 		tmp2.add(bf);
@@ -59,18 +89,18 @@ public class InfoPlante extends JFrame {
 		ArrayList<Date> copieDateFloraison = p.getDateFloraison();
 		ArrayList<Date> copieDateFinFloraison = p.getDateFinFloraison();
 		String tmpDate = "Date(s) de floraison : \n";
-		for(int i=0; i < tabDates.size(); i++) {
-			tmpDate += "-" + copieDateFloraison.get(i) + " au " + copieDateFinFloraison.get(i) + '\n';
+		for(int i=0; i < tabDates.size(); i += 2) {
+			tmpDate += "-" + copieDateFloraison.get(i) + " au " + copieDateFinFloraison.get(i+1) + '\n';
 		}
-		JLabel dates = new JLabel(tmpDate);
+		dates = new JLabel(tmpDate);
 		
 		//Concernant l'image de la plante
-		JLabel imageLabel = new JLabel();
+		imageLabel = new JLabel();
 		ImageIcon img = p.getImgFleurie();
 		imageLabel.setIcon(img);
 		
 		//Bouton fermer
-		JButton fermer = new JButton("Fermer");
+		fermer = new JButton("Fermer");
 		fermer.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
@@ -81,20 +111,20 @@ public class InfoPlante extends JFrame {
 		
 		//Mise en page
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout(5, 5));
+		mainPanel.setLayout(new GridLayout(10, 2));
 		
-		mainPanel.add(name, BorderLayout.NORTH);
-		mainPanel.add(desc, BorderLayout.CENTER);
-		mainPanel.add(typeEns, BorderLayout.CENTER);
-		mainPanel.add(typeSol, BorderLayout.CENTER);
-		mainPanel.add(imageLabel, BorderLayout.EAST);
-		mainPanel.add(tmp1, BorderLayout.EAST);
-		mainPanel.add(tmp2, BorderLayout.EAST);
+		mainPanel.add(name);
+		mainPanel.add(desc);
+		mainPanel.add(typeEns);
+		mainPanel.add(typeSol);
+		mainPanel.add(imageLabel);
+		mainPanel.add(tmp1);
+		mainPanel.add(tmp2);
 		mainPanel.add(dates);
 		mainPanel.add(vivace);
 		mainPanel.add(fermer);
 		
 		this.add(mainPanel);
-		
+		this.pack();
 	}
 }
