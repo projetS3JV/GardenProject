@@ -7,7 +7,6 @@ import jardin.ui.PlantothequePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JList;
 
@@ -15,9 +14,6 @@ public class AlgoSearch implements ActionListener{
 	private AccesBD instance = AccesBD.getInstance();
 	private SortedListModel modelList = instance.getPlantes();
 	private SortedListModel newModelList = instance.getPlantes();
-	private JList listePlante;
-	private PlantothequePanel pn;
-	private PlantothequeFrame pf;
 	
 /////////Recherche par NOM
 	boolean AlgoNom(String nom,int index){
@@ -164,7 +160,7 @@ public class AlgoSearch implements ActionListener{
 		return new JList<Plante>(newModelList);
 	}
 	
-	public JList algoSearch(PlantothequePanel pf){
+	public JList<Plante> algoSearch(PlantothequePanel pf){
 		Ensoleillement e = (Ensoleillement) pf.getEnsoleillementComboBox().getSelectedItem();
 		TypeSol ts = (TypeSol)pf.getTypeSolComboBox().getSelectedItem();
 		TypePlante tp = (TypePlante)pf.getTypePlanteComboBox().getSelectedItem();

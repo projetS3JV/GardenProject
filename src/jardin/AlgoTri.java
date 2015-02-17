@@ -13,13 +13,19 @@ import javax.swing.JList;
 public class AlgoTri implements ActionListener{
 	private AccesBD instance = AccesBD.getInstance();
 	private SortedListModel modelList = instance.getPlantes();
-	private ArrayList<Plante> listePlante;
-	private ArrayList<Plante> newListePlante;
-	private PlantothequePanel pn;
-	private PlantothequeFrame pf;
 	
 	public ArrayList<Plante> algoTri(PlantothequeFrame pf){
-		JList jl = pf.getListePlante();
+		SortedListModel newModelList = modelList;
+		Plante[] p = new Plante[modelList.getSize()];
+		
+		
+		for(int i =0; i< modelList.getSize();i++){
+			p[i] = modelList.getElementAt(i);
+		}
+		
+		for(int i =0; i<p.length ; i++){
+			
+		}
 		
 		
 		
