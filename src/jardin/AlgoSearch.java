@@ -9,10 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JList;
+
 public class AlgoSearch implements ActionListener{
 	private AccesBD instance = AccesBD.getInstance();
 	private SortedListModel modelList = instance.getPlantes();
-	private ArrayList<Plante> listePlante;
+	private SortedListModel newModelList = instance.getPlantes();
+	private JList listePlante;
 	private PlantothequePanel pn;
 	private PlantothequeFrame pf;
 	
@@ -59,107 +62,109 @@ public class AlgoSearch implements ActionListener{
 		return false;
 	}
 	
-	public ArrayList algoSearch(PlantothequeFrame pf){
+	public JList<Plante> algoSearch(PlantothequeFrame pf){
 		Ensoleillement e = (Ensoleillement) pf.getEnsoleillementComboBox().getSelectedItem();
 		TypeSol ts = (TypeSol)pf.getTypeSolComboBox().getSelectedItem();
 		TypePlante tp = (TypePlante)pf.getTypePlanteComboBox().getSelectedItem();
 		String nom = pf.getNomF().getSelectedText();
+		 
 		//String fam = pf.getFamilleF().getText();
+		
 		
 		if(e != null && ts != null && tp != null && nom != null /*&& fam != null*/){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i) && AlgoTypePlante(tp, i)  && AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp != null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypePlante(tp, i)  && AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts == null && tp != null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypePlante(tp, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts == null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp == null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts == null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypePlante(tp, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp == null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts != null && tp == null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoEnsol(e, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts != null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoEnsol(e, i) && AlgoTypePlante(tp, i) ){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i) && AlgoTypePlante(tp, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}		}else if (e != null && ts != null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoTypePlante(tp, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp != null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i)&& AlgoTypePlante(tp, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}
-		return this.listePlante;
+		return new JList<Plante>(newModelList);
 	}
 	
-	public ArrayList algoSearch(PlantothequePanel pf){
+	public JList algoSearch(PlantothequePanel pf){
 		Ensoleillement e = (Ensoleillement) pf.getEnsoleillementComboBox().getSelectedItem();
 		TypeSol ts = (TypeSol)pf.getTypeSolComboBox().getSelectedItem();
 		TypePlante tp = (TypePlante)pf.getTypePlanteComboBox().getSelectedItem();
@@ -169,94 +174,94 @@ public class AlgoSearch implements ActionListener{
 		if(e != null && ts != null && tp != null && nom != null /*&& fam != null*/){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i) && AlgoTypePlante(tp, i)  && AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp != null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypePlante(tp, i)  && AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts == null && tp != null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypePlante(tp, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts == null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp == null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts == null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypePlante(tp, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp == null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts != null && tp == null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoEnsol(e, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts != null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoEnsol(e, i) && AlgoTypePlante(tp, i) ){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i) && AlgoTypePlante(tp, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}		}else if (e != null && ts != null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp == null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e == null && ts != null && tp != null && nom == null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoTypeSol(ts, i) && AlgoTypePlante(tp, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}else if (e != null && ts == null && tp != null && nom != null){
 			for(int i = 0 ; i<modelList.getSize(); i++){
 				if (AlgoEnsol(e, i)&& AlgoTypePlante(tp, i) && AlgoNom(nom, i)){
-					listePlante.add(modelList.getElementAt(i));
+					newModelList.add(modelList.getElementAt(i));
 				}
 			}
 		}
-		return this.listePlante;
+		return new JList<Plante>(newModelList);
 	}
 
 	@Override

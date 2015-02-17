@@ -18,15 +18,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-
-import javax.swing.ImageIcon;
 
 import org.hsqldb.jdbc.JDBCArrayBasic;
 import org.hsqldb.types.Types;
@@ -532,19 +527,6 @@ public final class AccesBD {
 	public static void main(String[] args) {
 		AccesBD bd = AccesBD.getInstance();
 		
-		/*Date[] debut = new Date[2];
-		debut[0] = new Date(datee(2010, Calendar.MAY, 12));
-		debut[1] = new Date(datee(2010, Calendar.AUGUST, 19));
-		
-		Date[] fin = new Date[2];
-		fin[0] = new Date(datee(2010, Calendar.JULY, 20));
-		fin[1] = new Date(datee(2010, Calendar.SEPTEMBER, 20));
-		
-		int[] typeSol1 = new int[2];
-		typeSol1[0] = TypeSol.ARGILEUX.getValue();
-		typeSol1[1] = TypeSol.SABLEUX.getValue();
-		*/
-		
 		ArrayList<Date> debut = new ArrayList<>();
 		debut.add(new Date(datee(2010, Calendar.MAY, 12)));
 		debut.add(new Date(datee(2010, Calendar.AUGUST, 19)));
@@ -566,21 +548,12 @@ public final class AccesBD {
 				Ensoleillement.MIOMBRE, typeSol1,
 				"Ce rosier centfeuilles forme un buisson souple et harmonieux, portant de grosses fleurs globuleuses rose vif, au port retombant, s'épanouissant en coupes bien pleines, au parfum puissant.");
 		
-		/*debut[0] = new Date(datee(2010, Calendar.MARCH, 5));
-		debut[1] = null;
-		
-		fin[0] = new Date(datee(2010, Calendar.AUGUST, 31));
-		fin[1] = null;*/
 		
 		Plante p2 = new Plante(10, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.blue, Color.green, true,
 				"Trèfle blanc", "(Trifolium repens", "res/img/popol", TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, typeSol1,"Le trèfle blanc, aussi appelé trèfle rampant, est une plante fourragère très commune dans les prairies et les jardins.");
 		
-		/*debut[0] = new Date(datee(2010, Calendar.JUNE, 5));
-		debut[1] = null;
-		
-		fin[0] = new Date(datee(2010, Calendar.OCTOBER, 31));
-		fin[1] = null;*/
+
 		
 		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(240, 240, 240), Color.green, true,
 						"Marguerite commune", "Leucanthemum vulgare", "res/img/popol", TypePlante.FLEUR,
@@ -683,32 +656,7 @@ public final class AccesBD {
 			o[i] = new Integer(T.get(i));
 		return new JDBCArrayBasic(o, type);
 	}
-	
-	
-	@SuppressWarnings("deprecation")
-	public static JDBCArrayBasic dateArrayToJDBXArray(Date[] d, int size){
-		org.hsqldb.types.Type type = org.hsqldb.types.Type.SQL_DATE;
-		Object[] o = new Object[size];
-		for (int i = 0 ; i< size ; i++){
-			o[i] = new Date(datee(d[i].getYear(), d[i].getMonth(), d[i].getDay()));
-		}
-		return new JDBCArrayBasic(o, type);
-	}
-	
-	public static Date[] JDBCArrayTodateArray(Array T) {
-		ResultSet rs;
-		ArrayList<Date> x = new ArrayList<Date>();
-		try {
-			rs = T.getResultSet();
-			while (rs.next()) 
-				x.add((Date)rs.getDate(2));	
-		} catch (SQLException e) {e.printStackTrace();}
-		Date[] ret = new Date[x.size()];
-		for (int i = 0 ; i < x.size() ; i++) {
-			ret[i] = x.get(i);
-		}
-		return ret;
-	}
+
 	
 	@SuppressWarnings("deprecation")
 	public static JDBCArrayBasic dateArrayToJDBXArray(ArrayList<Date> d, int size){

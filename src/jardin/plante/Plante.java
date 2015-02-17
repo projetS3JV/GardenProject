@@ -267,10 +267,12 @@ public class Plante implements Comparable<Integer> {
 	public void setImgFleurie(ImageIcon imgFleurie) {
 		ImgFleurie = imgFleurie;
 	}
+	
 	@Override
 	public int compareTo(Integer id) {
 		return this.id - id;
 	}
+	
 	
 	@Override
 	public boolean equals(Object o) {
