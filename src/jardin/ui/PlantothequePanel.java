@@ -96,6 +96,8 @@ public class PlantothequePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JList<Plante> algo = new JList<Plante>();
 				algo = algoSearch(PlantothequePanel.this);
+				listePlante = algo;
+				listePlante.setCellRenderer(new PlantePanel());
 			}
 		});
 		this.add(recherButton);

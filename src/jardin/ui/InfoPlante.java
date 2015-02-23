@@ -1,10 +1,8 @@
 package jardin.ui;
 
 import jardin.Ensoleillement;
-import jardin.TypeSol;
 import jardin.plante.Plante;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -89,8 +89,8 @@ public class InfoPlante extends JFrame {
 		ArrayList<Date> copieDateFloraison = p.getDateFloraison();
 		ArrayList<Date> copieDateFinFloraison = p.getDateFinFloraison();
 		String tmpDate = "Date(s) de floraison : \n";
-		for(int i=0; i < tabDates.size(); i += 2) {
-			tmpDate += "-" + copieDateFloraison.get(i) + " au " + copieDateFinFloraison.get(i+1) + '\n';
+		for(int i=0; i < tabDates.size(); i++) {
+			tmpDate += "-" + copieDateFloraison.get(i) + " au " + copieDateFinFloraison.get(i) + '\n';
 		}
 		dates = new JLabel(tmpDate);
 		
@@ -111,20 +111,27 @@ public class InfoPlante extends JFrame {
 		
 		//Mise en page
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(10, 2));
+		mainPanel.setLayout(new GridLayout(5,1, 5, 5));
 		
-		mainPanel.add(name);
-		mainPanel.add(desc);
-		mainPanel.add(typeEns);
-		mainPanel.add(typeSol);
-		mainPanel.add(imageLabel);
-		mainPanel.add(tmp1);
-		mainPanel.add(tmp2);
-		mainPanel.add(dates);
-		mainPanel.add(vivace);
-		mainPanel.add(fermer);
+		JPanel p1 = new JPanel();
+		p1.setLayout(new FlowLayout(FlowLayout.CENTER));
+		p1.add(name);
+		mainPanel.add(p1);
+		
+		JPanel p2 = new JPanel();
+		p2.setLayout(new GridLayout(5, 2));
+		p2.add(desc);
+		p2.add(imageLabel);
+		p2.add(typeSol);
+		p2.add(typeEns);
+		p2.add(tmp1);
+		p2.add(tmp2);
+		p2.add(dates);
+		mainPanel.add(p2);
 		
 		this.add(mainPanel);
+		this.setSize(400, 600);
+		this.setResizable(false);
 		this.pack();
 	}
 }

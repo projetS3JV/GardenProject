@@ -111,6 +111,8 @@ public final class PlantothequeFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JList<Plante> algo = new JList<Plante>();
 				algo = algoSearch(PlantothequeFrame.this);
+				listePlante = algo;
+				listePlante.setCellRenderer(new PlantePanel());
 			}
 		});
 		
