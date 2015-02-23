@@ -26,6 +26,8 @@ public class InfoPlante extends JFrame {
 	JPanel tmp1, tmp2;
 	
 	public InfoPlante(Plante p) {
+		this.setSize(400, 600);
+		this.setResizable(false);
 		name = new JLabel(p.getNom() + " / " + p.getNomL());
 		desc = new JLabel("Description : " + p.getDescription());
 		
@@ -72,7 +74,7 @@ public class InfoPlante extends JFrame {
 		bnf = new JButton("     ");
 		bnf.setBackground(p.getCouleur_non_fleuris());
 		tmp1 = new JPanel();
-		tmp1.setLayout(new FlowLayout());
+		tmp1.setLayout(new BoxLayout(tmp1, BoxLayout.X_AXIS));
 		tmp1.add(cnf);
 		tmp1.add(bnf);
 		
@@ -80,19 +82,21 @@ public class InfoPlante extends JFrame {
 		bf = new JButton("     ");
 		bf.setBackground(p.getCouleur_en_fleur());
 		tmp2 = new JPanel();
-		tmp2.setLayout(new FlowLayout());
+		tmp2.setLayout(new BoxLayout(tmp2, BoxLayout.X_AXIS));
 		tmp2.add(cf);
 		tmp2.add(bf);
 		
 		//Concernant les dates de floraison.
-		ArrayList<String> tabDates = new ArrayList<String>(p.getDateFloraison().size());
 		ArrayList<Date> copieDateFloraison = p.getDateFloraison();
 		ArrayList<Date> copieDateFinFloraison = p.getDateFinFloraison();
 		String tmpDate = "Date(s) de floraison : \n";
-		for(int i=0; i < tabDates.size(); i++) {
-			tmpDate += "-" + copieDateFloraison.get(i) + " au " + copieDateFinFloraison.get(i) + '\n';
+		for(int i=0; i < copieDateFloraison.size(); i++) {
+			tmpDate += copieDateFloraison.get(i) +"/"+ copieDateFloraison.get(i)
+					   + " au " + 
+					   copieDateFinFloraison.get(i) + "/" + copieDateFinFloraison.get(i) + "<br>";
+			System.out.print(tmpDate);
 		}
-		dates = new JLabel(tmpDate);
+		dates = new JLabel("<html>" + tmpDate + "</html>");
 		
 		//Concernant l'image de la plante
 		imageLabel = new JLabel();
@@ -115,6 +119,7 @@ public class InfoPlante extends JFrame {
 		
 		JPanel p1 = new JPanel();
 		p1.setLayout(new FlowLayout(FlowLayout.CENTER));
+		p1.setSize(mainPanel.getWidth(), 1);
 		p1.add(name);
 		mainPanel.add(p1);
 		
@@ -127,11 +132,16 @@ public class InfoPlante extends JFrame {
 		p2.add(tmp1);
 		p2.add(tmp2);
 		p2.add(dates);
+		p2.add(vivace);
 		mainPanel.add(p2);
 		
+		JPanel p3 = new JPanel();
+		p3.setLayout(new FlowLayout(FlowLayout.CENTER));
+		p3.setSize(mainPanel.getWidth(), 1);
+		p3.add(fermer);
+		mainPanel.add(p3);
+		
 		this.add(mainPanel);
-		this.setSize(400, 600);
-		this.setResizable(false);
 		this.pack();
 	}
 }
