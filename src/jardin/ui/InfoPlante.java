@@ -4,6 +4,8 @@ import jardin.Ensoleillement;
 import jardin.plante.Plante;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -20,7 +22,7 @@ import javax.swing.SwingConstants;
 
 public class InfoPlante extends JFrame {
 	private static final long serialVersionUID = 1L;
-	JLabel name, desc, typeEns, typeSol, hauteur, vivace, cnf, cf, dates, imageLabel, vide;
+	JLabel name, typeEns, typeSol, hauteur, vivace, cnf, cf, dates, imageLabel, vide;
 	JTextArea d;
 	JButton bnf, bf, fermer;
 	JPanel tmp1, tmp2;
@@ -29,7 +31,6 @@ public class InfoPlante extends JFrame {
 		//this.setSize(400, 400);
 		//this.setResizable(false);
 		name = new JLabel(p.getNom() + " / " + p.getNomL());
-		desc = new JLabel("Description : " + p.getDescription());
 		
 		d = new JTextArea("Description : " + p.getDescription());
 		d.setLineWrap(true);
@@ -120,12 +121,19 @@ public class InfoPlante extends JFrame {
 		});
 		
 		//Mise en page
+		this.setLayout(new FlowLayout());
+			//Panel contenant le nom et la description
 		JPanel p1 = new JPanel();
-		p1.setLayout(new BorderLayout());
-		name.setHorizontalAlignment(SwingConstants.CENTER);
-		p1.add(name, BorderLayout.NORTH);
-		p1.add(d, BorderLayout.CENTER);
+		p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
+		
+		//name.setHorizontalAlignment(SwingConstants.CENTER);
+		p1.add(name);
+		p1.add(d);
+		
 		this.add(p1);
+		
+			//Panel contenant le type d'ensoleillement, de sol, et les couleurs
+		
 		
 	}
 }
