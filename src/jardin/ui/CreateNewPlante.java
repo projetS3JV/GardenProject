@@ -436,17 +436,17 @@ public class CreateNewPlante extends JDialog{
 
 	public int getDayOfDate(String d){
 		try{
-			return Integer.parseInt(d.charAt(0) + d.charAt(1) + "");
+			 return Integer.parseInt(d.substring(0, 2));
 		} catch (NumberFormatException e){
-			return 0;
+			return -1;
 		}
 	}
 
 	public int getMonthOfDate(String d){
 		try{
-			return Integer.parseInt(d.charAt(3) + d.charAt(4) + "");
+			return Integer.parseInt(d.substring(3, 5));
 		} catch (NumberFormatException e){
-			return 0;
+			return -1;
 		}
 	}
 
@@ -465,6 +465,14 @@ public class CreateNewPlante extends JDialog{
 			}
 		}
 	}
+	
+	/*	
+	 	01/01
+		01/02
+		
+		05/05
+		10/10
+	*/
 
 	public boolean datesCroisees(String dates1, String dates2){
 		boolean croisees = false;
@@ -476,6 +484,7 @@ public class CreateNewPlante extends JDialog{
 		if( (beforeOrAfter(dateDebut2, dateFin1)!=1 && beforeOrAfter(dateDebut2, dateDebut1)!=-1) || (beforeOrAfter(dateFin2, dateFin1)!=1 && beforeOrAfter(dateFin2, dateDebut1)!=-1)){
 			croisees = true;
 		}		
+		//System.out.println("Là : " + !croisees);
 		return croisees;
 	}
 
@@ -552,7 +561,7 @@ public class CreateNewPlante extends JDialog{
 						areDatesCorect = false;
 					}
 				}
-				System.out.println(areDatesCorect);
+				//System.out.println("Ici : " + areDatesCorect);
 			}
 		} catch (Exception e2) {
 			areDatesCorect = false;
