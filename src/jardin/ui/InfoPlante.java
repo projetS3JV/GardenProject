@@ -3,33 +3,39 @@ package jardin.ui;
 import jardin.Ensoleillement;
 import jardin.plante.Plante;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 
 public class InfoPlante extends JFrame {
 	private static final long serialVersionUID = 1L;
-	JLabel name, desc, typeEns, typeSol, hauteur, vivace, cnf, cf, dates, imageLabel;
+	JLabel name, desc, typeEns, typeSol, hauteur, vivace, cnf, cf, dates, imageLabel, vide;
+	JTextArea d;
 	JButton bnf, bf, fermer;
 	JPanel tmp1, tmp2;
 	
 	public InfoPlante(Plante p) {
-		this.setSize(400, 600);
-		this.setResizable(false);
+		//this.setSize(400, 400);
+		//this.setResizable(false);
 		name = new JLabel(p.getNom() + " / " + p.getNomL());
 		desc = new JLabel("Description : " + p.getDescription());
+		
+		d = new JTextArea("Description : " + p.getDescription());
+		d.setLineWrap(true);
+		d.setWrapStyleWord(true);
+		
+		vide = new JLabel();
 		
 		//Gestion de l'ensoleillement
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
@@ -93,15 +99,15 @@ public class InfoPlante extends JFrame {
 		for(int i=0; i < copieDateFloraison.size(); i++) {
 			tmpDate += copieDateFloraison.get(i) +"/"+ copieDateFloraison.get(i)
 					   + " au " + 
-					   copieDateFinFloraison.get(i) + "/" + copieDateFinFloraison.get(i) + "<br>";
+					   copieDateFinFloraison.get(i) + "/" + copieDateFinFloraison.get(i);
 			System.out.print(tmpDate);
 		}
 		dates = new JLabel("<html>" + tmpDate + "</html>");
 		
 		//Concernant l'image de la plante
 		imageLabel = new JLabel();
-		ImageIcon img = p.getImgFleurie();
-		imageLabel.setIcon(img);
+		//ImageIcon img = p.getImgFleurie();
+		imageLabel.setIcon(p.getImgFleurie());
 		
 		//Bouton fermer
 		fermer = new JButton("Fermer");
@@ -114,34 +120,12 @@ public class InfoPlante extends JFrame {
 		});
 		
 		//Mise en page
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(5,1, 5, 5));
-		
 		JPanel p1 = new JPanel();
-		p1.setLayout(new FlowLayout(FlowLayout.CENTER));
-		p1.setSize(mainPanel.getWidth(), 1);
-		p1.add(name);
-		mainPanel.add(p1);
+		p1.setLayout(new BorderLayout());
+		name.setHorizontalAlignment(SwingConstants.CENTER);
+		p1.add(name, BorderLayout.NORTH);
+		p1.add(d, BorderLayout.CENTER);
+		this.add(p1);
 		
-		JPanel p2 = new JPanel();
-		p2.setLayout(new GridLayout(5, 2));
-		p2.add(desc);
-		p2.add(imageLabel);
-		p2.add(typeSol);
-		p2.add(typeEns);
-		p2.add(tmp1);
-		p2.add(tmp2);
-		p2.add(dates);
-		p2.add(vivace);
-		mainPanel.add(p2);
-		
-		JPanel p3 = new JPanel();
-		p3.setLayout(new FlowLayout(FlowLayout.CENTER));
-		p3.setSize(mainPanel.getWidth(), 1);
-		p3.add(fermer);
-		mainPanel.add(p3);
-		
-		this.add(mainPanel);
-		this.pack();
 	}
 }

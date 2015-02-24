@@ -45,8 +45,8 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		this.desc.setText("Description : " + p.getDescription() + "\n" + "Ensoleillement : ");
 		
 		//Label contenant l'image de la plante.
-		ImageIcon img = p.getImgFleurie();
-		image.setIcon(img);
+		//ImageIcon img = p.getImgFleurie();
+		image.setIcon(p.getImgFleurie());
 		
 		this.setLayout(new GridLayout(2,2));
 		this.add(name);

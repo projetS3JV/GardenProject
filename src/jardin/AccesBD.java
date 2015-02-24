@@ -550,7 +550,7 @@ public final class AccesBD {
 		
 		
 		Plante p2 = new Plante(10, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), Color.blue, Color.green, true,
-				"Trèfle blanc", "(Trifolium repens", "res/img/popol.png", TypePlante.FLEUR,
+				"Trèfle blanc", "Trifolium repens", "res/img/popol.png", TypePlante.FLEUR,
 				Ensoleillement.SOLEIL, typeSol1,"Le trèfle blanc, aussi appelé trèfle rampant, est une plante fourragère très commune dans les prairies et les jardins.");
 		
 
