@@ -3,6 +3,7 @@ package jardin.ui;
 import jardin.AccesBD;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -20,12 +21,27 @@ public class MainFrame extends JFrame{
 	private MenuBar menuBar = new MenuBar();
 	private static MainFrame instance = null;
 	public static final String defaultTitle = "Jardin Virtuel";
+	public int width =1270;
+	public int height = 850;
 	
 	private MainFrame(){
 		super();
 		// acces a la BD pour la creation si besoin
 		AccesBD.getInstance();
-		this.setSize(1270, 850);
+		
+		/*
+		if(this.jardinPanel.getJardin() == null){
+			this.height = 850;
+			this.width = 1270;
+		}else{
+			this.height = this.jardinPanel.getJardin(). + this.calendarPanel.getHeight();
+			this.width = this.jardinPanel.getJardin().getWidth() + this.outilPanel.getWidth();
+		}
+		if(this.height > 1270)this.height =1270;
+		if(this.width >850)this.width = 850;*/
+		
+		
+		this.setSize(this.width, this.height);
 		this.setResizable(false);
 		this.setTitle(defaultTitle);
 		// Fermeture propre de la fenetre pour pouvoir fermer la base de données
@@ -40,10 +56,10 @@ public class MainFrame extends JFrame{
 		});
 		
 		this.setLayout(new BorderLayout());		
-		this.setJMenuBar(menuBar);	   
+		this.setJMenuBar(menuBar);
 	    this.add(BorderLayout.SOUTH, this.calendarPanel);	    
 	    this.add(BorderLayout.EAST, this.outilPanel);	    
-	    this.add(BorderLayout.CENTER, this.jardinPanel);
+	    this.add(BorderLayout.CENTER , this.jardinPanel);
 	}
 
 	public JardinPanel getJardinPanel() {

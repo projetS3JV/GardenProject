@@ -27,6 +27,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 
 /**
  * 
@@ -52,6 +53,7 @@ public class JardinPanel extends JPanel{
 		this.jardin = j;
 		this.zone = new AbstractZone();
 		this.setFocusable(true);
+		
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
