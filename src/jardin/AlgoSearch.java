@@ -7,6 +7,7 @@ import jardin.ui.PlantothequePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JList;
 
@@ -65,98 +66,150 @@ public class AlgoSearch implements ActionListener{
 		String nom = pf.getNomF().getSelectedText();
 		 
 		//String fam = pf.getFamilleF().getText();
+		int size = modelList.getSize();
+		ArrayList<Integer> tab = new ArrayList<Integer>();
 		
 		
-		if(e != null && ts != null && tp != null && nom != null /*&& fam != null*/){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+		if(e != null && ts != null && tp != null && nom != null){
+			for(int i = 0 ; i< size; i++){
 				if (AlgoEnsol(e, i) && AlgoTypePlante(tp, i)  && AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e == null && ts != null && tp != null && nom != null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypePlante(tp, i)  && AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
 			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
+			}
 		}else if (e == null && ts == null && tp != null && nom != null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypePlante(tp, i) && AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
 			}
 		}else if (e == null && ts == null && tp == null && nom != null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e != null && ts == null && tp == null && nom == null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoEnsol(e, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e == null && ts == null && tp != null && nom == null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i< size; i++){
 				if (AlgoTypePlante(tp, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e == null && ts != null && tp == null && nom == null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypeSol(ts, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e != null && ts != null && tp == null && nom == null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypeSol(ts, i) && AlgoEnsol(e, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e != null && ts != null && tp != null && nom == null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypeSol(ts, i) && AlgoEnsol(e, i) && AlgoTypePlante(tp, i) ){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e != null && ts == null && tp != null && nom == null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoEnsol(e, i) && AlgoTypePlante(tp, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e == null && ts != null && tp == null && nom != null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
-			}		}else if (e != null && ts != null && tp == null && nom != null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
+			}
+		}else if (e != null && ts != null && tp == null && nom != null){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypeSol(ts, i) && AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e != null && ts == null && tp == null && nom != null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoEnsol(e, i) && AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e == null && ts != null && tp != null && nom == null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoTypeSol(ts, i) && AlgoTypePlante(tp, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
+			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
 			}
 		}else if (e != null && ts == null && tp != null && nom != null){
-			for(int i = 0 ; i<modelList.getSize(); i++){
+			for(int i = 0 ; i<size; i++){
 				if (AlgoEnsol(e, i)&& AlgoTypePlante(tp, i) && AlgoNom(nom, i)){
-					newModelList.add(modelList.getElementAt(i));
+					tab.add(i);
 				}
 			}
+			for(int j =0; j< tab.size();j++){
+				newModelList.add(modelList.getElementAt(tab.get(j)));
+			}
 		}
+		
+		
+		this.modelList = instance.getPlantes();
+		
 		return new JList<Plante>(newModelList);
 	}
 	
