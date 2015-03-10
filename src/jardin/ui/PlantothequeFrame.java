@@ -113,6 +113,7 @@ public final class PlantothequeFrame extends JFrame {
 				algo = algoSearch(PlantothequeFrame.this);
 				listePlante = algo;
 				listePlante.setCellRenderer(new PlantePanel());
+				PlantothequeFrame.this.update(getGraphics());
 			}
 		});
 		

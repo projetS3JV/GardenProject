@@ -121,10 +121,10 @@ public class InfoPlante extends JFrame {
 		});
 		
 		//Mise en page
-		this.setLayout(new FlowLayout());
+		this.setLayout(new BorderLayout());
 			//Panel contenant le nom et la description
 		JPanel p1 = new JPanel();
-		p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
+		p1.setLayout(new GridLayout(2, 1));
 		
 		//name.setHorizontalAlignment(SwingConstants.CENTER);
 		p1.add(name);
