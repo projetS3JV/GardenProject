@@ -30,7 +30,8 @@ public class InfoPlante extends JFrame {
 	public InfoPlante(Plante p) {
 		//this.setSize(400, 400);
 		//this.setResizable(false);
-		name = new JLabel(p.getNom() + " / " + p.getNomL());
+		String nameP = p.getNom() + " / " + p.getNomL();
+		name = new JLabel(nameP.toUpperCase());
 		
 		d = new JTextArea("Description : " + p.getDescription());
 		d.setLineWrap(true);
@@ -121,18 +122,26 @@ public class InfoPlante extends JFrame {
 		});
 		
 		//Mise en page
-		this.setLayout(new BorderLayout());
-			//Panel contenant le nom et la description
-		JPanel p1 = new JPanel();
-		p1.setLayout(new GridLayout(2, 1));
+		this.setLayout(new GridLayout(8,0));
 		
-		//name.setHorizontalAlignment(SwingConstants.CENTER);
-		p1.add(name);
-		p1.add(d);
+		name.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(name);
+		this.add(d);
+		this.add(typeEns);
+		this.add(typeSol);
+		this.add(cnf);
+		this.add(bnf);
+		this.add(cf);
+		this.add(bf);
+		this.add(hauteur);
+		this.add(vivace);
+		this.add(tmp1);
+		this.add(tmp2);
+		this.add(fermer);
 		
-		this.add(p1);
+		//this.pack();
 		
-			//Panel contenant le type d'ensoleillement, de sol, et les couleurs
+		
 		
 		
 	}
