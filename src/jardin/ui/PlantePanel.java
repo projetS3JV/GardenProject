@@ -6,10 +6,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 
@@ -18,11 +18,14 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 	private static final long serialVersionUID = 1L;
 	private JLabel image;
 	private JLabel name, desc, vide;
+	private JTextArea d;
 	
 	public PlantePanel() {
 		super();
 		name = new JLabel("test", SwingConstants.LEFT);
-		desc = new JLabel();
+		d = new JTextArea();
+		d.setLineWrap(true);
+		d.setWrapStyleWord(true);
 		image = new JLabel();
 		vide = new JLabel();
 		this.setOpaque(true);
@@ -42,7 +45,7 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		
 		this.name.setText((p.getNom() + " / " + p.getNomL()).toUpperCase());
 		this.name.setHorizontalAlignment(JLabel.CENTER);
-		this.desc.setText("Description : " + p.getDescription() + "\n" + "Ensoleillement : ");
+		this.d.setText("Description : " + p.getDescription() + "\n" + "Ensoleillement : ");
 		
 		//Label contenant l'image de la plante.
 		//ImageIcon img = p.getImgFleurie();
@@ -51,7 +54,7 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 		this.setLayout(new GridLayout(2,2));
 		this.add(name);
 		this.add(vide);
-		this.add(desc);
+		this.add(d);
 		this.add(image);
 		
 		return this;
