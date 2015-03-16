@@ -14,7 +14,7 @@ import javax.swing.JList;
 public class AlgoSearch implements ActionListener{
 	private AccesBD instance = AccesBD.getInstance();
 	private SortedListModel modelList = instance.getPlantes();
-	private SortedListModel newModelList = instance.getPlantes();
+	private SortedListModel newModelList;
 	
 /////////Recherche par NOM
 	boolean AlgoNom(String nom,int index){
@@ -68,7 +68,7 @@ public class AlgoSearch implements ActionListener{
 		//String fam = pf.getFamilleF().getText();
 		int size = modelList.getSize();
 		ArrayList<Integer> tab = new ArrayList<Integer>();
-		
+		newModelList = new SortedListModel();
 		
 		if(e != null && ts != null && tp != null && nom != null){
 			for(int i = 0 ; i< size; i++){
@@ -207,9 +207,8 @@ public class AlgoSearch implements ActionListener{
 			}
 		}
 		
-		
-		this.modelList = instance.getPlantes();
-		
+		System.out.print(newModelList.getSize());
+		//this.modelList = instance.getPlantes();
 		return new JList<Plante>(newModelList);
 	}
 	
