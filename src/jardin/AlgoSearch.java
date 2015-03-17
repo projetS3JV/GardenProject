@@ -207,7 +207,7 @@ public class AlgoSearch implements ActionListener{
 			}
 		}
 		
-		System.out.print(newModelList.getSize());
+		//System.out.print(newModelList.getSize());
 		//this.modelList = instance.getPlantes();
 		return new JList<Plante>(newModelList);
 	}
