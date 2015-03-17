@@ -37,6 +37,7 @@ public final class PlantothequeFrame extends JFrame {
 	private JComboBox<TypePlante> typePlanteComboBox;
 	private JComboBox<TypeSol> typeSolComboBox;
 	private JComboBox<Ensoleillement> ensoleillementComboBox;
+	private JComboBox<String> triComboBox;
 	
 	public PlantothequeFrame() {
 		this.setResizable(false);
@@ -126,7 +127,7 @@ public final class PlantothequeFrame extends JFrame {
 		
 		JButton fermer = new JButton("Fermer");
 		
-		this.add(form, BorderLayout.SOUTH);
+		
 		
 		//Ajout des actionListener sur les boutons.
 		fermer.addActionListener(new ActionListener() {
@@ -157,8 +158,11 @@ public final class PlantothequeFrame extends JFrame {
 			}
 		});
 		
+		
+			
+		
 			//Bouton de tri de la liste
-		JButton triButton = new JButton("Trier");
+		JButton triButton = new JButton("Trier par : ");
 		triButton.addActionListener(new AlgoTri() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
@@ -172,10 +176,20 @@ public final class PlantothequeFrame extends JFrame {
 				PlantothequeFrame.this.update(getGraphics());
 			}
 		});
+			//Choix du type de tri
+		String[] tris = {null, "Nom", "Plante", "Ensoleillement"};
+		triComboBox = new JComboBox<String>(tris);
+		triComboBox.setSelectedItem(null);
+		form.add(triButton);
+		
+		
+
 		
 		//Ajout des boutons Rechercher et Fermer
-		form.add(triButton);
+		form.add(triComboBox);
 		form.add(fermer);
+		
+		this.add(form, BorderLayout.SOUTH);
 		
 		//this.pack();
 	}
