@@ -2,6 +2,7 @@ package jardin.ui;
 
 import jardin.AccesBD;
 import jardin.AlgoSearch;
+import jardin.AlgoTri;
 import jardin.Ensoleillement;
 import jardin.SortedListModel;
 import jardin.TypeSol;
@@ -49,7 +50,7 @@ public final class PlantothequeFrame extends JFrame {
 		listePlante = new JList<Plante>(modelList);
 		//SortedListModel.sortedByName((List)listePlante);
 		listePlante.setCellRenderer(new PlantePanel());
-		this.add(new JScrollPane(this.listePlante), BorderLayout.CENTER);
+		this.add(new JScrollPane(this.listePlante), BorderLayout.WEST);
 
 		
 		//Creation de la barre de defilement et des boutons Ajouter et Annuler.
@@ -94,9 +95,24 @@ public final class PlantothequeFrame extends JFrame {
 			//Bouton d'affichage de fiche
 		JButton afficherFiche = new JButton("Fiche de la plante");
 		form.add(afficherFiche);
+			//Bouton de recherche
+		JButton recherButton = new JButton("Rechercher");
+		recherButton.addActionListener(new AlgoSearch() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				JList<Plante> algo = new JList<Plante>();
+				algo = algoSearch(PlantothequeFrame.this);
+				listePlante = null;
+				PlantothequeFrame.this.update(getGraphics());
+				listePlante = algo;
+				PlantothequeFrame.this.update(getGraphics());
+				listePlante.setCellRenderer(new PlantePanel());
+				PlantothequeFrame.this.update(getGraphics());
+			}
+		});
 			//Champs de recherche
 		form.add(rechercher);
-		form.add(vide);
+		form.add(recherButton);
 		form.add(nom);
 		form.add(nomF);
 		form.add(famille);
@@ -105,17 +121,7 @@ public final class PlantothequeFrame extends JFrame {
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
 		
-		JButton recherButton = new JButton("Rechercher");
-		recherButton.addActionListener(new AlgoSearch() {
-			//@Override
-			public void actionPerformed(ActionEvent e) {
-				JList<Plante> algo = new JList<Plante>();
-				algo = algoSearch(PlantothequeFrame.this);
-				listePlante = algo;
-				listePlante.setCellRenderer(new PlantePanel());
-				PlantothequeFrame.this.update(getGraphics());
-			}
-		});
+		
 		
 		
 		JButton fermer = new JButton("Fermer");
@@ -151,8 +157,24 @@ public final class PlantothequeFrame extends JFrame {
 			}
 		});
 		
+			//Bouton de tri de la liste
+		JButton triButton = new JButton("Trier");
+		triButton.addActionListener(new AlgoTri() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				JList<Plante> algo = new JList<Plante>();
+				algo = algoTri(PlantothequeFrame.this,0);
+				listePlante = null;
+				PlantothequeFrame.this.update(getGraphics());
+				listePlante = algo;
+				PlantothequeFrame.this.update(getGraphics());
+				listePlante.setCellRenderer(new PlantePanel());
+				PlantothequeFrame.this.update(getGraphics());
+			}
+		});
+		
 		//Ajout des boutons Rechercher et Fermer
-		form.add(recherButton);
+		form.add(triButton);
 		form.add(fermer);
 		
 		//this.pack();

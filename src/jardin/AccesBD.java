@@ -557,7 +557,7 @@ public final class AccesBD {
 		
 		Plante p3 = new Plante(80, debut, fin, new Date(datee(2010, Calendar.JANUARY, 20)), new Color(240, 240, 240), Color.green, true,
 						"Marguerite commune", "Leucanthemum vulgare", "res/img/popol.png", TypePlante.FLEUR,
-						Ensoleillement.SOLEIL, typeSol2,"");
+						Ensoleillement.SOLEIL, typeSol2,"La marguerite comme on l'a trouve partout, avec ses pétales blancs et son coeur jaune.");
 		
 		bd.insertPlante(p1);
 		bd.insertPlante(p2);
