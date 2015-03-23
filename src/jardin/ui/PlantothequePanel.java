@@ -7,6 +7,7 @@ import jardin.SortedListModel;
 import jardin.TypeSol;
 import jardin.plante.Plante;
 import jardin.plante.TypePlante;
+import jardin.zone.ZonePlantable;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -106,6 +107,15 @@ public class PlantothequePanel extends JPanel {
 			}
 		});
 		
+		JButton ajouter = new JButton("Ajouter plante");
+		//Ajout des actionListener sur les boutons.
+		ajouter.addActionListener(new ActionListener() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+					((ZonePlantable) JardinPanel.getSelected()).setPlante(selectedPlante);
+			}
+		});
+		
 		
 		//Champs de recherche
 		form.add(rechercher);
@@ -117,9 +127,8 @@ public class PlantothequePanel extends JPanel {
 		form.add(typePlante); form.add(typePlanteComboBox);
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
+		form.add(ajouter);
 		form.add(fermer);
-
-
 
 		this.add(form, BorderLayout.SOUTH);
 
