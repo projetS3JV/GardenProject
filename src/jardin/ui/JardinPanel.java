@@ -291,7 +291,7 @@ public class JardinPanel extends JPanel{
 	}
 
 	public void deleteSelected() {
-		if (this.selected != null) {
+		if (JardinPanel.selected != null) {
 			if (selected instanceof Zone) {
 				this.jardin.deleteZone((Zone)this.selected);
 				this.bd.deleteZone((Zone)this.selected);

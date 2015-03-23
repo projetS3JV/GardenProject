@@ -1,5 +1,7 @@
 package jardin.ui;
 
+import java.awt.Color;
+
 import jardin.AccesBD;
 import jardin.Ensoleillement;
 import jardin.TypeSol;
@@ -22,66 +24,75 @@ public class EditZoneFrame extends JDialog{
 	private JComboBox<TypeSol> typeSolComboBox;
 	private JComboBox<Ensoleillement> ensoleillementComboBox;
 
-
 	private EditZoneFrame(JFrame f) {
 		super(f, "Modifier Zone", true);
-		this.setSize(500, 500);
+		this.setSize(300, 100);
 		this.setResizable(false);
+		this.setBackground(Color.white);
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
-		JardinPanel panel = MainFrame.getInstance().getJardinPanel();
-		AbstractZone z = panel.getSelected();
+		AbstractZone z = JardinPanel.getSelected();
 
-		PlantothequePanel plantes = new PlantothequePanel();
+		//Concernant l'ensoleillement
+		JPanel soleilPanel = new JPanel();
 
 		JLabel ensoleillement = new JLabel("Ensoleillement : ");
-		JLabel typeSol = new JLabel("Type de sol : ");
+		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
+		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
 
+		soleilPanel.add(ensoleillement);
+		soleilPanel.add(ensoleillementComboBox);
 
-		//Concernant le type de sol
-		typeSol = new JLabel("Type de sol");
-		TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
-		typeSolComboBox = new JComboBox(typeSolBoxItems);
-		//Copie de la Zone Plantable sélectionnée pour avoir accès à ses attributs.
-		ZonePlantable tmp = (ZonePlantable)JardinPanel.getSelected();
-		typeSolComboBox.setSelectedIndex(tmp.getTypeSol());
-		int typeS = tmp.getTypeSol();
+		JPanel solPanel = new JPanel();
+		JPanel plantPanel = new JPanel();
+		
+		if(z instanceof ZonePlantable) {
+			this.setSize(300, 200);
+			
+			//Concernant le type de sol
+			solPanel = new JPanel();
+
+			JLabel typeSol = new JLabel("Type de sol : ");
+			TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
+			typeSolComboBox = new JComboBox(typeSolBoxItems);
+			typeSolComboBox.setSelectedIndex(((ZonePlantable) z).getTypeSol());
+
+			solPanel.add(typeSol);
+			solPanel.add(typeSolComboBox);
+			
+			//Concernant la plante
+			plantPanel = new JPanel();
+			JLabel plant = new JLabel("Plante : ");
+			JButton changePlant = new JButton();
+			if(((ZonePlantable) z).getPlante() == null) {
+				changePlant.setText("Ajouter");
+			} else {
+				changePlant.setText("Modifier");
+			}
+			plantPanel.add(plant);
+			changePlant.addActionListener(e->{
+				((ZonePlantable) z).setPlante(EditPlantDialog.showPlantDialog(this));
+			});
+			plantPanel.add(changePlant);
+		}
+		
+		//Useless ?
+		/*int typeS = tmp.getTypeSol();
 		String typeS2 = "";
 		if(typeS == 0) typeS2 = "ARGILEUX";
 		else if(typeS == 1) typeS2 = "CALCAIRE";
 		else if(typeS == 2) typeS2 = "HUMIFERE";
 		else if(typeS == 3) typeS2 = "LIMONIEUX";
 		else                typeS2 = "SABLEUX";
-
-
-		//Concernant l'ensoleillement
-		ensoleillement = new JLabel("Ensoleillement");
-		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
-		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
+		
 		int typeE = tmp.getTypeSol();
 		String typeE2 = "";
 		     if(typeE == 0) typeE2 = "MIOMBRE";
 		else if(typeE == 1) typeE2 = "OMBRE";
 		else                typeE2 = "SOLEIL";
-		ensoleillementComboBox.setSelectedItem(typeE2);
+		ensoleillementComboBox.setSelectedItem(typeE2);*/
 
-
-		if (z instanceof Zone) {
-			typeSol.setVisible(false);
-			typeSolComboBox.setVisible(false);
-			plantes.setVisible(false);
-		}
-
-		JPanel soleilPanel = new JPanel();
-		JPanel solPanel = new JPanel();
-
-		soleilPanel.add(ensoleillement);
-		soleilPanel.add(ensoleillementComboBox);
-
-		soleilPanel.add(typeSol);
-		soleilPanel.add(typeSolComboBox);
-
-		JPanel resultPanel = new JPanel();
+		JPanel buttonsPanel = new JPanel();
 		JButton annuler = new JButton("Annuler");
 		JButton valider = new JButton("Valider");
 
@@ -97,12 +108,12 @@ public class EditZoneFrame extends JDialog{
 			z.setEnsoleillement(((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue());
 
 			if (z instanceof ZonePlantable) {
-				ZonePlantable zone = (ZonePlantable) z;
+				ZonePlantable zoneP = (ZonePlantable) z;
+				//System.out.println(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());
+				zoneP.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());					
 				try {
-					panel.setPlante(plantes.getSelected());
-					zone.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());					
 					//Mise a jour de la zone
-					AccesBD.getInstance().updateZonePlantable(zone);
+					AccesBD.getInstance().updateZonePlantable(zoneP);
 				} catch (IllegalArgumentException exception) {
 					JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
 					valid = false;
@@ -110,20 +121,22 @@ public class EditZoneFrame extends JDialog{
 			} else {
 				AccesBD.getInstance().updateZone((Zone)z);
 			}
-
+			
 			if(valid) {
 				EditZoneFrame.this.setVisible(false);
 				EditZoneFrame.this.dispose();
 			}
 		});
 
-		resultPanel.add(annuler);
-		resultPanel.add(valider);
+		buttonsPanel.add(annuler);
+		buttonsPanel.add(valider);
 
-		this.add(plantes);
 		this.add(soleilPanel);
-		this.add(solPanel);
-		this.add(resultPanel);
+		if(z instanceof ZonePlantable) {
+			this.add(solPanel);
+			this.add(plantPanel);
+		}
+		this.add(buttonsPanel);
 		this.setVisible(true);
 	}	
 

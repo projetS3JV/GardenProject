@@ -9,7 +9,7 @@ public class ZonePlantable extends AbstractZone {
 	private Plante plante = null;
 	private int typeSol;
 	private Zone zoneConteneur = null;
-	
+
 	/**
 	 * Crée une zone plantable vide
 	 */
@@ -17,7 +17,7 @@ public class ZonePlantable extends AbstractZone {
 		super(ensoleillement);
 		this.typeSol = sol;
 	}
-	
+
 	/**
 	 * Crée une zone plantable avec un point
 	 * @param x la coordonnée en x du point
@@ -27,7 +27,7 @@ public class ZonePlantable extends AbstractZone {
 		super(ensoleillement, x, y);
 		this.typeSol = sol;
 	}
-	
+
 	/**
 	 * Constructeur par copie qui permet d'obtenir une ZonePlantable a partir d'une AbstractZone
 	 * @param zone la zone a changer
@@ -37,12 +37,12 @@ public class ZonePlantable extends AbstractZone {
 		super(zone);
 		this.typeSol = sol;
 	}
-	
+
 	public ZonePlantable(int[] xPoints, int[] yPoints, int ensoleillement, int sol) {
 		super(xPoints,yPoints, ensoleillement);
 		this.typeSol = sol;
 	}
-	
+
 	/**
 	 * Constructeur par copie qui permet d'obtenir une ZonePlantable a partir d'une AbstractZone
 	 * Si la plante ne peut etre mise une exception est lancé
@@ -55,13 +55,13 @@ public class ZonePlantable extends AbstractZone {
 		this.typeSol = sol;
 		this.setPlante(plante);
 	}
-	
+
 	/**
 	 * Ajoute une plante dans la zone si elle peut etre planter
 	 * @param p la plante à ajouter
 	 */
 	public void setPlante(Plante plante) throws IllegalArgumentException{
-		
+
 		// verification si la plante peut être planté
 		for(int i =0; i< plante.getTypeSol().size() ; i++)
 			if(plante.getTypeSol().get(i) != this.typeSol)
@@ -71,7 +71,7 @@ public class ZonePlantable extends AbstractZone {
 		// ajout de la plante
 		this.plante = plante;
 	}
-	
+
 	/**
 	 * Accesseurs à la plante de la zone
 	 * @return une plante
@@ -79,7 +79,7 @@ public class ZonePlantable extends AbstractZone {
 	public Plante getPlante() {
 		return this.plante;
 	}
-	
+
 	/**
 	 * Accesseur au Type de sol de la zone
 	 * @return le TypeSol de la zone
@@ -87,26 +87,30 @@ public class ZonePlantable extends AbstractZone {
 	public int getTypeSol() {
 		return this.typeSol;
 	}
-	
+
 	/**
 	 * Change le type de sol si possible, lance une exception sinon
 	 * @param nouveau le nouveau type de sol
 	 * @throws IllegalArgumentException si c'est impossible
 	 */
 	public void setTypeSol(int nouveau) throws IllegalArgumentException {
-		for(int i =0; i< plante.getTypeSol().size() ; i++)
-			if(this.plante != null && plante.getTypeSol().get(i) != nouveau)
-				throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
-		
-		this.typeSol = nouveau;
+		if(this.plante == null) {
+			System.out.print("Plante null");
+		} else {
+			for(int i =0; i < plante.getTypeSol().size() ; i++)
+				if(plante.getTypeSol().get(i) != nouveau)
+					throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
+
+			this.typeSol = nouveau;
+		}
 	}
-	
+
 	public void setZoneConteneur(Zone zoneConteneur) {
 		this.zoneConteneur = zoneConteneur;
 	}
-	
+
 	public Zone getZoneConteneur() {
 		return zoneConteneur;
 	}
-	
+
 }
