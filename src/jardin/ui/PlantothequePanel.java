@@ -11,6 +11,7 @@ import jardin.plante.TypePlante;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -41,8 +42,9 @@ public class PlantothequePanel extends JPanel {
 
 		//Creation de la grille contenant le descriptif des plantes en fonction du nombre de la plante.
 		listePlante = new JList<Plante>(modelList);
+		//SortedListModel.sortedByName((List)listePlante);
 		listePlante.setCellRenderer(new PlantePanel());
-		this.add(new JScrollPane(this.listePlante));
+		this.add(new JScrollPane(this.listePlante), BorderLayout.WEST);
 
 		JLabel rechercher = new JLabel("Rechercher :");
 
@@ -73,15 +75,41 @@ public class PlantothequePanel extends JPanel {
 
 		JPanel form = new JPanel();
 		form.setLayout(new GridLayout(9, 2, 5, 5));
-			//Bouton de création de plante
+		//Bouton de création de plante
 		JButton creerNewPlante = new JButton("Créer une plante");
 		form.add(creerNewPlante);
-			//Bouton d'affichage de fiche
+		//Bouton d'affichage de fiche
 		JButton afficherFiche = new JButton("Fiche de la plante");
 		form.add(afficherFiche);
-			//Champs de recherche
+		//Bouton de recherche
+		JButton recherButton = new JButton("Rechercher");
+		recherButton.addActionListener(new AlgoSearch() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				JList<Plante> algo = new JList<Plante>();
+				algo = algoSearch(PlantothequePanel.this);
+				listePlante = null;
+				PlantothequePanel.this.update(getGraphics());
+				listePlante = algo;
+				PlantothequePanel.this.update(getGraphics());
+				listePlante.setCellRenderer(new PlantePanel());
+				PlantothequePanel.this.update(getGraphics());
+			}
+		});
+		
+		JButton fermer = new JButton("Fermer");
+		//Ajout des actionListener sur les boutons.
+		fermer.addActionListener(new ActionListener() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				PlantothequePanel.this.setVisible(false);
+			}
+		});
+		
+		
+		//Champs de recherche
 		form.add(rechercher);
-		form.add(vide);
+		form.add(recherButton);
 		form.add(nom);
 		form.add(nomF);
 		form.add(famille);
@@ -89,22 +117,17 @@ public class PlantothequePanel extends JPanel {
 		form.add(typePlante); form.add(typePlanteComboBox);
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
-		
-		JButton recherButton = new JButton("Rechercher");
-		recherButton.addActionListener(new AlgoSearch() {
-			//@Override
-			public void actionPerformed(ActionEvent e) {
-				JList<Plante> algo = new JList<Plante>();
-				algo = algoSearch(PlantothequePanel.this);
-				listePlante = algo;
-				listePlante.setCellRenderer(new PlantePanel());
-			}
-		});
-		this.add(recherButton);
+		form.add(fermer);
+
+
 
 		this.add(form, BorderLayout.SOUTH);
+
+
 	}
-	
+
+
+
 	public JLabel getTypePlante() {
 		return typePlante;
 	}
