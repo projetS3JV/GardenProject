@@ -39,7 +39,11 @@ public class EditZoneFrame extends JDialog{
 		JLabel ensoleillement = new JLabel("Ensoleillement : ");
 		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.SOLEIL, Ensoleillement.MIOMBRE, Ensoleillement.OMBRE};
 		ensoleillementComboBox = new JComboBox(ensoleillementBoxItems);
-		ensoleillementComboBox.setSelectedIndex(((ZonePlantable)z).getZoneConteneur().getEnsoleillement());
+		if(z instanceof ZonePlantable) {
+			ensoleillementComboBox.setSelectedIndex(((ZonePlantable)z).getZoneConteneur().getEnsoleillement());
+		} else {
+			ensoleillementComboBox.setSelectedIndex(z.getEnsoleillement());
+		}
 		//System.out.println(((ZonePlantable)z).getZoneConteneur().getEnsoleillement());
 
 		soleilPanel.add(ensoleillement);
@@ -47,10 +51,10 @@ public class EditZoneFrame extends JDialog{
 
 		JPanel solPanel = new JPanel();
 		JPanel plantPanel = new JPanel();
-		
+
 		if(z instanceof ZonePlantable) {
 			this.setSize(300, 200);
-			
+
 			//Concernant le type de sol
 			solPanel = new JPanel();
 
@@ -60,7 +64,7 @@ public class EditZoneFrame extends JDialog{
 			typeSolComboBox.setSelectedIndex(((ZonePlantable) z).getTypeSol());
 			solPanel.add(typeSol);
 			solPanel.add(typeSolComboBox);
-			
+
 			//Concernant la plante
 			plantPanel = new JPanel();
 			JLabel plant = new JLabel("Plante : ");
@@ -76,7 +80,7 @@ public class EditZoneFrame extends JDialog{
 			});
 			plantPanel.add(changePlant);
 		}
-		
+
 		//Useless ?
 		/*int typeS = tmp.getTypeSol();
 		String typeS2 = "";
@@ -85,7 +89,7 @@ public class EditZoneFrame extends JDialog{
 		else if(typeS == 2) typeS2 = "HUMIFERE";
 		else if(typeS == 3) typeS2 = "LIMONIEUX";
 		else                typeS2 = "SABLEUX";
-		
+
 		int typeE = tmp.getTypeSol();
 		String typeE2 = "";
 		     if(typeE == 0) typeE2 = "MIOMBRE";
@@ -118,9 +122,22 @@ public class EditZoneFrame extends JDialog{
 				}
 			} else {
 				AccesBD.getInstance().updateZone((Zone)z);
+				for(int i=0; i<((Zone)z).getZones().size(); i++) {
+					try {
+						//Mise a jour des sous zones de la zone modifiée
+						((Zone)z).getZones().get(i).setEnsoleillement(((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue());
+						if(((Zone) z).getZones().get(i) instanceof ZonePlantable) {
+							AccesBD.getInstance().updateZonePlantable((ZonePlantable)((Zone)z).getZones().get(i));
+						} else {
+							AccesBD.getInstance().updateZone((Zone)((Zone)z).getZones().get(i));
+						}
+					} catch (IllegalArgumentException exception) {
+						JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
+					}
+				}
 			}
-				EditZoneFrame.this.setVisible(false);
-				EditZoneFrame.this.dispose();
+			EditZoneFrame.this.setVisible(false);
+			EditZoneFrame.this.dispose();
 		});
 
 		buttonsPanel.add(annuler);
