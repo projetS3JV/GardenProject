@@ -294,7 +294,7 @@ public final class AccesBD {
 	}
 
 	public void updateZone(Zone z) throws IllegalArgumentException {
-		if (z.getId() != -1) {
+		//if (z.getId() != -1) {
 			String sql = "UPDATE ZONE SET id_Jardin =?, x =?, y =?, luminosite =? WHERE id = "+ z.getId();
 			try {
 				PreparedStatement stat = this.connection.prepareStatement(sql);
@@ -312,9 +312,9 @@ public final class AccesBD {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} else {
+		/*} else {
 			throw new IllegalArgumentException("Zone pas dans la base de données");
-		}
+		}*/
 	}
 
 	public void updateZonePlantable(ZonePlantable z) throws IllegalArgumentException {

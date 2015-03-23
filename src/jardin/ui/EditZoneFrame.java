@@ -104,28 +104,22 @@ public class EditZoneFrame extends JDialog{
 
 		valider.addActionListener(e -> {
 
-			boolean valid = true;
 			z.setEnsoleillement(((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue());
 
 			if (z instanceof ZonePlantable) {
 				ZonePlantable zoneP = (ZonePlantable) z;
-				//System.out.println(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());
 				zoneP.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());					
 				try {
 					//Mise a jour de la zone
 					AccesBD.getInstance().updateZonePlantable(zoneP);
 				} catch (IllegalArgumentException exception) {
 					JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
-					valid = false;
 				}
 			} else {
 				AccesBD.getInstance().updateZone((Zone)z);
 			}
-			
-			if(valid) {
 				EditZoneFrame.this.setVisible(false);
 				EditZoneFrame.this.dispose();
-			}
 		});
 
 		buttonsPanel.add(annuler);

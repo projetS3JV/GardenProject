@@ -95,7 +95,7 @@ public class ZonePlantable extends AbstractZone {
 	 */
 	public void setTypeSol(int nouveau) throws IllegalArgumentException {
 		if(this.plante == null) {
-			System.out.print("Plante null");
+			this.typeSol = nouveau;
 		} else {
 			for(int i =0; i < plante.getTypeSol().size() ; i++)
 				if(plante.getTypeSol().get(i) != nouveau)
