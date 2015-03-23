@@ -1,5 +1,7 @@
 package jardin.zone;
 
+import javax.swing.JOptionPane;
+
 import jardin.plante.Plante;
 
 public class ZonePlantable extends AbstractZone {
@@ -61,13 +63,13 @@ public class ZonePlantable extends AbstractZone {
 	 * @param p la plante à ajouter
 	 */
 	public void setPlante(Plante plante) throws IllegalArgumentException{
-
 		// verification si la plante peut être planté
 		for(int i =0; i< plante.getTypeSol().size() ; i++)
 			if(plante.getTypeSol().get(i) != this.typeSol)
-				throw new IllegalArgumentException("impossible de mettre une plante, le type de sol ne correspond pas");
+				JOptionPane.showMessageDialog(null, "Type de sol incompatible", "Erreur", JOptionPane.ERROR_MESSAGE);
+				//throw new IllegalArgumentException("impossible de mettre une plante, le type de sol ne correspond pas");
 		if (plante.getEnsoleillement() != this.ensoleillement)
-			throw new IllegalArgumentException("impossible de mettre une plante, l'ensoleillement ne correspond pas");
+			//throw new IllegalArgumentException("impossible de mettre une plante, l'ensoleillement ne correspond pas");
 		// ajout de la plante
 		this.plante = plante;
 	}

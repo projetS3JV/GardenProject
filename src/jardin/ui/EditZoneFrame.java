@@ -37,8 +37,10 @@ public class EditZoneFrame extends JDialog{
 		JPanel soleilPanel = new JPanel();
 
 		JLabel ensoleillement = new JLabel("Ensoleillement : ");
-		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.MIOMBRE, Ensoleillement.OMBRE, Ensoleillement.SOLEIL};
-		ensoleillementComboBox = new JComboBox<>(ensoleillementBoxItems);
+		Ensoleillement[] ensoleillementBoxItems = {Ensoleillement.SOLEIL, Ensoleillement.MIOMBRE, Ensoleillement.OMBRE};
+		ensoleillementComboBox = new JComboBox(ensoleillementBoxItems);
+		ensoleillementComboBox.setSelectedIndex(((ZonePlantable)z).getZoneConteneur().getEnsoleillement());
+		//System.out.println(((ZonePlantable)z).getZoneConteneur().getEnsoleillement());
 
 		soleilPanel.add(ensoleillement);
 		soleilPanel.add(ensoleillementComboBox);
@@ -56,7 +58,6 @@ public class EditZoneFrame extends JDialog{
 			TypeSol[] typeSolBoxItems = {TypeSol.ARGILEUX, TypeSol.CALCAIRE, TypeSol.HUMIFERE, TypeSol.LIMONEUX, TypeSol.SABLEUX};
 			typeSolComboBox = new JComboBox(typeSolBoxItems);
 			typeSolComboBox.setSelectedIndex(((ZonePlantable) z).getTypeSol());
-
 			solPanel.add(typeSol);
 			solPanel.add(typeSolComboBox);
 			

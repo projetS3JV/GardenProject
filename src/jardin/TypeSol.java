@@ -20,7 +20,7 @@ public enum TypeSol {
     	} else if (type == 1) {
     		return "CALCAIRE";
     	} else if (type == 2) {
-    		return "HULIFERE";
+    		return "HUMIFERE";
     	} else if (type == 3) {
     		return "LIMONEUX";
     	}

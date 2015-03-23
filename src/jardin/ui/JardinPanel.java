@@ -240,7 +240,6 @@ public class JardinPanel extends JPanel{
 	}
 
 	private void saveZonePlantable(AbstractZone z) {
-		z.setEnsoleillement(this.setEnsoleillement());
 		int sol = this.setTypeSol();
 		ZonePlantable zone = new ZonePlantable(z,sol);
 		Zone supZone = (Zone) jardin.getZone(z.xpoints[0], z.ypoints[0]);
