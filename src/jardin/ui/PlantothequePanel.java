@@ -98,21 +98,12 @@ public class PlantothequePanel extends JPanel {
 			}
 		});
 		
-		JButton fermer = new JButton("Fermer");
-		//Ajout des actionListener sur les boutons.
-		fermer.addActionListener(new ActionListener() {
-			//@Override
-			public void actionPerformed(ActionEvent e) {
-				PlantothequePanel.this.setVisible(false);
-			}
-		});
-		
 		JButton ajouter = new JButton("Ajouter plante");
 		//Ajout des actionListener sur les boutons.
 		ajouter.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-					((ZonePlantable) JardinPanel.getSelected()).setPlante(selectedPlante);
+				((ZonePlantable) JardinPanel.getSelected()).setPlante(selectedPlante);
 			}
 		});
 		
@@ -128,7 +119,6 @@ public class PlantothequePanel extends JPanel {
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
 		form.add(ajouter);
-		form.add(fermer);
 
 		this.add(form, BorderLayout.SOUTH);
 

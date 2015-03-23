@@ -40,6 +40,7 @@ public class PlantePanel extends JPanel implements ListCellRenderer{
 			this.setBackground(list.getSelectionBackground());
 			PlantePanel tmp = PlantePanel.this;
 			PlantothequeFrame.setSelected(tmp, p);
+			PlantothequePanel.setSelected(tmp, p);
 		}else 
 			this.setBackground(Color.WHITE);
 		
