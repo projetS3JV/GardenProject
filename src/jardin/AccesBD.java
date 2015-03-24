@@ -335,9 +335,9 @@ public final class AccesBD {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} else {
+		} /*else {
 			throw new IllegalArgumentException("Zone pas dans la base de données");
-		}
+		}*/
 	}
 
 	/**

@@ -63,15 +63,21 @@ public class ZonePlantable extends AbstractZone {
 	 * @param p la plante à ajouter
 	 */
 	public void setPlante(Plante plante) throws IllegalArgumentException{
+		int k =0;
 		// verification si la plante peut être planté
 		for(int i =0; i< plante.getTypeSol().size() ; i++)
 			if(plante.getTypeSol().get(i) != this.typeSol)
-				JOptionPane.showMessageDialog(null, "Type de sol incompatible", "Erreur", JOptionPane.ERROR_MESSAGE);
+				k++;
+				//JOptionPane.showMessageDialog(null, "Type de sol incompatible", "Erreur", JOptionPane.ERROR_MESSAGE);
 				//throw new IllegalArgumentException("impossible de mettre une plante, le type de sol ne correspond pas");
 		if (plante.getEnsoleillement() != this.ensoleillement)
 			//throw new IllegalArgumentException("impossible de mettre une plante, l'ensoleillement ne correspond pas");
 		// ajout de la plante
-		this.plante = plante;
+			if(plante.getTypeSol().size()== k){
+				JOptionPane.showMessageDialog(null, "Type de sol incompatible", "Erreur", JOptionPane.ERROR_MESSAGE);
+			}else{
+				this.plante = plante;
+			}
 	}
 
 	/**
@@ -96,12 +102,15 @@ public class ZonePlantable extends AbstractZone {
 	 * @throws IllegalArgumentException si c'est impossible
 	 */
 	public void setTypeSol(int nouveau) throws IllegalArgumentException {
+		int k=0;
 		if(this.plante == null) {
 			this.typeSol = nouveau;
 		} else {
 			for(int i =0; i < plante.getTypeSol().size() ; i++)
 				if(plante.getTypeSol().get(i) != nouveau)
-					throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
+					k++;
+			
+					//throw new IllegalArgumentException("impossible de mettre ce type de sol, la plante de cette zone est incompatible");
 
 			this.typeSol = nouveau;
 		}

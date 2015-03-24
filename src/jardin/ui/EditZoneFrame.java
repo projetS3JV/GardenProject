@@ -114,26 +114,26 @@ public class EditZoneFrame extends JDialog{
 			if (z instanceof ZonePlantable) {
 				ZonePlantable zoneP = (ZonePlantable) z;
 				zoneP.setTypeSol(((TypeSol)typeSolComboBox.getSelectedItem()).getValue());					
-				try {
+				//try {
 					//Mise a jour de la zone
 					AccesBD.getInstance().updateZonePlantable(zoneP);
-				} catch (IllegalArgumentException exception) {
-					JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
-				}
+				//} catch (IllegalArgumentException exception) {
+				//	JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
+				//}
 			} else {
 				AccesBD.getInstance().updateZone((Zone)z);
 				for(int i=0; i<((Zone)z).getZones().size(); i++) {
-					try {
+					/*try {
 						//Mise a jour des sous zones de la zone modifiée
-						((Zone)z).getZones().get(i).setEnsoleillement(((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue());
+						*/((Zone)z).getZones().get(i).setEnsoleillement(((Ensoleillement)ensoleillementComboBox.getSelectedItem()).getValue());
 						if(((Zone) z).getZones().get(i) instanceof ZonePlantable) {
 							AccesBD.getInstance().updateZonePlantable((ZonePlantable)((Zone)z).getZones().get(i));
 						} else {
 							AccesBD.getInstance().updateZone((Zone)((Zone)z).getZones().get(i));
-						}
-					} catch (IllegalArgumentException exception) {
-						JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
 					}
+					//} catch (IllegalArgumentException exception) {
+					//	JOptionPane.showMessageDialog(EditZoneFrame.this, "La plante ne peut etre mise dans cette zone. Vérifier son type de sol et son ensoleillement.", "Plante incompatible", JOptionPane.ERROR_MESSAGE);;
+					//}
 				}
 			}
 			EditZoneFrame.this.setVisible(false);
