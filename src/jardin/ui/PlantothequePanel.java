@@ -107,6 +107,27 @@ public class PlantothequePanel extends JPanel {
 			}
 		});
 		
+		creerNewPlante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Plante p = CreateNewPlante.showCreateNewPlante();
+				if (p != null) {
+					AccesBD.getInstance().insertPlante(p);
+				}
+			}
+		});
+		
+		afficherFiche.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(selectedPlante != null) {
+					InfoPlante info = new InfoPlante(selectedPlante);
+					info.setSize(500, 400);
+					info.setVisible(true);
+				}
+			}
+		});
+		
 		
 		//Champs de recherche
 		form.add(rechercher);
