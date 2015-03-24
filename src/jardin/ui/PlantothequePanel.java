@@ -125,6 +125,7 @@ public class PlantothequePanel extends JPanel {
 				if(selectedPlante != null) {
 					InfoPlante info = new InfoPlante(selectedPlante);
 					info.setAlwaysOnTop(true);
+					info.setFocusable(true);
 					info.setSize(500, 400);
 					info.setVisible(true);
 				}
@@ -147,6 +148,14 @@ public class PlantothequePanel extends JPanel {
 			}
 		});
 		
+		
+		JButton fermer = new JButton("Fermer");
+		fermer.addActionListener(new ActionListener() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				PlantothequePanel.this.setVisible(false);
+			}
+		});
 		
 		
 		
@@ -171,6 +180,7 @@ public class PlantothequePanel extends JPanel {
 
 		
 		form.add(ajouter);
+		form.add(fermer);
 		this.add(form, BorderLayout.SOUTH);
 
 
@@ -260,4 +270,3 @@ public class PlantothequePanel extends JPanel {
 		frame.setVisible(true);
 	}
 
-}
