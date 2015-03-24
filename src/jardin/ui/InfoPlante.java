@@ -54,20 +54,21 @@ public class InfoPlante extends JFrame {
 		{
 			if(typeSolPlante.get(i)==0)
 			{
-				tmpTS += "Argileux, ";
+				tmpTS += "Argileux ";
 			}
 			else if(typeSolPlante.get(i)==1)
 			{
-				tmpTS += "Humifère, ";
+				tmpTS += "Humifère ";
 			}
 			else if(typeSolPlante.get(i)==2)
 			{
-				tmpTS += "Limonieux, ";
+				tmpTS += "Limonieux ";
 			}
 			else
 			{
 				tmpTS += "Sableux";
 			}
+			if(i != typeSolPlante.size()-2) tmpTS += ", ";
 		}
 		typeSol = new JLabel(tmpTS);
 		hauteur = new JLabel("Hauteur : " + p.getTailleFin());

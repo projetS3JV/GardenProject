@@ -122,6 +122,7 @@ public class PlantothequePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(selectedPlante != null) {
 					InfoPlante info = new InfoPlante(selectedPlante);
+					info.setAlwaysOnTop(true);
 					info.setSize(500, 400);
 					info.setVisible(true);
 				}
