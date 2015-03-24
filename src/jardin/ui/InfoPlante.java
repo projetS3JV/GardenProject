@@ -4,6 +4,7 @@ import jardin.Ensoleillement;
 import jardin.plante.Plante;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class InfoPlante extends JFrame {
 	public InfoPlante(Plante p) {
 		//this.setSize(400, 400);
 		//this.setResizable(false);
+		this.setBackground(Color.white);
 		String nameP = p.getNom() + " / " + p.getNomL();
 		name = new JLabel(nameP.toUpperCase());
 		

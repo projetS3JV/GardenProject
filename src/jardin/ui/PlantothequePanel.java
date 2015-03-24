@@ -2,6 +2,7 @@ package jardin.ui;
 
 import jardin.AccesBD;
 import jardin.AlgoSearch;
+import jardin.AlgoTri;
 import jardin.Ensoleillement;
 import jardin.SortedListModel;
 import jardin.TypeSol;
@@ -36,6 +37,7 @@ public class PlantothequePanel extends JPanel {
 	private JComboBox<TypePlante> typePlanteComboBox;
 	private JComboBox<TypeSol> typeSolComboBox;
 	private JComboBox<Ensoleillement> ensoleillementComboBox;
+	private JComboBox<String> triComboBox;
 
 	public PlantothequePanel() {
 		this.setSize(400, 400);
@@ -129,6 +131,24 @@ public class PlantothequePanel extends JPanel {
 			}
 		});
 		
+		//Bouton de tri de la liste
+		JButton triButton = new JButton("Trier par : ");
+		triButton.addActionListener(new AlgoTri() {
+			//@Override
+			public void actionPerformed(ActionEvent e) {
+				JList<Plante> algo = new JList<Plante>();
+				//algo = algoTri(PlantothequePanel.this,0);
+				listePlante = null;
+				PlantothequePanel.this.update(getGraphics());
+				listePlante = algo;
+				PlantothequePanel.this.update(getGraphics());
+				listePlante.setCellRenderer(new PlantePanel());
+				PlantothequePanel.this.update(getGraphics());
+			}
+		});
+		
+		
+		
 		
 		//Champs de recherche
 		form.add(rechercher);
@@ -140,12 +160,23 @@ public class PlantothequePanel extends JPanel {
 		form.add(typePlante); form.add(typePlanteComboBox);
 		form.add(typeSol); form.add(typeSolComboBox);
 		form.add(ensoleillement); form.add(ensoleillementComboBox);
-		form.add(ajouter);
+		
+		
+		//Choix du type de tri
+		String[] tris = {null, "Nom", "Plante", "Ensoleillement"};
+		triComboBox = new JComboBox<String>(tris);
+		triComboBox.setSelectedItem(null);
+		form.add(triButton);
+		form.add(triComboBox);
 
+		
+		form.add(ajouter);
 		this.add(form, BorderLayout.SOUTH);
 
 
 	}
+	
+	
 
 
 
