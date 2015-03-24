@@ -153,7 +153,8 @@ public class PlantothequePanel extends JPanel {
 		fermer.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent e) {
-				PlantothequePanel.this.setVisible(false);
+				//PlantothequePanel.this.setVisible(false);
+				//PlantothequePanel.this.getParent().
 			}
 		});
 		
@@ -258,6 +259,7 @@ public class PlantothequePanel extends JPanel {
 		return (Plante) this.listePlante.getSelectedValue();
 	}
 
+
 	public static void main(String arg[]) {
 		JFrame frame = new JFrame();
 		frame.setResizable(false);
@@ -269,4 +271,5 @@ public class PlantothequePanel extends JPanel {
 		frame.add(p);
 		frame.setVisible(true);
 	}
+}
 
